@@ -1,0 +1,249 @@
+<style>
+	ol, ul {
+		margin-top: 0;
+		margin-bottom: 10px;
+	}
+	.list-unstyled, .list-inline{
+		padding-right: 0;
+		list-style: outside none none;
+	}
+	.m-0 {
+		margin: 0 !important;
+	}
+	.m-0-bottom {
+		margin-bottom: 0 !important;
+	}
+	.m-0-right{
+		margin-right: 0 !important;
+	}
+	.m-xs-left {
+		margin-left: 10px;
+	}
+	.ellipsis {
+		overflow-x : hidden ;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		word-break: break-all;
+	}
+	.m-xs-top{
+		margin-top: 5px !important;
+	}
+	.oDescription {
+		overflow: hidden;
+		line-height: inherit;
+		position: relative;
+		height: 4.4em;
+	}
+	.m-md-top {
+		margin-top: 20px !important;
+	}
+	.list-inline {
+		margin-left: -5px;
+	}
+	.list-inline > li {
+		display: inline-block;
+		padding-left: 5px;
+		padding-right: 5px;
+	}
+	ol li, ul li {
+		margin-bottom: 10px;
+	}
+	.o-tag-skill {
+		background-color: #E0E0E0;
+		border-radius: 4px;
+		color: #494949;
+		font-size: 11px;
+		display: inline-block;
+		cursor: default;
+		padding; 5px 7px;
+		line-height: 1;
+	}
+	.avatar {
+		border: 2px solid #7D7D7D;
+	}
+	.avatar, img-circle {
+		border-radius: 50%;
+	}
+	.avatar-lg {
+		width: 100px;
+		height: 100px;
+		margin: 20px;
+		padding: 0;
+	}
+	article {
+		border-bottom : 1px solid #E0E0E0;
+	}
+	.p-lg-top-bottom {
+		padding-top: 40px;
+		padding-bottom: 40px;
+	}
+	.bg-info {
+		padding-top: 20px;
+		padding-bottom: 15px;
+		padding-right: 15px;
+	}
+	.blueLink:hover {
+		cursor: pointer;
+	}
+	.input-group {
+		position: relative;
+		display: table;
+		border-collapse: separate;
+		width: 100% !important;
+	}
+	.input-group.input-group-search, input-group-addon:first-child {
+		position: absolute;
+		right:0;
+		top: 0;
+		z-index: 5;
+		width: auto;
+		padding-left: 0;
+		border: 0 none;
+	}
+	.input-group-addon {
+		font-weight: 100;
+		padding: 0;
+		padding-left: 20px;
+		font-size: 36px;
+		line-height: 32px;
+		background-color: transparent;
+		color: #7D7D7D;
+		white-space: nowrap;
+		vertical-align: middle;
+	}
+	.input-group .input-group-addon .ion-search {
+		color: #00bf8c;
+		margin: 0 14px;
+		width: 14px;
+		height: 14px;
+		font-size: 24px;
+		line-height: 14px;
+	}
+	.input-group-addon:first-child {
+		position: absolute;
+		top: 4px;
+		z-index: 100;
+		background-color: transparent;
+		right: 3px;
+		width: 35px;
+		height: 35px;
+		border: medium none;
+	}
+	 .searchinput {
+		padding-right: 40px !important;
+		width: 80% !important;
+	}
+	.m-md-right {
+		margin-right: 20px;
+	}
+	.p-lg-top {
+		padding-top: 40px !important;
+	}
+	.p-md-bottom {
+		padding-bottom: 20px !important;
+	}
+	.air-card{
+		background-color: #FFF;
+		margin: 40px;
+		padding: 40px;
+		box-shadow: 0px 0px 0px 1px #E0E0E0;
+	}
+	.oFormSearch {
+		min-height: 40px;
+		margin-left:40px;
+		margin-right: 40px;
+		position: relative;
+	}
+	article:last-child {
+		border: medium none;
+	}
+	.shortname {
+		color: #33B5E6;
+	}
+</style>
+<div class="col-md-12">
+	<div class="oFormSearch form-group m-lg-top">
+		<div class="input-group input-group-search">
+			<label class="input-group-addon">
+				<span class="ion-search"></span>						
+			</label>
+			<input class="form-control searchinput" type="search" ng-maxlength="200" autocomplete="off" ng-model="searchInput"></input>
+			<div class="">
+				<button class="btn btn-lg btn-action m-md-right" style="float: left;">
+جست و جو
+				</button>
+			</div>
+		</div>
+	</div>	
+</div>
+	<div class="col-md-12">
+		<!-- <div class="row show-list p-lg-top air-card p-md-bottom"> -->
+<!-- 			<ol class="list-unstyled">
+				<li class="m-0"> -->
+					<article class="p-lg-top-bottom air-card" ng-repeat="user in users">
+						<div class="row">
+							<div class="col-md-2">
+								<div class="row">
+									<div class="col-md-12">
+										<p class="text-center m-0-bottom">
+											<a data-ng-href="/profile/{{user._id}}">
+												<img class="avatar avatar-lg m-0-top m-0-right" src="/images/buyer.png"></img>
+											</a>
+										</p>
+									</div>
+								</div>
+								<div class="row" style="text-align:center;">
+									<span class="h3 m-0-top-bottom">
+										<a class="shortname" title="" data-ng-href="/profile/{{user._id}}">
+											{{user.firstName}} {{user.lastName}}
+										</a>
+									</span>
+									<h5 class="title m-xs-top m-0-bottom text-muted">
+										Mobile Developer
+									</h5>
+									<p class="m-md-top m-0-bottom">
+										<span class="ion-location m-0-right m-xs-left"></span>
+										<strong class="city">
+ایران - اهواز
+										</strong>
+									</p>	
+									<ul class="list-inline separated m-md-top ng-cloak" ng-show="user.tags[0]">
+									<li ng-repeat="tag in user.tags">
+										<a class="blueLink m-0" ng-href="/browse/tag/{{tag}}">
+											{{tag}}
+										</a>
+									</li>
+								</ul>
+								</div>
+							</div>
+							<div class="col-md-7">
+									<p class="oDescription m-md-top m-0-bottom ng-cloak" ng-show="user.summary">
+{{user.summary}}
+									</p>
+									<p class="oDescription m-md-top m-0-bottom bg-info ng-cloak" ng-hide="user.summary">
+									<i class="ion-ios-bolt" style="color: tomato"></i>
+به نظر میاد این کاربر کمی تنبل ! چون هنوز خلاصه از فعالیت هاش ثبت نکرده !
+									</p>
+
+								<!-- ListStyle : listStyleType - listStylePosition - listStyleImage -->
+
+								<ul class="list-inline separated m-md-top ng-cloak" ng-show="user.tags[0]">
+									<li ng-repeat="tag in user.tags">
+										<a class="blueLink m-0" ng-href="/browse/tag/{{tag}}">
+											{{tag}}
+										</a>
+									</li>
+								</ul>
+								<div class="ng-cloak" ng-hide="user.tags[0]">
+									<p class="oDescription m-md-top m-0-bottom bg-info ng-cloak">
+										<i class="ion-ios-bolt" style="color: tomato"></i>
+به نظر میاد این کاربر کمی تنبل ! چون هنوز مهارتی به پروفایل خود اضافه نکرده است !
+									</p>
+								</div>
+							</div>
+						</div>
+					</article>
+<!-- 				</li>
+			</ol> -->
+		<!-- </div> -->
+	</div>

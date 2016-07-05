@@ -1,0 +1,202 @@
+<style>
+    #how-to-use {
+
+    }
+    table {
+        background-color: transparent;
+    }
+    table th {
+        line-height: 18px;
+        text-align: right;
+    }
+    .dataTable {
+        table-layout: fixed;
+        width: 100%;
+        font-size: 12px;
+        border: 1px solid #CACACA;
+        border-spacing: 0;
+        border-radius: 6px 6px 0px 0px;
+        border-collapse: separate;
+    }
+    .dataTable thead th {
+        vertical-align: bottom;
+    }
+
+    .dataTable th {
+        padding: 10px;
+    }
+    .dataTable thead {
+        color: #FFF;
+    }
+    .dataTable thead tr th:first-child {
+        border-top-right-radius: 5px;
+    }
+    .dataTable thead tr th:last-child {
+        border-top-left-radius: 5px;
+    }
+    .dataTable > thead > tr > th {
+        border-bottom: 0 !important;
+    }
+    .dataTable th.title-col , .dataTable tbody th.title-col{
+        /*width: 235px;*/
+        widows: 32%;
+    }
+    .dataTable tbody .title-col, .dataTable tbody .title-col a {
+        font-size: 13px;
+        color: #33B5E6;
+    }
+    .dataTable th.bids-col , .dataTable td.bids-col {
+        /*width: 65px;*/
+        width: 8%;
+        padding-left: 0;
+        padding-right: 15px;
+        text-align: center;
+    }
+    .dataTable th.skills-col , .dataTable td.skills-col {
+        /*width: 225px;*/
+        width: 35%;
+    }
+    .dataTable th.started-col , .dataTable td.started-col {
+        /*width: 115px;*/
+        width: 10%;
+    }
+    .dataTable th.price-col , .dataTable td.price-col {
+        /*width: 125px;*/
+        width: 10%;
+    }
+    .dataTable th.bookmark-col , .dataTable td.bookmark-col {
+        /*width: 25px;*/
+        width: 5%;
+        padding-right: 0;
+        padding-left: 0;
+    }
+    .dataTable thead tr th {
+        background-color: #33B5E6;
+    }
+    .dataTable tbody tr {
+        cursor: pointer;
+    }
+    .dataTable tbody tr .bookmark-col .bookmark {
+        display: block;
+        width: 100%;
+        cursor: pointer;
+        text-align: center;
+        min-height: 40px;
+    }
+    .bookmark {
+        cursor : pointer;
+    }
+    .bookmark-inner .ion-ios-star {
+        color: #CFD9DB;
+    }
+    .bookmark-inner .ion-ios-star:hover{
+        color: #4AAFE6;
+    }
+    .injob {
+        font-size: 10px;
+        padding: 2px 4px;
+        margin-left: 5px;
+        margin-right: 0;
+        margin-top: 10px;
+
+    }
+</style>
+
+
+
+<div class="container">
+    <div class="col-md-12">
+                    <div id="how-to-use">
+                        <div id="hero-content">
+                                    <span id="controls">
+                                        <a id="tell-me-more" class="button">
+چطور کار می کند ؟
+                                        </a>
+                                        <span id="close">
+                                            <a title="click to dismiss">
+                                                x
+                                            </a>
+                                        </span>
+                                    </span>
+                            <div id="blurb">
+ده ها هزار فریلنسر در
+                                <strong>
+                                    مگاکار
+                                </strong>
+                                 آماده همکاری با شما هستند . پروژه خود را در
+                                <strong>
+مگاکار
+                                </strong>
+                                سفارش دهید و با بهترین کیفیت آنرا تحویل بگیرید . 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row show-list">
+                        <div class="col-md-10">
+                            <div class="projectTable">
+                                <table class="table table-striped table-hover dataTable">
+                                    <thead>
+                                    <tr>
+                                        <th class="title-col">
+                                            نام پروژه
+                                        </th>
+                                        <th class="bids-col">
+                                            پیشنهادات
+                                        </th>
+                                        <th class="skills-col">
+                                        مهارت ها
+                                        </th>
+                                        <th class="started-col">
+                                            شروع 
+                                        </th>
+                                        <th class="price-col">
+                                        میانگین (ریال)
+                                        </th>
+                                        <th class="bookmark-col">
+
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody> 
+                                        <tr ng-repeat="job in jobs | orderBy: 'job.startedDate' ">
+                                            
+                                        <th class="title-col">
+                                            <a class="seo-url" href="/job/{{job._id}}">
+                                                {{job.title}}</a>
+                                        </th>
+                                        <td class="bids-col">
+                                            {{job.bids || '-'}}
+                                        </td>
+                                        <td class="skills-col">
+                                           <a ng-repeat="tag in job.tags" class="blueLink injob">
+                                                {{tag}}
+                                            </a>
+                                        </td>
+                                        <td class="started-col">
+                                            <time am-time-ago="job.startedDate"></time>
+                                        </td>
+                                        <td class="price-col">
+                                            10,000,000
+                                        </td>
+                                        <td class="bookmark-col">
+                                            <a class="bookmark">
+                                                <div class="bookmark-inner">
+                                                    <span class="ion-ios-star"></span>
+                                                </div>
+                                            </a>
+                                        </td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+
+
+                    <!--row - show-list last line-->
+
+                    </div>
+    </div>
+</div>
+

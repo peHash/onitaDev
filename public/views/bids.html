@@ -1,0 +1,435 @@
+<style>
+	h1, h2, h3, h4, h5, p {
+		color: #666;
+	}
+	.ion-edit {
+		cursor: pointer;
+	}
+	.ion-edit:hover{
+		color: #33B5E6;
+	}
+	.o-profile{
+		min-height: 500px;
+	}
+	.avatar{
+		border: 2px solid #7D7D7D;
+		border-radius: 50%;
+
+	}
+	.avatar-lg{
+		width: 100px;
+		height: 100px;
+		margin: 20px;
+		padding: 0;
+	}
+	.o-profile-skills {
+		margin-left: -10px;
+		min-height: 30px;
+		position: relative;
+	}
+	.p-lg-left{
+		padding-left: 40px !important;
+	}
+	.o-break-word{
+		word-wrap : break-word;
+	}
+	.o-white-space-pre-line {
+		white-space: pre-line;
+	}
+	.air-card{
+		background-color: #FFF;
+		margin: 40px -40px;
+		padding: 40px;
+		box-shadow: 0px 0px 0px 1px #E0E0E0;
+	}
+	.air-card > h2 {
+		line-height: 34px;
+		margin-bottom: 40px;
+	}
+	.upper-body {
+		margin-bottom: 40px;
+	}
+	.circle-edit-button {
+		border-radius: 50%;
+		left: 10px;
+		top: -5px;
+		margin: 0.15em;
+		background: #70CBED none repeat scroll 0% 0%;
+		color: #FFF;
+		padding: 5px;
+		width: 20px;
+		height: 20px;
+		line-height: 10px;
+		cursor: pointer;
+		position: absolute;
+		font-size: 10px;
+	}
+	.circle-remove-button {
+		left: 40px !important;
+		background-color: #666 !important;
+	}
+	.partial {
+		min-height: 50px;
+		padding: 0;
+		margin: 0;
+		margin-bottom: 10px;
+		position: relative;
+	}
+	.text-muted {font-size: 80%;}
+	.NavTabPanel {
+		background: #848484 none repeat scroll 0% 0%;
+		border-bottom: 0 none;
+		height: 45px;
+	}
+	.PageCentered {
+		margin: 0 auto;
+		position: relative;
+		width: 960px;
+		display: block;
+		height: inherit;
+	}
+	.SecondaryNavList{
+		padding-right: 0;
+		margin: 0;
+		padding-left: 1px;
+		height: inherit;
+	}
+	.SecondaryNavList li:first-child {
+		padding-right: 0;
+	}
+	.SecondaryNavList li {
+		padding: 14px 30px 14px 0px;
+		display: inline-block;
+		line-height: 1em;
+		position: relative;
+	}
+	.SecondaryNavList .isCurrent a {
+		color: #fff;
+		font-size: 12px;
+	}
+	.SecondaryNavList a {
+		outline: 0 none;
+		cursor: pointer;
+	}
+	.navbar {
+      margin-bottom : 0 !important;
+    }
+</style>
+<!-- ---- browse.html stylesheets ----- -->
+<style>
+	ol, ul {
+		margin-top: 0;
+		margin-bottom: 10px;
+	}
+	.list-unstyled, .list-inline{
+		padding-right: 0;
+		list-style: outside none none;
+	}
+	.m-0 {
+		margin: 0 !important;
+	}
+	.p-0 {
+		padding: 0 !important;
+	}
+	.m-0-bottom {
+		margin-bottom: 0 !important;
+	}
+	.m-0-right{
+		margin-right: 0 !important;
+	}
+	.p-0-right{
+		padding-right: 0 !important;
+	}
+	.p-0-left{
+		padding-left: 0 !important;
+	}
+	.m-xs-left {
+		margin-left: 10px;
+	}
+	.m-xs-bottom {
+		margin-bottom : 10px;
+	}
+	.ellipsis {
+		overflow-x : hidden ;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		word-break: break-all;
+	}
+	.m-xs-top{
+		margin-top: 5px !important;
+	}
+	.oDescription {
+		overflow: hidden;
+		line-height: inherit;
+		position: relative;
+		height: 4.4em;
+	}
+	.m-md-top {
+		margin-top: 20px !important;
+	}
+	.m-md-bottom {
+		margin-bottom : 20px !important;
+	}
+	.list-inline {
+		margin-left: -5px;
+	}
+	.list-inline > li {
+		display: inline-block;
+		padding-left: 5px;
+		padding-right: 5px;
+	}
+	ol li, ul li {
+		margin-bottom: 10px;
+	}
+	.o-tag-skill {
+		background-color: #E0E0E0;
+		border-radius: 4px;
+		color: #494949;
+		font-size: 11px;
+		display: inline-block;
+		cursor: default;
+		padding; 5px 7px;
+		line-height: 1;
+	}
+	.avatar {
+		border: 2px solid #7D7D7D;
+	}
+	.avatar, img-circle {
+		border-radius: 50%;
+	}
+	.avatar-lg {
+		width: 100px;
+		height: 100px;
+		margin: 20px;
+		padding: 0;
+	}
+	article {
+		border-bottom : 1px solid #E0E0E0;
+	}
+	.p-lg-top-bottom {
+		padding-top: 40px;
+		padding-bottom: 40px;
+	}
+	.bg-info {
+		padding-top: 20px;
+		padding-bottom: 15px;
+		padding-right: 15px;
+	}
+	.blueLink:hover {
+		cursor: pointer;
+	}
+	.input-group {
+		position: relative;
+		display: table;
+		border-collapse: separate;
+		width: 100% !important;
+	}
+	.input-group.input-group-search, input-group-addon:first-child {
+		position: absolute;
+		right:0;
+		top: 0;
+		z-index: 5;
+		width: auto;
+		padding-left: 0;
+		border: 0 none;
+	}
+	.input-group-addon {
+		font-weight: 100;
+		padding: 0;
+		padding-left: 20px;
+		font-size: 36px;
+		line-height: 32px;
+		background-color: transparent;
+		color: #7D7D7D;
+		white-space: nowrap;
+		vertical-align: middle;
+	}
+	.input-group .input-group-addon .ion-search {
+		color: #33B5E6;
+		margin: 0 14px;
+		width: 14px;
+		height: 14px;
+		font-size: 24px;
+		line-height: 14px;
+	}
+	.input-group-addon:first-child {
+		position: absolute;
+		top: 4px;
+		z-index: 100;
+		background-color: transparent;
+		right: 3px;
+		width: 35px;
+		height: 35px;
+		border: medium none;
+	}
+	 .searchinput {
+		padding-right: 40px !important;
+		width: 80% !important;
+	}
+	.m-md-right {
+		margin-right: 20px;
+	}
+	.m-lg-top {
+		margin-top: 40px !important;
+	}
+	.p-lg-top {
+		padding-top: 40px !important;
+	}
+	.p-md-bottom {
+		padding-bottom: 20px !important;
+	}
+	.air-card{
+		background-color: #FFF;
+		margin: 40px -40px;
+		padding: 40px;
+		box-shadow: 0px 0px 0px 1px #E0E0E0;
+	}
+	.oFormSearch {
+		width: 100%;
+		min-height: 40px;
+	}
+	article:last-child {
+		border: medium none;
+	}
+	.shortname {
+		color: #33B5E6;
+	}
+	.proj-pros {
+		position: absolute;
+		left: 0;
+		top: 0;
+	}
+	.NavLink:hover {
+		color: #fff;
+	}
+</style>
+<section class="">
+	<div class="NavTabPanel">
+		<div class="col-md-9 col-sm-9">
+			<div class="col-md-3 col-sm-3 hidden-xs"></div>
+			<div class="col-md-9 col-sm-9 col-xs-12" style="padding-right:5px;">
+                <ul class="SecondaryNavList">
+                    <li class="" ng-class="{isCurrent: bidsCtrlCurrent}">
+                        <a class="NavLink" data-ng-href="{{userProjectPage}}">
+                            پروژه 
+                        </a>
+                    </li>
+                    <li class="">
+                        <a class="NavLink">
+                            پیغام
+                        </a>
+                    </li>
+                    <li class="">
+                        <a class="NavLink">
+                            پیشنهاد
+                        </a>
+                    </li>
+                    <li class="" ng-class="{isCurrent: myCtrlCurrent}">
+                        <a class="NavLink" data-ng-href="{{userProfilePage}}">
+                            پروفایل
+                        </a>
+                    </li>
+                </ul>
+            </div>
+		</div>
+	</div>
+</section>
+
+<div id="messageBox" class="container">
+	<div ng-class="[message.category]" class="col-md-12 col-sm-12 col-xs-12 alert alert-dismissible" ng-repeat="message in messages" ng-if="!message.dismissed">
+		<span ng-bind-html="message.content">
+		</span>
+		<span id="close">
+	        <a title="dismiss" ng-click="message.dismissed = !message.dismissed">
+	            x
+	        </a>
+	    </span>
+	</div>
+</div>
+<div class="container ng-cloak m-lg-top" data-ng-hide="job.bids[0]">
+	<div class="well info">
+		<h3>
+			هنوز پیشنهادی برای این پروژه ارسال نشده است !
+		</h3>
+	</div>
+</div>
+<div class="container o-profile m-lg-top" data-ng-show="job.bids[0]">
+	<div class="col-md-9" ng-mouseover="trigger_in();" ng-mouseleave="trigger_out();">
+
+			<div class="air-card" ng-repeat="bid in job.bids">
+				<!-- {{job.bids}} -->
+				<article>
+					<div class="row" style="position: relative;">
+						<div class="col-md-2">
+							<div class="row">
+								<div class="col-md-10">
+									<p class="text-center m-0-bottom">
+										<a data-ng-href="/profile/{{bid.user._id}}">
+											<img class="avatar avatar-lg m-0-top m-0-right" src="/images/buyer.png"></img>
+										</a>
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-7">
+							<div class="">
+								<span class="h3 m-0-top-bottom">
+									<a class="shortname" title="" data-ng-href="/profile/{{bid.user._id}}">
+										{{bid.user.firstName}} {{bid.user.lastName}}
+									</a>
+								</span>
+								<h5 class="title m-xs-top m-0-bottom text-muted">
+									Mobile Developer
+								</h5>
+							<ul class="list-inline separated m-md-top">
+								<li ng-repeat="tag in bid.user.tags">
+									<a class="blueLink m-0" ng-href="/browse/tag/{{tag}}">
+										{{tag}}
+									</a>
+								</li>
+							</ul>
+							<div class="ng-cloak" ng-hide="true">
+								<p class="oDescription m-md-top m-0-bottom bg-info ng-cloak">
+									<i class="ion-ios-bolt" style="color: tomato"></i>
+به نظر میاد این کاربر کمی تنبل ! چون هنوز مهارتی به پروفایل خود اضافه نکرده است !
+								</p>
+							</div>
+							<div id="pros-desc" class="col-md-12 col-sm-12 col-xs-12 m-md-bottom p-0-right" style="min-height: 90px;">
+								<span class="col-md-12 col-sm-12 text-muted p-0-right">
+									توضیحات
+								</span>
+								<span class="col-md-12 col-sm-12 col-xs-12" style="font-size: 11px">
+									<p ng-bind-html="bid.desc"></p>
+								</span>
+							</div>
+						</div>
+						</div>
+						<div class="col-md-3 p-0">
+							<div class="" style="">
+								<span class="col-md-6 text-muted p-0-right">
+									مبلغ پیشنهادی
+								</span>
+								<span class="col-md-6 p-0-left" style=''>
+									{{bid.amount}}
+								</span>
+								<span class="col-md-6 text-muted p-0-right">
+								تعداد روز
+								</span>
+								<span class="col-md-6">
+								 {{bid.days}}
+								</span>
+							</div>
+						</div>
+						<div class="" style="position: absolute; left: 10px; bottom: 0; width: 170px">
+						<span class="col-md-12">
+							<button class="btn btn-lg m-xs-bottom btn-action">انتخاب پیشنهاد</button>
+						</span>
+						<span class="col-md-12">
+							<button class="btn btn-link btn-lg">گفت و گو </button>
+						</span>
+						</div>
+					</div>
+				</article>
+			</div>
+	</div>
+</div>
