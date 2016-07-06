@@ -1,0 +1,75 @@
+<style>
+p {
+  font-size: 12px;
+}
+</style>
+
+<div class="container">
+  <div class="row">
+    <div class="center-form panel" style="direction: ltr;">
+      <div class="panel-body">
+        <form method="post" ng-submit="signup()" name="signupForm">
+          <h2 class="text-center">ثبت نام </h2>
+
+          <div class="form-group has-feedback" ng-class="{ 'has-error' : signupForm.firstName.$invalid && signupForm.firstName.$dirty }" style="direction:rtl">
+            <input class="form-control input-lg" type="text" name="firstName" ng-model="firstName" placeholder="
+نام
+            " required style="padding-right:42.5px;">
+            <span class="ion-person form-control-feedback"></span>
+            <div class="help-block text-danger" ng-if="signupForm.firstName.$dirty" ng-messages="signupForm.firstName.$error">
+              <div ng-message="required">
+               لطفا نام خود را مطابق با آنجه در شناسنامه/کارت ملی آمده است وارد کنید !
+              </div>
+            </div>
+          </div>
+          <div class="form-group has-feedback" ng-class="{ 'has-error' : signupForm.lastName.$invalid && signupForm.lastName.$dirty }" style="direction:rtl">
+            <input class="form-control input-lg" type="text" name="lastName" ng-model="lastName" placeholder="
+نام خانوادگی
+            " required style="padding-right:42.5px;">
+            <span class="ion-ios-people form-control-feedback"></span>
+            <div class="help-block text-danger" ng-if="signupForm.lastName.$dirty" ng-messages="signupForm.lastName.$error">
+              <div ng-message="required">
+                لطفا نام خانوادگی خود را مطابق با آنجه در شناسنامه/کارت ملی آمده است وارد کنید !
+              </div>
+            </div>
+          </div>
+          <div class="form-group has-feedback" ng-class="{ 'has-error' : signupForm.cellPhoneNumber.$invalid && signupForm.cellPhoneNumber.$dirty }">
+            <input class="form-control input-lg" type="text" name="cellPhoneNumber" ng-model="cellPhoneNumber" placeholder="شماره موبایل " required>
+            <span class="ion-android-call form-control-feedback"></span>
+            <div class="help-block text-danger" ng-if="signupForm.cellPhoneNumber.$dirty" ng-messages="signupForm.cellPhoneNumber.$error">
+              <div ng-message="required">شما باید شماره موبایل خود را وارد کنید !</div>
+            </div>
+          </div>
+
+          <div class="form-group has-feedback" ng-class="{ 'has-error' : signupForm.email.$invalid && signupForm.email.$dirty }">
+            <input unique-email class="form-control input-lg" type="email" id="email" name="email" ng-model="email" placeholder="ایمیل" required autofocus>
+            <span class="ion-at form-control-feedback"></span>
+            <div class="help-block text-danger" ng-if="signupForm.email.$dirty" ng-messages="signupForm.email.$error">
+              <div ng-message="required">وارد کردن ایمیل الزامی است !</div>
+              <div ng-message="email">ایمیل شما صحیح نیست !</div>
+              <div ng-message="unique"><span class="ion-looping">
+              </span>
+ با این ایمیل قبل ثبت نام شده است ! 
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group has-feedback" ng-class="{ 'has-error' : signupForm.password.$invalid && signupForm.password.$dirty }">
+            <input password-strength class="form-control input-lg" type="password" name="password" ng-model="password" placeholder="کلمه عبور " required>
+            <span class="ion-key form-control-feedback"></span>
+            <div class="help-block text-danger" ng-if="signupForm.password.$dirty" ng-messages="signupForm.password.$error">
+              <div ng-message="required">وارد کردن کلمه عبور الزامی است .</div>
+            </div>
+          </div>
+
+         <!-- <p class="text-center text-muted"><small>By clicking on Sign up, you agree to <a href="#">terms & conditions</a> and <a href="#">privacy policy</a></small></p>-->
+
+          <button type="submit" ng-disabled="signupForm.$invalid" class="btn btn-block btn-post" style="color: #fff;">ثبت نام </button>
+          <br/>
+
+          <p class="text-center text-muted">قبلا ثبت نام کرده اید ؟ <a href="/login">خب وارد شوید ! </a></p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

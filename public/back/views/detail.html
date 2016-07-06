@@ -1,0 +1,402 @@
+<style>
+    .module_headerCrumb {
+        color: #999;
+        font-size: 14px;
+        margin: 0;
+        padding: 18px 0;
+        position: relative;
+    }
+    .module_headerCrumb h1 {
+        line-height: 1.4;
+        font-size: 24px;
+        font-weight: 500;
+        color: #666;
+    }
+    .copy {
+        font-size: 14px;
+        line-height: 1.5;
+        color: #666;
+        margin-bottom: 0 !important;
+    }
+
+    .m-md-bottom {
+        margin-bottom: 20px !important;
+    }
+    .m-0-top {
+        margin-top: 0 !important;
+    }
+    .m-0-right {
+        margin-right: 0 !important;
+    }
+    .divider {
+        padding: 0 3px;
+    }
+    .applicants {
+        box-sizing: border-box;
+
+        min-height: 100px;
+    }
+    .projectView {
+        padding-left: 0;
+        /*border-left: 1px solid #CFD9DB;*/
+    }
+    .heading {
+        color: #494949;
+        margin-bottom: 12px;
+        font-weight: 600;
+        font-size:14px;
+    }
+    .heading i {
+        margin-left: 10px;
+    }
+    .applicants ul , .budget ul, .exposure ul {
+        list-style: outside none none;
+        padding: 0;
+    }
+    .applicants ul li {
+        padding: 0 0 12px;
+        font-size: 14px;
+        color: rgba(0, 0, 0, 0.54);
+    }
+    .applicants a {
+        color: #4C83C3;
+    }
+    .projectDetails {
+        position: relative;
+        padding: 18px;
+        border-top: 1px solid #CFD9DB;
+        border-bottom: 1px solid #CFD9DB;
+    }
+    .projectDetails li {
+        color: rgba(0, 0, 0, 0.54);
+        padding-bottom: 5px;
+    }
+    .projectDetails .col-md-4 {
+        border-left: 1px solid #CFD9DB;
+    }
+    .projectDetails .col-md-4:last-child {
+        border-left: none;
+    }
+    .margin-b5 {
+        margn-bottom: 5px;
+    }
+    .skills a {
+        color: rgba(0, 0, 0, 0.54);
+        margin-left: 5px;
+    }
+    .skills a:hover {
+        cursor: pointer;
+    }
+    .divider-hr {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #CFD9DB;
+    }
+    #projectVeryDetail {
+        padding: 0;
+    }
+    .additional img {
+        width: 100% !important;
+        height: 100% !important;
+        max-height: 100%;
+    }
+    .bold {
+        font-weight: 500;
+        color: #494949;
+        line-height: 1.1;
+        font-size: 18px;
+    }
+    p {
+        color: #494949;
+        font-size: 13px;
+        line-height: 20px;
+        margin-bottom: 40px;
+        margin: 0 0 9px;
+    }
+    .projectID {
+        width: 150px;
+        float: left;
+    }
+    #projID {
+        margin-right: 10px;
+        margin-left: 10px;
+        color: rgba(0, 0, 0, 0.54);
+    }
+    #reportProject {
+        float: left;
+        color: #CD3F0C;
+        margin: 10px;
+        cursor: pointer;
+    }
+    .postLikeThis {
+        padding: 0;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        float: right;
+    }
+    .proposals img {
+        width: 100%;
+        height: 100%;
+        max-height: 100%;
+    }
+    .bid-info-container {
+        width: 100%;
+        float: right;
+        position: relative;
+    }
+    .exposure {
+        height: 120px;
+    }
+    .applicants {
+        height: 120px;
+    }
+    .user-thumbnail {
+        margin-bottom: 5px;
+        margin-right: 10px;
+        float: right;
+    }
+    .left-framework {
+        float: right;
+        margin-bottom: 3px;
+    }
+    .bid-user-info {
+        float: right;
+        margin-right: 0px;
+
+    }
+    .bid-reputation-sum {
+        float: right;
+        margin-top: 2px;
+        font-size: 13px;
+    }
+    .bid-reputation-container {
+        text-align: center;
+    }
+    .bid-sum {
+        
+    }
+    .projectDate {
+    }
+    .pad-0-right {
+        padding-right: 0;
+    }
+    .openStatus {
+        color: #B0E44F;
+    }
+    .closeStatus {
+        color : #d9534f;
+    }
+    .ltr {
+        direction: ltr;
+    }
+
+</style>
+
+<script type="text/ng-template" id="postBid.html">
+        <div class="modal-header">
+            <h3 class="modal-title">I'm a modal!</h3>
+        </div>
+        <div class="modal-body">
+            <ul>
+                <li ng-repeat="item in items">
+                    <a ng-click="selected.item = item">{{ item }}</a>
+                </li>
+            </ul>
+            <input class="form-control" type="text" ng-model="fuck"></input>
+            Selected: <b>{{ selected.item }}</b>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+
+<div class="container">
+    <div class="col-md-12">
+        <div class="module_headerCrumb col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-md-9 col-sm-6 col-xs-12">
+                        <h1 class="projectTitle">
+                            {{job.title}}
+                            {{ip}}
+                        </h1>
+                        <p class="copy">
+                            <a class="blueLink m-md-bottom m-0-top m-0-right">
+                                برنامه نویسی
+                            </a>
+                            <a class="blueLink m-md-bottom m-0-top m-0-right">
+                                اندروید
+                            </a>
+                            <a class="blueLink m-md-bottom m-0-top m-0-right">
+                                iOS
+                            </a>
+                        <div class="projectDate pad-0-right col-md-6 col-sm-6 col-xs-6">
+                          <span class="col-md-6 pad-0-right">
+ثبت شده در 
+                            </span>
+<span class="col-md-6">
+<time am-time-ago="job.startedDate"></time>
+</span>
+                        </div>
+                        <div class="ProjectDuration col-md-6 col-sm-6 col-xs-6">
+                            <span class="col-md-6">
+اتمام در 
+                            </span>
+                            <span class="col-md-6">
+<time am-time-ago="job.deadlineDate"></time>
+        </span>
+                        </div>
+                        </p>
+                    </div>
+                    <div class="col-md-3 col-sm-6 hidden-xs">
+                        <!-- <div class="user-wrap pull-left">
+                            <img src="buyer-wrapper.png" alt="user-wrapper"/>
+                        </div> -->
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-9 col-sm-9 col-xs-12 projectView">
+                        <div class="projectDetails col-sm-12 col-xs-12">
+                            <div class="col-md-4 col-sm-12 col-xs-12 exposure pad-0-right">
+                                <p class="heading">
+                                    <i class="ion-clipboard"></i>
+                                    اطلاعات کلی
+                                </p>
+                                <ul >
+                                    <li>
+                                        <span>
+                                            شماره پروژه :
+                                        </span>
+                                        <span id="projectNumber" class="">
+                                            {{job._id | limitTo:6}}
+                                        </span>
+
+                                    </li>
+                                    <li>
+                                        <span>
+                                       وضعیت :
+                                        </span>
+                                        <span id="projectStatus" ng-class="statusClass">
+{{status}}
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-4 col-sm-12 col-xs-12 applicants">
+                                <p class="heading">
+                                    <i class="ion-person-stalker"></i>
+متقاضیان
+                                </p>
+                                <ul id="projectDetailApplicants">
+                                    <li id="totalProposal">
+                                        <span id="totalProposalHeader">
+                                            تعداد پیشنهاد ها :
+                                        </span>
+                                        <span id="proposalCount" class="digit">
+                                            22
+                                        </span>
+                                    </li>
+                                </ul>
+
+                            </div>
+                            <div class="col-md-4 col-sm-12 col-xs-12 budget">
+                                <p class="heading">
+                                    <i class="ion-social-usd"></i>
+                                    بودجه
+                                </p>
+                                <ul >
+                                    <li>
+قیمت ثابت
+                                    </li>
+                                    <li>
+                                      ۱،۰۰۰،۰۰۰ ریال - ۱۰،۰۰۰،۰۰۰
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+                        <div id="projectVeryDetail" class="col-md-12 col-sm-12 col-xs-12">
+                                <h2 class="bold margin-b5">
+                                    توضیحات پروژه
+                                </h2>
+                            <br>
+                            <span class="ProjectDesc">
+                                <p>
+                            {{job.longDesc}}
+                                </p>
+                            </span>
+                            <span class="divider-hr col-md-12 col-sm-12 col-xs-12"></span>
+                            <span class="projectSkills">
+                                <h3 class="bold margin-b5">
+                                    مهارت ها
+                                </h3>
+                                <span class="skills">
+                                    <a ng-repeat="tag in job.tags" class="blueLink m-md-bottom m-0-top m-0-right">
+                                        {{tag}}
+                                    </a>
+                                </span>
+                            </span>
+                            <span class="divider-hr col-md-12 col-sm-12 col-xs-12"></span>
+                            <span class="projectID">
+                                <span id="projID"class="muted-text pull-left">
+۱۱۲۲۳۳
+                                    </span>
+                                    <span class="muted-text pull-left">
+شماره پروژه
+                                    </span>
+                                    <a id="reportProject">
+گزارش پروژه
+                                    </a>
+                            </span>
+                            <div class="postLikeThis col-md-6 col-sm-6 col-xs-12">
+                                <input class="btn btn-post btn-lg" value="ثبت  پروژه مشابه" type="submit" style="color: #fff;" ng-click="showip()"></imput>
+                                <input class="btn btn-proposal btn-post btn-lg" value="ارسال پیشنهاد" ng-click="open('lg');" type="submit"></input>
+                                <div ng-show="selected"> Selection from a modal :
+                                    {{selected}}
+                                </div>
+                            </div>
+                            <span class="divider-hr col-md-12"></span>
+                            <div id="projBids">
+                                <div class="bid-info-container col-md-8">
+                                    <div class="user-thumbnail">
+
+                                    </div>
+                                    <div class="left-framework">
+
+                                    </div>
+                                    <div class="bid-user-info">
+
+                                    </div>
+                                </div>
+                                <div class="bid-reputation-sum col-md-4">
+                                    <div class="bid-reputation-container">
+                                        <div class="bid-reputation">
+
+                                        </div>
+                                    </div>
+                                    <div class="bid-sum">
+                                        <div class="details">
+                                            <span class="actual-amount">
+
+                                            </span>
+                                            <br></br>
+                                            <span class="actual-period">
+
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <span class="proposals">
+                                <img src="proposals.png"/>
+                            </span> -->
+                        </div>
+                    </div>
+                    <!-- end of right column (projectView) -->
+                    <div class="col-md-3 col-sm-3 hidden-xs additional">
+                        <div class="ads">
+                            <img src="ads.png" alt="advertisement"/>
+                        </div>
+                    </div>
+                </div>
+    </div>
+</div>

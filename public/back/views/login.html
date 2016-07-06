@@ -1,0 +1,47 @@
+<style>
+p {
+  font-size: 12px;
+}
+</style>
+<div class="container">
+  <div class="row">
+    <div class="center-form panel" style="direction: ltr;">
+        <div class="panel-body">
+          <h2 class="text-center">ورود</h2>
+          <form method="post" ng-submit="login()" name="loginForm">
+            <div class="form-group has-feedback">
+              <input class="form-control input-lg" type="text" name="email" ng-model="email" placeholder="ایمیل" required autofocus>
+              <span class="ion-at form-control-feedback"></span>
+            </div>
+
+            <div class="form-group has-feedback">
+              <input class="form-control input-lg" type="password" name="password" ng-model="password" placeholder="کلمه عبور" required>
+              <span class="ion-key form-control-feedback"></span>
+            </div>
+
+            <button type="submit" ng-disabled="loginForm.$invalid" class="btn btn-block btn-post" style="color:#FFF;">وارد شو</button>
+
+            <br/>
+
+            <p class="text-center">
+              <a href="#">پسورد خود را فراموش کرده اید ؟</a>
+            </p>
+
+            <p class="text-center text-muted">
+              <small>  قبلا ثبت نام نکرده اید ؟ اشکال نداره   <a href="/signup">ثبت نام کن !</a></small>
+            </p>
+
+<!-- NOT NOW HONEY !!! -->
+<!-- 
+            <div class="signup-or-separator">
+              <h6 class="text">یا</h6>
+              <hr>
+            </div>
+
+            <button class="btn btn-block btn-facebook" ng-click="facebookLogin()"><span class="ion-social-facebook"></span>با اکانت فیس بوک وارد شوید </button>
+            <button class="btn btn-block btn-google-plus" ng-click="googleLogin()"><span class="ion-social-googleplus"></span>با اکانت گوگل وارد شوید </button> -->
+          </form>
+        </div>
+    </div>
+  </div>
+</div>
