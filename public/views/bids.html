@@ -76,11 +76,6 @@
 		position: relative;
 	}
 	.text-muted {font-size: 80%;}
-	.NavTabPanel {
-		background: #848484 none repeat scroll 0% 0%;
-		border-bottom: 0 none;
-		height: 45px;
-	}
 	.PageCentered {
 		margin: 0 auto;
 		position: relative;
@@ -88,32 +83,7 @@
 		display: block;
 		height: inherit;
 	}
-	.SecondaryNavList{
-		padding-right: 0;
-		margin: 0;
-		padding-left: 1px;
-		height: inherit;
-	}
-	.SecondaryNavList li:first-child {
-		padding-right: 0;
-	}
-	.SecondaryNavList li {
-		padding: 14px 30px 14px 0px;
-		display: inline-block;
-		line-height: 1em;
-		position: relative;
-	}
-	.SecondaryNavList .isCurrent a {
-		color: #fff;
-		font-size: 12px;
-	}
-	.SecondaryNavList a {
-		outline: 0 none;
-		cursor: pointer;
-	}
-	.navbar {
-      margin-bottom : 0 !important;
-    }
+
 </style>
 <!-- ---- browse.html stylesheets ----- -->
 <style>
@@ -203,9 +173,7 @@
 		margin: 20px;
 		padding: 0;
 	}
-	article {
-		border-bottom : 1px solid #E0E0E0;
-	}
+	
 	.p-lg-top-bottom {
 		padding-top: 40px;
 		padding-bottom: 40px;
@@ -303,38 +271,8 @@
 		color: #fff;
 	}
 </style>
-<section class="">
-	<div class="NavTabPanel">
-		<div class="col-md-9 col-sm-9">
-			<div class="col-md-3 col-sm-3 hidden-xs"></div>
-			<div class="col-md-9 col-sm-9 col-xs-12" style="padding-right:5px;">
-                <ul class="SecondaryNavList">
-                    <li class="" ng-class="{isCurrent: bidsCtrlCurrent}">
-                        <a class="NavLink" data-ng-href="{{userProjectPage}}">
-                            پروژه 
-                        </a>
-                    </li>
-                    <li class="">
-                        <a class="NavLink">
-                            پیغام
-                        </a>
-                    </li>
-                    <li class="">
-                        <a class="NavLink">
-                            پیشنهاد
-                        </a>
-                    </li>
-                    <li class="" ng-class="{isCurrent: myCtrlCurrent}">
-                        <a class="NavLink" data-ng-href="{{userProfilePage}}">
-                            پروفایل
-                        </a>
-                    </li>
-                </ul>
-            </div>
-		</div>
-	</div>
-</section>
 
+<div class="" ng-include src="'views/header.html'"></div>
 <div id="messageBox" class="container">
 	<div ng-class="[message.category]" class="col-md-12 col-sm-12 col-xs-12 alert alert-dismissible" ng-repeat="message in messages" ng-if="!message.dismissed">
 		<span ng-bind-html="message.content">

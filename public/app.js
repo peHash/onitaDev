@@ -1,10 +1,14 @@
-
-angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'mgcrea.ngStrap', 'ui.bootstrap', 'ui.date', 'ui.bootstrap.persian.datepicker','ui.bootstrap.datepicker', 'angularMoment', 'mdChips', 'ngUpload', 'ngCkeditor', 'ngSanitize'])
+//angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'mgcrea.ngStrap', 'ui.bootstrap', 'ui.date', 'ui.bootstrap.persian.datepicker','ui.bootstrap.datepicker', 'angularMoment', 'mdChips', 'ngUpload', 'ngCkeditor', 'ngSanitize'])
+angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'mgcrea.ngStrap', 'ui.bootstrap', 'ui.date','ui.bootstrap.datepicker', 'angularMoment', 'mdChips', 'ngUpload', 'ngCkeditor', 'ngSanitize'])
 .config(function ($routeProvider, $locationProvider) {
         $routeProvider
             .when('/', {
                 templateUrl: 'views/home.html',
                 controller: 'MainCtrl'
+            })
+            .when('/blog', {
+                templateUrl: 'views/partial-blog.html',
+                controller: 'partialBlogCtrl'
             })
             .when('/job/:id', {
                 templateUrl: 'views/detail.html',
