@@ -1,0 +1,263 @@
+<style>
+table {
+        background-color: transparent;
+    }
+    table th {
+        line-height: 18px;
+        text-align: right;
+    }
+    .dataTable {
+        table-layout: fixed;
+        width: 100%;
+        font-size: 12px;
+        border: 1px solid #CACACA;
+        border-spacing: 0;
+        border-radius: 6px 6px 0px 0px;
+        border-collapse: separate;
+    }
+    .dataTable thead th {
+        vertical-align: bottom;
+    }
+
+    .dataTable th {
+        padding: 10px;
+    }
+    .dataTable thead {
+        color: #FFF;
+    }
+    .dataTable thead tr th:first-child {
+        border-top-right-radius: 5px;
+    }
+    .dataTable thead tr th:last-child {
+        border-top-left-radius: 5px;
+    }
+    .dataTable > thead > tr > th {
+        border-bottom: 0 !important;
+    }
+    .dataTable th.title-col , .dataTable tbody th.title-col{
+        /*width: 235px;*/
+        widows: 32%;
+    }
+    .dataTable tbody .title-col, .dataTable tbody .title-col a {
+        font-size: 13px;
+        color: #33B5E6;
+    }
+    .dataTable th.bids-col , .dataTable td.bids-col {
+        /*width: 65px;*/
+        width: 8%;
+        padding-left: 0;
+        padding-right: 15px;
+        text-align: center;
+    }
+    .dataTable th.skills-col , .dataTable td.skills-col {
+        /*width: 225px;*/
+        width: 35%;
+    }
+    .dataTable th.started-col , .dataTable td.started-col {
+        /*width: 115px;*/
+        width: 10%;
+    }
+    .dataTable th.price-col , .dataTable td.price-col {
+        /*width: 125px;*/
+        width: 10%;
+    }
+    .dataTable th.bookmark-col , .dataTable td.bookmark-col {
+        /*width: 25px;*/
+        width: 5%;
+        padding-right: 0;
+        padding-left: 0;
+    }
+    .dataTable thead tr th {
+        background-color: #33B5E6;
+    }
+    .dataTable tbody tr {
+        cursor: pointer;
+    }
+    .dataTable tbody tr .bookmark-col .bookmark {
+        display: block;
+        width: 100%;
+        cursor: pointer;
+        text-align: center;
+        min-height: 40px;
+    }
+    .bookmark {
+        cursor : pointer;
+        position: relative;
+    }
+    .bookmark-inner {
+        left: 50%;
+        top: 25%;
+        position: absolute;
+    }
+    .bookmark-inner .ion-ios-star {
+        color: #CFD9DB;
+    }
+    .bookmark-inner .ion-ios-star:hover{
+        color: #4AAFE6;
+    }
+    .injob {
+        font-size: 10px;
+        padding: 2px 4px;
+        margin-left: 5px;
+        margin-right: 0;
+        margin-top: 10px;
+
+    }
+    .col {
+        vertical-align: middle !important;
+    }
+    .m-lg-top {
+        margin-top : 40px !important;
+    }
+</style>
+<style>
+    .NavTabPanel {
+        background: #848484 none repeat scroll 0% 0%;
+        border-bottom: 0 none;
+        height: 45px;
+    }
+    .PageCentered {
+        margin: 0 auto;
+        position: relative;
+        width: 960px;
+        display: block;
+        height: inherit;
+    }
+    .SecondaryNavList{
+        padding-right: 0;
+        margin: 0;
+        padding-left: 1px;
+        height: inherit;
+    }
+    .SecondaryNavList li:first-child {
+        padding-right: 0;
+    }
+    .SecondaryNavList li {
+        padding: 14px 30px 14px 0px;
+        display: inline-block;
+        line-height: 1em;
+        position: relative;
+    }
+    .SecondaryNavList .isCurrent a {
+        color: #fff;
+        font-size: 12px;
+    }
+    .SecondaryNavList a {
+        outline: 0 none;
+        cursor: pointer;
+    }
+    .navbar {
+      margin-bottom : 0 !important;
+    }
+    .NavLink:hover {
+        color: #fff;
+    }
+</style>
+<section class="">
+    <div class="NavTabPanel">
+        <div class="col-md-9 col-sm-9">
+            <div class="col-md-3 col-sm-3 hidden-xs"></div>
+            <div class="col-md-9 col-sm-9 col-xs-12" style="padding-right:5px;">
+                <ul class="SecondaryNavList">
+                    <li class="" ng-class="{isCurrent: myProjCtrlCurrent}">
+                        <a class="NavLink" data-ng-href="{{userProjectPage}}">
+                            پروژه 
+                        </a>
+                    </li>
+                    <li class="">
+                        <a class="NavLink">
+                            پیغام
+                        </a>
+                    </li>
+                    <li class="">
+                        <a class="NavLink">
+                            پیشنهاد
+                        </a>
+                    </li>
+                    <li class="" ng-class="{isCurrent: myCtrlCurrent}">
+                        <a class="NavLink" data-ng-href="{{userProfilePage}}">
+                            پروفایل
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div id="messageBox" class="container">
+    <div ng-class="[message.category]" class="col-md-12 col-sm-12 col-xs-12 alert alert-dismissible" ng-repeat="message in messages" ng-if="!message.dismissed">
+        <span ng-bind-html="message.content">
+        </span>
+        <span id="close">
+            <a title="dismiss" ng-click="message.dismissed = !message.dismissed">
+                x
+            </a>
+        </span>
+    </div>
+</div>
+
+<div class="container">
+    <div class="col-md-12">
+        <table class="table table-striped table-hover dataTable m-lg-top ng-cloak" data-ng-show="user.data.projects[0]">
+            <thead>
+            <tr>
+                <th class="title-col">
+                    نام پروژه
+                </th>
+                <th class="bids-col">
+                    پیشنهادات
+                </th>
+                <th class="skills-col">
+                مهارت ها
+                </th>
+                <th class="started-col">
+                    شروع 
+                </th>
+                <th class="price-col">
+                میانگین (ریال)
+                </th>
+                <th class="bookmark-col">
+
+                </th>
+            </tr>
+            </thead>
+            <tbody> 
+                <tr ng-repeat="job in user.data.projects | orderBy: 'job.startedDate' ">
+                    
+                <th class="col title-col">
+                    <a class="seo-url" href="/bids/{{job._id}}">
+                        {{job.title}}</a>
+                </th>
+                <td class="col bids-col">
+                    {{job.bids.length || '0'}}
+                </td>
+                <td class="col skills-col">
+                   <a ng-repeat="tag in job.tags" class="blueLink" ng-href="/browse/tag/{{tag}}">
+                        {{tag}}
+                    </a>
+                </td>
+                <td class="col started-col">
+                    <time am-time-ago="job.startedDate"></time>
+                </td>
+                <td class="col price-col">
+                    10,000,000
+                </td>
+                <td class="col bookmark-col">
+                    <a class="bookmark">
+                        <div class="bookmark-inner">
+                            <span class="ion-ios-star"></span>
+                        </div>
+                    </a>
+                </td>
+
+                </tr>
+            </tbody>
+        </table>
+        <div class="well warn ng-cloak m-lg-top" ng-hide="user.data.projects[0]">
+            <h3>
+            شما در حال حاضر پروژه ای ایجاد نکرده اید !
+            </h3>
+        </div>
+    </div>
+</div>
