@@ -10,6 +10,10 @@ angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'mgcrea.ngStrap'
                 templateUrl: 'views/partial-blog.html',
                 controller: 'partialBlogCtrl'
             })
+            .when('/blogs', {
+                templateUrl: 'views/blog.html',
+                controller: 'blogsCtrl'
+            })
             .when('/job/:id', {
                 templateUrl: 'views/detail.html',
                 controller: 'JobCtrl'
