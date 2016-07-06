@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-//just for the sake of git
-=======
->>>>>>> dc4086ff87bbe8b0509fa5d5cadbf530cfd7858e
 var path = require('path');
 var express = require('express');
 var bodyParser = require('body-parser');
