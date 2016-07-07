@@ -6,13 +6,17 @@ angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'mgcrea.ngStrap'
                 templateUrl: 'views/home.html',
                 controller: 'MainCtrl'
             })
-            .when('/blog', {
+            .when('/article/:id', {
                 templateUrl: 'views/partial-blog.html',
                 controller: 'partialBlogCtrl'
             })
-            .when('/blogs', {
+            .when('/articles', {
                 templateUrl: 'views/blog.html',
                 controller: 'blogsCtrl'
+            })
+            .when('/post-article', {
+                templateUrl: 'views/post-article.html', 
+                controller: 'postBlogCtrl'
             })
             .when('/job/:id', {
                 templateUrl: 'views/detail.html',
@@ -39,7 +43,7 @@ angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'mgcrea.ngStrap'
                 controller: 'SignupCtrl'
             })
             .when('/add'    , {
-                templateUrl: 'views/add1.html',
+                templateUrl: 'views/add.html',
                 controller: 'AddCtrl'
             })
             .when('/delete', {

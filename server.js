@@ -72,7 +72,8 @@ var userSchema = new Schema({
       text: {type: String, default: ''},
       time_sent: {type: Date, default: new Date}
     }]
-  }]
+  }],
+  articles: [{type: mongoose.Schema.Types.ObjectId, ref: 'Article', default: null}]
 });
 
 userSchema.pre('save', function(next) {
@@ -134,44 +135,27 @@ var bidSchema = new mongoose.Schema({
     sponsor: Boolean,
     desc: String
 });
-   // postedBy: [{
-    //     type: mongoose.Schema.Types.ObjectId, ref: 'User'
-    // }],
-    
-    // lastModifiedBy: [{
-    //     type: mongoose.Schema.Types.ObjectId, ref: 'User'
-    // }],
-var projectSchemaNew = new mongoose.Schema({
-    // tags: [String],
-    // longDesc: String,
-    // budgetNumber: Number,
-    // budgetRate: String,
-    // startedDate: Date,
-    // deadlineDate: Date,
-    // featured: Boolean,
-    // views: Number,
-    // report: Boolean,
-    // reportCounter: Number,
-    // status: String,
-    // poster: String,
-    // // postedBy: [{
-    // //     type: mongoose.Schema.Types.ObjectId, ref: 'User'
-    // // }],
-    // lastModifiedInDate: Date,
-    // // lastModifiedBy: [{
-    // //     type: mongoose.Schema.Types.ObjectId, ref: 'User'
-    // // }],
-    // verified: Boolean
+
+var articleSchema = new mongoose.Schema({
+  user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+  title: {type: String, required: true},
+  keywords: [{type:String, default: 'giga'}],
+  body: {type: String, required: true},
+  desc: {type: String, required: true},
+  image: {type: String, required: true},
+  verified: {type: Boolean, default: 1},
+  postedDate : {type: Date, default: Date.now},
+  updatedDate : [{type: Date, default: Date.now}],
+  relateArticles : [{type: mongoose.Schema.Types.ObjectId, ref: 'Article'}]
 });
 
 var User = mongoose.model('User', userSchema);
 
 var Job = mongoose.model('Job', jobSchema);
-jobSchema.plugin(deepPopulate);
 
 var Bid = mongoose.model('Bid', bidSchema);
-/////////
 
+var Article = mongoose.model('Article', articleSchema);
 
 mongoose.connect('mongodb://localhost/Megakar');
 
@@ -421,10 +405,71 @@ app.get('/api/jobs/:id', function(req, res, next) {
   //   if (err) console.log(err);
   //   User.findById(job)
   // });
+
+  jobSchema.plugin(deepPopulate);
+
   Job.findById(req.params.id).deepPopulate('bids.user').exec(function (err, job) {
     if (err) console.log(err);
     res.send(job);
+  });
 });
+
+
+app.get('/api/article', function(req,res,next){
+  if (req.query.tag) {
+    // query.where({ $in : { tags : req.query.tag }});
+    var query = Article.find({}).where('keywords').in([req.query.tag]);
+  } else if (req.query.alphabet) {
+    query.where({ name: new RegExp('^' + '[' + req.query.alphabet + ']', 'i') });
+  } else {
+    var query = Article.find({}).populate('user', 'firstName lastName articles').sort({_id: -1});
+  }
+  query.exec(function(err, arts) {
+    if (err) return next(err);
+    res.send(arts);
+  });
+});
+
+articleSchema.plugin(deepPopulate, {
+  populate: {
+    'user': {
+      select: 'firstName lastName articles'
+    }
+  }
+});
+
+app.get('/api/article/:id', function(req,res,next){
+  Article.findById(req.params.id).deepPopulate('user.articles').exec(function(err, article){
+    if (err) return next(err);
+    res.send(article);
+  });
+});
+
+app.post('/api/article', ensureAuthenticated, function(req, res, next){
+
+  var article = new Article({
+  user: req.user._id,
+  title: req.body.title,
+  keywords: req.body.keywords,
+  body: req.body.body,
+  desc: req.body.desc,
+  image: req.body.image,
+  verified: 1,
+  postedDate : req.body.postedDate || null,
+  updatedDate : req.body.updatedDate || null,
+  relateArticles : null
+});
+  article.save(function(err) {
+    if (err) return next(err);
+    User.findById(req.user._id, function (err, doc) {
+    if (err) return handleError(err);
+      doc.articles.push(article._id);
+      doc.save(function(err){
+        if (err) console.log(err);
+      });
+    });
+    res.send(200);
+  });
 });
 
 

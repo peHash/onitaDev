@@ -1,0 +1,259 @@
+<style>
+    
+    .projectPost {
+        padding-top: 38px;
+        padding-right: 0;
+        padding-left: 0;
+        max-width: 800px;
+        margin-right: auto;
+        margin-left: auto;
+        display: block;
+    }
+    .projectPost .form-gourp-ol {
+        margin: 0px;
+        padding: 0px;
+        list-style-type: decimal;
+    }
+    .projectPost fieldset {
+        position: relative;
+        margin: 0px 0px 50px;
+    }
+    .projectPost > ol legend {
+        padding-left: 40px;
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+    .projectPost .form-step {
+        position: relative;
+        padding-bottom : 20px;
+        margin-bottom: 0px ;
+        list-style: outside none none;
+    }
+    .li-number{
+        display: block;
+        background: #33B5E6 none repeat scroll 0% 0%;
+        color: #fff;
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        font-weight: bold;
+        border-radius: 50%;
+        line-height: 30px;
+    }
+    #projectForm, #projectForm ol {
+        padding-right: 0;
+    }
+    #projectForm > ol > li{
+        list-style: outside none none;
+        width: 100%;
+    }
+    #projectForm > ol > li > ol {
+        list-style: outside none none;
+    }
+    #projectForm select {
+        display: inline-block;
+        width: 100%;
+        border-style: solid;
+        border-width: 1px;
+        color: #616161;
+        border-color : #D1D1D1;
+        background-color: #fff;
+        box-shadow: none;
+        border-radius: 3px;
+        height: 40px;
+        padding: 0px 0px 0px 12px;
+    }
+    #projectForm label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 10px;
+        line-height: 22px;
+        overflow-y: hidden;
+    }
+    #projectForm [type="text"]{
+        display: inline-block;
+        width: 100%;
+        color: #616161;
+        border-color: #D1D1D1;
+        background-color: #fff;
+        border-radius: 3px;
+        height: 40px;
+        padding: 0 12px;
+        box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset;
+
+    }
+
+    .ribon {
+        position: absolute;
+        top:0;
+        right:0;
+        margin: 0;
+    }
+    .projectFeature {
+        display: block;
+        margin-bottom: 8px;
+        cursor: pointer;
+        border: 2px solid #eee;
+        padding: 24px;
+        position: relative;
+        background: #fff;
+        min-height: 150px;
+    }
+    .projectFeature:hover{
+        transition: border-color 0.5s ease-in-out 0s, box-shadow 0.5s ease-in-out 0s;
+        border-color: #33B5E6 !important;
+        box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px #33B5E6 !important;
+    }
+    .featureCheck {
+        float: right;
+        margin-top: 10%;
+        margin-left: 3%;
+        margin-right: 0;
+        margin-bottom: 0;
+    }
+    .featureTitle {
+        width: 55%;
+        margin-left: 5%;
+        float: right;
+        color: #333;
+        line-height: 1.5;
+    }
+    .featureCopy {
+        width: 65%;
+        margin-top: 12px;
+        margin-left: 5%;
+        float: right;
+        line-height: 1.5;
+        color: #666;
+        font-size: 80%;
+    }
+    .featureAmount {
+        width: 10%;
+        margin-left: 10%;
+        float: left;
+        clear: none;
+        color:#666;
+    }
+    .btn-action, .btn-link {
+        float: none !important;
+        display:inline !important;
+    }
+    .footer {
+        text-align: center;
+        float:left !important;
+    }
+    #article-image {
+        direction: ltr;
+    }
+</style>
+
+<div class="container">
+    <div class="col-md-12" style="text-align:center;margin-bottom:100px">
+        <div class="projectPost">
+            <form id="projectForm" class="col-md-12">
+                <ol class="form-group-ol">
+                    <li>
+                        <div class="col-md-1 col-sm-1 col-xs-1">
+                             <span class="li-number">
+                            1
+                             </span>
+                        </div>
+                        <fieldset class="col-md-11">
+                            <legend>
+موضوع مقاله را مشخص کنید 
+                            </legend>
+                            <ol>
+                                <li class="form-step" style="position: relative;">
+                                        <input id="article-category" type="text" name="article_category" class="form-control" ng-model="article.category"></input>
+                                </li>
+                            </ol>
+                        </fieldset>
+                    </li>
+
+                    <li>
+                        <div class="col-md-1 col-sm-1 col-xs-1">
+                            <span class="li-number">
+                            2
+                        </span>
+                        </div>
+
+                        <fieldset class="col-md-11 col-sm-11 col-xs-11">
+                            <legend>
+در مورد مقاله بیشتر توضیح دهید 
+                            </legend>
+                            <ol>
+                                <li class="form-step">
+                                    <label for="">
+سر تیتر  :
+                                    </label>
+                                    <input id="article-title" type="text" name="article_title" class="form-control" ng-model="article.title"></input>
+                                </li>
+                                <li class="form-step">
+                                    <label for="">
+کلمات کلیدی  :
+                                    </label>
+                                     <md-chips collection='coll' ng-model='returnedValues' md-title='title' md-subtitle='subtitle' md-item='items'/>
+                                </li>
+                                <li class="form-step">
+                                    <label for="">
+متن کوتاه :
+                                    </label>
+                                    <textarea id="article-desc" type="text" cols="50" rows="4" maxlength="420" name="article_desc" style="height: auto; direction:rtl" class="form-control" ng-model="article.desc"></textarea>
+                                </li>
+                                <li class="form-step">
+                                    <label for="">
+ متن کامل :
+                                    </label>
+                                    <textarea id="article-body" type="text" cols="80" rows="10" maxlength="5000" name="article_body" style="height: auto;" class="form-control" ng-model="article.body" ckeditor="editorOptions" ></textarea>
+                                </li>
+                            </ol>
+                        </fieldset>
+                    </li>
+                    <li>
+                        <div class="col-md-1 col-sm-1 col-xs-1">
+                            <span class="li-number">
+                                3
+                            </span>
+                        </div>
+                        <fieldset class="col-md-11 col-sm-11 col-xs-11">
+                            <legend>
+                                تصویر بک گراند مقاله :
+                            </legend>
+                            <ol>
+                                <li class="form-step">
+                                    <input id="article-image" type="text" name="article_image" class="form-control" ng-model="article.image"></input>
+                                </li>
+                            </ol>
+                        </fieldset>
+                    </li>
+                    <!-- <li>
+                        <div class="col-md-1 col-sm-1 col-xs-1">
+                            <span class="li-number">
+                                ۴
+                            </span>
+                        </div>
+                        <fieldset class="col-md-11 col-sm-11 col-xs-11">
+                            <legend>
+                                زمان مدنظر شما برای اتمام پروژه :
+                            </legend>
+                            <ol>
+                                <li class="form-step">
+                                    <div class="dateShow"style="">
+                                        <persian-datepicker class="ll-skin-santiago datepicker" ng-model="project.deadline"></persian-datepicker>
+                                    </div>
+                                </li>
+                            </ol>
+                        </fieldset>
+                    </li> -->
+                </ol>
+            </form>
+
+            <div class="footer col-md-11" style="">
+                <span style="margin-right:auto;margin-left:auto;display:block">
+                    <button class="btn btn-lg btn-action" ng-click="postArticle(article)"> ارسال مقاله </button>
+                    <button class="btn btn-lg btn-link " ng-click="cancel()"> انصراف </button>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

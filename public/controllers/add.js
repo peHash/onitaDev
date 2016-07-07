@@ -25,6 +25,11 @@ angular.module('MyApp')
     //     });
     // };
 
+    //config : 
+    $scope.editorOptions = {
+      contentsLangDirection: 'rtl'
+    };
+
 
     $scope.helper1 = false;
     $scope.itemsCollection = [{
@@ -81,12 +86,5 @@ angular.module('MyApp')
         alert('your project posted Successfuly !');
       });
     };
-    $scope.editorOptions = {
-    contentsLangDirection: 'rtl'
-};
-
-
-
-
   });
 }();
