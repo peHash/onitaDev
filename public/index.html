@@ -661,6 +661,35 @@
     .cke_wysiwyg_div {
       direction : rtl;
     } 
+    .button-secondary.blue {
+        border-color: #4dbdeb;
+        color: #4dbdeb;
+    }
+    .button-secondary {
+        background-color: transparent;
+        border-style: solid;
+        border-width: 2px;
+        height: 42px;
+        line-height: 38px;
+        transition-duration: 0.2s;
+        transition-property: border-color, color;
+    }
+    .button-primary, .button-secondary, .button-link {
+        background-clip: padding-box;
+        border-radius: 2px;
+        cursor: pointer;
+        display: inline-block;
+        font-size: 14px;
+        font-weight: normal;
+        margin: 10px 0 0 0;
+        outline: medium none;
+        padding: 0 14px;
+        position: relative;
+        text-align: center;
+        text-decoration: none !important;
+        vertical-align: middle;
+        white-space: nowrap;
+    }
     </style>
 
 </head>
@@ -673,6 +702,7 @@
       <a class="navbar-brand" href="/">
         <img alt="مگا کار" src="images/megakar-logo.png">
       </a>
+      <a class="button-secondary blue" style="position:absolute;right:-20px;top:20%;" href="/post-article">ارسال مقاله</a>
     </div>
   </div>
   <div class="col-md-9 col-sm-9 col-xs-6 header login">

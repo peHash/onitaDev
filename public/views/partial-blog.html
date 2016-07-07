@@ -1,11 +1,13 @@
 <style>
 .post-header img {
 	border: 0 none;
-	max-width: 100% !important;
-	max-height:100% !important;
+	max-width: 1180px !important;
+	max-height:400px !important;
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
+	width: 100%;
+	height:100%;
 }
 .avatar-inner {
 	position: relative;
@@ -98,7 +100,7 @@
 <div class="col-md-12">
 	<article class="blog-post">
 		<header class="post-header">
-			<img class="post-image" src="images/577674a67293e0.06803903.jpg">
+			<img class="post-image" ng-src="{{art.image}}">
 			<div class="grid container">
 				<div class="col-md-12 centered">
 					<div class="author media parent">
@@ -113,18 +115,16 @@
 						</div>
 						<div class="media-body">
 							نویسنده :
-							<a class="h5 text-blue" href="https://moz.com/community/users/174938">جعفر</a>
+							<a class="h5 text-blue" ng-href="art.user._id">{{art.user.firstName}}  {{art.user.lastName}}</a>
 							<time class="pull-left" am-time-ago="defaultTime"></time>
 						</div>
 					</div>
 					<div class="col-md-12">
 						<h1 class="h2 title">
-							<a href="https://moz.com/blog/a-9step-client-management-manifesto-your-agency-should-steal">{{tempTitle}}
+							<a ng-href="art._id">{{art.user.title}}
 							</a>
 						</h1>
-						<a class ="blueLink" href="https://moz.com/blog/category/reporting"> Reporting </a>
-						<a class ="blueLink" href="https://moz.com/blog/category/business-practices"> Business Practices </a>
-						<a class ="blueLink" href="https://moz.com/blog/category/consulting"> Consulting </a>
+						<a ng-repeat="keyword in art.keywords" class ="blueLink" href="/browse/tags/{{keyword}}"> {{keyword}} </a>
 						<div class="disclaimer" ng-hide="true">
 							 This post was promoted from
 							<a href="https://moz.com/ugc">YouMoz</a>
@@ -137,19 +137,7 @@
 		<div class="parent container">
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="post-content">
-					اگر به دنبال یک افزونه مدیریت دانلود جذاب و لذت بخش وردپرس میگردید؛ پس درست اومدید. افزونه Delightful Downloads یک سیستم مدیریت دانلود فوق العاده برای وبسایت وردپرسی شماست که به سادگی امکان افزودن لینک ها و دکمه های دانلود رو به مطالب، برگه ها و ابزارک های شما ایجاد میکنه. علاوه بر این، یک سیستم آماره جمع و جور هم داره که گزارش دانلودهای شما رو در پیشخوان وردپرس نمایش میده. این افزونه توسط دنیای وردپرس، به زبان شیرین پارسی ترجمه شده و همراهان عزیز به سادگی میتونند از این سیستم در سایت ها و وبلاگ هاشون استفاده کنند.
-
-برخی از امکانات دوست داشتی این افزونه
-
-    آپلود فایل ها در پیشخوان وردپرس، با امکان تنظیم محل بارگذاری و سفارشی سازی پیوند.
-    ذخیره دانلودها به صورت Post Type با امکان تنظیم دسته بندی و اضافه کردن برچسب.
-    پشتیبانی از انواع کدهای کوتاه (Short Code) با آپشن های مختلف و مستندات کامل.
-    پشتیبانی از کد کوتاه لیست کردن دانلودها با فیلترها و متدهای مرتب سازی گوناگون.
-    سیستم آماره دانلودها به همراه قابلیت جلوگیری از ذخیره متعدد وقایع توسط یک کاربر.
-    قابلیت حذف خودکار وقایع دانلودها و همچنین امکان بلاک کردن برخی کاربران و ربات ها.
-    قابلیت رمز گذاری روی فایل ها و تنظیم دسترسی دانلود تنها برای کاربران لوگین کرده.
-    قابلیت سفارشی سازی دکمه ها، توسعه آسان، ترجمه فارسی، کش اطلاعات و…
-
+					<p ng-bind-html="art.body"></p>
 				</div>
 				<aside class="related-posts align-center top5 bottom5"></aside>
 			</div>
