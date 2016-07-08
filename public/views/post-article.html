@@ -192,7 +192,10 @@
                                     <label for="">
 کلمات کلیدی  :
                                     </label>
-                                     <md-chips collection='coll' ng-model='returnedValues' md-title='title' md-subtitle='subtitle' md-item='items'/>
+                                    <span ng-hide="!articleRevision">
+                                        <a class="chips-mini" ng-repeat="key in article.keywords">{{key}}</a>
+                                    </span>
+                                    <md-chips collection='coll' ng-model='returnedValues' md-title='title' md-subtitle='subtitle' md-item='items'/>
                                 </li>
                                 <li class="form-step">
                                     <label for="">
@@ -250,8 +253,10 @@
 
             <div class="footer col-md-11" style="">
                 <span style="margin-right:auto;margin-left:auto;display:block">
-                    <button class="btn btn-lg btn-action" ng-click="postArticle(article)"> ارسال مقاله </button>
+                    <button class="btn btn-lg btn-action" ng-hide="articleRevision" ng-click="postArticle(article)"> ارسال مقاله </button>
+                    <button class="btn btn-lg btn-action" ng-hide="!articleRevision" ng-click="updateArticle(article)"> آپدیت مقاله </button>
                     <button class="btn btn-lg btn-link " ng-click="cancel()"> انصراف </button>
+                    <button class="btn btn-lg btn-action" ng-hide="!articleRevision" ng-click="removeArticle();"> حذف مقاله </button>
                 </span>
             </div>
         </div>

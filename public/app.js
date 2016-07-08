@@ -15,6 +15,10 @@ angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'mgcrea.ngStrap'
                 controller: 'blogsCtrl'
             })
             .when('/post-article', {
+                templateUrl: '/views/post-article.html',
+                controller: 'postBlogCtrl'
+            })
+            .when('/post-article/:id', {
                 templateUrl: 'views/post-article.html', 
                 controller: 'postBlogCtrl'
             })

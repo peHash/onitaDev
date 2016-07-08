@@ -445,20 +445,27 @@ app.get('/api/article/:id', function(req,res,next){
   });
 });
 
+app.delete('/api/article/:id', ensureAuthenticated, function(req,res, next){
+  Article.findById(req.params.id).remove().exec(function(err){
+    if (err) return next(err);
+    res.sendStatus(200);
+  });
+});
+
 app.post('/api/article', ensureAuthenticated, function(req, res, next){
 
   var article = new Article({
-  user: req.user._id,
-  title: req.body.title,
-  keywords: req.body.keywords,
-  body: req.body.body,
-  desc: req.body.desc,
-  image: req.body.image,
-  verified: 1,
-  postedDate : req.body.postedDate || null,
-  updatedDate : req.body.updatedDate || null,
-  relateArticles : null
-});
+    user: req.user._id,
+    title: req.body.title,
+    keywords: req.body.keywords,
+    body: req.body.body,
+    desc: req.body.desc,
+    image: req.body.image,
+    verified: 1,
+    postedDate : req.body.postedDate || null,
+    updatedDate : req.body.updatedDate || null,
+    relateArticles : null
+  });
   article.save(function(err) {
     if (err) return next(err);
     User.findById(req.user._id, function (err, doc) {
@@ -469,6 +476,16 @@ app.post('/api/article', ensureAuthenticated, function(req, res, next){
       });
     });
     res.send(200);
+  });
+});
+
+app.put('/api/article', ensureAuthenticated, function(req,res,next){
+  Article.findById(req.body._id).exec(function(err,article){
+    article = _.extend(article, req.body);
+    article.save(function(err){
+      if (err) return next(err);
+      res.send(article);
+    })
   });
 });
 
