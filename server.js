@@ -37,6 +37,7 @@ var userSchema = new Schema({
   lastName: {type: String, trim: true, required: true},
   cellPhoneNumber : {type: Number, unique: true, default: ''},
   email: { type: String, unique: true, lowercase: true, trim: true , required: true},
+  image: {type: String},
   password: { type: String },
   facebook: {
     id: String,
@@ -797,14 +798,13 @@ if (req.params.id1 && req.params.id2) {
 });
 
 
-app.post('/upload' , function(req, res, next) {
+app.post('/upload' ,ensureAuthenticated, function(req, res, next) {
  var form = new formidable.IncomingForm();
+ var imageRoot, imageName;
  form.uploadDir = './public/img-upload';
  form.keepExtensions = true;
 
  form.parse(req, function(err, fields, files){
-        res.status(200).send('file uploaded Successfully');
-        console.log("form.bytesReceived");
         // TESTING
         console.log("file size: "+JSON.stringify(files.file.size));
         console.log("file path: "+JSON.stringify(files.file.path));
@@ -813,10 +813,19 @@ app.post('/upload' , function(req, res, next) {
         console.log("astModifiedDate: "+JSON.stringify(files.file.lastModifiedDate));
         // Formidable changes the name of the uploaded file
         // Rename the file to its original name
-        fs.rename(files.file.path, './public/img-upload/' + files.file.name, function(err) {
+    imageRoot = './public';
+    imageName = '/img-upload/' + Date.now() + files.file.name;
+    fs.rename(files.file.path, imageRoot + imageName, function(err) {
+    if (err) return 0;
+    User.findById(req.user._id, function(err, doc) {
+      if (err) return 0;
+      doc.image = imageName;
+      doc.save(function(err){
         if (err) console.log(err);
-          console.log('renamed complete');  
-        });
+        res.status(200).send(doc); 
+      });
+    });  
+    });
  });
 });
 

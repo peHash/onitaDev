@@ -1,5 +1,5 @@
 //angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'mgcrea.ngStrap', 'ui.bootstrap', 'ui.date', 'ui.bootstrap.persian.datepicker','ui.bootstrap.datepicker', 'angularMoment', 'mdChips', 'ngUpload', 'ngCkeditor', 'ngSanitize'])
-angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'mgcrea.ngStrap', 'ui.bootstrap', 'ui.date','ui.bootstrap.datepicker', 'angularMoment', 'mdChips', 'ngUpload', 'ngCkeditor', 'ngSanitize'])
+angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'mgcrea.ngStrap', 'ui.bootstrap', 'ui.date','ui.bootstrap.datepicker', 'angularMoment', 'mdChips', 'ngUpload', 'ngCkeditor', 'ngSanitize', 'ngFileUpload', 'ngImgCrop'])
 .config(function ($routeProvider, $locationProvider) {
         $routeProvider
             .when('/', {

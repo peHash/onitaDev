@@ -75,8 +75,15 @@
 		margin-bottom: 10px;
 		position: relative;
 	}
-	.text-muted {font-size: 80%;}
-
+	.text-muted {
+		font-size: 80%;
+	}
+	.cropArea {
+    	background: #E4E4E4;
+    	overflow: hidden;
+    	width:500px;
+    	height:350px;
+	}
 
 </style>
 
@@ -279,6 +286,60 @@
 </div>
 </div>
 </script>
+<script type="text/ng-template" id="profile-image.html">
+<style>
+	.center {
+		display: block;
+		margin-right: auto;
+		margin-left: auto;
+	}
+	.m20 {
+		margin-top: 20px;
+		margin-bottom: 20px;
+	}
+	.modal-lg .modal-body {
+		min-height: 420px !important;
+	}
+</style>
+	<div class="modal-header">
+	            <h3 class="modal-title"> تصویر پروفایل </h3>
+	</div>
+	<div class="modal-body" style="min-height:350px;">
+		<div class="col-md-12" style="padding-right:0;padding-left:0">
+			<div class="col-md-4">
+				<img id="user-portrait" class="avatar avatar-lg center m20" ng-src="{{croppedDataUrl}}"/>
+				<button class="center m20" ngf-select ng-model="picFile" accept="image/*">
+    			   آپلود تصویر </button>
+			    <button class="center m20" ng-show="picFile" ng-click="uploadImg(croppedDataUrl, picFile.name)"> انتخاب نهایی </button> 		
+			    <div class="progress center m20" ns-show="{{progress > 1}}">
+				  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{progress}}"
+				  aria-valuemin="0" aria-valuemax="100" style="width:{{progress}}%">
+				    {{progress}}% آپلود شد
+				  </div>
+				</div>
+    			<span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+			</div>
+			<div class="col-md-8">
+   			<form name="myForm">
+    			<div ngf-drop ng-model="picFile" ngf-pattern="image/*"
+    			     class="cropArea">
+    			    <img-crop image="picFile  | ngfDataUrl"                 
+    			    result-image="croppedDataUrl" ng-init="croppedDataUrl=''">
+    			    </img-crop>
+    			</div>
+    			<div>
+    			</div>
+    		</form>
+			</div>
+
+	    </div>
+	</div>
+	<div class="modal-footer">
+	    <button class="btn btn-lg btn-action" ng-click="reload()"> ثبت </button>
+	</div>
+	</div>
+</script>
+
 <style>
 	.NavTabPanel {
 		background: #848484 none repeat scroll 0% 0%;
@@ -410,20 +471,12 @@
 	<div class="col-md-9" ng-mouseover="trigger_in();" ng-mouseleave="trigger_out();">
 		<div class="col-md-12 upper-body">
 			<div class="pull-right">
-				<img id="user-portrait" class="avatar avatar-lg" src="/images/upload_ba306abb08424caa55618b897c7710ef.png"></img>
-			<form action="/upload" ng-upload="completed()"
-			ng-upload-loading="loading();">
-    			<input type="file" name="file"></input>
-     			<input type='submit' value='Upload'
-        ng-disabled="$isUploading"></input>
-   			</form>
-   			{{response}}
+				<img id="user-portrait" class="avatar avatar-lg" ng-src="{{user.image || 'images/ads.png'}}" ng-click="profile_image_open('lg')"/>
 			</div>
 			<div class="media-body">
 				<div class="row">
 					<div class="col-md-8">
-						<h3> {{user.firstName}} </h3>
-						<h4> {{user.email}} </h4>
+						<h3> {{user.firstName}} {{user.lastName}}</h3>
 					</div>
 					<div class="col-md-4">
 

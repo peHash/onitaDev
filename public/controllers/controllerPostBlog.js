@@ -67,8 +67,8 @@ $scope.postArticle = function(article) {
 
 $scope.removeArticle = function(){
 	if ($scope.articleRevision) 
-		Article.delete({_id : $routeParams.id}, function(err){
-			console.log(err);
+		Article.delete({_id : $routeParams.id}, function(){
+			alert('The article removed Successfuly !');
 		});
 };
 });
