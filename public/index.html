@@ -696,6 +696,33 @@
       padding: 0 10px !important;
       line-height: 30px !important;
     }
+    .avatar-lg{
+      width: 150px;
+      height: 150px;
+      margin: 20px;
+      padding: 0;
+    }
+    .btn-compound {
+      display: block;
+      padding: 0;
+      height: 35px;
+    }
+    .btn-compound [class^="ion-"] {
+      margin: 0;
+      padding: 0 6px;
+      width: 34px;
+      height: 33px;
+      float: right;
+      font-size: 1.8em;
+      line-height: 37px;
+    }
+    .btn-compound .btn-value {
+      height: 40px;
+      line-height: 30px;
+      margin: 0 6px;
+      float: right;
+      color: #333;
+    }
     </style>
 
 </head>
@@ -706,7 +733,7 @@
   <div class="col-md-3 col-sm-3 col-xs-6 header" style="float: left !important;">
     <div class="navbar-header">
       <a class="navbar-brand" href="/">
-        <img alt="مگا کار" src="images/megakar-logo.png">
+        <img alt="مگا کار" ng-src="images/megakar-logo.png">
       </a>
       <a class="button-secondary blue" style="position:absolute;right:-20px;top:20%;" href="/post-article">ارسال مقاله</a>
     </div>
@@ -730,7 +757,7 @@
     </ul>
     <ul ng-cloak class="nav navbar-nav pull-right userContainer col-md-3 col-sm-3 hidden-xs" ng-if="currentUser">
       <li class="dropdown" ng-click="usertoggle();">
-        <img class="navAvatar" src="images/upload_ba306abb08424caa55618b897c7710ef.png" alt="currentUser.email"></img>
+        <img class="navAvatar" src="{{currentUser.image || 'images/upload_ba306abb08424caa55618b897c7710ef.png'}}" alt="کاربر محترم"></img>
       </li>
       <div class="userDropDown ng-cloak" ng-show="userdown">
         <ul class="listWrapper">

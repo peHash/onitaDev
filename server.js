@@ -224,7 +224,8 @@ app.post('/auth/login', function(req, res, next) {
       var cpUser = {
         _id: user._id,
         email: user.email,
-        password: user.password
+        password: user.password, 
+        image: user.image
       };
       var token = createJwtToken(cpUser);
       res.send({ token: token });

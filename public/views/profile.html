@@ -16,12 +16,6 @@
 		border-radius: 50%;
 
 	}
-	.avatar-lg{
-		width: 100px;
-		height: 100px;
-		margin: 20px;
-		padding: 0;
-	}
 	.o-profile-skills {
 		margin-left: -10px;
 		min-height: 30px;
@@ -46,8 +40,8 @@
 		line-height: 34px;
 		margin-bottom: 40px;
 	}
-	.upper-body {
-		margin-bottom: 40px;
+	.air-card:first-child {
+		margin-top: 0;
 	}
 	.circle-edit-button {
 		border-radius: 50%;
@@ -76,194 +70,37 @@
 		position: relative;
 	}
 	.text-muted {font-size: 80%;}
-
+	.profile_contact_user {
+		float: none;
+		width: auto;
+		margin-bottom: 20px;
+	}
+	.btn-compound {
+		display: block;
+		padding: 0;
+		height: 35px;
+	}
+	.btn-compound [class^="ion-"] {
+		margin: 0;
+		padding: 0 6px;
+		width: 34px;
+		height: 33px;
+		float: right;
+		font-size: 1.8em;
+		line-height: 37px;
+	}
+	.btn-compound .btn-value {
+		height: 40px;
+		line-height: 30px;
+		margin: 0 6px;
+		float: right;
+		color: #333;
+	}
+	.bg_light-green {
+		background-color: rgb(24, 208, 157);
+	}
 
 </style>
-
-<script type="text/ng-template" id="resume-add.html">
-<div class="modal-header">
-            <h3 class="modal-title"> رزومه من </h3>
-</div>
-<div class="modal-body" style="min-height:400px;">
-	<div class="col-md-12">
-		<div class="col-md-6">
-	        <label> 
-	            عنوان
-	        </label>
-	        <input class="form-control" data-ng-model="resume.title"></input>
-	        <label>
-	            	سال شروع
-	        </label>
-	        <select class="form-control" label="" data-ng-model="resume.start">
-	        	<option value="1393">1393</option>
-	        	<option value="1392">1392</option>
-	    	</select>
-		</div>
-		<div class="col-md-6">
-			<label>
-				موضوع 
-			</label>
-			<input class="form-control" data-ng-model="resume.category"></input>
-			<label>
-				سال اتمام
-			</label>
-			<select class="form-control" label="" data-ng-model="resume.finish">
-				<option value="0">...</option>
-				<option value="1394">1394</option>
-				<option value="1393">1393</option>
-			</select>
-		</div>
-		<div class="col-md-12">
-			<label>
-				توضیحات
-			</label>	
-			<textarea class="form-control" rows="10" data-ng-model="resume.desc"></textarea>
-		</div>
-	</div>
-</div>
-<div class="modal-footer">
-    <button class="btn btn-primary" ng-click="add_resume()"> ثبت </button>
-    <button class="btn" ng-click="cancel()"> انصراف </button>
-</div>
-</div>
-</script>
-<script type="text/ng-template" id="resume-edit.html">
-<div class="modal-header">
-            <h3 class="modal-title"> تغییر رزومه </h3>
-</div>
-<div class="modal-body" style="min-height:400px;">
-	<div class="col-md-12">
-		<div class="col-md-6">
-	        <label> 
-	            عنوان
-	        </label>
-	        <input class="form-control" data-ng-model="resume.title"></input>
-	        <label>
-	            	سال شروع
-	        </label>
-	        <select class="form-control" label="" data-ng-model="resume.start">
-	        	<option value="1393">1393</option>
-	        	<option value="1392">1392</option>
-	    	</select>
-		</div>
-		<div class="col-md-6">
-			<label>
-				موضوع 
-			</label>
-			<input class="form-control" data-ng-model="resume.category"></input>
-			<label>
-				سال اتمام
-			</label>
-			<select class="form-control" label="" data-ng-model="resume.finish">
-				<option value="0">...</option>
-				<option value="1394">1394</option>
-				<option value="1393">1393</option>
-			</select>
-		</div>
-		<div class="col-md-12">
-			<label>
-				توضیحات
-			</label>	
-			<textarea class="form-control" rows="10" data-ng-model="resume.desc"></textarea>
-		</div>
-	</div>
-</div>
-<div class="modal-footer">
-    <button class="btn btn-primary" ng-click="add_resume()"> ثبت </button>
-    <button class="btn" ng-click="cancel()"> انصراف </button>
-</div>
-</div>
-</script>
-<script type="text/ng-template" id="edu-add.html">
-<div class="modal-header">
-            <h3 class="modal-title"> مدرک تحصیلی</h3>
-</div>
-<div class="modal-body" style="min-height:350px;">
-	<div class="col-md-12">
-        <label> 
-            نام دانشگاه 
-        </label>
-        <input class="form-control" data-ng-model="edu.name"></input>
-    </div>
-		<div class="col-md-6" style="">
-			<label>
-				سال ورود 
-			</label>
-			<select class="form-control" data-ng-model="edu.start">
-				<option class="" label="" value="1390">1390</option>
-			</select>
-		</div>
-		<div class="col-md-6" style="">
-			<label>
-				سال اتمام
-			</label>
-			<select class="form-control" data-ng-model="edu.finish">
-				<option class="" label="" value="1394">1394</option>
-			</select>
-		</div>
-	<div class="col-md-12">
-		<label> 
-			مدرک
-		</label>
-		<input class="form-control" data-ng-model="edu.grade"></input>
-		<label>
-			رشته تحصیلی
-		</label>
-		<input class="form-control" data-ng-model="edu.field"></input>
-	</div>
-</div>
-<div class="modal-footer">
-    <button class="btn btn-primary" ng-click="add_edu()"> ثبت </button>
-    <button class="btn" ng-click="cancel()"> انصراف </button>
-</div>
-</div>
-</script>
-<script type="text/ng-template" id="summary-edit.html">
-<div class="modal-header">
-            <h3 class="modal-title"> خلاصه فعالیت ها </h3>
-</div>
-<div class="modal-body" style="min-height:100px;">
-	<div class="col-md-12">
-        <label> 
-            فعالیت ها
-        </label>
-       <textarea class="form-control" ng-model='summary'></textarea>
-    </div>
-    
-</div>
-<div class="modal-footer">
-    <button class="btn btn-primary" ng-click="update_summary()"> ثبت </button>
-    <button class="btn" ng-click="cancel()"> انصراف </button>
-</div>
-</div>
-</script>
-<script type="text/ng-template" id="skills-edit.html">
-	<style>
-		.chipsInput {
-			width: 100%;
-			border-color: rgb(51, 181, 230) !important;
-			border-width: 3px;
-			border-style: solid;
-		}
-	</style>
-<div class="modal-header">
-            <h3 class="modal-title"> مهارت های من </h3>
-</div>
-<div class="modal-body" style="min-height:350px;">
-	<div class="col-md-12">
-        <label> 
-           مهارت ها
-        </label>
-     	<md-chips collection='itemsCollection' ng-model='returnedValues' md-title='title' md-subtitle='subtitle' md-item='items'/>
-    </div>
-</div>
-<div class="modal-footer">
-    <button class="btn btn-primary" ng-click="update_skills()"> ثبت </button>
-    <button class="btn" ng-click="cancel()"> انصراف </button>
-</div>
-</div>
-</script>
-
 <div class="container">	
 	<div class="col-md-3">
 		<h2 class="">
@@ -282,9 +119,13 @@
 <div class="container o-profile" ng-hide="error">
 	{{error}}
 	<div class="col-md-9" ng-mouseover="trigger_in();" ng-mouseleave="trigger_out();">
-		<div class="col-md-12 upper-body">
+		<div class="profile_upper-body col-md-12 upper-body">
 			<div class="pull-right">
-				<img id="user-portrait" class="avatar avatar-lg" ng-src="{{user.image  || '/images/buyer.png'}}"></img>
+				<img id="user-portrait" class="avatar avatar-lg" ng-src="{{user.image || 'images/ads.png'}}" ng-click="profile_image_open('lg')"/>
+			    <button class="profile_contact_user btn btn-lg btn-action btn-compound" ng-click="update_skills()">
+			    	<span class="ion-email bg_light-green"></span>
+		    		<span class="btn-value"> ارسال درخواست همکاری </span>
+			    </button>
 			</div>
 			<div class="media-body">
 				<div class="row">
@@ -296,13 +137,24 @@
 					</div>
 				</div>
 				<div class="o-profile-skills">
-					<span class="blueLink tag" ng-repeat="tag in user.tags">
+					<a class="blueLink tag" 
+					ng-repeat="tag in user.tags" 
+					ng-html="/browse/tag/{{tag}}">
+
 						{{tag}}
-					</span>
+
+					</a>
 					<span class="ng-cloak" ng-hide="user.tags">
 						شما مهارتی اضافه نکره اید
 					</span>
-					<i class="ion-plus circle-edit-button ng-cloak" ng-show="is_edit_open" ng-click="skills_edit_open('lg');"></i>
+
+					<!-- edit button  -->
+
+					<i class="ion-plus circle-edit-button ng-cloak" 
+					ng-show="is_edit_open" 
+					ng-click="skills_edit_open('lg');">
+					</i>
+
 				</div>
 			</div>
 		</div>

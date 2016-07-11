@@ -16,12 +16,6 @@
 		border-radius: 50%;
 
 	}
-	.avatar-lg{
-		width: 100px;
-		height: 100px;
-		margin: 20px;
-		padding: 0;
-	}
 	.o-profile-skills {
 		margin-left: -10px;
 		min-height: 30px;
@@ -46,8 +40,8 @@
 		line-height: 34px;
 		margin-bottom: 40px;
 	}
-	.upper-body {
-		margin-bottom: 40px;
+	.air-card:first-child {
+		margin-top: 0;
 	}
 	.circle-edit-button {
 		border-radius: 50%;
@@ -258,6 +252,7 @@
 </div>
 </script>
 
+	<!-- skill edit -->
 
 
 <script type="text/ng-template" id="skills-edit.html">
@@ -286,6 +281,9 @@
 </div>
 </div>
 </script>
+
+	<!-- profile image -->
+
 <script type="text/ng-template" id="profile-image.html">
 <style>
 	.center {
@@ -311,7 +309,7 @@
 				<button class="center m20" ngf-select ng-model="picFile" accept="image/*">
     			   آپلود تصویر </button>
 			    <button class="center m20" ng-show="picFile" ng-click="uploadImg(croppedDataUrl, picFile.name)"> انتخاب نهایی </button> 		
-			    <div class="progress center m20" ns-show="{{progress > 1}}">
+			    <div class="progress center m20" ng-show="picFile">
 				  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{progress}}"
 				  aria-valuemin="0" aria-valuemax="100" style="width:{{progress}}%">
 				    {{progress}}% آپلود شد
@@ -467,7 +465,6 @@
 	<h1> {{error}} </h1>
 </div>
 <div class="container o-profile" ng-hide="error">
-	{{error}}
 	<div class="col-md-9" ng-mouseover="trigger_in();" ng-mouseleave="trigger_out();">
 		<div class="col-md-12 upper-body">
 			<div class="pull-right">

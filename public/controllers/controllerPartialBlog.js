@@ -4,4 +4,5 @@ angular.module('MyApp').controller('partialBlogCtrl', function ($scope, Article,
 	  Article.get({ _id: $routeParams.id }, function(art){
 	  $scope.art = art; 
 	  });
+
 });
