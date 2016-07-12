@@ -1,4 +1,5 @@
-angular.module('MyApp')
++ function() {
+  angular.module('MyApp')
   .directive('uniqueEmail', function($http) {
     return {
       restrict: 'A',
@@ -16,4 +17,5 @@ angular.module('MyApp')
         });
       }
     };
-  });
+  });  
+}();

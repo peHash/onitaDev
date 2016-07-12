@@ -1,4 +1,5 @@
-angular.module('MyApp')
++ function() {
+  angular.module('MyApp')
   .controller('MyCtrl', function($scope, User, $routeParams, $window, $modal, $http, Upload, $timeout) {
      
       $scope.fileUploaded = '';
@@ -16,10 +17,10 @@ angular.module('MyApp')
       
 
         $scope.trigger_in = function() {
-        		this.is_edit_open = true;
+            this.is_edit_open = true;
         };
         $scope.trigger_out = function() {
-        		this.is_edit_open = false;
+            this.is_edit_open = false;
         };
     
         $scope.uploadimg = function() {
@@ -204,7 +205,7 @@ angular.module('MyApp')
     }
 
   }).controller('ResumeCtrl', function($scope, $routeParams, $window, $modal, $modalInstance, $http, user){
-  	$scope.default = '';
+    $scope.default = '';
     $scope.resume = {};
     $scope.add_resume = function() {
       
@@ -354,4 +355,5 @@ angular.module('MyApp')
       $modalInstance.dismiss('cancel');
     }
 
-  });
+  });  
+}();

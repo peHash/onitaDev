@@ -1,5 +1,6 @@
-//angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'mgcrea.ngStrap', 'ui.bootstrap', 'ui.date', 'ui.bootstrap.persian.datepicker','ui.bootstrap.datepicker', 'angularMoment', 'mdChips', 'ngUpload', 'ngCkeditor', 'ngSanitize'])
-angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'mgcrea.ngStrap', 'ui.bootstrap', 'ui.date','ui.bootstrap.datepicker', 'angularMoment', 'mdChips', 'ngUpload', 'ngCkeditor', 'ngSanitize', 'ngFileUpload', 'ngImgCrop'])
++ function() {
+    //angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'mgcrea.ngStrap', 'ui.bootstrap', 'ui.date', 'ui.bootstrap.persian.datepicker','ui.bootstrap.datepicker', 'angularMoment', 'mdChips', 'ngUpload', 'ngCkeditor', 'ngSanitize'])
+angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'mgcrea.ngStrap', 'ui.bootstrap', 'ui.date','ui.bootstrap.datepicker', 'angularMoment', 'mdChips', 'ngUpload', 'ngCkeditor', 'ngSanitize', 'ngFileUpload', 'ngImgCrop', 'toaster', 'ngAnimate'])
 .config(function ($routeProvider, $locationProvider) {
         $routeProvider
             .when('/', {
@@ -50,10 +51,6 @@ angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'mgcrea.ngStrap'
                 templateUrl: 'views/add.html',
                 controller: 'AddCtrl'
             })
-            .when('/delete', {
-                templateUrl: 'views/delete.html',
-                controller: 'DelCtrl'
-            })
             .when('/presignup', {
                 templateUrl: 'views/presignup.html',
                 controller: 'userSetting'
@@ -78,14 +75,6 @@ angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'mgcrea.ngStrap'
                 templateUrl: 'views/profile.html',
                 controller: 'ProfileCtrl'
             })
-            // .when('/question/:id/title/:questionBody', {
-            //     templateUrl: 'views/question.html',
-            //     controller: 'QuestionCtrl'
-            // })
-            // .when('/mahan', {
-            //     templateUrl: 'viws/test.html', 
-            //     controller: 'testCtrl'
-            // })
             .otherwise({
                 redirectTo: '/'
             });
@@ -114,4 +103,5 @@ angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'mgcrea.ngStrap'
         }
       }
     });
-  });
+  });    
+}();

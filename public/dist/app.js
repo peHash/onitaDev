@@ -1,11 +1,27 @@
-//'ui.bootstrap.persian.datepicker' --> deleted to fix 
-//angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'mgcrea.ngStrap', 'ui.bootstrap', 'ui.date', 'ui.bootstrap.persian.datepicker','ui.bootstrap.datepicker', 'angularMoment', 'mdChips', 'ngUpload', 'ngCkeditor', 'ngSanitize'])
-angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'mgcrea.ngStrap', 'ui.bootstrap', 'ui.date','ui.bootstrap.datepicker', 'angularMoment', 'mdChips', 'ngUpload', 'ngCkeditor', 'ngSanitize'])
++ function() {
+    //angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'mgcrea.ngStrap', 'ui.bootstrap', 'ui.date', 'ui.bootstrap.persian.datepicker','ui.bootstrap.datepicker', 'angularMoment', 'mdChips', 'ngUpload', 'ngCkeditor', 'ngSanitize'])
+angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'mgcrea.ngStrap', 'ui.bootstrap', 'ui.date','ui.bootstrap.datepicker', 'angularMoment', 'mdChips', 'ngUpload', 'ngCkeditor', 'ngSanitize', 'ngFileUpload', 'ngImgCrop', 'toaster', 'ngAnimate'])
 .config(function ($routeProvider, $locationProvider) {
         $routeProvider
             .when('/', {
                 templateUrl: 'views/home.html',
                 controller: 'MainCtrl'
+            })
+            .when('/article/:id', {
+                templateUrl: 'views/partial-blog.html',
+                controller: 'partialBlogCtrl'
+            })
+            .when('/articles', {
+                templateUrl: 'views/blog.html',
+                controller: 'blogsCtrl'
+            })
+            .when('/post-article', {
+                templateUrl: '/views/post-article.html',
+                controller: 'postBlogCtrl'
+            })
+            .when('/post-article/:id', {
+                templateUrl: 'views/post-article.html', 
+                controller: 'postBlogCtrl'
             })
             .when('/job/:id', {
                 templateUrl: 'views/detail.html',
@@ -32,12 +48,8 @@ angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'mgcrea.ngStrap'
                 controller: 'SignupCtrl'
             })
             .when('/add'    , {
-                templateUrl: 'views/add1.html',
+                templateUrl: 'views/add.html',
                 controller: 'AddCtrl'
-            })
-            .when('/delete', {
-                templateUrl: 'views/delete.html',
-                controller: 'DelCtrl'
             })
             .when('/presignup', {
                 templateUrl: 'views/presignup.html',
@@ -63,14 +75,6 @@ angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'mgcrea.ngStrap'
                 templateUrl: 'views/profile.html',
                 controller: 'ProfileCtrl'
             })
-            // .when('/question/:id/title/:questionBody', {
-            //     templateUrl: 'views/question.html',
-            //     controller: 'QuestionCtrl'
-            // })
-            // .when('/mahan', {
-            //     templateUrl: 'viws/test.html', 
-            //     controller: 'testCtrl'
-            // })
             .otherwise({
                 redirectTo: '/'
             });
@@ -99,4 +103,5 @@ angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'mgcrea.ngStrap'
         }
       }
     });
-  });
+  });    
+}();

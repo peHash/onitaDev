@@ -1,33 +1,15 @@
-angular.module('MyApp')
-    .factory('Answerfactory', function($http) {
-        return {
-            answer: function(questionid, answertext) {
-                return $http.post('/api/answer', { questionId: questionid, answerbody: answertext});
-            },
-            delanswer: function(course) {
-                return $http.post('/api/delanswer', { questionId: course._id });
-            }
-        };
++ function () {
+	angular.module('MyApp')
+  .factory('Article', function($resource) {
+    return $resource('/api/article/:_id', {}, {
+    	update: {
+    		method : 'PUT'
+    	}
     });
-angular.module('MyApp')
-    .factory('Del', function($http) {
-        // return {
-        //     // answer: function(questionid, answertext) {
-        //     //     return $http.post('/api/answer', { questionId: questionid, answerbody: answertext});
-        //     // },
-        //     delete: function(job) {
-        //         return $http.post('/api/v1/deljob', { jobID: job.id });
-        //     }
-        // };
-            return $http({
-                url: '/api/v1/deljob',
-                method: 'POST',
-                data: {
-                    jobID: job.id
-                }
-            });
+  });	
+}();
 
-    });
++ function() {
 angular.module('MyApp')
   .factory('Auth', function($http, $location, $rootScope, $alert, $window) {
     var token = $window.localStorage.token;
@@ -153,23 +135,19 @@ angular.module('MyApp')
         $rootScope.signedin = false;
       }
     };
-  });
-angular.module('MyApp')
+  });  
+}();
+
++ function() {
+	angular.module('MyApp')
   .factory('Show', function($resource) {
     return $resource('/api/jobs/:_id');
-  });
-angular.module('MyApp')
-  .factory('Subscription', function($http) {
-    return {
-      subscribe: function(show) {
-        return $http.post('/api/subscribe', { showId: show._id });
-      },
-      unsubscribe: function(show) {
-        return $http.post('/api/unsubscribe', { showId: show._id });
-      }
-    };
-  });
-angular.module('MyApp')
+  });	
+}();
+
++function() {
+	angular.module('MyApp')
   .factory('User', function($resource) {
     return $resource('/api/v1/user/:_id');
-  });
+  });	
+}();

@@ -1,4 +1,5 @@
-angular.module('MyApp')
++ function () {
+  angular.module('MyApp')
   .controller('InboxCtrl', function($scope, $rootScope, $routeParams, User, $modal, $resource, $http) {
       $http({
         url: '/api/v1/inbox/' + $routeParams.id, 
@@ -9,4 +10,5 @@ angular.module('MyApp')
       }, function(response){
         alert(response);
       });
-});
+  });   
+}();

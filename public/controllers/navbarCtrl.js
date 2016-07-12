@@ -10,5 +10,5 @@
     $scope.usertoggle = function() {
     	$scope.userdown = !($scope.userdown);
     };
-  })
+  });
 }();

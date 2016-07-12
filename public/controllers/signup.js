@@ -1,3 +1,4 @@
++ function() {
 angular.module('MyApp')
   .controller('SignupCtrl', function($scope, Auth) {
     $scope.signup = function() {
@@ -10,4 +11,5 @@ angular.module('MyApp')
       });
     };
     $scope.pageClass = 'fadeZoom'
-  });
+  });  
+}();
