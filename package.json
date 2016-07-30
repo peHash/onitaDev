@@ -1,6 +1,6 @@
 {
   "name": "Giga",
-  "version": "00.00.00",
+  "version": "00.00.10",
   "scripts": {},
   "dependencies": {
     "agenda": "^0.6.10",
