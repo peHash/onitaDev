@@ -1,7 +1,6 @@
 + function() {
   angular.module('MyApp')
     .controller('AddCtrl', function($scope, Show) {
-      
       //config : 
       $scope.editorOptions = {
         contentsLangDirection: 'rtl'

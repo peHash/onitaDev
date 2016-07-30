@@ -345,6 +345,7 @@ margin-bottom: 15px;
 }
 .navbar {
     height: 90px;
+    /*margin-bottom: 0 !important;*/
 }
 
 .navbar-header {
@@ -724,6 +725,13 @@ legend {
   padding-right: 15px;
   padding-bottom: 8px;
 }
+.header-cover {
+  background: url('/images/bg-test.jpg') no-repeat 50%;
+  background-size: cover;
+  position: relative;
+  height: 300px;
+  margin-bottom: 20px
+}
 </style>
 
 </head>
@@ -804,6 +812,7 @@ legend {
     </ul>
   </div>
 </div>
+
 
 <div style="" ng-view class="{{pageClass}}"></div>
 

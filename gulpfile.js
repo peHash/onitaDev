@@ -2,6 +2,8 @@ var gulp = require('gulp'),
     path = require('path'),
     sass = require('gulp-sass'),
     csso = require('gulp-csso'),
+    nodemon = require('gulp-nodemon'),
+    exec = require('child_process').exec,
     ngAnnotate = require('gulp-ng-annotate'),
     plumber = require('gulp-plumber'),
     plugins = {
@@ -53,27 +55,6 @@ sources.css.main = [
     paths.assets.css + 'flight-list.css',
 ];
 
-function gulper(src, dest, fn) {
-    fn = fn || [];
-    var stream = gulp.src(src),
-        apply = function (fn, args) { return stream = stream.pipe(fn.apply(this, args)); };
-    if (!Array.isArray(fn)) {
-        apply(fn, [].splice.call(arguments, 3));
-    } else {
-        var fnSets = [].splice.call(arguments, 2);
-        fnSets.forEach(function (set) {
-            apply(set[0], set.slice(1));    
-        });
-    }
-
-    return stream
-        .pipe(plugins.chmod(666))
-        .pipe(gulp.dest(dest));
-}
-
-function concater(sources, concated, dest) {
-    return gulper(sources, dest, plugins.concat, concated, { newLine: '\r\n' });
-}
 
 gulp.task('concat-js-controllers', function () {
     return concater(sources.js.controllers, 'controllers.js', paths.app.dist);
@@ -92,6 +73,34 @@ gulp.task('concat-js-app', function () {
 });
 
 gulp.task('concat-js', ['concat-js-controllers', 'concat-js-directives', 'concat-js-filters', 'concat-js-services', 'concat-js-app']);
+
+// gulp.task('server', function() {
+//     // configure nodemon
+//     nodemon({
+//         // the script to run the app
+//         script: 'server.js',
+//         // this listens to changes in any of these files/routes and restarts the application
+//         watch: ["server.js", "public/app.js", 'public/*', 'public/*/**'],
+//         ext: 'js'
+//         // Below i'm using es6 arrow functions but you can remove the arrow and have it a normal .on('restart', function() { // then place your stuff in here }
+//     }).on('restart', function(){
+//         reporter('Running the Server');
+//   });
+// });
+
+gulp.task('server', function (cb) {
+    exec('mongod --dbpath E:/data/db', function (err, stdout, stderr) {
+    console.log(stdout);
+    console.log(stderr);
+    cb(err);
+    });
+        
+    exec('node server.js', function (err, stdout, stderr) {
+    console.log(stdout);
+    console.log(stderr);
+    cb(err);
+    });
+});
 
 
 
@@ -134,14 +143,38 @@ gulp.task('concat-js', ['concat-js-controllers', 'concat-js-directives', 'concat
 
 // gulp.task('default', ['sass', 'compress', 'templates', 'watch']);
 
-    gulp.task('default', ['concat-js'], function () {
+
+
+    gulp.task('default', ['concat-js','server'], function () {
     gulp.watch(sources.js.controllers, ['concat-js-controllers']).on('change', reporter('running `concat-js-controllers` task'));
     gulp.watch(sources.js.directives, ['concat-js-directives']).on('change', reporter('running `concat-js-directives` task'));
     gulp.watch(sources.js.filters, ['concat-js-filters']).on('change', reporter('running `concat-js-filters` task'));
     gulp.watch(sources.js.services, ['concat-js-services']).on('change', reporter('running `concat-js-services` task'));
     gulp.watch(sources.js.app, ['concat-js-app']).on('change', reporter('running `concat-js-app` task'));
-    
+    });
 
+
+    function concater(sources, concated, dest) {
+    return gulper(sources, dest, plugins.concat, concated, { newLine: '\r\n' });
+    }
+
+    function gulper(src, dest, fn) {
+        fn = fn || [];
+        var stream = gulp.src(src),
+            apply = function (fn, args) { return stream = stream.pipe(fn.apply(this, args)); };
+        if (!Array.isArray(fn)) {
+            apply(fn, [].splice.call(arguments, 3));
+        } else {
+            var fnSets = [].splice.call(arguments, 2);
+            fnSets.forEach(function (set) {
+                apply(set[0], set.slice(1));    
+            });
+    }
+
+    return stream
+        .pipe(plugins.chmod(666))
+        .pipe(gulp.dest(dest));
+    }   
     function reporter(input) {
         var message = 'running tasks...';
         if (input.path) {
@@ -149,7 +182,7 @@ gulp.task('concat-js', ['concat-js-controllers', 'concat-js-directives', 'concat
         }
         return report.bind(null, input || message);
     }
+
     function report(message, event) {
         console.log(path.basename(event.path) + ' was ' + event.type + ' :', message);
     }
-});
