@@ -8,24 +8,18 @@ var bcrypt = require('bcryptjs');
 var mongoose = require('mongoose');
 var jwt = require('jwt-simple');
 var moment = require('moment');
-
 var async = require('async');
 var request = require('request');
 var xml2js = require('xml2js');
-
-var agenda = require('agenda')({ db: { address: '185.8.172.102:27017/Megakar' } });
+// var agenda = require('agenda')({ db: { address: '185.8.172.102:27017/giga' } });
 var sugar = require('sugar');
 var nodemailer = require('nodemailer');
 var _ = require('lodash');
-// ---- 12/6/94 ----
 var fs = require('fs-extra');
 var formidable = require('formidable');
 var deepPopulate = require('mongoose-deep-populate')(mongoose);
-// ----
-//var ip = require('ip');
-//console.log(ip.address());
-var tokenSecret = 'your unique secret';
 
+var tokenSecret = 'your unique secret';
 var Schema = mongoose.Schema,
     ObjectId = Schema.ObjectId;
 
@@ -67,11 +61,12 @@ var userSchema = new Schema({
   }], 
   projects: [{type: mongoose.Schema.Types.ObjectId, 
     ref: 'Job', default: null}], 
-  texts: [{
+  messages: [{
     receiver: {type: mongoose.Schema.Types.ObjectId, default: null}, 
-    messages: [{
+    box: [{
       text: {type: String, default: ''},
-      time_sent: {type: Date, default: new Date}
+      time_sent: {type: Date, default: new Date}, 
+      seen: {type: Boolean}
     }]
   }],
   articles: [{type: mongoose.Schema.Types.ObjectId, ref: 'Article', default: null}]
@@ -165,7 +160,7 @@ mongoose.connect('mongodb://localhost/Megakar');
 
 var app = express();
 
-app.set('port', process.env.PORT || 2020);
+app.set('port', process.env.PORT || 1010);
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -232,62 +227,62 @@ app.post('/auth/login', function(req, res, next) {
   });
 });
 
-app.post('/auth/facebook', function(req, res, next) {
-  var profile = req.body.profile;
-  var signedRequest = req.body.signedRequest;
-  var encodedSignature = signedRequest.split('.')[0];
-  var payload = signedRequest.split('.')[1];
+// app.post('/auth/facebook', function(req, res, next) {
+//   var profile = req.body.profile;
+//   var signedRequest = req.body.signedRequest;
+//   var encodedSignature = signedRequest.split('.')[0];
+//   var payload = signedRequest.split('.')[1];
 
-  var appSecret = '298fb6c080fda239b809ae418bf49700';
+//   var appSecret = '298fb6c080fda239b809ae418bf49700';
 
-  var expectedSignature = crypto.createHmac('sha256', appSecret).update(payload).digest('base64');
-  expectedSignature = expectedSignature.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+//   var expectedSignature = crypto.createHmac('sha256', appSecret).update(payload).digest('base64');
+//   expectedSignature = expectedSignature.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 
-  if (encodedSignature !== expectedSignature) {
-    return res.send(400, 'Invalid Request Signature');
-  }
+//   if (encodedSignature !== expectedSignature) {
+//     return res.send(400, 'Invalid Request Signature');
+//   }
 
-  User.findOne({ facebook: profile.id }, function(err, existingUser) {
-    if (existingUser) {
-      var token = createJwtToken(existingUser);
-      return res.send(token);
-    }
-    var user = new User({
-      name: profile.name,
-      facebook: {
-        id: profile.id,
-        email: profile.email
-      }
-    });
-    user.save(function(err) {
-      if (err) return next(err);
-      var token = createJwtToken(user);
-      res.send(token);
-    });
-  });
-});
+//   User.findOne({ facebook: profile.id }, function(err, existingUser) {
+//     if (existingUser) {
+//       var token = createJwtToken(existingUser);
+//       return res.send(token);
+//     }
+//     var user = new User({
+//       name: profile.name,
+//       facebook: {
+//         id: profile.id,
+//         email: profile.email
+//       }
+//     });
+//     user.save(function(err) {
+//       if (err) return next(err);
+//       var token = createJwtToken(user);
+//       res.send(token);
+//     });
+//   });
+// });
 
-app.post('/auth/google', function(req, res, next) {
-  var profile = req.body.profile;
-  User.findOne({ google: profile.id }, function(err, existingUser) {
-    if (existingUser) {
-      var token = createJwtToken(existingUser);
-      return res.send(token);
-    }
-    var user = new User({
-      name: profile.displayName,
-      google: {
-        id: profile.id,
-        email: profile.emails[0].value
-      }
-    });
-    user.save(function(err) {
-      if (err) return next(err);
-      var token = createJwtToken(user);
-      res.send(token);
-    });
-  });
-});
+// app.post('/auth/google', function(req, res, next) {
+//   var profile = req.body.profile;
+//   User.findOne({ google: profile.id }, function(err, existingUser) {
+//     if (existingUser) {
+//       var token = createJwtToken(existingUser);
+//       return res.send(token);
+//     }
+//     var user = new User({
+//       name: profile.displayName,
+//       google: {
+//         id: profile.id,
+//         email: profile.emails[0].value
+//       }
+//     });
+//     user.save(function(err) {
+//       if (err) return next(err);
+//       var token = createJwtToken(user);
+//       res.send(token);
+//     });
+//   });
+// });
 
 app.get('/api/users', function(req, res, next) {
   if (!req.query.email) {
@@ -302,24 +297,32 @@ app.get('/api/users', function(req, res, next) {
 
 
 
-app.get('/api/jobs' , function(req, res, next) {
+app.get('/api/jobs' ,ensureAuthenticated,  function(req, res, next) {
 
-//Just for test
-// var aNewText = {
-//   receiver: '55b392241d26fcfe017dd3dd', 
-//   messages: [{
-//     text: 'hello ahmad mahmoud', 
-//     time_sent: new Date
-//   }];
-// User.update({_id: req.user._id}, {
-//       $push: {
-//         texts: aNewText
-//       }
-//     },{ upsert: true}, function(err, number){
-//       if (err) return Next(err);
-//       console.log(number + 'new text/s successfully inserted !');
-//     });
+var aNewText = {
+  receiver: '577bd0eda57df9f413a0855b', 
+  box: {
+    text: 'hello ahmad mahmoud', 
+    time_sent: new Date
+  }
+};
 
+ // messages: [{
+ //    receiver: {type: mongoose.Schema.Types.ObjectId, default: null}, 
+ //    messages: [{
+ //      text: {type: String, default: ''},
+ //      time_sent: {type: Date, default: new Date}, 
+ //      seen: {type: Boolean}
+ //    }]
+
+User.update({_id: req.user._id}, {
+      $push: {
+        messages: aNewText
+      }
+    },{ upsert: true}, function(err, number){
+      if (err) return Next(err);
+      console.log(number + 'new text/s successfully inserted !');
+    });
 
 /*
     Storymdl
@@ -390,7 +393,6 @@ app.get('/api/jobs' , function(req, res, next) {
     if (err) return next(err);
     res.send(jobs);
   });
-
 
 });
 
@@ -855,7 +857,7 @@ app.use(function(err, req, res, next) {
 });
 
 app.listen(app.get('port'), function() {
-  console.log('Express server listening on port ' + app.get('port'));
+  console.log('Server is up and running on port ' + app.get('port'));
 });
 
 // agenda.define('send email alert', function(job, done) {

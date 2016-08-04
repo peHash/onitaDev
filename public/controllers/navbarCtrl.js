@@ -1,6 +1,6 @@
 + function() {
   angular.module('MyApp')
-  .controller('navbarCtrl', function($scope, $window) {
+  .controller('navbarCtrl', function($scope, $window, Auth) {
   	$scope.userdown = false;
     $scope.logout = function() {
 	  	Auth.logout();

@@ -74,33 +74,33 @@ gulp.task('concat-js-app', function () {
 
 gulp.task('concat-js', ['concat-js-controllers', 'concat-js-directives', 'concat-js-filters', 'concat-js-services', 'concat-js-app']);
 
-// gulp.task('server', function() {
-//     // configure nodemon
-//     nodemon({
-//         // the script to run the app
-//         script: 'server.js',
-//         // this listens to changes in any of these files/routes and restarts the application
-//         watch: ["server.js", "public/app.js", 'public/*', 'public/*/**'],
-//         ext: 'js'
-//         // Below i'm using es6 arrow functions but you can remove the arrow and have it a normal .on('restart', function() { // then place your stuff in here }
-//     }).on('restart', function(){
-//         reporter('Running the Server');
-//   });
-// });
-
-gulp.task('server', function (cb) {
-    exec('mongod --dbpath E:/data/db', function (err, stdout, stderr) {
-    console.log(stdout);
-    console.log(stderr);
-    cb(err);
-    });
-        
-    exec('node server.js', function (err, stdout, stderr) {
-    console.log(stdout);
-    console.log(stderr);
-    cb(err);
-    });
+gulp.task('launch', function() {
+    // configure nodemon
+    nodemon({
+        // the script to run the app
+        script: 'server.js',
+        // this listens to changes in any of these files/routes and restarts the application
+        watch: ["server.js", "public/app.js", 'public/*', 'public/*/**'],
+        ext: 'js'
+        // Below i'm using es6 arrow functions but you can remove the arrow and have it a normal .on('restart', function() { // then place your stuff in here }
+    }).on('restart', function(){
+        reporter('Running the Server');
+  });
 });
+
+// gulp.task('launch', function (cb) {
+//     // exec('mongod --dbpath E:/data/db', function (err, stdout, stderr) {
+//     // console.log(stdout);
+//     // console.log(stderr);
+//     // cb(err);
+//     // });
+        
+//     exec('node server.js', function (err, stdout, stderr) {
+//     console.log(stdout);
+//     console.log(stderr);
+//     cb(err);
+//     });
+// });
 
 
 
@@ -145,7 +145,7 @@ gulp.task('server', function (cb) {
 
 
 
-    gulp.task('default', ['concat-js','server'], function () {
+    gulp.task('default', ['concat-js','launch'], function () {
     gulp.watch(sources.js.controllers, ['concat-js-controllers']).on('change', reporter('running `concat-js-controllers` task'));
     gulp.watch(sources.js.directives, ['concat-js-directives']).on('change', reporter('running `concat-js-directives` task'));
     gulp.watch(sources.js.filters, ['concat-js-filters']).on('change', reporter('running `concat-js-filters` task'));

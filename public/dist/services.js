@@ -17,28 +17,7 @@ angular.module('MyApp')
       var payload = JSON.parse($window.atob(token.split('.')[1]));
       $rootScope.currentUser = payload.user;
     }
-
-    // // Asynchronously initialize Facebook SDK
-    // $window.fbAsyncInit = function() {
-    //   FB.init({
-    //     appId: '624059410963642',
-    //     responseType: 'token',
-    //     version: 'v2.0'
-    //   });
-    // };
-
-    // Asynchronously load Facebook SDK
-    // (function(d, s, id) {
-    //   var js, fjs = d.getElementsByTagName(s)[0];
-    //   if (d.getElementById(id)) {
-    //     return;
-    //   }
-    //   js = d.createElement(s);
-    //   js.id = id;
-    //   js.src = "//connect.facebook.net/en_US/sdk.js";
-    //   fjs.parentNode.insertBefore(js, fjs);
-    // }(document, 'script', 'facebook-jssdk'));
-
+    
     // // Asynchronously load Google+ SDK
     // (function() {
     //   var po = document.createElement('script');

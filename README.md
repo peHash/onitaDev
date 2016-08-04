@@ -1,4 +1,4 @@
 # giga
 
-This is a private repo meine freunde ! 
+Es ist ein Privaten Repo mein Freund !
 
