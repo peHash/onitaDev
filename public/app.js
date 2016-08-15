@@ -4,6 +4,10 @@ angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'mgcrea.ngStrap'
 .config(function ($routeProvider, $locationProvider) {
         $routeProvider
             .when('/', {
+                templateUrl: 'views/landing.html',
+                controller: 'landingPageCtrl'
+            })
+            .when('/jobs', {
                 templateUrl: 'views/home.html',
                 controller: 'MainCtrl'
             })

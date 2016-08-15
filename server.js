@@ -160,7 +160,7 @@ mongoose.connect('mongodb://localhost/Megakar');
 
 var app = express();
 
-app.set('port', process.env.PORT || 1010);
+app.set('port', process.env.PORT || 1212);
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({

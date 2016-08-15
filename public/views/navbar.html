@@ -1,0 +1,74 @@
+ <div ng-controller="navbarCtrl" class="navbar navbar-default navbar-static-top" role="navigation">
+    <div class="col-md-3 col-sm-3 col-xs-6 header" style="float: left !important;">
+      <div class="navbar__header">
+        <!-- <a class="navbar__brand" href="/">
+          <h1 class="brand__header logo__gray">gigakar</h1>
+        </a> -->
+        <a class="button-secondary white" style="position:absolute;left:55px;top:20%;" href="/post-article">ارسال مقاله</a>
+      </div>
+    </div>
+    <div class="col-md-9 col-sm-9 col-xs-6 header login">
+      <ul class="nav navbar-nav pull-right login-ul col-md-3 col-sm-3 hidden-xs" ng-if="!currentUser">
+        <li data-match-route="/login">
+          
+          <a href="/login">
+            <span class="ion-android-exit"></span>
+            ورود
+          </a>
+        </li>
+        <li data-match-route="/signup">
+          
+          <a href="/signup">
+         <span class="ion-android-create"></span>
+           ثبت نام 
+         </a>
+        </li>
+      </ul>
+      <ul ng-cloak class="nav navbar-nav pull-right userContainer col-md-3 col-sm-3 hidden-xs" ng-if="currentUser">
+        <li class="dropdown navbar-profile" ng-click="usertoggle();">
+          <img class="navAvatar" ng-src="images/upload_ba306abb08424caa55618b897c7710ef.png" alt="کاربر محترم"></img>
+        </li>
+        <div class="userDropDown ng-cloak" ng-show="userdown">
+          <ul class="listWrapper">
+            <li class="">
+              <a class="dropdown-toggle dropDownItem isCurrent" ng-href="/my/{{currentUser._id}}" ng-click="usertoggle()">
+                <i class="ion-person"></i>
+                {{currentUser.email}}
+              </a>
+            </li>
+          </ul>
+          <a class="dropDownItem listFooter" ng-href="/my/{{currentUser._id}}" ng-click="usertoggle()">
+            <i class="ion-gear-a"></i>
+            پروفایل
+          </a>
+          <a class="dropDownItem" ng-click="logout();">
+            <i class="ion-power"></i>
+            خروج
+          </a>
+        </div>
+        <li class="dropdown">
+          <a class="navAvatar" ng-href="/">
+            <span class="ion-speakerphone"></span>
+          </a>
+        </li>
+        <li class="dropdown">
+          <a class="navAvatar">
+            <span class="ion-briefcase"></span>
+          </a>
+        </li>
+      </ul>
+      <ul class="col-md-9 col-sm-9 hidden-xs nav navbar-nav primary-pages pull-right">
+          <li style="max-width: 38%" data-match-route="/add"><a href="/add">
+             پروژه جدید
+          </a></li>
+          <li style="max-width: 19%" data-match-route="/$"><a href="/" style="">
+              کار ها
+          </a></li>
+          <li style="max-width: 30%">
+            <a href="/browse" data-match-route="/browse">
+              فری لنسر ها
+            </a> 
+          </li>
+      </ul>
+    </div>
+  </div>

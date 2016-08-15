@@ -19,10 +19,27 @@
   <link rel="stylesheet" href="bower_components/angularjs-toaster/toaster.min.css">
 
 <style>
+@font-face {
+  font-family:Iran Sans Web;
+  src:url('./font/iransans+web+light.woff2') format("woff2");
+  font-weight:200
+}
+@font-face {
+  font-family:Iran Sans Web;
+  src:url('./font/iransans+web.woff2') format("woff2");
+  font-weight:400
+}
+@font-face {
+  font-family:Iran Sans Web;
+  src:url('./font/iransans+web+medium.woff2') format("woff2");
+  font-weight:500
+}
+
 body {
     background-color: #F9F9F9;
-    font-family: "Web_Yekan", Arial , tahoma;
-    border-top:3px solid rgb(51, 181, 230) !important;
+    font-family: "Iran Sans Web", "Web_Yekan", Arial , tahoma !important;
+    margin: 0;
+    padding: 0;
 }
 body, table, div , td, th {
   line-height: 22px;
@@ -45,8 +62,18 @@ a:focus, a:active, a:hover {
 a:active, a:hover {
   outline: 0 none;
 }
+.navbar {
+  display: none;
+  height: 90px;
+  margin-bottom: 0 !important;
+  position: fixed;
+  left: 0;
+  right: 0;
+  border-top:3px solid #0277bd !important;
+  opacity: 0.9;
+}
 .navbar-default {
-  background: #fff !important;
+  background: #0288d1 !important;
 }
 .navbar-default .navbar-nav > .active > a {
   background: transparent !important;
@@ -54,7 +81,7 @@ a:active, a:hover {
 }
 .navbar-default .navbar-nav > li > a:hover, 
 .navbar-default .nabvar-nav > li > a:focus {
-  color: #70CBED !important;
+  color: #fff !important;
 }
 .navbar-brand {
   background-color: #fff !important;
@@ -343,11 +370,6 @@ margin-bottom: 15px;
 .relativetime {
     margin-right: 5px;
 }
-.navbar {
-    height: 90px;
-    /*margin-bottom: 0 !important;*/
-}
-
 .navbar__header {
     float: left;
     margin-left: 40px;
@@ -401,7 +423,7 @@ margin-bottom: 15px;
   color:#1A9CCD;
 }
 .header > ul > li {
-  color : #848484;
+  color : #fff;
 }
 .header > ul > li:hover {
   color : #237EA1;
@@ -421,9 +443,7 @@ margin-bottom: 15px;
 }
 .navbar-default .navbar-nav > li > a {
   line-height: 10px !important;
-}
-.navbar-default .nabvar-nav > li > a {
-  color: #666 !important;
+  color: #fff !important;
 }
 .primary-pages > li > a {
   color: #666 !important;
@@ -570,8 +590,7 @@ legend {
   height: 30px;
   width: 30px;
   border-radius: 50%;
-  border: 2px solid #7D7D7D;
-  border-color: #33B5E6;
+  border: 2px solid #fff;
   margin-top: 5px;
   margin-bottom: 5px;
 }
@@ -580,7 +599,7 @@ legend {
   top: 3px;
 }
 .navAvatar:hover , .navAvatar:active  {
-  border-color: #33B5E6;
+  border-color: #fff;
 }
 .userContainer {
   padding-right: 40px;
@@ -647,8 +666,15 @@ legend {
   height:40px;
   margin-right: 10px;
 }
-.dropdown:first-child {
+.navbar-profile {
+  margin-top: 20px;
   margin-right:0;
+  width: 40px;
+  height: 40px;
+}
+.navbar-profile > img {
+  width: 100%;
+  height: 100%; 
 }
 .dropdown-toggle span {
   font-size: 27px !important;
@@ -656,9 +682,9 @@ legend {
 .cke_wysiwyg_div {
   direction : rtl;
 } 
-.button-secondary.blue {
-    border-color: #4dbdeb;
-    color: #4dbdeb;
+.button-secondary.white {
+    border-color: #fff;
+    color: #fff;
 }
 .button-secondary {
     background-color: transparent;
@@ -730,14 +756,6 @@ legend {
   height: 300px;
   margin-bottom: 20px
 }
-.homeIntro {
-  background: url(/images/lpbg.jpg) no-repeat 50%;
-  background-size: cover;
-  border-bottom: none;
-  position: relative;
-  text-align: center;
-  height: 300px;
-}
 .brand__header {
   width: 90px;
   display: block;
@@ -753,90 +771,15 @@ legend {
 .logo__normal {
     background-image: url(/images/logo.png); 
 }
-
 </style>
+
 
 </head>
 
 
 <body ng-app="MyApp">
-  <div ng-controller="navbarCtrl" class="navbar navbar-default navbar-static-top" role="navigation">
-    <div class="col-md-3 col-sm-3 col-xs-6 header" style="float: left !important;">
-      <div class="navbar__header">
-        <a class="navbar__brand" href="/">
-          <h1 class="brand__header logo__gray">gigakar</h1>
-        </a>
-        <a class="button-secondary blue" style="position:absolute;right:-20px;top:20%;" href="/post-article">ارسال مقاله</a>
-      </div>
-    </div>
-    <div class="col-md-9 col-sm-9 col-xs-6 header login">
-      <ul class="nav navbar-nav pull-right login-ul col-md-3 col-sm-3 hidden-xs" ng-if="!currentUser">
-        <li data-match-route="/login">
-          
-          <a href="/login">
-            <span class="ion-android-exit"></span>
-            ورود
-          </a>
-        </li>
-        <li data-match-route="/signup">
-          
-          <a href="/signup">
-         <span class="ion-android-create"></span>
-           ثبت نام 
-         </a>
-        </li>
-      </ul>
-      <ul ng-cloak class="nav navbar-nav pull-right userContainer col-md-3 col-sm-3 hidden-xs" ng-if="currentUser">
-        <li class="dropdown" ng-click="usertoggle();">
-          <img class="navAvatar" ng-src="images/upload_ba306abb08424caa55618b897c7710ef.png" alt="کاربر محترم"></img>
-        </li>
-        <div class="userDropDown ng-cloak" ng-show="userdown">
-          <ul class="listWrapper">
-            <li class="">
-              <a class="dropdown-toggle dropDownItem isCurrent" ng-href="/my/{{currentUser._id}}" ng-click="usertoggle()">
-                <i class="ion-person"></i>
-                {{currentUser.email}}
-              </a>
-            </li>
-          </ul>
-          <a class="dropDownItem listFooter" ng-href="/my/{{currentUser._id}}" ng-click="usertoggle()">
-            <i class="ion-gear-a"></i>
-            پروفایل
-          </a>
-          <a class="dropDownItem" ng-click="logout();">
-            <i class="ion-power"></i>
-            خروج
-          </a>
-        </div>
-        <li class="dropdown">
-          <a class="navAvatar">
-            <span class="ion-speakerphone"></span>
-          </a>
-        </li>
-        <li class="dropdown">
-          <a class="navAvatar">
-            <span class="ion-briefcase"></span>
-          </a>
-        </li>
-      </ul>
-      <ul class="col-md-9 col-sm-9 hidden-xs nav navbar-nav primary-pages pull-right">
-          <li style="max-width: 38%" data-match-route="/add"><a href="/add">
-             پروژه جدید
-          </a></li>
-          <li style="max-width: 19%" data-match-route="/$"><a href="/" style="">
-              کار ها
-          </a></li>
-          <li style="max-width: 30%">
-            <a href="/browse" data-match-route="/browse">
-              فری لنسر ها
-            </a> 
-          </li>
-      </ul>
-    </div>
-  </div>
-    <div class="homeIntro"></div>
-
-  <div style="" ng-view class="{{pageClass}}"></div>
+ 
+  <div ng-view class="{{pageClass}}"></div>
 
 </body>
 
@@ -875,4 +818,17 @@ legend {
 <script src="./dist/filters.js"></script>
 <script src="./dist/services.js"></script>
 </body>
+<script>
+function navbarTrigger() {
+  var scroll = $(window).scrollTop();
+    if (scroll >= ($(".landIntro").outerHeight(true))) { 
+        $(".navbar").css("display", "block"); 
+   } else {
+    $(".navbar").css("display", "none");
+   }
+};
+$(window).scroll(function() {
+  navbarTrigger();
+});
+</script>
 </html>

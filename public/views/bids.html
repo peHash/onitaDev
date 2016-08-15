@@ -272,7 +272,9 @@
 	}
 </style>
 
-<div class="" ng-include src="'views/header.html'"></div>
+<div ng-include src="'views/navbar.html'"></div>
+<div ng-include src="'views/header.html'"></div>
+
 <div id="messageBox" class="container">
 	<div ng-class="[message.category]" class="col-md-12 col-sm-12 col-xs-12 alert alert-dismissible" ng-repeat="message in messages" ng-if="!message.dismissed">
 		<span ng-bind-html="message.content">

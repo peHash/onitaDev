@@ -1,6 +1,6 @@
 var gulp = require('gulp'),
     path = require('path'),
-    sass = require('gulp-sass'),
+    // sass = require('gulp-sass'),
     csso = require('gulp-csso'),
     nodemon = require('gulp-nodemon'),
     exec = require('child_process').exec,
@@ -145,7 +145,7 @@ gulp.task('launch', function() {
 
 
 
-    gulp.task('default', ['concat-js','launch'], function () {
+    gulp.task('default', ['concat-js', 'launch'], function () {
     gulp.watch(sources.js.controllers, ['concat-js-controllers']).on('change', reporter('running `concat-js-controllers` task'));
     gulp.watch(sources.js.directives, ['concat-js-directives']).on('change', reporter('running `concat-js-directives` task'));
     gulp.watch(sources.js.filters, ['concat-js-filters']).on('change', reporter('running `concat-js-filters` task'));
