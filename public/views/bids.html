@@ -270,6 +270,10 @@
 	.NavLink:hover {
 		color: #fff;
 	}
+	.expert-profile-pic {
+		border-radius: 4px;
+		margin: 0 auto;
+	}
 </style>
 
 <div ng-include src="'views/navbar.html'"></div>
@@ -305,7 +309,7 @@
 								<div class="col-md-10">
 									<p class="text-center m-0-bottom">
 										<a data-ng-href="/profile/{{bid.user._id}}">
-											<img class="avatar avatar-lg m-0-top m-0-right" src="/images/buyer.png"></img>
+											<img class="avatar avatar-lg expert-profile-pic m-0-top m-0-right" ng-src="{{bid.user.profilePic}}"></img>
 										</a>
 									</p>
 								</div>
@@ -344,7 +348,7 @@
 							</div>
 						</div>
 						</div>
-						<div class="col-md-3 p-0">
+						<!-- <div class="col-md-3 p-0">
 							<div class="" style="">
 								<span class="col-md-6 text-muted p-0-right">
 									مبلغ پیشنهادی
@@ -359,8 +363,8 @@
 								 {{bid.days}}
 								</span>
 							</div>
-						</div>
-						<div class="" style="position: absolute; left: 10px; bottom: 0; width: 170px">
+						</div> -->
+						<div class="" style="position: absolute; left: 10px; top: 0; width: 170px">
 						<span class="col-md-12">
 							<button class="btn btn-lg m-xs-bottom btn-action">انتخاب پیشنهاد</button>
 						</span>

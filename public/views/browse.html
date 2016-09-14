@@ -74,8 +74,8 @@
 		border-bottom : 1px solid #E0E0E0;
 	}
 	.p-lg-top-bottom {
-		padding-top: 40px;
-		padding-bottom: 40px;
+		padding-top: 50px !important;
+		padding-bottom: 50px !important;
 	}
 	.bg-info {
 		padding-top: 20px;
@@ -158,11 +158,21 @@
 		border: medium none;
 	}
 	.shortname {
+		font-size: 17px;
 		color: #33B5E6;
+	}
+	#expert .avatar-lg {
+		margin: 0 !important;
+	}
+	#expert .expert-profile-pic {
+		border-radius: 4px;
+		margin: 0 auto;
+		min-width: 200px;
+		min-height: 200px;
 	}
 </style>
 <div ng-include src="'views/navbar.html'"></div>
-<div class="col-md-12">
+<div class="col-md-12 pt-nav">
 	<div class="oFormSearch form-group m-lg-top">
 		<div class="input-group input-group-search">
 			<label class="input-group-addon">
@@ -181,67 +191,61 @@
 		<!-- <div class="row show-list p-lg-top air-card p-md-bottom"> -->
 <!-- 			<ol class="list-unstyled">
 				<li class="m-0"> -->
-					<article class="p-lg-top-bottom air-card" ng-repeat="user in users">
+					<article id="expert" class="p-lg-top-bottom air-card col-md-4" ng-repeat="user in users">
 						<div class="row">
-							<div class="col-md-2">
-								<div class="row">
-									<div class="col-md-12">
-										<p class="text-center m-0-bottom">
-											<a data-ng-href="/profile/{{user._id}}">
-												<img class="avatar avatar-lg m-0-top m-0-right" src="/images/buyer.png"></img>
-											</a>
-										</p>
-									</div>
-								</div>
-								<div class="row" style="text-align:center;">
-									<span class="h3 m-0-top-bottom">
-										<a class="shortname" title="" data-ng-href="/profile/{{user._id}}">
-											{{user.firstName}} {{user.lastName}}
-										</a>
-									</span>
-									<h5 class="title m-xs-top m-0-bottom text-muted">
-										Mobile Developer
-									</h5>
-									<p class="m-md-top m-0-bottom">
-										<span class="ion-location m-0-right m-xs-left"></span>
-										<strong class="city">
+							<p class="text-center m-0-bottom">
+								<a data-ng-href="/profile/{{user._id}}">
+									<img class="avatar avatar-lg expert-profile-pic m-0-top m-0-right" ng-src="{{user.profilePic}}"></img>
+								</a>
+							</p>
+						</div>
+						<div class="row" style="text-align:center;">
+							<span class="h3 m-0-top-bottom">
+								<a class="shortname" title="" data-ng-href="/profile/{{user._id}}">
+									{{user.firstName}} {{user.lastName}}
+								</a>
+							</span>
+							<h5 class="title m-xs-top m-0-bottom text-muted">
+								Mobile Developer
+							</h5>
+							<!-- <p class="m-md-top m-0-bottom">
+								<span class="ion-location m-0-right m-xs-left"></span>
+								<strong class="city">
 ایران - اهواز
-										</strong>
-									</p>	
-									<ul class="list-inline separated m-md-top ng-cloak" ng-show="user.tags[0]">
-									<li ng-repeat="tag in user.tags">
-										<a class="blueLink m-0" ng-href="/browse/tag/{{tag}}">
-											{{tag}}
-										</a>
-									</li>
-								</ul>
-								</div>
-							</div>
-							<div class="col-md-7">
-									<p class="oDescription m-md-top m-0-bottom ng-cloak" ng-show="user.summary">
+								</strong>
+							</p> -->	
+							<ul class="list-inline separated m-md-top ng-cloak" ng-show="user.tags[0]">
+							<li ng-repeat="tag in user.tags">
+								<a class="blueLink m-0" ng-href="/browse/tag/{{tag}}">
+									{{tag}}
+								</a>
+							</li>
+						</ul>
+						</div>
+					</div>
+					<div class="col-md-7" ng-hide="true">
+							<p class="oDescription m-md-top m-0-bottom ng-cloak" ng-show="user.summary">
 {{user.summary}}
-									</p>
-									<p class="oDescription m-md-top m-0-bottom bg-info ng-cloak" ng-hide="user.summary">
-									<i class="ion-ios-bolt" style="color: tomato"></i>
+							</p>
+							<p class="oDescription m-md-top m-0-bottom bg-info ng-cloak" ng-hide="user.summary">
+							<i class="ion-ios-bolt" style="color: tomato"></i>
 به نظر میاد این کاربر کمی تنبل ! چون هنوز خلاصه از فعالیت هاش ثبت نکرده !
-									</p>
+							</p>
 
-								<!-- ListStyle : listStyleType - listStylePosition - listStyleImage -->
+						<!-- ListStyle : listStyleType - listStylePosition - listStyleImage -->
 
-								<ul class="list-inline separated m-md-top ng-cloak" ng-show="user.tags[0]">
-									<li ng-repeat="tag in user.tags">
-										<a class="blueLink m-0" ng-href="/browse/tag/{{tag}}">
-											{{tag}}
-										</a>
-									</li>
-								</ul>
-								<div class="ng-cloak" ng-hide="user.tags[0]">
-									<p class="oDescription m-md-top m-0-bottom bg-info ng-cloak">
-										<i class="ion-ios-bolt" style="color: tomato"></i>
+						<ul class="list-inline separated m-md-top ng-cloak" ng-show="user.tags[0]">
+							<li ng-repeat="tag in user.tags">
+								<a class="blueLink m-0" ng-href="/browse/tag/{{tag}}">
+									{{tag}}
+								</a>
+							</li>
+						</ul>
+						<div class="ng-cloak" ng-hide="user.tags[0]">
+							<p class="oDescription m-md-top m-0-bottom bg-info ng-cloak">
+								<i class="ion-ios-bolt" style="color: tomato"></i>
 به نظر میاد این کاربر کمی تنبل ! چون هنوز مهارتی به پروفایل خود اضافه نکرده است !
-									</p>
-								</div>
-							</div>
+							</p>
 						</div>
 					</article>
 <!-- 				</li>

@@ -1,7 +1,7 @@
 <style>
 /*------------------------- intro --------------------------*/
 .landIntro {
-  font-family: Iran Sans Web !important;
+  font-family: IRANSans-web !important;
   background: url('http://codecontrol.io/app/uploads/573d93879e3559.31810386.jpg');
   background-position: center;
   width: 100%;
@@ -13,8 +13,9 @@
   height: 100%;
 }
 .landIntro h1 {
+  font-family: IRANSans-web;
   max-width: 680px;
-  font-size: 50px;
+  font-size: 30px;
   line-height: 60px;
   margin-bottom: 40px;
   font-weight: 400;
@@ -108,7 +109,7 @@
   background-color: #f6f4ec;
 }
 #talents h2 {
-  font-size: 3.375rem;
+  font-size: 2.375rem;
   color: #484848;
   text-align: center;
   margin-bottom: 80px;
@@ -252,18 +253,18 @@
   color: #0095dd;
 }
 
-------------------------- milestone --------------------------
+/*------------------------- milestone --------------------------*/
 #milestone {
-  background-color: #fff;
+  background-color: #E3E3E3;
 }
-#milestone ul {
+#milestone ul, #ig ul {
   position: relative;
   list-style-type: none;
   width: 100%;
   margin: 0 auto;
   padding: 60px 0 40px 0;
 }
-#milestone ul li {
+#milestone ul li, #ig ul li {
   float: right;
   margin: 0;
   padding: 0;
@@ -368,12 +369,12 @@
 #newsletter .form-title h3 {
   font-size: 40px;
   font-size: 2.5rem;
-  margin: 0 0 .2em;
+  margin: 0 0 1em;
 }
 #newsletter .form-title h4 {
   font-size: 24px;
-  font-size: 1.5rem;
-  line-height: 1.1;
+  font-size: 1.3rem;
+  line-height: 1.5;
 }
 #newsletter h3, #newsletter h4 {
   color: #fff;
@@ -413,6 +414,12 @@
   margin: 0;
   max-width: 50%;
 }
+/* --------------------------------IG-------------------------------- */
+#ig img {
+  min-width: 300px;
+  min-height: 300px;
+}
+
 input.form-button[type="submit"], button.form-button {
   position: relative;
   display: inline-block;
@@ -451,6 +458,17 @@ input.form-button.light[type="submit"]:hover, button.form-button.light:hover, in
             <a class="btn btn-white" href="/login">{{introBtn}}</a>
           </div>
         </div>
+      </div>
+    </section>
+    <section id="ig">
+      <div class="container">
+        <ul>
+          <li class="col-md-4 col-sm-4 col-xs-12" ng-repeat="post in posts">
+            <a class="" ng-href="https://instagram.com/p/{{post.img_code}}">
+              <img class="" ng-src="{{post.thumbnail_src}}"/>
+            </a>
+          </li>
+        </ul>
       </div>
     </section>
     <section id="milestone">

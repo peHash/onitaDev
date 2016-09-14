@@ -105,32 +105,39 @@
 + function() {
   angular.module('MyApp')
   .controller('BidsCtrl', function($scope, User, $routeParams, $window, $modal, $http, Show) {
-   Show.get({ _id: $routeParams.id }, function(info) {
-    
-    $scope.job = info;
-    if ($scope.job.user) {
-      $scope.userProjectPage = '/myprojects/' + $scope.job.user;
-      $scope.userProfilePage = '/my/' + $scope.job.user;
-    } else {
-      $scope.userProjectPage = '/myprojects/' + 111;
-      $scope.userProfilePage = '/my/' + 111;
-    };   
+   Show.get({ _id: $routeParams.id }, function(job) {
+    angular.forEach(job.bids, function(bid) {
+        bid.user.profilePic = bid.user.image ? bid.user.image : '/images/buyer.png';
+      });
+    console.log(job);
+    $scope.job = job;
   });
  });    
 }();
 
++ function(){
+	angular.module('MyApp').controller('blogsCtrl', function ($scope, Article) {
+	  $scope.defaultTime = "2016-07-06T13:09:04.206Z";
+	  $scope.tempTitle = "مدیریت لذت بخش دانلودهای وردپرس";
+
+	  Article.query().$promise.then(function(result){
+  		angular.forEach(result, function(article) {
+        	article.user.profilePic = article.user.image ? article.user.image : '/images/buyer.png';
+      	});
+	  	$scope.arts = result;
+	  });
+	});
+}();
 + function() {
   angular.module('MyApp')
-  .controller('BrowseCtrl', function($scope, User, $window, $routeParams, Show, $location) {
-   //  $scope.users = {};
-    // console.log($routeParams);
-    // if ($routeParams.tagname) {
-   //    User.get({tag: $routeParams.tagname}, function(users){
-   //      $scope.use = users;
-   //    });
-    // } else {
-    $scope.users = User.query();  
-    // }
+  .controller('BrowseExpertsCtrl', function($scope, User, $window, $routeParams, Show, $location) {
+
+    User.query(function(users){
+      angular.forEach(users, function(user) {
+        user.profilePic = user.image ? user.image : '/images/buyer.png';
+      });
+      $scope.users = users;
+    });
 
   }).controller('BrowseTagCtrl', function($scope, $routeParams, User){
     User.query({tag: $routeParams.tagname}, function(info){
@@ -140,13 +147,9 @@
 }();
 
 + function(){
-	angular.module('MyApp').controller('blogsCtrl', function ($scope, Article) {
-	  $scope.defaultTime = "2016-07-06T13:09:04.206Z";
-	  $scope.tempTitle = "مدیریت لذت بخش دانلودهای وردپرس";
-
-	  Article.query().$promise.then(function(result){
-	  	$scope.arts = result;
-	  });
+	angular.module('MyApp').controller('headerProfileController', function ($scope,$rootScope) {
+		$rootScope.userProjectPage = '/myprojects/' + $rootScope.currentUser._id;
+	  	$rootScope.userProfilePage = '/my/' + $rootScope.currentUser._id;
 	});
 }();
 + function() {
@@ -155,10 +158,11 @@
 	  $scope.tempTitle = "مدیریت لذت بخش دانلودهای وردپرس";
 	  var data_recieved = 'اطلاعات کامل دریافت شد', 
 	  	data_recieved_title = 'آفرین آفرین';
-		  Article.get({ _id: $routeParams.id }, function(art){
-		  $scope.art = art; 
-		  toaster.pop('success', data_recieved, data_recieved_title);
-		  });
+		Article.get({ _id: $routeParams.id }, function(art){
+			art.user.profilePic = art.user.image ? art.user.image : '/images/buyer.png';
+			$scope.art = art; 
+			// toaster.pop('success', data_recieved, data_recieved_title);
+		});
 	});
 }();
 + function() {
@@ -330,11 +334,12 @@
 
 + function() {
     angular.module('MyApp')
-    .controller('landingPageCtrl', function($scope) {
+    .controller('landingPageCtrl', function($scope, Posts) {
       $scope.introH1 = 'دسترسی آسان شما به بهترین برنامه نویس ها';
       $scope.introBtn = 'بزن بریم !';
       $scope.newsletterPlaceHolder = 'ایمیل شما اینجا ...';
       $scope.newsletterSignUpValue = 'همین حالا ثبت کن';
+    $scope.posts = Posts.query();
     });  
   }();
 + function() {

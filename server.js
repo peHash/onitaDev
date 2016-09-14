@@ -11,7 +11,7 @@ var moment = require('moment');
 var async = require('async');
 var request = require('request');
 var xml2js = require('xml2js');
-// var agenda = require('agenda')({ db: { address: '185.8.172.102:27017/giga' } });
+var agenda = require('agenda')({ db: { address: 'localhost:27017/giga', collection: 'agendaGiga' } });
 var sugar = require('sugar');
 var nodemailer = require('nodemailer');
 var _ = require('lodash');
@@ -145,6 +145,15 @@ var articleSchema = new mongoose.Schema({
   relateArticles : [{type: mongoose.Schema.Types.ObjectId, ref: 'Article'}]
 });
 
+var postSchema = new mongoose.Schema({
+  owner: {type: String, required: true},
+  img_code: {type: String, required: true, unique: true},
+  date: {type: String, required: true},
+  likes: {type: Number},
+  thumbnail_src: {type: String, required: true}, 
+  added_date: {type:String, default: Date.now}
+});
+
 var User = mongoose.model('User', userSchema);
 
 var Job = mongoose.model('Job', jobSchema);
@@ -153,10 +162,9 @@ var Bid = mongoose.model('Bid', bidSchema);
 
 var Article = mongoose.model('Article', articleSchema);
 
-mongoose.connect('mongodb://localhost/Megakar');
+var Post = mongoose.model('Post', postSchema);
 
-
-
+mongoose.connect('mongodb://localhost/giga');
 
 var app = express();
 
@@ -197,6 +205,13 @@ function createJwtToken(user) {
   return jwt.encode(payload, tokenSecret);
 }
 
+app.get('/api/posts', function(req,res,next){
+  var query = Post.find({}).exec(function(err, posts) {  
+    if (err) return next(err);
+    res.send(posts);
+  });
+});
+
 app.post('/auth/signup', function(req, res, next) {
   var user = new User({
     firstName: req.body.firstName,
@@ -227,62 +242,6 @@ app.post('/auth/login', function(req, res, next) {
   });
 });
 
-// app.post('/auth/facebook', function(req, res, next) {
-//   var profile = req.body.profile;
-//   var signedRequest = req.body.signedRequest;
-//   var encodedSignature = signedRequest.split('.')[0];
-//   var payload = signedRequest.split('.')[1];
-
-//   var appSecret = '298fb6c080fda239b809ae418bf49700';
-
-//   var expectedSignature = crypto.createHmac('sha256', appSecret).update(payload).digest('base64');
-//   expectedSignature = expectedSignature.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
-
-//   if (encodedSignature !== expectedSignature) {
-//     return res.send(400, 'Invalid Request Signature');
-//   }
-
-//   User.findOne({ facebook: profile.id }, function(err, existingUser) {
-//     if (existingUser) {
-//       var token = createJwtToken(existingUser);
-//       return res.send(token);
-//     }
-//     var user = new User({
-//       name: profile.name,
-//       facebook: {
-//         id: profile.id,
-//         email: profile.email
-//       }
-//     });
-//     user.save(function(err) {
-//       if (err) return next(err);
-//       var token = createJwtToken(user);
-//       res.send(token);
-//     });
-//   });
-// });
-
-// app.post('/auth/google', function(req, res, next) {
-//   var profile = req.body.profile;
-//   User.findOne({ google: profile.id }, function(err, existingUser) {
-//     if (existingUser) {
-//       var token = createJwtToken(existingUser);
-//       return res.send(token);
-//     }
-//     var user = new User({
-//       name: profile.displayName,
-//       google: {
-//         id: profile.id,
-//         email: profile.emails[0].value
-//       }
-//     });
-//     user.save(function(err) {
-//       if (err) return next(err);
-//       var token = createJwtToken(user);
-//       res.send(token);
-//     });
-//   });
-// });
 
 app.get('/api/users', function(req, res, next) {
   if (!req.query.email) {
@@ -298,88 +257,6 @@ app.get('/api/users', function(req, res, next) {
 
 
 app.get('/api/jobs' ,ensureAuthenticated,  function(req, res, next) {
-
-var aNewText = {
-  receiver: '577bd0eda57df9f413a0855b', 
-  box: {
-    text: 'hello ahmad mahmoud', 
-    time_sent: new Date
-  }
-};
-
- // messages: [{
- //    receiver: {type: mongoose.Schema.Types.ObjectId, default: null}, 
- //    messages: [{
- //      text: {type: String, default: ''},
- //      time_sent: {type: Date, default: new Date}, 
- //      seen: {type: Boolean}
- //    }]
-
-User.update({_id: req.user._id}, {
-      $push: {
-        messages: aNewText
-      }
-    },{ upsert: true}, function(err, number){
-      if (err) return Next(err);
-      console.log(number + 'new text/s successfully inserted !');
-    });
-
-/*
-    Storymdl
-        .find({})
-        .populate('_creator')
-        .exec(function (err, story) {
-            if (err) return next(err);
-            res.send(story);
-            // prints "The creator is Aaron"
-        });
-});*/
-
-
-    // var question2 = new Question({
-    //     title: 'elmlink2',
-    //     body: 'elmlink2',
-    //     tags: ['computer', 'mathematic', 'mechanic'],
-    //     voteup: 12,
-    //     votedown: 18,
-    //     report: 12,
-    //     status: 'closed',
-    //     poster: '',
-    //     verified_ans: 'false',
-    //     last_modified_in_date: new Date(2013,11,10),
-    //     answers: [{
-    //         code: 232,
-    //         body: 'javabe dorost ine',
-    //         date: new Date(2014,11,27),
-    //         last_modified_in: new Date(2014,11,27),
-
-    //         overview: 'true',
-    //         comments: [{
-    //             context: 'first answers comment is this !',
-    //             date: new Date(2014,11,28)
-    //         }]
-    //     }],
-    //     comments: [{
-    //         context: 'first questions comment',
-    //         date: new Date(2014,11,29)
-    //     }]
-
-    // });
-/*    // Remove Question Collection
-    Question.remove({}, function(err, number) {
-        if (err) console.log('error on removing the document.');
-        console.log('Document Successfully Removed !' + ' -- ' + number + 'row/s has affected !');
-    });*/
-
-    // question2.save(function (err, number) {
-    //     if (err) console.log('Error on save!');
-    //     console.log('everything is ok!' + ' -- ' + number + ' row/s has affected');
-    // });
-
-// var pop = Bid.find({}).populate('user').exec(function(err, res) {
-//   if (err) return Next(err);
-//   console.log(res);
-// });
 
   if (req.query.tag) {
     // query.where({ $in : { tags : req.query.tag }});
@@ -425,7 +302,7 @@ app.get('/api/article', function(req,res,next){
   } else if (req.query.alphabet) {
     query.where({ name: new RegExp('^' + '[' + req.query.alphabet + ']', 'i') });
   } else {
-    var query = Article.find({}).populate('user', 'firstName lastName articles').sort({_id: -1});
+    var query = Article.find({}).populate('user', 'firstName lastName articles image').sort({_id: -1});
   }
   query.exec(function(err, arts) {
     if (err) return next(err);
@@ -436,13 +313,13 @@ app.get('/api/article', function(req,res,next){
 articleSchema.plugin(deepPopulate, {
   populate: {
     'user': {
-      select: 'firstName lastName articles'
+      select: 'firstName lastName articles image'
     }
   }
 });
 
 app.get('/api/article/:id', function(req,res,next){
-  Article.findById(req.params.id).deepPopulate('user.articles').exec(function(err, article){
+  Article.findById(req.params.id).deepPopulate('user').exec(function(err, article){
     if (err) return next(err);
     res.send(article);
   });
@@ -596,11 +473,12 @@ app.post('/api/jobs', ensureAuthenticated , function (req, res, next) {
     if (err) return next(err);
     console.log(job);
     User.findById(req.user._id, function (err, doc) {
-    if (err) return handleError(err);
+    if (err) {return handleError(err)} else {
       doc.projects.push(job._id);
       doc.save(function(err){
         if (err) console.log(err);
       });
+    }
     });
     res.send(200);
   });
@@ -746,6 +624,7 @@ User.update({_id: req.body.user._id}, {
     });
 res.status(200).end();
 });
+
 app.delete('/api/v1/resume/user/:id1/resume/:id2', ensureAuthenticated, function(req, res, next){
 if (req.params.id1 && req.params.id2) {
   User.update({_id: req.params.id1}, {
@@ -906,3 +785,151 @@ app.listen(app.get('port'), function() {
 // agenda.on('complete', function(job) {
 //   console.log("Job %s finished", job.attrs.name);
 // });
+
+
+agenda.define('igGrabber2', function(job){
+	console.log('new agenda started');
+	instaGrabber().then(function(data){
+		if(data.length > 0) instaPusher(data);
+	});
+});
+agenda.on('ready', function(){
+  var repeater = agenda.create('igGrabber2');
+  repeater.repeatEvery('10 minutes').save();
+  agenda.start();
+});
+
+function instaPusher(data){
+    data.forEach(function(elem, index, array){
+        var post = new Post({
+            owner: elem.owner.id,
+            img_code: elem.code,
+            date: elem.date,
+            likes: elem.likes.count,
+            thumbnail_src: elem.thumbnail_src, 
+            added_date: Date
+          })
+          post.save(function(err){
+            if (err) {
+              if (err.code == 11000) {
+                var conditions = { img_code: elem.code }
+                  , update = { $set: { likes: elem.likes.count }};
+                  // , options = { multi: false };
+
+                Post.update(conditions, update, callback);
+                function callback (err, numAffected) {
+                  if (err) console.log(err);
+                  console.log(numAffected);
+                };
+                // Post.update({img_code: elem.code}).exec(function(err,doc){
+                //   if (err) {console.log(err)} else {
+                //   console.log(doc);
+                //   }
+                // });
+                // console.log(elem.code);
+              } else {
+                console.log(err);
+              }
+            } else {
+              return 
+            }
+          });
+      });
+  };
+
+
+function instaGrabber() {
+  var request = require('request'),
+  cheerio = require('cheerio'),
+  qs = require('querystring'),
+  rp = require('request-promise'),
+  Q = require('q'),
+  defer= Q.defer();
+
+// const URL = 'https://www.instagram.com/yasaminyazdani';
+const URL = 'https://www.instagram.com/explore/tags/gigatest';
+var profilePage = false, tagPage = false;
+var instaImages = [];
+
+upRunner();
+// function returner() {
+//  return defer.promise;
+//  delete defer;
+// }
+
+function requester(URL, id, cb) {
+  if (id) URL = URL + '/?max_id=' + id;
+  return rp(URL);
+}
+function dynamicSort(property) {
+    var sortOrder = 1;
+    if(property[0] === "-") {
+        sortOrder = -1;
+        property = property.substr(1);
+    }
+    return function (a,b) {
+        var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+        return result * sortOrder;
+    }
+}
+
+ var str;   
+ function upRunner(str){
+  profilePage = !(tagPage = URL.includes("/tags/") ? true : false);
+  if (!str) {
+    request(URL,{jar:true}, function(err, resp, body){
+    if (err) {
+      defer.reject(err);
+      return;
+    }
+    var $ = cheerio.load(body), scripts= [];
+    $('script').each(function(i, elem){ 
+      scripts[i] = $(this).text();
+    }); 
+    var str = scripts[6];
+    // newData = tagPage ? JSON.parse(str.substring(str.indexOf("{"), str.lastIndexOf(";"))).entry_data.TagPage[0].tag.media.page_info : profilePage ?  JSON.parse(str.substring(str.indexOf("{"), str.lastIndexOf(";"))).entry_data.ProfilePage[0].user.media.page_info;
+    upRunner(str);
+  });
+  } else { 
+  	var newData = JSON.parse(str.substring(str.indexOf("{"), str.lastIndexOf(";"))).entry_data.TagPage[0].tag.media.page_info;
+    if (newData.has_next_page) {
+      requester(URL, newData.end_cursor).then(function(body){
+        newData = extractor(body);
+        upRunner(newData);
+      });
+    } else {
+		console.log('it\'s finished\n');
+		grabber(str);
+    }
+  }
+
+  function grabber(str) {
+  	var instaImages = [];
+  	media = JSON.parse(str.substring(str.indexOf("{"), str.lastIndexOf(";"))).entry_data.TagPage[0].tag.media;
+    maxNumber = media.count;
+    newData = media.nodes; 
+    newData.sort(dynamicSort('-date'));
+    newData.forEach(function(elem,index,array){
+      // if (instaImages.length >= maxNumber) {
+      //   defer.resolve(instaImages);
+      // } else {      
+      // 	console.log(instaImages);
+      //   instaImages.push(elem);
+      // }
+      instaImages.push(elem);
+    });
+ //    console.log(instaImages);
+	defer.resolve(instaImages);
+  }
+  function extractor(body) {
+    var $ = cheerio.load(body), scripts= [];
+    $('script').each(function(i, elem){ 
+      scripts[i] = $(this).text();
+    }); 
+    var str = scripts[6],
+    newData = JSON.parse(str.substring(str.indexOf("{"), str.lastIndexOf(";"))).entry_data.TagPage[0].tag.media.page_info;
+    grabber(str);
+  }
+ };
+  return defer.promise;
+}

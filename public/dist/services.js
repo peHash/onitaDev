@@ -117,6 +117,12 @@ angular.module('MyApp')
   });  
 }();
 
++ function(){
+	angular.module('MyApp')
+	.factory('Posts', function($resource){
+		return $resource('/api/posts');
+	});
+}();
 + function() {
 	angular.module('MyApp')
   .factory('Show', function($resource) {

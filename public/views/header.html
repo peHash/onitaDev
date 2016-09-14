@@ -33,14 +33,23 @@
     article {
         border-bottom : 1px solid #E0E0E0;
     }
+    .pt-nav {
+        padding-top: 90px;
+    }
     
 </style>
-<section class="">
+<div class="" ng-controller="headerProfileController">
+<section class="pt-nav">
 	<div class="NavTabPanel">
 		<div class="col-md-9 col-sm-9">
 			<div class="col-md-3 col-sm-3 hidden-xs"></div>
 			<div class="col-md-9 col-sm-9 col-xs-12" style="padding-right:5px;">
                 <ul class="SecondaryNavList">
+                    <li class="" ng-class="{isCurrent: myCtrlCurrent}">
+                        <a class="NavLink" data-ng-href="{{userProfilePage}}">
+                            پروفایل
+                        </a>
+                    </li>
                     <li class="" ng-class="{isCurrent: bidsCtrlCurrent}">
                         <a class="NavLink" data-ng-href="{{userProjectPage}}">
                             پروژه 
@@ -54,11 +63,6 @@
                     <li class="">
                         <a class="NavLink">
                             پیشنهاد
-                        </a>
-                    </li>
-                    <li class="" ng-class="{isCurrent: myCtrlCurrent}">
-                        <a class="NavLink" data-ng-href="{{userProfilePage}}">
-                            پروفایل
                         </a>
                     </li>
                 </ul>

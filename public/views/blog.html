@@ -1,8 +1,8 @@
 <style>
 	.post-header img {
 		border: 0 none;
-		max-width: 600px !important;
-		max-height:200px !important;
+		width:100%;
+		height:100%;
 		display: block;
 		margin-left: auto;
 		margin-right: auto;
@@ -68,6 +68,18 @@
    		font-size: 12px;
    		margin: 0 30px;
 	}
+#article .title a {
+	font-size: 17px;
+}
+#article time {
+	font-size: 11px;
+}
+#article .media-body {
+	display: none;
+}
+#article post-info {
+	padding-top: 20px;
+}
 </style>
 <div ng-include src="'views/navbar.html'"></div>
 <!-- <div class="col-md-12">
@@ -79,8 +91,8 @@
 	</p>
 </div> -->
 
-<div class="col-md-12">
-	<article class="col-md-6 col-sm-12 col-xs-12 blog-post" ng-repeat="art in arts">
+<div class="col-md-12 pt-nav">
+	<article id="article" class="col-md-6 col-sm-12 col-xs-12 blog-post" ng-repeat="art in arts">
 		<header class="post-header">
 			<img class="post-image" ng-src="{{art.image || 'images/577674a67293e0.06803903.jpg'}}">
 			<div class="grid">
@@ -90,7 +102,7 @@
 							<div class="avatar avatar-large circle">
 								<div class="avatar-inner">
 									<a rel="nofollow" href="/profile/{{art.user._id}}">
-										<img alt="userName" src="//d1avok0lzls2w.cloudfront.net/img_users/174938.jpg?1384873081">
+										<img alt="userName" ng-src="{{art.user.profilePic}}">
 									</a>
 								</div>
 							</div>
@@ -98,19 +110,19 @@
 						<div class="media-body">
 							نویسنده :
 							<a class="h5 text-blue" href="/profile/{{art.user._id}}">{{art.user.firstName}}  {{art.user.lastName}}</a>
-							<time class="pull-left" am-time-ago="art.postedDate || defaultTime"></time>
 						</div>
+						<time class="pull-left" am-time-ago="art.postedDate || defaultTime"></time>
 					</div>
-					<div class="col-md-12 pr0 pl0">
+					<div class="col-md-12 pr0 pl0 post-info">
 						<h1 class="h2 title">
 							<a href="/article/{{art._id}}">{{art.title}}
 							</a>
 						</h1>
 						<a class ="blueLink" ng-repeat="keyword in art.keywords" href="/browse/tag/{{keyword}}"> {{keyword}} </a>
 						<div class="disclaimer" ng-hide="true">
-							 This post was promoted from
-							<a href="https://moz.com/ugc">YouMoz</a>
-							. The author’s views are entirely his or her own (excluding an unlikely case of hypnosis) and may not reflect the views of Moz. 
+							 
+							<a href=""></a>
+							
 						</div>
 					</div>
 				</div>
@@ -118,7 +130,7 @@
 		</header>
 		<div class="parent">
 			<div class="col-md-12 col-sm-12 col-xs-12">
-				<p ng-bind-html="art.desc"></p>
+				<p class="post-content" ng-bind-html="art.desc"></p>
 			</div>
 		</div>
 		<footer class="col-md-12 col-sm-12 col-xs-12">
@@ -134,177 +146,4 @@
 		</footer>
 	</article>
 
-	<article class="col-md-6 col-sm-12 col-xs-12 blog-post">
-		<header class="post-header">
-			<img class="post-image" src="images/5776f24e317ec4.87384581.jpg">
-			<div class="grid">
-				<div class="col-md-12 centered">
-					<div class="author media parent">
-						<div class="pull-right">
-							<div class="avatar avatar-large circle">
-								<div class="avatar-inner">
-									<a rel="nofollow" href="https://moz.com/community/users/174938">
-										<img alt="userName" src="images/98309.jpg">
-									</a>
-								</div>
-							</div>
-						</div>
-						<div class="media-body">
-							نویسنده :
-							<a class="h5 text-blue" href="https://moz.com/community/users/174938">جعفر</a>
-							<time class="pull-left" am-time-ago="defaultTime"></time>
-						</div>
-					</div>
-					<div class="col-md-12 pr0 pl0">
-						<h1 class="h2 title">
-							<a href="https://moz.com/blog/a-9step-client-management-manifesto-your-agency-should-steal">{{tempTitle}}
-							</a>
-						</h1>
-						<a class ="blueLink" href="https://moz.com/blog/category/reporting"> Reporting </a>
-						<a class ="blueLink" href="https://moz.com/blog/category/business-practices"> Business Practices </a>
-						<a class ="blueLink" href="https://moz.com/blog/category/consulting"> Consulting </a>
-						<div class="disclaimer" ng-hide="true">
-							 This post was promoted from
-							<a href="https://moz.com/ugc">YouMoz</a>
-							. The author’s views are entirely his or her own (excluding an unlikely case of hypnosis) and may not reflect the views of Moz. 
-						</div>
-					</div>
-				</div>
-			</div>
-		</header>
-		<div class="parent">
-			<div class="col-md-12 col-sm-12 col-xs-12">
-				<div class="post-content">
-					اگر به دنبال یک افزونه مدیریت دانلود جذاب و لذت بخش وردپرس میگردید؛ پس درست اومدید. افزونه Delightful Downloads یک سیستم مدیریت دانلود فوق العاده برای وبسایت وردپرسی شماست که به سادگی امکان افزودن لینک ها و دکمه های دانلود رو به مطالب، برگه ها و ابزارک های شما ایجاد میکنه. علاوه بر این، یک سیستم آماره جمع و جور هم داره که گزارش دانلودهای شما رو در پیشخوان وردپرس نمایش میده. این افزونه توسط دنیای وردپرس، به زبان ...
-				</div>
-			</div>
-		</div>
-		<footer class="col-md-12 col-sm-12 col-xs-12">
-			<div class="col-md-4 col-sm-6 col-xs-12">
-				<a class="button-secondary blue" href="https://moz.com/blog/onpage-seo-unlimited-access-mozbar">مطالعه این مقاله</a>
-			</div>
-			<div class="thumbs col-md-4 col-sm-3 hidden-xs align-center" data-resource-type="post" data-resource-id="42226">
-				<a class="thumbs-up" href="#"> 30 </a>
-			</div>
-			<div class="thumbs col-md-4 col-sm-3 hidden-xs">
-				<a class="comment-count"> 50 </a>
-			</div>
-		</footer>
-	</article>
-
-	<article class="col-md-6 col-sm-12 col-xs-12 blog-post">
-		<header class="post-header">
-			<img class="post-image" src="images/whiteboard-friday.png">
-			<div class="grid">
-				<div class="col-md-12 centered">
-					<div class="author media parent">
-						<div class="pull-right">
-							<div class="avatar avatar-large circle">
-								<div class="avatar-inner">
-									<a rel="nofollow" href="https://moz.com/community/users/174938">
-										<img alt="userName" src="images/63.jpg">
-									</a>
-								</div>
-							</div>
-						</div>
-						<div class="media-body">
-							نویسنده :
-							<a class="h5 text-blue" href="https://moz.com/community/users/174938">جعفر</a>
-							<time class="pull-left" am-time-ago="defaultTime"></time>
-						</div>
-					</div>
-					<div class="col-md-12 pr0 pl0">
-						<h1 class="h2 title">
-							<a href="https://moz.com/blog/a-9step-client-management-manifesto-your-agency-should-steal">{{tempTitle}}
-							</a>
-						</h1>
-						<a class ="blueLink" href="https://moz.com/blog/category/reporting"> Reporting </a>
-						<a class ="blueLink" href="https://moz.com/blog/category/business-practices"> Business Practices </a>
-						<a class ="blueLink" href="https://moz.com/blog/category/consulting"> Consulting </a>
-						<div class="disclaimer" ng-hide="true">
-							 This post was promoted from
-							<a href="https://moz.com/ugc">YouMoz</a>
-							. The author’s views are entirely his or her own (excluding an unlikely case of hypnosis) and may not reflect the views of Moz. 
-						</div>
-					</div>
-				</div>
-			</div>
-		</header>
-		<div class="parent">
-			<div class="col-md-12 col-sm-12 col-xs-12">
-				<div class="post-content">
-					اگر به دنبال یک افزونه مدیریت دانلود جذاب و لذت بخش وردپرس میگردید؛ پس درست اومدید. افزونه Delightful Downloads یک سیستم مدیریت دانلود فوق العاده برای وبسایت وردپرسی شماست که به سادگی امکان افزودن لینک ها و دکمه های دانلود رو به مطالب، برگه ها و ابزارک های شما ایجاد میکنه. علاوه بر این، یک سیستم آماره جمع و جور هم داره که گزارش دانلودهای شما رو در پیشخوان وردپرس نمایش میده. این افزونه توسط دنیای وردپرس، به زبان ...
-				</div>
-			</div>
-		</div>
-		<footer class="col-md-12 col-sm-12 col-xs-12">
-			<div class="col-md-4 col-sm-6 col-xs-12">
-				<a class="button-secondary blue" href="https://moz.com/blog/onpage-seo-unlimited-access-mozbar">مطالعه این مقاله</a>
-			</div>
-			<div class="thumbs col-md-4 col-sm-3 hidden-xs align-center" data-resource-type="post" data-resource-id="42226">
-				<a class="thumbs-up" href="#"> 30 </a>
-			</div>
-			<div class="thumbs col-md-4 col-sm-3 hidden-xs">
-				<a class="comment-count"> 50 </a>
-			</div>
-		</footer>
-	</article>
-
-	<article class="col-md-6 col-sm-12 col-xs-12 blog-post">
-		<header class="post-header">
-			<img class="post-image" src="images/577455b50b9c98.90099680.jpg">
-			<div class="grid">
-				<div class="col-md-12 centered">
-					<div class="author media parent">
-						<div class="pull-right">
-							<div class="avatar avatar-large circle">
-								<div class="avatar-inner">
-									<a rel="nofollow" href="https://moz.com/community/users/174938">
-										<img alt="userName" src="images/425275.jpg">
-									</a>
-								</div>
-							</div>
-						</div>
-						<div class="media-body">
-							نویسنده :
-							<a class="h5 text-blue" href="https://moz.com/community/users/174938">جعفر</a>
-							<time class="pull-left" am-time-ago="defaultTime"></time>
-						</div>
-					</div>
-					<div class="col-md-12 pr0 pl0">
-						<h1 class="h2 title">
-							<a href="https://moz.com/blog/a-9step-client-management-manifesto-your-agency-should-steal">{{tempTitle}}
-							</a>
-						</h1>
-						<a class ="blueLink" href="https://moz.com/blog/category/reporting"> Reporting </a>
-						<a class ="blueLink" href="https://moz.com/blog/category/business-practices"> Business Practices </a>
-						<a class ="blueLink" href="https://moz.com/blog/category/consulting"> Consulting </a>
-						<div class="disclaimer" ng-hide="true">
-							 This post was promoted from
-							<a href="https://moz.com/ugc">YouMoz</a>
-							. The author’s views are entirely his or her own (excluding an unlikely case of hypnosis) and may not reflect the views of Moz. 
-						</div>
-					</div>
-				</div>
-			</div>
-		</header>
-		<div class="parent">
-			<div class="col-md-12 col-sm-12 col-xs-12">
-				<div class="post-content">
-					اگر به دنبال یک افزونه مدیریت دانلود جذاب و لذت بخش وردپرس میگردید؛ پس درست اومدید. افزونه Delightful Downloads یک سیستم مدیریت دانلود فوق العاده برای وبسایت وردپرسی شماست که به سادگی امکان افزودن لینک ها و دکمه های دانلود رو به مطالب، برگه ها و ابزارک های شما ایجاد میکنه. علاوه بر این، یک سیستم آماره جمع و جور هم داره که گزارش دانلودهای شما رو در پیشخوان وردپرس نمایش میده. این افزونه توسط دنیای وردپرس، به زبان ...
-				</div>
-			</div>
-		</div>
-		<footer class="col-md-12 col-sm-12 col-xs-12">
-			<div class="col-md-4 col-sm-6 col-xs-12">
-				<a class="button-secondary blue" href="https://moz.com/blog/onpage-seo-unlimited-access-mozbar">مطالعه این مقاله</a>
-			</div>
-			<div class="thumbs col-md-4 col-sm-3 hidden-xs align-center" data-resource-type="post" data-resource-id="42226">
-				<a class="thumbs-up" href="#"> 30 </a>
-			</div>
-			<div class="thumbs col-md-4 col-sm-3 hidden-xs">
-				<a class="comment-count"> 50 </a>
-			</div>
-		</footer>
-	</article>
 </div>

@@ -1,6 +1,6 @@
 + function() {
     //angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'mgcrea.ngStrap', 'ui.bootstrap', 'ui.date', 'ui.bootstrap.persian.datepicker','ui.bootstrap.datepicker', 'angularMoment', 'mdChips', 'ngUpload', 'ngCkeditor', 'ngSanitize'])
-angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'mgcrea.ngStrap', 'ui.bootstrap', 'ui.date','ui.bootstrap.datepicker', 'angularMoment', 'mdChips', 'ngUpload', 'ngCkeditor', 'ngSanitize', 'ngFileUpload', 'ngImgCrop', 'toaster', 'ngAnimate'])
+angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'mgcrea.ngStrap', 'ui.bootstrap', 'ui.date','ui.bootstrap.datepicker', 'angularMoment', 'mdChips', 'ngUpload', 'ngCkeditor', 'ngSanitize', 'ngFileUpload', 'ngImgCrop', 'toaster', 'ngAnimate', 'ADM-dateTimePicker'])
 .config(function ($routeProvider, $locationProvider) {
         $routeProvider
             .when('/', {
@@ -8,7 +8,7 @@ angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'mgcrea.ngStrap'
                 controller: 'landingPageCtrl'
             })
             .when('/jobs', {
-                templateUrl: 'views/home.html',
+                templateUrl: 'views/jobs.html',
                 controller: 'MainCtrl'
             })
             .when('/article/:id', {
@@ -28,12 +28,12 @@ angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'mgcrea.ngStrap'
                 controller: 'postBlogCtrl'
             })
             .when('/job/:id', {
-                templateUrl: 'views/detail.html',
+                templateUrl: 'views/job-detail.html',
                 controller: 'JobCtrl'
             })
             .when('/browse', {
                 templateUrl: 'views/browse.html', 
-                controller: 'BrowseCtrl'
+                controller: 'BrowseExpertsCtrl'
             })
             .when('/browse/tag/:tagname', {
                 templateUrl: 'views/browse.html', 
@@ -41,7 +41,7 @@ angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'mgcrea.ngStrap'
             })
             .when('/browse/tag/:tagname&:tagname2', {
                 templateUrl: 'views/browse.html', 
-                controller: 'BrowseCtrl'
+                controller: 'BrowseExpertsCtrl'
             })
             .when('/login', {
                 templateUrl: 'views/login.html',

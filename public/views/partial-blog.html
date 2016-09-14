@@ -104,8 +104,9 @@
 	width: 22px;
 }
 </style>
-<toaster-container toaster-options="{'time-out': 0, 'close-button':true, 'animation-class': 'toast-top-center'}"></toaster-container>
-<div class="col-md-12">
+<toaster-container toaster-options="{'time-out': 4000, 'close-button':true, 'animation-class': 'toast-top-center'}"></toaster-container>
+<div ng-include src="'views/navbar.html'"></div>
+<div class="col-md-12 pt-nav">
 	<article class="blog-post">
 		<header class="post-header">
 			<img class="post-image" ng-src="{{art.image}}">
@@ -116,7 +117,7 @@
 							<div class="avatar avatar-large circle">
 								<div class="avatar-inner">
 									<a rel="nofollow" href="https://moz.com/community/users/174938">
-										<img alt="userName" src="//d1avok0lzls2w.cloudfront.net/img_users/174938.jpg?1384873081">
+										<img alt="userName" ng-src="{{art.user.profilePic}}">
 									</a>
 								</div>
 							</div>

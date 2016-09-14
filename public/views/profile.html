@@ -80,140 +80,144 @@
 	}
 
 </style>
-<div class="container">	
-	<div class="col-md-3">
-		<h2 class="">
-		</h2>
-	</div>
-	<div class="col-md-6">
+<div ng-include src="'views/navbar.html'"></div>
+<div class="pt-nav">
 
-	</div>
-	<div class="col-md-3">
-
-	</div>
-</div>
-<div class="container ng-cloak" ng-show="error">
-	<h1> {{error}} </h1>
-</div>
-<div class="container o-profile" ng-hide="error">
-	{{error}}
-	<div class="col-md-9" ng-mouseover="trigger_in();" ng-mouseleave="trigger_out();">
-		<div class="profile_upper-body col-md-12 upper-body">
-			<div class="pull-right">
-				<img id="user-portrait" class="avatar avatar-lg" ng-src="{{user.image || 'images/ads.png'}}" ng-click="profile_image_open('lg')"/>
-			    <button class="profile_contact_user btn btn-lg btn-action btn-compound" ng-click="update_skills()">
-			    	<span class="ion-email bg_light-green"></span>
-		    		<span class="btn-value"> ارسال درخواست همکاری </span>
-			    </button>
-			</div>
-			<div class="media-body">
-				<div class="row">
-					<div class="col-md-8">
-						<h3> {{user.firstName}} {{user.lastName}}</h3>
-					</div>
-					<div class="col-md-4">
-
-					</div>
-				</div>
-				<div class="o-profile-skills">
-					<a class="blueLink tag" 
-					ng-repeat="tag in user.tags" 
-					ng-html="/browse/tag/{{tag}}">
-
-						{{tag}}
-
-					</a>
-					<span class="ng-cloak" ng-hide="user.tags">
-						شما مهارتی اضافه نکره اید
-					</span>
-
-					<!-- edit button  -->
-
-					<i class="ion-plus circle-edit-button ng-cloak" 
-					ng-show="is_edit_open" 
-					ng-click="skills_edit_open('lg');">
-					</i>
-
-				</div>
-			</div>
+	<div class="container">	
+		<div class="col-md-3">
+			<h2 class="">
+			</h2>
 		</div>
-		<div class="col-md-12">
-			<div class="air-card">
-				<legend>
-					<span> خلاصه فعالیت ها </span>
-					<i class="ion-plus circle-edit-button ng-cloak" ng-show="is_edit_open" ng-click="summary_edit_open('lg');"></i>
-				</legend>
-				<section class="p-lg-left">
-					<p class="o-break-word o-white-space-pre-line" ng-show="user.summary">
-						{{user.summary}}
-					</p>
-					<p class="o-break-word o-white-space-pre-line ng-cloak" ng-hide="user.summary">
-						شما فعالیتی در رزومه خود اضافه نکرده اید 
-					</p>
-				</section>
-			</div>
-			<div class="air-card">
-				<legend>
-					<span> رزومه کاری </span>
-					<span class="">
-						<i class="ion-plus circle-edit-button ng-cloak" ng-show="is_edit_open" ng-click="resume_add_open('lg');"></i>
-					</span>
-				</legend>
-				<div class="" data-ng-hide="user.resumes[0].title">
-					<strong>
-						شما رزومه ای اضافه نکرده اید
-					</strong>
+		<div class="col-md-6">
+
+		</div>
+		<div class="col-md-3">
+
+		</div>
+	</div>
+	<div class="container ng-cloak" ng-show="error">
+		<h1> {{error}} </h1>
+	</div>
+	<div class="container o-profile" ng-hide="error">
+		{{error}}
+		<div class="col-md-9" ng-mouseover="trigger_in();" ng-mouseleave="trigger_out();">
+			<div class="profile_upper-body col-md-12 upper-body">
+				<div class="pull-right">
+					<img id="user-portrait" class="avatar avatar-lg" ng-src="{{user.image || 'images/ads.png'}}" ng-click="profile_image_open('lg')"/>
+				    <button class="profile_contact_user btn btn-lg btn-action btn-compound" ng-click="update_skills()">
+				    	<span class="ion-email bg_light-green"></span>
+			    		<span class="btn-value"> ارسال درخواست همکاری </span>
+				    </button>
 				</div>
-				<div class="" data-ng-show="user.resumes[0].title">
-					<div class="partial" data-ng-repeat="resume in user.resumes track by $index">
-						<span class="col-md-9">
-							<strong>
-								{{resume.title}}
-							</strong>
-							| 
-							<strong>
-								{{resume.category}}
-							</strong>
+				<div class="media-body">
+					<div class="row">
+						<div class="col-md-8">
+							<h3> {{user.firstName}} {{user.lastName}}</h3>
+						</div>
+						<div class="col-md-4">
+
+						</div>
+					</div>
+					<div class="o-profile-skills">
+						<a class="blueLink tag" 
+						ng-repeat="tag in user.tags" 
+						ng-html="/browse/tag/{{tag}}">
+
+							{{tag}}
+
+						</a>
+						<span class="ng-cloak" ng-hide="user.tags">
+							شما مهارتی اضافه نکره اید
 						</span>
-						<span class="col-md-3 text-muted">
-							{{resume.finish}} - {{resume.start}}
-						</span>
-						<span class="col-md-9 text-muted">
-							{{resume.desc}}
-						</span>
-						<i class="ion-edit circle-edit-button ng-cloak" ng-show="is_edit_open" ng-click="resume_edit_open('lg', $index);"></i>
-						<i class="ion-close circle-edit-button circle-remove-button ng-cloak" ng-show="is_edit_open" ng-click="resume_remove(resume._id);"></i>
-						
+
+						<!-- edit button  -->
+
+						<i class="ion-plus circle-edit-button ng-cloak" 
+						ng-show="is_edit_open" 
+						ng-click="skills_edit_open('lg');">
+						</i>
+
 					</div>
 				</div>
 			</div>
-			<div class="air-card">
-				<legend>
-					<span> تحصیلات </span>
-					<span class="">
-						<i class="ion-plus circle-edit-button ng-cloak" ng-show="is_edit_open" ng-click="edu_add_open('lg');"></i>
-					</span>
-				</legend>
-				<div class="" data-ng-hide="user.educations[0].name">
-					<strong>
-						شما تحصیلاتی وارد نکرده اید
-					</strong>
+			<div class="col-md-12">
+				<div class="air-card">
+					<legend>
+						<span> خلاصه فعالیت ها </span>
+						<i class="ion-plus circle-edit-button ng-cloak" ng-show="is_edit_open" ng-click="summary_edit_open('lg');"></i>
+					</legend>
+					<section class="p-lg-left">
+						<p class="o-break-word o-white-space-pre-line" ng-show="user.summary">
+							{{user.summary}}
+						</p>
+						<p class="o-break-word o-white-space-pre-line ng-cloak" ng-hide="user.summary">
+							شما فعالیتی در رزومه خود اضافه نکرده اید 
+						</p>
+					</section>
 				</div>
-				<div class="ng-cloak" data-ng-show="user.educations[0].name">
-					<div class="partial" data-ng-repeat="edu in user.educations track by $index">
-						<span class="col-md-9">
-							<strong>
-								{{edu.name}}
-							</strong>
+				<div class="air-card">
+					<legend>
+						<span> رزومه کاری </span>
+						<span class="">
+							<i class="ion-plus circle-edit-button ng-cloak" ng-show="is_edit_open" ng-click="resume_add_open('lg');"></i>
 						</span>
-						<span class="col-md-3 text-muted">
-							{{edu.finish}} - {{edu.start}}
-							<i class="ion-edit circle-edit-button ng-cloak" ng-show="is_edit_open" ng-click="edu_edit_open('lg', $index);"></i>
-							<i class="ion-close circle-edit-button circle-remove-button ng-cloak" ng-show="is_edit_open" ng-click="edu_remove(edu._id);"></i>
+					</legend>
+					<div class="" data-ng-hide="user.resumes[0].title">
+						<strong>
+							شما رزومه ای اضافه نکرده اید
+						</strong>
+					</div>
+					<div class="" data-ng-show="user.resumes[0].title">
+						<div class="partial" data-ng-repeat="resume in user.resumes track by $index">
+							<span class="col-md-9">
+								<strong>
+									{{resume.title}}
+								</strong>
+								| 
+								<strong>
+									{{resume.category}}
+								</strong>
+							</span>
+							<span class="col-md-3 text-muted">
+								{{resume.finish}} - {{resume.start}}
+							</span>
+							<span class="col-md-9 text-muted">
+								{{resume.desc}}
+							</span>
+							<i class="ion-edit circle-edit-button ng-cloak" ng-show="is_edit_open" ng-click="resume_edit_open('lg', $index);"></i>
+							<i class="ion-close circle-edit-button circle-remove-button ng-cloak" ng-show="is_edit_open" ng-click="resume_remove(resume._id);"></i>
+							
+						</div>
+					</div>
+				</div>
+				<div class="air-card">
+					<legend>
+						<span> تحصیلات </span>
+						<span class="">
+							<i class="ion-plus circle-edit-button ng-cloak" ng-show="is_edit_open" ng-click="edu_add_open('lg');"></i>
 						</span>
-						<span class="col-md-12 text-muted">
-							{{edu.grade}} - {{edu.field}}
-						</span>
+					</legend>
+					<div class="" data-ng-hide="user.educations[0].name">
+						<strong>
+							شما تحصیلاتی وارد نکرده اید
+						</strong>
+					</div>
+					<div class="ng-cloak" data-ng-show="user.educations[0].name">
+						<div class="partial" data-ng-repeat="edu in user.educations track by $index">
+							<span class="col-md-9">
+								<strong>
+									{{edu.name}}
+								</strong>
+							</span>
+							<span class="col-md-3 text-muted">
+								{{edu.finish}} - {{edu.start}}
+								<i class="ion-edit circle-edit-button ng-cloak" ng-show="is_edit_open" ng-click="edu_edit_open('lg', $index);"></i>
+								<i class="ion-close circle-edit-button circle-remove-button ng-cloak" ng-show="is_edit_open" ng-click="edu_remove(edu._id);"></i>
+							</span>
+							<span class="col-md-12 text-muted">
+								{{edu.grade}} - {{edu.field}}
+							</span>
+						</div>
 					</div>
 				</div>
 			</div>
