@@ -1,184 +1,205 @@
 + function() {
   angular.module('MyApp')
-  .controller('MyCtrl', function($scope, User, $routeParams, $window, $modal, $http, Upload, $timeout) {
-     
-      $scope.fileUploaded = '';
-      $scope.selectedFile = [];
-      $scope.response = '';
-      $scope.onFileSelect = function ($files) {
-          $scope.selectedFile = $files;
-          alert('yes'); 
-      };
-        
-     User.get({ _id: $routeParams.id }, function(info) {
+  .controller('MyCtrl', function($scope, User, $routeParams, $window, $modal, $http, Upload, $timeout, toaster, $interval) {
+     $scope.updateUser = function(timer){
+      var timer = timer ? timer : 10;
+      $timeout(function(){
+        User.get({ _id: $routeParams.id }, function(info) {
+          $scope.user = info;
+        }); 
+      }, timer)
+     };
+    $scope.destroyCroppedDataUrl = function() {
+      $timeout(function(){
+        $scope.croppedDataUrl = null;
+      }, 100);
+    };
+    $scope.updateUser();
+    $scope.destroyCroppedDataUrl();
+    $scope.fileUploaded = '';
+    $scope.selectedFile = [];
+    $scope.response = '';
+    $scope.tab = 'activity';
+    $scope.tabSelector = function(tab) {
+      $scope.tab = tab;
+    }
+    $scope.onFileSelect = function ($files) {
+        $scope.selectedFile = $files;
+        alert('yes'); 
+    };
       
-      $scope.user = info;
 
-      
+    $scope.trigger_in = function() {
+        this.is_edit_open = true;
+    };
+    $scope.trigger_out = function() {
+        this.is_edit_open = false;
+    };
 
-        $scope.trigger_in = function() {
-            this.is_edit_open = true;
-        };
-        $scope.trigger_out = function() {
-            this.is_edit_open = false;
-        };
-    
-        $scope.uploadimg = function() {
-          console.log($scope.fileUploaded);
-        };
-        $scope.completed = function() {
-          alert('upload completed !');
-    
-        };  
-    
-        $scope.loading = function() {
-            // just testing gulp functionality!
-          alert('loading');
-        };  
-    
-        $scope.resume_add_open = function (size) {
-    
-          var modalInstance = $modal.open({
-            animation: $scope.animationsEnabled,
-            templateUrl: 'resume-add.html',
-            controller: 'ResumeCtrl',
-            size: size,
-            resolve: {
-              user: function() {
-                return $scope.user;
-              }
-            }
+    $scope.uploadImage = function (dataUrl, name) {
+      $scope.destroyCroppedDataUrl();
+      $scope.updateUser(2000);
+      $scope.tab = 'activity';
+      Upload.upload({
+          url: '/upload',
+          data: {
+              file: Upload.dataUrltoBlob(dataUrl, name)
+          },
+      }).then(function (response) {
+          $timeout(function () {
+              $scope.result = response.data;
+              toaster.pop('success','موفقیت آمیز', 'عکس شما با موفقیت در سرود آپلود شد.');
           });
-    
-          modalInstance.result.then(function (selectedItem) {
-            $scope.selected = selectedItem;
-          });
-        };
-        $scope.resume_edit_open = function(size, index) {
-        //   var modalInstance = $modal.open({
-        //   animation: $scope.animationsEnabled,
-        //   templateUrl: 'resume-add.html',
-        //   controller: 'ResumeEditCtrl',
-        //   size: size,
-        //   resolve: {
-        //     user: function() {
-        //       return $scope.user;
-        //     },
-        //     id: function() {
-        //       return id;
-        //     }
-        //   }
-        // });
-    
-        // modalInstance.result.then(function (selectedItem) {
-        //   $scope.selected = selectedItem;
-        // });
-        alert(size + '   ' + index);
-        }; 
-        $scope.resume_remove =  function(id) {
-          $http({
-            url: 'api/v1/resume/user/' + $scope.user._id + '/resume/' + id,
-            method: 'DELETE'
-          })
-          .then(function(response){
-            alert('your selected resume removed successfully');
-            $window.location.href = '/my/' + $scope.user._id;
-          }, function(response){
-            alert('something went wrong in removing your selected resume');
-            $window.location.href = '/my/' + $scope.user._id;
-    
-          });
-        };
-        $scope.skills_edit_open = function (size) {
-    
-          var modalInstance = $modal.open({
-            animation: $scope.animationsEnabled,
-            templateUrl: 'skills-edit.html',
-            controller: 'SkillCtrl',
-            size: size,
-            resolve: {
-              user: function() {
-                return $scope.user;
-              }
-            }
-          });
-    
-          modalInstance.result.then(function (selectedItem) {
-            $scope.selected = selectedItem;
-          });
-        };
-        $scope.edu_add_open = function (size) {
-    
-          var modalInstance = $modal.open({
-            animation: $scope.animationsEnabled,
-            templateUrl: 'edu-add.html',
-            controller: 'EduCtrl',
-            size: size,
-            resolve: {
-              user: function() {
-                return $scope.user;
-              }
-            }
-          });
-          modalInstance.result.then(function (selectedItem) {
-            $scope.selected = selectedItem;
-          });
-        };
-        $scope.edu_edit_open = function(size, id) {
-          alert(size + '  ' + id);
-        };
-        $scope.edu_remove = function(id) {
-          $http({
-            url: 'api/v1/education/user/' + $scope.user._id + '/edu/' + id,
-            method: 'DELETE'
-          })
-          .then(function(response){
-            alert('your selected edu removed successfully');
-            $window.location.href = '/my/' + $scope.user._id;
-          }, function(response){
-            alert('something went wrong in removing education');
-            $window.location.href = '/my/' + $scope.user._id;
-          });
-        };
-        $scope.summary_edit_open = function (size) {
-    
-          var modalInstance = $modal.open({
-            animation: $scope.animationsEnabled,
-            templateUrl: 'summary-edit.html',
-            controller: 'SummaryCtrl',
-            size: size,
-            resolve: {
-              user: function() {
-                return $scope.user;
-              }
-            }
-          });
-    
-          modalInstance.result.then(function (selectedItem) {
-            $scope.selected = selectedItem;
-          });
-    
-        };
+      }, function (response) {
+          if (response.status > 0) $scope.errorMsg = response.status 
+              + ': ' + response.data;
+      }, function (evt) {
+          // $scope.progress = parseInt(100.0 * evt.loaded / evt.total);
+      });
+    };
 
-    });   
-        $scope.profile_image_open = function (size) {
-    
-          var modalInstance = $modal.open({
-            animation: $scope.animationsEnabled,
-            templateUrl: 'profile-image.html',
-            controller: 'profileImageCtrl',
-            size: size,
-            resolve: {
-              user: function() {
-                return $scope.user;
-              }
-            }
-          });
-    
-          modalInstance.result.then(function (selectedItem) {
-            $scope.selected = selectedItem;
-          });
-        };
+  
+    $scope.resume_add_open = function (size) {
+
+      var modalInstance = $modal.open({
+        animation: $scope.animationsEnabled,
+        templateUrl: 'resume-add.html',
+        controller: 'ResumeCtrl',
+        size: size,
+        resolve: {
+          user: function() {
+            return $scope.user;
+          }
+        }
+      });
+
+      modalInstance.result.then(function (selectedItem) {
+        $scope.selected = selectedItem;
+      });
+    };
+    $scope.resume_edit_open = function(size, index) {
+    //   var modalInstance = $modal.open({
+    //   animation: $scope.animationsEnabled,
+    //   templateUrl: 'resume-add.html',
+    //   controller: 'ResumeEditCtrl',
+    //   size: size,
+    //   resolve: {
+    //     user: function() {
+    //       return $scope.user;
+    //     },
+    //     id: function() {
+    //       return id;
+    //     }
+    //   }
+    // });
+
+    // modalInstance.result.then(function (selectedItem) {
+    //   $scope.selected = selectedItem;
+    // });
+    alert(size + '   ' + index);
+    }; 
+    $scope.resume_remove =  function(id) {
+      $http({
+        url: 'api/v1/resume/user/' + $scope.user._id + '/resume/' + id,
+        method: 'DELETE'
+      })
+      .then(function(response){
+        alert('your selected resume removed successfully');
+        $window.location.href = '/my/' + $scope.user._id;
+      }, function(response){
+        alert('something went wrong in removing your selected resume');
+        $window.location.href = '/my/' + $scope.user._id;
+
+      });
+    };
+    $scope.skills_edit_open = function (size) {
+
+      var modalInstance = $modal.open({
+        animation: $scope.animationsEnabled,
+        templateUrl: 'skills-edit.html',
+        controller: 'SkillCtrl',
+        size: size,
+        resolve: {
+          user: function() {
+            return $scope.user;
+          }
+        }
+      });
+
+      modalInstance.result.then(function (selectedItem) {
+        $scope.selected = selectedItem;
+      });
+    };
+    $scope.edu_add_open = function (size) {
+
+      var modalInstance = $modal.open({
+        animation: $scope.animationsEnabled,
+        templateUrl: 'edu-add.html',
+        controller: 'EduCtrl',
+        size: size,
+        resolve: {
+          user: function() {
+            return $scope.user;
+          }
+        }
+      });
+      modalInstance.result.then(function (selectedItem) {
+        $scope.selected = selectedItem;
+      });
+    };
+    $scope.edu_edit_open = function(size, id) {
+      alert(size + '  ' + id);
+    };
+    $scope.edu_remove = function(id) {
+      $http({
+        url: 'api/v1/education/user/' + $scope.user._id + '/edu/' + id,
+        method: 'DELETE'
+      })
+      .then(function(response){
+        alert('your selected edu removed successfully');
+        $window.location.href = '/my/' + $scope.user._id;
+      }, function(response){
+        alert('something went wrong in removing education');
+        $window.location.href = '/my/' + $scope.user._id;
+      });
+    };
+    $scope.summary_edit_open = function (size) {
+
+      var modalInstance = $modal.open({
+        animation: $scope.animationsEnabled,
+        templateUrl: 'summary-edit.html',
+        controller: 'SummaryCtrl',
+        size: size,
+        resolve: {
+          user: function() {
+            return $scope.user;
+          }
+        }
+      });
+
+      modalInstance.result.then(function (selectedItem) {
+        $scope.selected = selectedItem;
+      });
+
+    };  
+    $scope.profile_image_open = function (size) {
+
+      var modalInstance = $modal.open({
+        animation: $scope.animationsEnabled,
+        templateUrl: 'profile-image.html',
+        controller: 'profileImageCtrl',
+        size: size,
+        resolve: {
+          user: function() {
+            return $scope.user;
+          }
+        }
+      });
+
+      modalInstance.result.then(function (selectedItem) {
+        $scope.selected = selectedItem;
+      });
+    };
   }).controller('profileImageCtrl', function($scope, $routeParams, $window, $modal, $modalInstance, user, $http, Upload, $timeout){
 
     $scope.uploadImg = function (dataUrl, name) {

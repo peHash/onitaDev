@@ -1,12 +1,13 @@
 <style>
     #projectForm {
-        max-width: 800px;
+        max-width: 600px;
         margin-right: auto;
         margin-left: auto;
     }
     .projectPost {
         padding-top: 38px;
         padding-right: 0;
+        text-align: center;
     }
     .projectPost .form-gourp-ol {
         margin: 0px;
@@ -64,10 +65,11 @@
     }
     #projectForm label {
         display: block;
-        font-weight: bold;
+        font-weight: normal;
         margin-bottom: 10px;
         line-height: 22px;
         overflow-y: hidden;
+        font-size: 75%;
     }
     #projectForm [type="text"]{
         display: inline-block;
@@ -310,7 +312,6 @@
 }
 .dateShow {
     display:inline-block;
-    min-height:290px;
     direction:rtl;
     width: 100%;
     text-align: center;
@@ -323,14 +324,15 @@
 select option:hover {
     background-color: #33B5E6;
 }
-legend {
-    color: #666;
-}
 #projectForm label {
-    color: #757575;
+    /*color: #757575;*/
 }
 select > option:hover {
     background-color: #c1c1c1;
+}
+.btn-action, .btn-link {
+    float: none !important;
+    display:inline !important;
 }
 </style>
 
@@ -394,7 +396,7 @@ select > option:hover {
                         </fieldset>
                     </li>
 
-                    <li>
+                    <!-- <li>
                         <div class="col-md-1 col-sm-1 col-xs-1">
                              <span class="li-number">
                             ۳
@@ -441,13 +443,12 @@ select > option:hover {
                             <ol>
                                 <li class="form-step">
                                     <div class="dateShow" style="">
-                                       <!--  <persian-datepicker class="ll-skin-santiago datepicker" ng-model="project.deadline"></persian-datepicker> -->
                                        <adm-dtp ng-model='project.deadline'></adm-dtp>
                                     </div>
                                 </li>
                             </ol>
                         </fieldset>
-                    </li>
+                    </li> -->
 
                     <!-- <li>
                         <div class="col-md-1 col-sm-1 col-xs-1">
@@ -489,10 +490,12 @@ select > option:hover {
                     </li> -->
                 </ol>
             </form>
-
-            <span class="col-md-12 col-sm-12 col-xs-12" style="text-align: center;">
-                <input type="submit" value="ثبت پروژه" class="btn btn-action" style="font-size: 17px; letter-spacing: 1px;width: 100%" ng-click="postProject(project)">
-            </span>
+            <div class="col-md-12 object-align-center" style="margin-bottom: 50px">
+                <span>
+                    <button class="btn btn-lg btn-action" ng-click="ppostProject(project)"> ثبت </button>
+                    <button class="btn btn-lg btn-link " ng-click="cancel()"> انصراف </button>
+                </span>
+            </div>
         </div>
     </div>
 </div>

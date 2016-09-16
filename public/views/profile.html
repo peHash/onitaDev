@@ -2,24 +2,31 @@
 	h1, h2, h3, h4, h5, p {
 		color: #666;
 	}
+	.avatar{
+		border: 2px solid #7D7D7D;
+		border-radius: 50%;
+
+	}
 	.ion-edit {
 		cursor: pointer;
 	}
 	.ion-edit:hover{
 		color: #33B5E6;
 	}
-	.o-profile{
+	.expert-profile{
 		min-height: 500px;
+		max-width: 800px;
 	}
-	.avatar{
-		border: 2px solid #7D7D7D;
-		border-radius: 50%;
-
-	}
-	.o-profile-skills {
+	.expert-profile-skills {
 		margin-left: -10px;
 		min-height: 30px;
 		position: relative;
+	}
+	.expert-profile-pic {
+		border-radius: 4px;
+		margin: 20px auto;
+		min-width: 200px;
+		min-height: 200px;
 	}
 	.p-lg-left{
 		padding-left: 40px !important;
@@ -98,27 +105,21 @@
 	<div class="container ng-cloak" ng-show="error">
 		<h1> {{error}} </h1>
 	</div>
-	<div class="container o-profile" ng-hide="error">
-		{{error}}
-		<div class="col-md-9" ng-mouseover="trigger_in();" ng-mouseleave="trigger_out();">
+	<div class="container expert-profile" ng-hide="error">
+		<div class="" ng-mouseover="trigger_in();" ng-mouseleave="trigger_out();">
 			<div class="profile_upper-body col-md-12 upper-body">
-				<div class="pull-right">
-					<img id="user-portrait" class="avatar avatar-lg" ng-src="{{user.image || 'images/ads.png'}}" ng-click="profile_image_open('lg')"/>
-				    <button class="profile_contact_user btn btn-lg btn-action btn-compound" ng-click="update_skills()">
+				<div class="object-align-center">
+					<img id="user-portrait" class="avatar avatar-lg expert-profile-pic" ng-src="{{user.image || 'images/ads.png'}}" ng-click="profile_image_open('lg')"/>
+					<span id="expert-name" class="">
+						<h3 style="margin-top:0"> {{user.firstName}} {{user.lastName}}</h3>
+					</span>
+				    <button class="profile_contact_user btn btn-lg btn-action btn-compound object-align-center" ng-click="update_skills()">
 				    	<span class="ion-email bg_light-green"></span>
 			    		<span class="btn-value"> ارسال درخواست همکاری </span>
 				    </button>
 				</div>
 				<div class="media-body">
-					<div class="row">
-						<div class="col-md-8">
-							<h3> {{user.firstName}} {{user.lastName}}</h3>
-						</div>
-						<div class="col-md-4">
-
-						</div>
-					</div>
-					<div class="o-profile-skills">
+					<div class="expert-profile-skills">
 						<a class="blueLink tag" 
 						ng-repeat="tag in user.tags" 
 						ng-html="/browse/tag/{{tag}}">

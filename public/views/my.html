@@ -8,15 +8,16 @@
 	.ion-edit:hover{
 		color: #33B5E6;
 	}
-	.o-profile{
+	.expert-profile{
 		min-height: 500px;
+		margin-top: 50px;
 	}
 	.avatar{
 		border: 2px solid #7D7D7D;
 		border-radius: 50%;
 
 	}
-	.o-profile-skills {
+	.expert-profile-skills {
 		margin-left: -10px;
 		min-height: 30px;
 		position: relative;
@@ -43,10 +44,13 @@
 	.air-card:first-child {
 		margin-top: 0;
 	}
+	.air-card.profile-pic {
+		min-height: 500px;
+	}
 	.circle-edit-button {
 		border-radius: 50%;
 		left: 10px;
-		top: -5px;
+		top: 0;
 		margin: 0.15em;
 		background: #70CBED none repeat scroll 0% 0%;
 		color: #FFF;
@@ -75,9 +79,20 @@
 	.cropArea {
     	background: #E4E4E4;
     	overflow: hidden;
-    	width:500px;
     	height:350px;
+    	width: 100%;
 	}
+	.expert-profile-pic {
+		border-radius: 4px;
+		margin: 0 auto 20px;
+		min-width: 200px;
+		min-height: 200px;
+	}
+	.expert-profile .air-card {
+		margin-right: 0;
+		margin-left: 0;
+	}
+
 
 </style>
 
@@ -303,32 +318,6 @@
 	            <h3 class="modal-title"> تصویر پروفایل </h3>
 	</div>
 	<div class="modal-body" style="min-height:350px;">
-		<div class="col-md-12" style="padding-right:0;padding-left:0">
-			<div class="col-md-4">
-				<img id="user-portrait" class="avatar avatar-lg center m20" ng-src="{{croppedDataUrl}}"/>
-				<button class="center m20" ngf-select ng-model="picFile" accept="image/*">
-    			   آپلود تصویر </button>
-			    <button class="center m20" ng-show="picFile" ng-click="uploadImg(croppedDataUrl, picFile.name)"> انتخاب نهایی </button> 		
-			    <div class="progress center m20" ng-show="picFile">
-				  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{progress}}"
-				  aria-valuemin="0" aria-valuemax="100" style="width:{{progress}}%">
-				    {{progress}}% آپلود شد
-				  </div>
-				</div>
-    			<span class="err" ng-show="errorMsg">{{errorMsg}}</span>
-			</div>
-			<div class="col-md-8">
-   			<form name="myForm">
-    			<div ngf-drop ng-model="picFile" ngf-pattern="image/*"
-    			     class="cropArea">
-    			    <img-crop image="picFile  | ngfDataUrl"                 
-    			    result-image="croppedDataUrl" ng-init="croppedDataUrl=''">
-    			    </img-crop>
-    			</div>
-    			<div>
-    			</div>
-    		</form>
-			</div>
 
 	    </div>
 	</div>
@@ -338,84 +327,9 @@
 	</div>
 </script>
 
-<style>
-	.NavTabPanel {
-		background: #848484 none repeat scroll 0% 0%;
-		border-bottom: 0 none;
-		height: 45px;
-	}
-	.PageCentered {
-		margin: 0 auto;
-		position: relative;
-		width: 960px;
-		display: block;
-		height: inherit;
-	}
-	.SecondaryNavList{
-		padding-right: 0;
-		margin: 0;
-		padding-left: 1px;
-		height: inherit;
-	}
-	.SecondaryNavList li:first-child {
-		padding-right: 0;
-	}
-	.SecondaryNavList li {
-		padding: 14px 30px 14px 0px;
-		display: inline-block;
-		line-height: 1em;
-		position: relative;
-	}
-	.SecondaryNavList .isCurrent a {
-		color: #fff;
-		font-size: 12px;
-	}
-	.SecondaryNavList a {
-		outline: 0 none;
-		cursor: pointer;
-	}
-	.navbar {
-      margin-bottom : 0 !important;
-    }
-	.NavLink:hover {
-		color: #fff;
-	}
-</style>
-<!-- <section class="">
-	<div class="NavTabPanel">
-        <div class="col-md-9 col-sm-9">
-			<div class="col-md-3 col-sm-3 hidden-xs"></div>
-			<div class="col-md-9 col-sm-9 col-xs-12" style="padding-right:5px;">
-				<ul class="SecondaryNavList">
-					<li class="">
-						<a class="NavLink" data-ng-href="/myprojects/{{user._id}}">
-							پروژه 
-						</a>
-					</li>
-					<li class="">
-						<a class="NavLink isCurrent">
-							پیغام
-						</a>
-					</li>
-					<li class="">
-						<a class="NavLink isCurrent">
-							پیشنهاد
-						</a>
-					</li>
-					<li class=""  ng-class="{isCurrent: myCtrlCurrent}">
-						<a class="NavLink"  ng-class="{isCurrent: myCtrlCurrent}" >
-							پروفایل
-						</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</div>
-</section> -->
-
+<toaster-container toaster-options="{'time-out': 2000, 'close-button':true, 'animation-class': 'toast-center'}"></toaster-container>
 <div ng-include src="'views/navbar.html'"></div>
 <div ng-include src="'views/header.html'"></div>
-
 <div id="messageBox" class="container">
 	<div ng-class="[message.category]" class="col-md-12 col-sm-12 col-xs-12 alert alert-dismissible" ng-repeat="message in messages" ng-if="!message.dismissed">
 		<span ng-bind-html="message.content">
@@ -428,60 +342,166 @@
 	</div>
 </div>
 
-<div class="container">
-	<div class="col-md-3">
-		<h2 class="">
-		</h2>
-	</div>
-	<div class="col-md-6">
+<style>
+.tabset {
+	width: 100%;
+	line-height: normal;
+	padding: 0px;
+	margin-bottom: 5px;
+	-margin-top: 5px;
+	background-color: #FFFFFF;
+	background: -moz-linear-gradient(center top, #fff, #F8F8F8) repeat scroll 0 0 #fff;
+	background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#F8F8F8));
+	border-radius: 2px 2px 2px 2px;
+	-box-shadow: 0 2px 2px -3px;
+			
+}
+.tabset {
+	margin: 0 0 20px;
+	background: transparent;
+	border: 0 none;
+}
+.tabset ul {	
+	margin: 0;
+	padding: 0px;
+	list-style: none;
+	width: 100%;
+	height: 38px;
+	border-bottom: 2px solid #ccc;
+}
+.tabset ul li {
+	float: right;
+	margin-bottom: -2px;
+	display: inline;
 
-	</div>
-	<div class="col-md-3">
+}
+.tabset ul li a {
+    font-size: 12px;
+    font-weight: bold;
+    color: #888;
+    display: block;
+    padding: 0 15px 15px;
+    border-bottom: 2px solid #ccc;
+    text-align: center;
+}
+.tabset ul li.active a {
+	color: #384848;
+	border-top: 0 none;
+	border-radius: 0;
+	padding-top: 0;
+	border-bottom-color: #384848;
+}
+.tabset ul li a:hover {
+	color: #384848;
+	cursor: pointer;
+}
+.tabset .active a {
+    border-top: 1px solid #FFFFFF;
+    border-radius: 3px 3px 0 0;
+    padding-top: 9px;
+}
+.unactive {
+    opacity: 0.85;
+}
+.expert-profile a{
 
-	</div>
-</div>
-<div class="container ng-cloak" ng-show="error">
-	<h1> {{error}} </h1>
-</div>
-<div class="container o-profile" ng-hide="error">
-	<div class="col-md-9" ng-mouseover="trigger_in();" ng-mouseleave="trigger_out();">
-		<div class="col-md-12 upper-body">
-			<div class="pull-right">
-				<img id="user-portrait" class="avatar avatar-lg" ng-src="{{user.image || 'images/ads.png'}}" ng-click="profile_image_open('lg')"/>
-			</div>
-			<div class="media-body">
-				<div class="row">
+}
+.expert-profile .profile-name {
+	max-width: 150px;
+	color: rgb(136, 136, 136);
+	font-weight: bold;
+	font-size: 15px;
+	margin-top: 12px;
+	padding-right: 1px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	display: block;
+	margin-right: auto;
+	margin-left: auto;
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 20px;
+	margin-bottom: 20px;
+}
+.expert-profile .profile-name:hover {
+   
+}
+
+		</style>
+<div class="container expert-profile p-0" ng-hide="error">
+	<div class="" ng-mouseover="trigger_in();" ng-mouseleave="trigger_out();">
+		<div class="col-md-12 p-0 m-0">
+			<div class="col-md-3 p-0 m-0">
+				<div class="pull-right">
+					<img id="user-portrait" class="avatar avatar-lg expert-profile-pic" ng-hide="croppedDataUrl" ng-src="{{user.image || 'images/ads.png'}}" ng-click="profile_image_open('lg')"/>
+					<img id="user-portrait" class="avatar avatar-lg expert-profile-pic" ng-show="croppedDataUrl" ng-src="{{croppedDataUrl}}"/>
+					<span class="profile-name" style="margin-top:0; text-align:center; fon"> {{user.firstName}} {{user.lastName}}</span>
+					
+				</div>
+				<!-- <div class="media-body">
 					<div class="col-md-8">
-						<h3> {{user.firstName}} {{user.lastName}}</h3>
+						
 					</div>
 					<div class="col-md-4">
 
 					</div>
-				</div>
-				<div class="o-profile-skills">
-					<a class="blueLink tag" 
-					ng-repeat="tag in user.tags" 
-					ng-html="/browse/tag/{{tag}}">
+					<div class="expert-profile-skills">
+						<a class="blueLink tag" 
+						ng-repeat="tag in user.tags" 
+						ng-html="/browse/tag/{{tag}}">
 
-						{{tag}}
+							{{tag}}
 
-					</a>
-					<span class="ng-cloak" ng-hide="user.tags">
-						شما مهارتی اضافه نکره اید
-					</span>
+						</a>
+						<span class="ng-cloak" ng-hide="user.tags">
+							شما مهارتی اضافه نکره اید
+						</span>
 
-					<!-- edit button  -->
 
-					<i class="ion-plus circle-edit-button ng-cloak" 
-					ng-show="is_edit_open" 
-					ng-click="skills_edit_open('lg');">
-					</i>
+						<i class="ion-plus circle-edit-button ng-cloak" 
+						ng-show="is_edit_open" 
+						ng-click="skills_edit_open('lg');">
+						</i>
 
-				</div>
+					</div>
+				</div> -->
 			</div>
-		</div>
-		<div class="col-md-12">
-			<div class="air-card">
+			<div class="col-md-9 m-0 p-0">
+				<div class="tabset">
+					<ul class="">
+						<li ng-class="{active: tab == 'activity'}" class="unactive">
+							<a ng-href="" ng-class="" ng-click="tabSelector('activity')">
+								فعالیت ها
+							</a>
+						</li>
+						<li ng-class="{active: tab == 'profilePic'}" class="unactive">
+							<a ng-href="" ng-class="" ng-click="tabSelector('profilePic')">
+								تصویر پروفایل 
+							</a>
+						</li>
+						<li ng-class="{active: tab == 'resume'}" class="unactive">
+							<a ng-href="" ng-class="" ng-click="tabSelector('resume')">
+								رزومه کاری 
+							</a>
+						</li>
+						<li ng-class="{active: tab == 'edu'}" class="unactive">
+							<a ng-href="" ng-class="" ng-click="tabSelector('edu')">
+								تحصیلات 
+							</a>
+						</li>
+						<li ng-class="{active: tab == 'socialNetwork'}" class="unactive">
+							<a ng-href="" ng-class="" ng-click="tabSelector('socialNetwork')">
+								شبکه های اجتماعی
+							</a>
+						</li>
+						<li ng-class="{active: tab == 'disableAccount'}" class="unactive">
+							<a ng-href="" ng-class="" ng-click="tabSelector('disableAccount')">
+								 لغو عضویت
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div class="air-card" ng-show="tab == 'activity'">
 				<legend>
 					<span> خلاصه فعالیت ها </span>
 					<i class="ion-plus circle-edit-button ng-cloak" ng-show="is_edit_open" ng-click="summary_edit_open('lg');"></i>
@@ -495,7 +515,7 @@
 					</p>
 				</section>
 			</div>
-			<div class="air-card">
+			<div class="air-card" ng-show="tab == 'resume'">
 				<legend>
 					<span> رزومه کاری </span>
 					<span class="">
@@ -530,7 +550,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="air-card">
+			<div class="air-card" ng-show="tab == 'edu'">
 				<legend>
 					<span> تحصیلات </span>
 					<span class="">
@@ -559,6 +579,35 @@
 						</span>
 					</div>
 				</div>
+			</div>
+			<div class="air-card profile-pic" ng-show="tab == 'profilePic'">
+				<legend>
+					<span> تصویر پروفایل </span>
+				</legend>
+				<div class="col-md-12" style="padding-right:0;padding-left:0">
+		   			<form name="myForm">
+		    			<div ngf-drop ng-model="picFile" ngf-pattern="image/*"
+		    			     class="cropArea">
+		    			    <img-crop image="picFile  | ngfDataUrl"                 
+		    			    result-image="croppedDataUrl" ng-init="croppedDataUrl=''">
+		    			    </img-crop>
+		    			</div>
+		    			<div>
+		    			</div>
+		    		</form>
+		    		<span>
+					<button class="center m20" ngf-select ng-model="picFile" accept="image/*">
+	    			   آپلود </button>
+				    <button class="center m20" ng-show="picFile" ng-click="uploadImage(croppedDataUrl, picFile.name)"> انتخاب نهایی </button> 		
+				    <!-- <div class="progress center m20" ng-show="picFile">
+					  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{progress}}"
+					  aria-valuemin="0" aria-valuemax="100" style="width:{{progress}}%">
+					    {{progress}}% آپلود شد
+					  </div>
+					</div> -->
+	    			<span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+				</span>
+			</div>
 			</div>
 		</div>
 	</div>

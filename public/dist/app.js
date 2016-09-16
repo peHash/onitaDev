@@ -5,7 +5,14 @@ angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'mgcrea.ngStrap'
         $routeProvider
             .when('/', {
                 templateUrl: 'views/landing.html',
-                controller: 'landingPageCtrl'
+                controller: 'landingPageCtrl', 
+                resolve: {
+                    // delay: function($q, $timeout){
+                    //     var delay = $q.defer();
+                    //     $timeout(delay.resolve, 4000);
+                    //     return delay.promise;
+                    // }
+                }
             })
             .when('/jobs', {
                 templateUrl: 'views/jobs.html',

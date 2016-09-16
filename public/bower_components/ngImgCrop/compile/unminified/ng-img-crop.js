@@ -1757,7 +1757,7 @@ crop.factory('cropPubSub', [function() {
   };
 }]);
 
-crop.directive('imgCrop', ['$timeout', 'cropHost', 'cropPubSub', function($timeout, CropHost, CropPubSub) {
+crop.directive('imgCrop', ['$rootScope', '$timeout', 'cropHost', 'cropPubSub', function($rootScope, $timeout, CropHost, CropPubSub) {
   return {
     restrict: 'E',
     scope: {
@@ -1873,6 +1873,10 @@ crop.directive('imgCrop', ['$timeout', 'cropHost', 'cropPubSub', function($timeo
       scope.$on('$destroy', function(){
           cropHost.destroy();
       });
+    $rootScope.$on('destroyCroppedDataUrl', function(){
+      console.log('called');
+        scope.resultImage = null;
+      }
     }
   };
 }]);

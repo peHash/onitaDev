@@ -72,9 +72,31 @@ a:focus, a:active, a:hover {
 a:active, a:hover {
   outline: 0 none;
 }
+.object-align-center {
+  margin-right: auto;
+  margin-left: auto;
+  display: block;
+  text-align: center;
+}
 .pt-nav {
   padding-top: 100px;
 }
+.p-0 {
+  padding: 0
+}
+.m-0 {
+  margin: 0;
+}
+.pr-0 {
+  padding-right: 0;
+}
+.mr-0 {
+  margin-right: 0;
+}
+.ml-0 {
+  margin-left: 0;
+}
+  
 .navbar {
   display: block;
   height: 90px;
@@ -481,6 +503,10 @@ margin-bottom: 15px;
 .btn {
   text-shadow: 0px -1px 5px rgba(0, 0, 0, 0.1);
 }
+.btn-lg, .btn-group-lg > .btn {
+  font-size: 12px;
+  font-weight: normal;
+}
 select > option {
   padding-right: 10px;
   border-right: 3px;
@@ -531,6 +557,10 @@ legend {
   /*background-color: #33B5E6;*/
   color: #fff;
   cursor: pointer;
+}
+.blueLink::before {
+  content: "#";
+  color: inherit;
 }
 .dropdown {
   position: relative;

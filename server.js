@@ -69,7 +69,9 @@ var userSchema = new Schema({
       seen: {type: Boolean}
     }]
   }],
-  articles: [{type: mongoose.Schema.Types.ObjectId, ref: 'Article', default: null}]
+  articles: [{type: mongoose.Schema.Types.ObjectId, ref: 'Article', default: null}], 
+  sign_up_date: {type: String, default:new Date()}, 
+  last_sign_in: {type: String, default:new Date()}
 });
 
 userSchema.pre('save', function(next) {
@@ -119,7 +121,8 @@ var jobSchema = new Schema({
     bids: [{type: mongoose.Schema.Types.ObjectId,
       ref: 'Bid', default: null}], 
     user: {type: mongoose.Schema.Types.ObjectId, 
-      ref: 'User', default: null}
+      ref: 'User', default: null}, 
+    updatedAt: {type: String, default: new Date()}
 });
 
 
@@ -129,7 +132,8 @@ var bidSchema = new mongoose.Schema({
     days: String,
     post_date: Date,
     sponsor: Boolean,
-    desc: String
+    desc: String, 
+    updatedAt: {type: String, default: new Date()}
 });
 
 var articleSchema = new mongoose.Schema({
@@ -141,8 +145,14 @@ var articleSchema = new mongoose.Schema({
   image: {type: String, required: true},
   verified: {type: Boolean, default: 1},
   postedDate : {type: Date, default: Date.now},
-  updatedDate : [{type: Date, default: Date.now}],
+  updatedAt : {type: Date},
   relateArticles : [{type: mongoose.Schema.Types.ObjectId, ref: 'Article'}]
+});
+articleSchema.pre('save', function(next) {
+  var date = moment().format();
+  console.log(date);
+  this.update({},{ $set: { updatedAt: date } });
+  next();
 });
 
 var postSchema = new mongoose.Schema({
@@ -151,7 +161,8 @@ var postSchema = new mongoose.Schema({
   date: {type: String, required: true},
   likes: {type: Number},
   thumbnail_src: {type: String, required: true}, 
-  added_date: {type:String, default: Date.now}
+  added_date: {type:String, default: new Date()}, 
+  updatedAt: String
 });
 
 var User = mongoose.model('User', userSchema);
@@ -358,6 +369,7 @@ app.post('/api/article', ensureAuthenticated, function(req, res, next){
     res.send(200);
   });
 });
+
 
 app.put('/api/article', ensureAuthenticated, function(req,res,next){
   Article.findById(req.body._id).exec(function(err,article){
@@ -794,9 +806,9 @@ agenda.define('igGrabber2', function(job){
 	});
 });
 agenda.on('ready', function(){
-  var repeater = agenda.create('igGrabber2');
-  repeater.repeatEvery('10 minutes').save();
-  agenda.start();
+  // var repeater = agenda.create('igGrabber2');
+  // repeater.repeatEvery('10 minutes').save();
+  // agenda.start();
 });
 
 function instaPusher(data){
