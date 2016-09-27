@@ -23,6 +23,7 @@ var gulp = require('gulp'),
     sources = { js: {}, css: {}, less: '', fonts: '', img: '' };
 
 paths.app.src = paths.root + 'public/';
+paths.assets.js = paths.app.src + 'js/';
 paths.app.lib = paths.app.src + 'lib/';
 paths.app.dist = paths.app.src + 'dist/';
 paths.app.views = paths.app.src + 'views/';
@@ -41,11 +42,11 @@ paths.publish.fonts = paths.publish.root + 'fonts/';
 paths.publish.img = paths.publish.root + 'img/';
 
 
-sources.js.controllers = paths.app.src + 'controllers/*.js';
-sources.js.directives = paths.app.src + 'directives/*.js';
-sources.js.filters = paths.app.src + 'filters/*.js';
-sources.js.services = paths.app.src + 'services/*.js';
-sources.js.app = paths.app.src + 'app.js';
+sources.js.controllers = paths.assets.js + 'controllers/*.js';
+sources.js.directives =  paths.assets.js + 'directives/*.js';
+sources.js.filters =     paths.assets.js + 'filters/*.js';
+sources.js.services =    paths.assets.js + 'services/*.js';
+sources.js.app =         paths.assets.js + 'app.js';
 
 sources.css.main = [
     paths.assets.css + 'app.css',
@@ -80,7 +81,8 @@ gulp.task('launch', function() {
         // the script to run the app
         script: 'server.js',
         // this listens to changes in any of these files/routes and restarts the application
-        watch: ["server.js", "public/app.js", 'public/*', 'public/*/**'],
+        // watch: ["server.js", "public/app.js", 'public/*', 'public/*/**'],
+        watch: ["server.js"],
         ext: 'js'
         // Below i'm using es6 arrow functions but you can remove the arrow and have it a normal .on('restart', function() { // then place your stuff in here }
     }).on('restart', function(){

@@ -11,7 +11,7 @@ var moment = require('moment');
 var async = require('async');
 var request = require('request');
 var xml2js = require('xml2js');
-var agenda = require('agenda')({ db: { address: 'localhost:27017/giga', collection: 'agendaGiga' } });
+// var agenda = require('agenda')({ db: { address: 'localhost:27017/giga', collection: 'agendaGiga' } });
 var sugar = require('sugar');
 var nodemailer = require('nodemailer');
 var _ = require('lodash');
@@ -239,16 +239,18 @@ app.post('/auth/signup', function(req, res, next) {
 
 app.post('/auth/login', function(req, res, next) {
   User.findOne({ email: req.body.email.toLowerCase() }, function(err, user) {
-    if (!user) return res.send(401, 'User does not exist');
+    // if (!user) return res.send(401, 'User does not exist');
+    if (!user) return res.status(401).send('User does not exist');
     user.comparePassword(req.body.password, function(err, isMatch) {
-      if (!isMatch) return res.send(401, 'Invalid email and/or password');
+      if (err) return res.status(401).send('something went WRONG, try again ;)')
+      if (!isMatch) return res.status(401).send('Invalid email and/or password');
       var cpUser = {
         _id: user._id,
         email: user.email,
         password: user.password
       };
       var token = createJwtToken(cpUser);
-      res.send({ token: token });
+      res.status(200).send({ token: token });
     });
   });
 });
@@ -799,17 +801,17 @@ app.listen(app.get('port'), function() {
 // });
 
 
-agenda.define('igGrabber2', function(job){
-	console.log('new agenda started');
-	instaGrabber().then(function(data){
-		if(data.length > 0) instaPusher(data);
-	});
-});
-agenda.on('ready', function(){
-  // var repeater = agenda.create('igGrabber2');
-  // repeater.repeatEvery('10 minutes').save();
-  // agenda.start();
-});
+// agenda.define('igGrabber2', function(job){
+// 	console.log('new agenda started');
+// 	instaGrabber().then(function(data){
+// 		if(data.length > 0) instaPusher(data);
+// 	});
+// });
+// agenda.on('ready', function(){
+//   // var repeater = agenda.create('igGrabber2');
+//   // repeater.repeatEvery('10 minutes').save();
+//   // agenda.start();
+// });
 
 function instaPusher(data){
     data.forEach(function(elem, index, array){

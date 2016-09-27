@@ -2,7 +2,7 @@
 </style>
 
  <div ng-controller="navbarCtrl" class="navbar navbar-default navbar-static-top" role="navigation">
-    <div class="col-md-3 col-sm-3 col-xs-6 header" style="float: left !important;">
+    <div class="col-md-3 col-sm-3 hidden-xs header" style="float: left !important;">
       <div class="navbar__header">
         <!-- <a class="navbar__brand" href="/">
           <h1 class="brand__header logo__gray">gigakar</h1>
@@ -16,7 +16,7 @@
         </a>
       </div>
     </div>
-    <div class="col-md-9 col-sm-9 col-xs-6 header login">
+    <div class="col-md-9 col-sm-9 col-xs-12 header login">
       <ul class="nav navbar-nav pull-right login-ul col-md-3 col-sm-3 hidden-xs" ng-if="!currentUser">
         <li data-match-route="/login">
           
@@ -33,7 +33,7 @@
          </a>
         </li>
       </ul>
-      <ul ng-cloak class="nav navbar-nav pull-right userContainer col-md-3 col-sm-3 hidden-xs" ng-if="currentUser">
+      <ul ng-cloak class="nav navbar-nav pull-right userContainer col-md-3 col-sm-6" ng-if="currentUser">
         <li class="dropdown navbar-profile" ng-click="usertoggle();">
           <img class="navAvatar" ng-src="images/upload_ba306abb08424caa55618b897c7710ef.png" alt="کاربر محترم"></img>
         </li>
@@ -55,18 +55,18 @@
             خروج
           </a>
         </div>
-        <li class="dropdown">
+        <li id="notifications" class="dropdown hidden-sm hidden-xs">
           <a class="navAvatar" ng-href="/">
             <span class="ion-speakerphone"></span>
           </a>
         </li>
-        <li class="dropdown">
+        <li id="jobs" class="dropdown hidden-sm hidden-xs">
           <a class="navAvatar">
             <span class="ion-briefcase"></span>
           </a>
         </li>
       </ul>
-      <ul class="col-md-9 col-sm-9 hidden-xs nav navbar-nav primary-pages pull-right">
+      <ul class="col-md-9 col-sm-6 hidden-xs nav navbar-nav primary-pages pull-right">
           <li style="" data-match-route="/add"><a href="/add">
              پروژه جدید
           </a></li>

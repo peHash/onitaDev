@@ -1,14 +1,3 @@
-+ function () {
-	angular.module('MyApp')
-  .factory('Article', function($resource) {
-    return $resource('/api/article/:_id', {}, {
-    	update: {
-    		method : 'PUT'
-    	}
-    });
-  });	
-}();
-
 + function() {
 angular.module('MyApp')
   .factory('Auth', function($http, $location, $rootScope, $alert, $window, toaster) {
@@ -66,24 +55,4 @@ angular.module('MyApp')
       }
     };
   });  
-}();
-
-+ function(){
-	angular.module('MyApp')
-	.factory('Posts', function($resource){
-		return $resource('/api/posts');
-	});
-}();
-+ function() {
-	angular.module('MyApp')
-  .factory('Show', function($resource) {
-    return $resource('/api/jobs/:_id');
-  });	
-}();
-
-+function() {
-	angular.module('MyApp')
-  .factory('User', function($resource) {
-    return $resource('/api/v1/user/:_id');
-  });	
 }();

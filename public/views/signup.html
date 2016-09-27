@@ -4,6 +4,7 @@ p {
 }
 </style>
 
+<toaster-container toaster-options="{'time-out': 2000, 'close-button':true, 'animation-class': 'toast-top-center'}"></toaster-container>
 <div class="container">
   <div class="row">
     <div class="center-form panel" style="direction: ltr;">
@@ -47,9 +48,8 @@ p {
             <div class="help-block text-danger" ng-if="signupForm.email.$dirty" ng-messages="signupForm.email.$error">
               <div ng-message="required">وارد کردن ایمیل الزامی است !</div>
               <div ng-message="email">ایمیل شما صحیح نیست !</div>
-              <div ng-message="unique"><span class="ion-looping">
-              </span>
- با این ایمیل قبل ثبت نام شده است ! 
+              <div ng-message="unique">
+                <span class="ion-looping"></span> با این ایمیل قبل ثبت نام شده است ! 
               </div>
             </div>
           </div>
@@ -67,7 +67,7 @@ p {
           <button type="submit" ng-disabled="signupForm.$invalid" class="btn btn-block btn-post" style="color: #fff;">ثبت نام </button>
           <br/>
 
-          <p class="text-center text-muted">قبلا ثبت نام کرده اید ؟ <a href="/login">خب وارد شوید ! </a></p>
+          <p class="text-center text-muted">قبلا ثبت نام کرده اید ؟ <a href="/login"> وارد شوید ;) </a></p>
         </form>
       </div>
     </div>

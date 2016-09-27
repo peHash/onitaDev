@@ -432,6 +432,9 @@ margin-bottom: 15px;
     background-color: transparent !important;
     color : #33B5E6 !important;
 }
+.navbar-nav > li {
+  float: right !important;
+}
 .navbar-brand:hover {
     
 }
@@ -822,7 +825,9 @@ legend {
 
 <body ng-app="MyApp">
  
-  <div ng-view class="{{pageClass}}"></div>
+  <div ng-view class="{{pageClass}}">
+    
+  </div>
 
 </body>
 
@@ -831,6 +836,7 @@ legend {
 <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
 <script src="bower_components/angular/angular.js"></script>
+<script src="./js/modernizr.js"></script>
 <script src="vendor/angular-messages.js"></script>
 <script src="vendor/angular-resource.js"></script>
 <script src="vendor/angular-route.js"></script>
@@ -856,11 +862,11 @@ legend {
 <script src="./dist/directives.js"></script>
 <script src="./dist/filters.js"></script>
 <script src="./dist/services.js"></script>
-</body>
+</body> 
 <script>
 function navbarTrigger() {
   var scroll = $(window).scrollTop();
-    if (scroll >= ($(".landIntro").outerHeight(true))) { 
+    if (scroll >= ($(".landIntro").outerHeight(true)) || scroll == 0) { 
         $(".navbar").css("display", "block"); 
    } else {
     $(".navbar").css("display", "none");
@@ -869,5 +875,6 @@ function navbarTrigger() {
 $(window).scroll(function() {
   navbarTrigger();
 });
+
 </script>
 </html>
