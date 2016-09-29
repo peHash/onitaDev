@@ -7,6 +7,9 @@ p {
 <toaster-container toaster-options="{'time-out': 2000, 'close-button':true, 'animation-class': 'toast-top-center'}"></toaster-container>
 <div class="container">
   <div class="row">
+    <div class="giga-logo-container">
+      <a  href="/"><img id="giga-logo-portion" src="./images/giga-logo.png"/></a>
+    </div>
     <div class="center-form panel" style="direction: ltr;">
       <div class="panel-body">
         <form method="post" ng-submit="signup()" name="signupForm">
@@ -64,7 +67,7 @@ p {
 
          <!-- <p class="text-center text-muted"><small>By clicking on Sign up, you agree to <a href="#">terms & conditions</a> and <a href="#">privacy policy</a></small></p>-->
 
-          <button type="submit" ng-disabled="signupForm.$invalid" class="btn btn-block btn-post" style="color: #fff;">ثبت نام </button>
+          <button type="submit" class="btn btn-block btn-post" style="color: #fff;">ثبت نام </button>
           <br/>
 
           <p class="text-center text-muted">قبلا ثبت نام کرده اید ؟ <a href="/login"> وارد شوید ;) </a></p>
