@@ -18,8 +18,10 @@
     </div>
     <div class="col-md-9 col-sm-9 col-xs-12 header login">
       <ul class="nav navbar-nav pull-right login-ul col-md-3 col-sm-3 hidden-xs" ng-if="!currentUser">
+      <div class="giga-logo-container">
+        <a  href="/"><img id="giga-logo-portion" src="./images/giga-logo.png"/></a>
+      </div>
         <li data-match-route="/login">
-          
           <a href="/login">
             <span class="ion-android-exit"></span>
             ورود
@@ -33,7 +35,7 @@
          </a>
         </li>
       </ul>
-      <ul ng-cloak class="nav navbar-nav pull-right userContainer col-md-3 col-sm-6" ng-if="currentUser">
+      <ul ng-cloak class="nav navbar-nav pull-right userContainer col-md-4 col-sm-6" ng-if="currentUser">
         <li class="dropdown navbar-profile" ng-click="usertoggle();">
           <img class="navAvatar" ng-src="images/upload_ba306abb08424caa55618b897c7710ef.png" alt="کاربر محترم"></img>
         </li>
@@ -55,7 +57,13 @@
             خروج
           </a>
         </div>
-        <li id="notifications" class="dropdown hidden-sm hidden-xs">
+        <li>
+          <div class="giga-logo-container">
+            <a  href="/"><img id="giga-logo-portion" src="./images/giga-logo.png"/></a>
+          </div>  
+        </li>
+        
+        <!-- <li id="notifications" class="dropdown hidden-sm hidden-xs">
           <a class="navAvatar" ng-href="/">
             <span class="ion-speakerphone"></span>
           </a>
@@ -64,9 +72,9 @@
           <a class="navAvatar">
             <span class="ion-briefcase"></span>
           </a>
-        </li>
+        </li> -->
       </ul>
-      <ul class="col-md-9 col-sm-6 hidden-xs nav navbar-nav primary-pages pull-right">
+      <ul class="col-md-8 col-sm-6 hidden-xs nav navbar-nav primary-pages pull-right">
           <li style="" data-match-route="/add"><a href="/add">
              پروژه جدید
           </a></li>

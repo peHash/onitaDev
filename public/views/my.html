@@ -423,19 +423,29 @@
 	padding-bottom: 20px;
 	margin-bottom: 20px;
 }
-.expert-profile .profile-name:hover {
-   
+	.my-profile-user-image {
+		float: right;
+	}
+@media screen and (min-width: 990px) {
+}
+@media screen and (max-width: 990px) {
+	.my-profile-user-image {
+		float: none;
+		margin: 0 auto;
+		display: block;
+		text-align: center;
+	}
 }
 
 		</style>
 <div class="container expert-profile p-0" ng-hide="error">
 	<div class="" ng-mouseover="trigger_in();" ng-mouseleave="trigger_out();">
 		<div class="col-md-12 p-0 m-0">
-			<div class="col-md-3 p-0 m-0">
-				<div class="pull-right">
+			<div class="col-md-3 col-sm-12 col-xs-12 p-0 m-0">
+				<div class="my-profile-user-image">
 					<img id="user-portrait" class="avatar avatar-lg expert-profile-pic" ng-hide="croppedDataUrl" ng-src="{{user.image || 'images/ads.png'}}" ng-click="profile_image_open('lg')"/>
 					<img id="user-portrait" class="avatar avatar-lg expert-profile-pic" ng-show="croppedDataUrl" ng-src="{{croppedDataUrl}}"/>
-					<span class="profile-name" style="margin-top:0; text-align:center; fon"> {{user.firstName}} {{user.lastName}}</span>
+					<span class="profile-name" style="margin-top:0; text-align:center;"> {{user.firstName}} {{user.lastName}}</span>
 					
 				</div>
 				<!-- <div class="media-body">
@@ -465,8 +475,8 @@
 
 					</div>
 				</div> -->
-			</div>
-			<div class="col-md-9 m-0 p-0">
+			</div> 
+			<div class="col-md-9 col-sm-12 col-xs-12 m-0 p-0">
 				<div class="tabset">
 					<ul class="">
 						<li ng-class="{active: tab == 'activity'}" class="unactive">
