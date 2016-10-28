@@ -14,6 +14,10 @@ angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'mgcrea.ngStrap'
                     // }
                 }
             })
+            .when('/youtube', {
+                templateUrl: 'views/youtube.html', 
+                controller: 'youtubeCtrl'
+            })
             .when('/jobs', {
                 templateUrl: 'views/jobs.html',
                 controller: 'MainCtrl'

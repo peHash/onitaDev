@@ -1,0 +1,39 @@
+<div ng-include src="'views/navbar.html'"></div>
+<div class="container">
+	<div class="col-md-12" style="margin-top: 100px;">
+		<label for="">Youtube file Address :</label>
+        <input id="yt-file-address" type="text" style="direction: ltr; margin-top: 50px;" class="form-control" ng-model="youtube.url"></input>
+	</div>
+	<div class="col-md-12 object-align-center" style="margin-top: 50px">
+                <span>
+                    <button class="btn btn-lg btn-action" ng-click="modalDownloaderOpen()"> Download </button>
+                    <button class="btn btn-lg btn-link " ng-click=""> Cancel </button>
+                </span>
+    </div>
+</div>
+
+<script type="text/ng-template" id="modalYoutube.html">
+<div class="modal-header">
+            <h3 class="modal-title"> Youtube </h3>
+</div>
+<div class="modal-body" style="min-height:400px;">
+    <div class="col-md-12 youtube-image-thumbnail">
+        <img class="" alt="youtube video thumbnail" />
+    </div>
+    <div class="col-md-12">
+        <label>
+            youtube video title
+        </label>    
+    </div>
+    <div class="col-md-12">
+            <select class="form-control" label="" data-ng-model="youtube.format">
+                <option value="1393">Audio</option>
+                <option value="1392">Video</option>
+            </select>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-lg btn-action" ng-click=""> Download </button>
+    <button class="btn btn-lg btn-link" ng-click="cancel()"> Cancel </button>
+</div>
+</script>
