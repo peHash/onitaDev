@@ -11,7 +11,7 @@
 	        	// url: function() {
 	        	// 	return $scope.youtube.url;
 	        	// }
-				delay: function($q, $timeout, $http){
+				info: function($q, $timeout, $http){
 				    var delay = $q.defer();
 				    // $timeout(delay.resolve, 4000);
 				    $http({
@@ -36,9 +36,24 @@
 	        $scope.selected = selectedItem;
 	      });
     };
-	}).controller('modalYoutubeCtrl', function($scope, $routeParams, $window, $modal, $modalInstance){
-
-		// alert(url);
+	}).controller('modalYoutubeCtrl', function($scope, $routeParams, $window, $modal, $modalInstance, info, $http){
+		$scope.info = info.data;
+		$scope.downloadIt = function() {
+			$http({
+				  url : '/api/youtubeDownloader',
+				  method : 'POST',
+				  data : {
+				  	'id' : $scope.info.id, 
+				  	'format': $scope.youtube.format
+				  }
+				})	
+				.then(function(response){
+				  console.log(response);
+				},
+				function(response) {
+				  console.log(response);
+				});
+		};
 	    $scope.cancel = function () {
 	      $modalInstance.dismiss('cancel');
 	    };

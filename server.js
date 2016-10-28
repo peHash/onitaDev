@@ -216,15 +216,17 @@ function createJwtToken(user) {
   return jwt.encode(payload, tokenSecret);
 }
 
-app.post('/api/youtube', function(req, res, next){
+app.post('/api/youtubeDownloader', function(req, res, next){
+  var id = req.body.id;
   var path = require('path');
   var fs   = require('fs');
   var ytdl = require('youtube-dl');
-  if (req.body.youtubeUrl) {
+  if (id) {
+    var url = 'https://www.youtube.com/watch?v=' + id;
     var file;
-    var video = ytdl(req.body.youtubeUrl,
+    var video = ytdl(url,
       // Optional arguments passed to youtube-dl.
-      ['-f', '18']);
+      ['-f', req.body.format]);
 
     var size = 0;
     video.on('info', function(info) {
@@ -255,6 +257,20 @@ app.post('/api/youtube', function(req, res, next){
       'use strict';
       res.status(200).send({file : file});
       
+    });
+  }
+});
+
+app.post('/api/youtube', function(req, res, next){
+  var path = require('path');
+  var fs   = require('fs');
+  var ytdl = require('youtube-dl');
+  var url = req.body.youtubeUrl;
+  if (url) {
+    ytdl.getInfo(url, function(err, info) {
+      'use strict';
+      if (err) { throw err; }
+      res.status(200).send({'id':info.id, 'title':info.title, 'thumbnail': info.thumbnail, 'desc': info.description});
     });
   }
   

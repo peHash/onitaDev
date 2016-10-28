@@ -17,23 +17,28 @@
             <h3 class="modal-title"> Youtube </h3>
 </div>
 <div class="modal-body" style="min-height:400px;">
-    <div class="col-md-12 youtube-image-thumbnail">
-        <img class="" alt="youtube video thumbnail" />
-    </div>
     <div class="col-md-12">
         <label>
-            youtube video title
+            {{info.title}}
+        </label>    
+    </div>
+    <div class="col-md-12 object-align-center">
+        <img class="" alt="youtube video thumbnail" ng-src="{{info.thumbnail}}" />
+    </div>
+    <div class="col-md-12">
+        <label style="overflow: scroll; height: 100px; margin-top:30px;">
+            {{info.desc}}
         </label>    
     </div>
     <div class="col-md-12">
             <select class="form-control" label="" data-ng-model="youtube.format">
-                <option value="1393">Audio</option>
-                <option value="1392">Video</option>
+                <option value="140">Audio</option>
+                <option value="18">Video</option>
             </select>
     </div>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-lg btn-action" ng-click=""> Download </button>
+    <button class="btn btn-lg btn-action" ng-click="downloadIt()"> Download </button>
     <button class="btn btn-lg btn-link" ng-click="cancel()"> Cancel </button>
 </div>
 </script>
