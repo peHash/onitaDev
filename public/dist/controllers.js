@@ -275,8 +275,10 @@
         	}	
       	});
 
-	      modalInstance.result.then(function (selectedItem) {
-	        $scope.selected = selectedItem;
+	      modalInstance.result.then(function (result) {
+	      	console.log(result);
+	        $scope.videoFile = '/youtube/videos/' + result.data.file._filename;
+	        // $scope.$apply();
 	      });
     };
 	}).controller('modalYoutubeCtrl', function($scope, $routeParams, $window, $modal, $modalInstance, info, $http){
@@ -291,7 +293,7 @@
 				  }
 				})	
 				.then(function(response){
-				  console.log(response);
+				  $modalInstance.close(response);
 				},
 				function(response) {
 				  console.log(response);

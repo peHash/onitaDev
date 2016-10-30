@@ -2,11 +2,16 @@
 <div class="container">
 	<div class="col-md-12" style="margin-top: 100px;">
 		<label for="">Youtube file Address :</label>
-        <input id="yt-file-address" type="text" style="direction: ltr; margin-top: 50px;" class="form-control" ng-model="youtube.url"></input>
+        <input id="yt-file-address" type="text" style="direction: ltr; margin-top: 50px;" class="form-control" ng-model="youtube.url" ng-hide="videoFile"></input>
+        <input id="yt-file-address" type="text" style="direction: ltr; margin-top: 50px;" class="form-control" ng-model="videoFile" ng-show="videoFile"></input>
 	</div>
 	<div class="col-md-12 object-align-center" style="margin-top: 50px">
                 <span>
-                    <button class="btn btn-lg btn-action" ng-click="modalDownloaderOpen()"> Download </button>
+                    <button class="btn btn-lg btn-action" ng-click="modalDownloaderOpen()" ng-hide="videoFile"> Get Info </button>
+                    <!-- <form method="get" action="{{videoFile}}">
+                        <button class="btn btn-lg btn-action" type="submit" ng-show="videoFile"> Download Video</button>
+                    </form> -->
+                    <a class="btn btn-lg btn-action" ng-href="{{videoFile}}" ng-show="videoFile"> Download Video</a>
                     <button class="btn btn-lg btn-link " ng-click=""> Cancel </button>
                 </span>
     </div>

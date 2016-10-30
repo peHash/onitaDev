@@ -22,6 +22,7 @@ var deepPopulate = require('mongoose-deep-populate')(mongoose);
 var tokenSecret = 'your unique secret';
 var Schema = mongoose.Schema,
     ObjectId = Schema.ObjectId;
+var youtubeFolder = path.join(__dirname, 'public/youtube/videos');
 
 
 
@@ -223,7 +224,7 @@ app.post('/api/youtubeDownloader', function(req, res, next){
   var ytdl = require('youtube-dl');
   if (id) {
     var url = 'https://www.youtube.com/watch?v=' + id;
-    var file;
+    var videoInfo;
     var video = ytdl(url,
       // Optional arguments passed to youtube-dl.
       ['-f', req.body.format]);
@@ -231,31 +232,20 @@ app.post('/api/youtubeDownloader', function(req, res, next){
     var size = 0;
     video.on('info', function(info) {
       'use strict';
+      videoInfo = info;
       size = info.size;
-
-      console.log('Got video info');
-      file = path.join(__dirname, info._filename);
+      var file = path.join(youtubeFolder, info._filename);
       video.pipe(fs.createWriteStream(file));
 
     });
 
-    var pos = 0;
-    video.on('data', function data(chunk) {
-      'use strict';
-      pos += chunk.length;
-
-      // `size` should not be 0 here.
-      if (size) {
-        var percent = (pos / size * 100).toFixed(2);
-        process.stdout.cursorTo(0);
-        process.stdout.clearLine(1);
-        process.stdout.write(percent + '%');
-      }
+    video.on('error', function(err){
+      res.status(200).send({err: err});
     });
 
     video.on('end', function end() {
       'use strict';
-      res.status(200).send({file : file});
+      res.status(200).send({file : videoInfo});
       
     });
   }
@@ -269,7 +259,7 @@ app.post('/api/youtube', function(req, res, next){
   if (url) {
     ytdl.getInfo(url, function(err, info) {
       'use strict';
-      if (err) { throw err; }
+      if (err) { res.status(503).send({err: err}); }
       res.status(200).send({'id':info.id, 'title':info.title, 'thumbnail': info.thumbnail, 'desc': info.description});
     });
   }
