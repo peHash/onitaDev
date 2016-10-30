@@ -42,3 +42,4 @@ jspm_packages
  public/bower_components/
  node_modules/
  public/img-upload/
+ public/videos
