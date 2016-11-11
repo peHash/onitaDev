@@ -1,6 +1,6 @@
 + function() {
   angular.module('MyApp')
-  .controller('MyCtrl', function($scope, User, $routeParams, $window, $modal, $http, Upload, $timeout, toaster, $interval) {
+  .controller('MyCtrl', function($scope, User, $routeParams, $window, $uibModal, $http, Upload, $timeout, toaster, $interval) {
      $scope.updateUser = function(timer){
       var timer = timer ? timer : 10;
       $timeout(function(){
@@ -61,7 +61,7 @@
   
     $scope.resume_add_open = function (size) {
 
-      var modalInstance = $modal.open({
+      var modalInstance = $uibModal.open({
         animation: $scope.animationsEnabled,
         templateUrl: 'resume-add.html',
         controller: 'ResumeCtrl',
@@ -78,7 +78,7 @@
       });
     };
     $scope.resume_edit_open = function(size, index) {
-    //   var modalInstance = $modal.open({
+    //   var modalInstance = $uibModal.open({
     //   animation: $scope.animationsEnabled,
     //   templateUrl: 'resume-add.html',
     //   controller: 'ResumeEditCtrl',
@@ -114,7 +114,7 @@
     };
     $scope.skills_edit_open = function (size) {
 
-      var modalInstance = $modal.open({
+      var modalInstance = $uibModal.open({
         animation: $scope.animationsEnabled,
         templateUrl: 'skills-edit.html',
         controller: 'SkillCtrl',
@@ -132,7 +132,7 @@
     };
     $scope.edu_add_open = function (size) {
 
-      var modalInstance = $modal.open({
+      var modalInstance = $uibModal.open({
         animation: $scope.animationsEnabled,
         templateUrl: 'edu-add.html',
         controller: 'EduCtrl',
@@ -165,7 +165,7 @@
     };
     $scope.summary_edit_open = function (size) {
 
-      var modalInstance = $modal.open({
+      var modalInstance = $uibModal.open({
         animation: $scope.animationsEnabled,
         templateUrl: 'summary-edit.html',
         controller: 'SummaryCtrl',
@@ -184,7 +184,7 @@
     };  
     $scope.profile_image_open = function (size) {
 
-      var modalInstance = $modal.open({
+      var modalInstance = $uibModal.open({
         animation: $scope.animationsEnabled,
         templateUrl: 'profile-image.html',
         controller: 'profileImageCtrl',
@@ -200,7 +200,7 @@
         $scope.selected = selectedItem;
       });
     };
-  }).controller('profileImageCtrl', function($scope, $routeParams, $window, $modal, $modalInstance, user, $http, Upload, $timeout){
+  }).controller('profileImageCtrl', function($scope, $routeParams, $window, $uibModal, $uibModalInstance, user, $http, Upload, $timeout){
 
     $scope.uploadImg = function (dataUrl, name) {
       Upload.upload({
@@ -225,7 +225,7 @@
       $window.location.href = '/my/' + user._id;
     }
 
-  }).controller('ResumeCtrl', function($scope, $routeParams, $window, $modal, $modalInstance, $http, user){
+  }).controller('ResumeCtrl', function($scope, $routeParams, $window, $uibModal, $uibModalInstance, $http, user){
     $scope.default = '';
     $scope.resume = {};
     $scope.add_resume = function() {
@@ -255,13 +255,13 @@
 
 
     $scope.cancel = function () {
-      $modalInstance.dismiss('cancel');
+      $uibModalInstance.dismiss('cancel');
     };
-  }).controller('ResumeEditCtrl', function($scope, $routeParams, $window, $modal, $modalInstance, user, id, $http){
+  }).controller('ResumeEditCtrl', function($scope, $routeParams, $window, $uibModal, $uibModalInstance, user, id, $http){
     // var resume = user.
 
   })
-  .controller('SkillCtrl', function($scope, $routeParams, $window, $modal, $modalInstance, user, $http) {
+  .controller('SkillCtrl', function($scope, $routeParams, $window, $uibModal, $uibModalInstance, user, $http) {
     $scope.itemsCollection = [{
       title: 'PHP',
       subtitle: '1',
@@ -311,10 +311,10 @@
   }
   )};
     $scope.cancel = function () {
-      $modalInstance.dismiss('cancel');
+      $uibModalInstance.dismiss('cancel');
     };
 
-  }).controller('SummaryCtrl', function($scope, $routeParams, $window, $modal, $modalInstance, user, $http){
+  }).controller('SummaryCtrl', function($scope, $routeParams, $window, $uibModal, $uibModalInstance, user, $http){
     $scope.summary = user.summary ? user.summary : '';
 
     $scope.update_summary = function() {
@@ -341,9 +341,9 @@
 
 
     $scope.cancel = function() {
-      $modalInstance.dismiss('cancel');
+      $uibModalInstance.dismiss('cancel');
     };
-  }).controller('EduCtrl', function($scope, $routeParams, $window, $modal, $modalInstance, $http, user) {
+  }).controller('EduCtrl', function($scope, $routeParams, $window, $uibModal, $uibModalInstance, $http, user) {
     $scope.default = '';
     $scope.edu = {};
     $scope.add_edu = function() {
@@ -373,7 +373,7 @@
 
 
     $scope.cancel = function() {
-      $modalInstance.dismiss('cancel');
+      $uibModalInstance.dismiss('cancel');
     }
 
   });  

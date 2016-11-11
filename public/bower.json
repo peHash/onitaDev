@@ -1,6 +1,6 @@
 {
   "name": "giga",
-  "version": "00:00:00",
+  "version": "00:00:10",
   "homepage": "https://github.com/peHash/giga",
   "authors": [
     "peHash <haschemi.p@gmail.com>"
@@ -18,7 +18,6 @@
     "tests"
   ],
   "dependencies": {
-    "angular-bootstrap": "~0.12.0",
     "angular-sanitize": "~1.4.5",
     "angular-ui-date": "~0.0.8",
     "bootstrap-rtl": "~3.3.2",
