@@ -29,6 +29,7 @@
     "ngImgCrop": "~0.3.2",
     "ngUpload": "~0.5.17",
     "angularjs-toaster": "~2.0.0",
-    "adm-dtp": "*"
+    "adm-dtp": "*",
+    "angular-strap": "^2.3.10"
   }
 }

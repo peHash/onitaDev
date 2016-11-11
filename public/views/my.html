@@ -371,18 +371,19 @@
 }
 .tabset ul li {
 	float: right;
-	margin-bottom: -2px;
+	margin-bottom: 0px;
 	display: inline;
 
 }
 .tabset ul li a {
-    font-size: 12px;
+    font-size: 13px;
     font-weight: bold;
     color: #888;
     display: block;
-    padding: 0 15px 15px;
+    padding: 0 15px 0;
     border-bottom: 2px solid #ccc;
     text-align: center;
+    height: 38px;
 }
 .tabset ul li.active a {
 	color: #384848;
@@ -406,26 +407,10 @@
 .expert-profile a{
 
 }
-.expert-profile .profile-name {
-	max-width: 150px;
-	color: rgb(136, 136, 136);
-	font-weight: bold;
-	font-size: 15px;
-	margin-top: 12px;
-	padding-right: 1px;
-	text-overflow: ellipsis;
-	overflow: hidden;
-	white-space: nowrap;
-	display: block;
-	margin-right: auto;
-	margin-left: auto;
-	border-bottom: 1px solid #ccc;
-	padding-bottom: 20px;
-	margin-bottom: 20px;
+
+.my-profile-user-image {
+	float: right;
 }
-	.my-profile-user-image {
-		float: right;
-	}
 @media screen and (min-width: 990px) {
 }
 @media screen and (max-width: 990px) {
@@ -479,32 +464,32 @@
 			<div class="col-md-9 col-sm-12 col-xs-12 m-0 p-0">
 				<div class="tabset">
 					<ul class="">
-						<li ng-class="{active: tab == 'activity'}" class="unactive">
+						<li ng-class="{active: tab == 'activity', unactive: tab != 'activity'}" class="">
 							<a ng-href="" ng-class="" ng-click="tabSelector('activity')">
 								فعالیت ها
 							</a>
 						</li>
-						<li ng-class="{active: tab == 'profilePic'}" class="unactive">
+						<li ng-class="{active: tab == 'profilePic', unactive: tab != 'profilePic'}" class="">
 							<a ng-href="" ng-class="" ng-click="tabSelector('profilePic')">
 								تصویر پروفایل 
 							</a>
 						</li>
-						<li ng-class="{active: tab == 'resume'}" class="unactive">
+						<li ng-class="{active: tab == 'resume', unactive: tab != 'resume'}" class="">
 							<a ng-href="" ng-class="" ng-click="tabSelector('resume')">
 								رزومه کاری 
 							</a>
 						</li>
-						<li ng-class="{active: tab == 'edu'}" class="unactive">
+						<li ng-class="{active: tab == 'edu', unactive: tab != 'edu'}" class="">
 							<a ng-href="" ng-class="" ng-click="tabSelector('edu')">
 								تحصیلات 
 							</a>
 						</li>
-						<li ng-class="{active: tab == 'socialNetwork'}" class="unactive">
+						<li ng-class="{active: tab == 'socialNetwork', unactive: tab != 'socialNetwork'}" class="">
 							<a ng-href="" ng-class="" ng-click="tabSelector('socialNetwork')">
 								شبکه های اجتماعی
 							</a>
 						</li>
-						<li ng-class="{active: tab == 'disableAccount'}" class="unactive">
+						<li ng-class="{active: tab == 'disableAccount', unactive: tab != 'disableAccount'}" class="">
 							<a ng-href="" ng-class="" ng-click="tabSelector('disableAccount')">
 								 لغو عضویت
 							</a>

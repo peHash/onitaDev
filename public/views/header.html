@@ -18,6 +18,7 @@
         display: inline-block;
         line-height: 1em;
         position: relative;
+        margin-left: 40px;
     }
     .SecondaryNavList .isCurrent a {
         color: #fff;
@@ -41,9 +42,8 @@
 <div class="" ng-controller="headerProfileController">
 <section class="pt-nav">
 	<div class="NavTabPanel">
-		<div class="col-md-9 col-sm-9">
-			<div class="col-md-3 col-sm-3 hidden-xs"></div>
-			<div class="col-md-9 col-sm-9 col-xs-12" style="padding-right:5px;">
+		<div class="col-md-9 col-sm-9 padding-right-0">
+			<div class="col-md-9 col-sm-9 col-xs-12" style="padding-right:55px;">
                 <ul class="SecondaryNavList">
                     <li class="" ng-class="{isCurrent: myCtrlCurrent}">
                         <a class="NavLink" data-ng-href="{{userProfilePage}}">
@@ -52,17 +52,12 @@
                     </li>
                     <li class="" ng-class="{isCurrent: bidsCtrlCurrent}">
                         <a class="NavLink" data-ng-href="{{userProjectPage}}">
-                            پروژه 
+                            پروژه
                         </a>
                     </li>
                     <li class="">
                         <a class="NavLink">
                             پیغام
-                        </a>
-                    </li>
-                    <li class="">
-                        <a class="NavLink">
-                            پیشنهاد
                         </a>
                     </li>
                 </ul>
