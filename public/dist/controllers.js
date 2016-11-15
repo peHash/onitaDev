@@ -255,10 +255,10 @@
 		$scope.watching = false;
 		$scope.config = {
 		    sources: [
-		  {src: "/youtube/videos/8VEOhBcQp_0.m4a", type: "audio/mpeg"}
+		  {src: $scope.videoFile , type: "audio/mpeg"}
 		],
 		    theme: {
-		url: "http://www.videogular.com/styles/themes/default/latest/videogular.css"
+		url: "/stylesheets/videogular.css"
 		    }
 		};
 	    $scope.watchToggle = function() {
