@@ -1,14 +1,7 @@
 + function() {
 	angular.module('MyApp').controller('youtubeCtrl', function ($scope, toaster, $uibModal, $sce) {
 		$scope.watching = false;
-		$scope.config = {
-		    sources: [
-		  {src: $scope.videoFile , type: "audio/mpeg"}
-		],
-		    theme: {
-		url: "/stylesheets/videogular.css"
-		    }
-		};
+		
 	    $scope.watchToggle = function() {
 	    	$scope.watching = !($scope.watching);
 	    }
@@ -48,6 +41,14 @@
 	      	console.log(result);
 	        $scope.videoFile = '/youtube/videos/' + result.data.file.id + '.' + result.data.file.ext;
 	        // $scope.$apply();
+	        $scope.config = {
+			    sources: [
+			  {src: $scope.videoFile , type: "audio/mpeg"}
+			],
+			    theme: {
+			url: "http://www.videogular.com/styles/themes/default/latest/videogular.css"
+			    }
+			};
 	      });
 
 
