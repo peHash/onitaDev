@@ -1,6 +1,6 @@
 // reference : \public\controllers\job.js
 + function () {
-    angular.module('MyApp').controller('bidCtrl', function ($scope, $modalInstance, $http, $window, job, toaster) {
+    angular.module('MyApp').controller('bidCtrl', function ($scope, $uibModalInstance, $http, $window, job, toaster) {
     $scope.editorOptions = {
       contentsLangDirection: 'rtl'
     };
@@ -30,7 +30,7 @@
   };
 
     $scope.cancel = function () {
-      $modalInstance.dismiss('cancel');
+      $uibModalInstance.dismiss('cancel');
     };
   });
 }();

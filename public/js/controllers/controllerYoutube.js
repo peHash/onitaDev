@@ -1,8 +1,20 @@
 + function() {
-	angular.module('MyApp').controller('youtubeCtrl', function ($scope, toaster, $modal) {
+	angular.module('MyApp').controller('youtubeCtrl', function ($scope, toaster, $uibModal, $sce) {
+		$scope.watching = false;
+		$scope.config = {
+		    sources: [
+		  {src: "/youtube/videos/8VEOhBcQp_0.m4a", type: "audio/mpeg"}
+		],
+		    theme: {
+		url: "http://www.videogular.com/styles/themes/default/latest/videogular.css"
+		    }
+		};
+	    $scope.watchToggle = function() {
+	    	$scope.watching = !($scope.watching);
+	    }
 		$scope.modalDownloaderOpen = function (size) {
 
-	      var modalInstance = $modal.open({
+	      var modalInstance = $uibModal.open({
 	        animation: $scope.animationsEnabled,
 	        templateUrl: 'modalYoutube.html',
 	        controller: 'modalYoutubeCtrl',
@@ -34,11 +46,16 @@
 
 	      modalInstance.result.then(function (result) {
 	      	console.log(result);
-	        $scope.videoFile = '/youtube/videos/' + result.data.file._filename;
+	        $scope.videoFile = '/youtube/videos/' + result.data.file.id + '.' + result.data.file.ext;
 	        // $scope.$apply();
 	      });
+
+
+
+
+
     };
-	}).controller('modalYoutubeCtrl', function($scope, $routeParams, $window, $modal, $modalInstance, info, $http){
+	}).controller('modalYoutubeCtrl', function($scope, $routeParams, $window, $uibModal, $uibModalInstance, info, $http){
 		$scope.info = info.data;
 		$scope.downloadIt = function() {
 			$http({
@@ -50,14 +67,14 @@
 				  }
 				})	
 				.then(function(response){
-				  $modalInstance.close(response);
+				  $uibModalInstance.close(response);
 				},
 				function(response) {
 				  console.log(response);
 				});
 		};
 	    $scope.cancel = function () {
-	      $modalInstance.dismiss('cancel');
+	      $uibModalInstance.dismiss('cancel');
 	    };
 
   	});

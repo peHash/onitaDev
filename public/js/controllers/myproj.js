@@ -1,6 +1,6 @@
 + function() {
   angular.module('MyApp')
-  .controller('MyProjCtrl', function($scope, User, $routeParams, $window, $modal, $http, Show) {
+  .controller('MyProjCtrl', function($scope, User, $routeParams, $window, $uibModal, $http, Show) {
    $http({
     url: '/api/v1/profile/' + $routeParams.id,
     method: 'GET'

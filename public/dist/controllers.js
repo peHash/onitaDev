@@ -66,7 +66,7 @@
 }();
 // reference : \public\controllers\job.js
 + function () {
-    angular.module('MyApp').controller('bidCtrl', function ($scope, $modalInstance, $http, $window, job, toaster) {
+    angular.module('MyApp').controller('bidCtrl', function ($scope, $uibModalInstance, $http, $window, job, toaster) {
     $scope.editorOptions = {
       contentsLangDirection: 'rtl'
     };
@@ -96,7 +96,7 @@
   };
 
     $scope.cancel = function () {
-      $modalInstance.dismiss('cancel');
+      $uibModalInstance.dismiss('cancel');
     };
   });
 }();
@@ -104,7 +104,7 @@
 
 + function() {
   angular.module('MyApp')
-  .controller('BidsCtrl', function($scope, User, $routeParams, $window, $modal, $http, Show) {
+  .controller('BidsCtrl', function($scope, User, $routeParams, $window, $uibModal, $http, Show) {
    Show.get({ _id: $routeParams.id }, function(job) {
     angular.forEach(job.bids, function(bid) {
         bid.user.profilePic = bid.user.image ? bid.user.image : '/images/buyer.png';
@@ -154,12 +154,11 @@
 }();
 + function() {
     angular.module('MyApp')
-    .controller('landingPageCtrl', function($scope, Posts, $modal) {
+    .controller('landingPageCtrl', function($scope, Posts) {
 		$scope.introBtn = 'بزن بریم !';
 		$scope.newsletterPlaceHolder = 'ایمیل شما اینجا ...';
 		$scope.newsletterSignUpValue = 'همین حالا ثبت کن';
 		$scope.posts = Posts.query();
-		var mod = $modal({title: 'this is it', content:'what ?', show: true});
     });  
   }();
 + function() {
@@ -252,10 +251,22 @@
 	});
 }();
 + function() {
-	angular.module('MyApp').controller('youtubeCtrl', function ($scope, toaster, $modal) {
+	angular.module('MyApp').controller('youtubeCtrl', function ($scope, toaster, $uibModal, $sce) {
+		$scope.watching = false;
+		$scope.config = {
+		    sources: [
+		  {src: "/youtube/videos/8VEOhBcQp_0.m4a", type: "audio/mpeg"}
+		],
+		    theme: {
+		url: "http://www.videogular.com/styles/themes/default/latest/videogular.css"
+		    }
+		};
+	    $scope.watchToggle = function() {
+	    	$scope.watching = !($scope.watching);
+	    }
 		$scope.modalDownloaderOpen = function (size) {
 
-	      var modalInstance = $modal.open({
+	      var modalInstance = $uibModal.open({
 	        animation: $scope.animationsEnabled,
 	        templateUrl: 'modalYoutube.html',
 	        controller: 'modalYoutubeCtrl',
@@ -287,11 +298,16 @@
 
 	      modalInstance.result.then(function (result) {
 	      	console.log(result);
-	        $scope.videoFile = '/youtube/videos/' + result.data.file._filename;
+	        $scope.videoFile = '/youtube/videos/' + result.data.file.id + '.' + result.data.file.ext;
 	        // $scope.$apply();
 	      });
+
+
+
+
+
     };
-	}).controller('modalYoutubeCtrl', function($scope, $routeParams, $window, $modal, $modalInstance, info, $http){
+	}).controller('modalYoutubeCtrl', function($scope, $routeParams, $window, $uibModal, $uibModalInstance, info, $http){
 		$scope.info = info.data;
 		$scope.downloadIt = function() {
 			$http({
@@ -303,21 +319,21 @@
 				  }
 				})	
 				.then(function(response){
-				  $modalInstance.close(response);
+				  $uibModalInstance.close(response);
 				},
 				function(response) {
 				  console.log(response);
 				});
 		};
 	    $scope.cancel = function () {
-	      $modalInstance.dismiss('cancel');
+	      $uibModalInstance.dismiss('cancel');
 	    };
 
   	});
 }();
 + function () {
   angular.module('MyApp')
-  .controller('InboxCtrl', function($scope, $rootScope, $routeParams, User, $modal, $resource, $http) {
+  .controller('InboxCtrl', function($scope, $rootScope, $routeParams, User, $uibModal, $resource, $http) {
       $http({
         url: '/api/v1/inbox/' + $routeParams.id, 
         method: 'GET'
@@ -335,7 +351,7 @@
 .controller('testCtrl', function($scope){
   $scope.test = true;
 })
-.controller('JobCtrl', function($scope, $rootScope, $routeParams, Show, $modal, $resource, $http) {
+.controller('JobCtrl', function($scope, $rootScope, $routeParams, Show, $uibModal, $resource, $http) {
       Show.get({ _id: $routeParams.id }, function(info) {
 
         $scope.job = info; 
@@ -387,7 +403,7 @@
 
     $scope.open = function () {
 
-      var modalInstance = $modal.open({
+      var modalInstance = $uibModal.open({
         animation: $scope.animationsEnabled,
         templateUrl: 'test.html',
         controller: 'bidCtrl',
@@ -406,15 +422,6 @@
 
 }();
 
-+ function() {
-    angular.module('MyApp')
-    .controller('landingPageCtrl', function($scope, Posts) {
-      $scope.introBtn = 'بزن بریم !';
-      $scope.newsletterPlaceHolder = 'ایمیل شما اینجا ...';
-      $scope.newsletterSignUpValue = 'همین حالا ثبت کن';
-    $scope.posts = Posts.query();
-    });  
-  }();
 + function() {
   angular.module('MyApp')
   .controller('LoginCtrl', function($scope, Auth) {
@@ -843,7 +850,7 @@
 
 + function() {
   angular.module('MyApp')
-  .controller('MyProjCtrl', function($scope, User, $routeParams, $window, $modal, $http, Show) {
+  .controller('MyProjCtrl', function($scope, User, $routeParams, $window, $uibModal, $http, Show) {
    $http({
     url: '/api/v1/profile/' + $routeParams.id,
     method: 'GET'

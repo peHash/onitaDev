@@ -29,6 +29,8 @@
     "ngUpload": "~0.5.17",
     "angularjs-toaster": "~2.0.0",
     "adm-dtp": "*",
-    "angular-strap": "^2.3.10"
+    "angular-strap": "^2.3.10",
+    "videogular": "^1.4.4",
+    "videogular-controls": "^1.4.4"
   }
 }

@@ -867,6 +867,41 @@ legend {
   padding-bottom: 20px;
   margin-bottom: 20px;
 }
+.videogular-container {
+  width: 100%;
+  height: 320px;
+  margin: auto;
+  overflow: hidden;
+  position: absolute;
+  top: 60px;
+  left: 0;
+  right: 0;
+  }
+}
+ 
+@media (min-width: 1200px) {
+  .videogular-container {
+    width: 1170px;
+    height: 658.125px;
+  }
+}
+ 
+@media (min-width: 992px) and (max-width: 1199px) {
+  .videogular-container {
+    width: 940px;
+    height: 528.75px;
+  }
+}
+ 
+@media (min-width: 768px) and (max-width: 991px) {
+  .videogular-container {
+    width: 728px;
+    height: 409.5px;
+  }
+}
+.videogular-container .audio {
+  height: 50px;
+}
 </style>
 
 
@@ -908,6 +943,8 @@ legend {
 <script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
 <script src="bower_components/ng-file-upload/ng-file-upload-all.min.js"></script>
 <script src="bower_components/ngImgCrop/compile/minified/ng-img-crop.js"></script>
+<script src="bower_components/videogular/videogular.js"></script>
+<script src="bower_components/videogular-controls/vg-controls.js"></script>
 <script src="./dist/app.js"></script>
 <script src="./dist/controllers.js"></script>
 <script src="./dist/directives.js"></script>

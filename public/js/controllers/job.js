@@ -3,7 +3,7 @@
 .controller('testCtrl', function($scope){
   $scope.test = true;
 })
-.controller('JobCtrl', function($scope, $rootScope, $routeParams, Show, $modal, $resource, $http) {
+.controller('JobCtrl', function($scope, $rootScope, $routeParams, Show, $uibModal, $resource, $http) {
       Show.get({ _id: $routeParams.id }, function(info) {
 
         $scope.job = info; 
@@ -55,7 +55,7 @@
 
     $scope.open = function () {
 
-      var modalInstance = $modal.open({
+      var modalInstance = $uibModal.open({
         animation: $scope.animationsEnabled,
         templateUrl: 'test.html',
         controller: 'bidCtrl',

@@ -234,9 +234,8 @@ app.post('/api/youtubeDownloader', function(req, res, next){
       'use strict';
       videoInfo = info;
       size = info.size;
-      var file = path.join(youtubeFolder, info._filename);
+      var file = path.join(youtubeFolder, info.id) + '.' + info.ext;
       video.pipe(fs.createWriteStream(file));
-
     });
 
     video.on('error', function(err){
