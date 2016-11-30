@@ -795,7 +795,7 @@ app.get('*', function(req, res) {
 
 app.use(function(err, req, res, next) {
   console.error(err.stack);
-  res.send(500, { message: err.message });
+  res.status(500).send({message: err.message});
 });
 
 app.listen(app.get('port'), function() {
