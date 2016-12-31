@@ -8,7 +8,8 @@
 
     $scope.headingTitle = '۱۲ درس اول شما';
 
-    $scope.jobs = Show.query();
+    console.log($scope.jobs = Show.query());
+
     $scope.filterByGenre = function(genre) {
       $scope.shows = Show.query({ genre: genre });
       $scope.headingTitle = genre;

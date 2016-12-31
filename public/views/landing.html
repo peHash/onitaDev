@@ -490,6 +490,54 @@ input.form-button.light[type="submit"]:hover, button.form-button.light:hover, in
   font-style: bold;
   font-size: 200%;
 }
+.icon-post {
+  background: url("https://www.box.com/sites/default/files/styles/module_30_square_small_mobile_x1/public/2016-05/tier2-39.png?itok=T2T8LvW5");
+  width: 140px !important;
+}
+.icon-find {
+  background: url("https://www.box.com/sites/default/files/styles/module_30_square_small_mobile_x1/public/2016-05/tier2-50_1.png?itok=Q9L8_Qo3");
+  width: 150px !important;
+}
+.icon-communicate {
+  background: url("https://www.box.com/sites/default/files/styles/module_30_square_mobile_landscape_x1/public/2016-05/tier2-62.png?itok=_4p8N9dB");
+}
+.icon-secure-payment {
+  background: url("https://www.box.com/sites/default/files/styles/module_30_square_mobile_landscape_x1/public/2016-05/tier2-68.png?itok=x2ASi60k");
+}
+.hiw-icon {
+  display: inline-block;
+  width: 195px;
+  height: 160px;
+  background-repeat: no-repeat;
+}
+.text-block {
+  text-align: center;
+}
+.text-center {
+  text-align: center;
+}
+.text-block hr {
+  width: 80px;
+  margin-top: 23px;
+  margin-bottom: 25px;
+  border-top: 2px solid #e0e0e0;
+}
+.margin-top-80 {
+  margin-top: 80px;
+}
+.margin-bottom-80 {
+  margin-bottom: 80px;
+}
+#platform , #secure-payment{
+  padding-top: 80px;
+  padding-bottom:80px;
+  background-color:#fff;
+}
+#platform img, #secure-payment img {
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+}
 </style>
 <div ng-include src="'views/navbar.html'"></div>
 <section>
@@ -507,6 +555,102 @@ input.form-button.light[type="submit"]:hover, button.form-button.light:hover, in
         </div>
       </div>
     </section>
+    <section id="platform" style="">
+      <div class="container">
+        <div class="col-md-6 col-sm-12" style="padding-bottom:40px;">
+          <h1>Stay Productive, Wherever You Are</h1>
+          <p>Working with coworkers, customers and partners has never been simpler. With Box, not only can you securely share files, you can also create, edit and review documents with others in real-time from anywhere, on any device.
+
+From simplifying how you manage your content to empowering global teams, Box helps you work smarter and faster than ever before. </p>
+        <a>READ MORE</a>
+        </div>
+        <div class="col-md-6 col-sm-12">
+          <img style="" ng-src="https://www.box.com/sites/default/files/styles/module_31_mobile_x1/public/2016-05/home_mod1_0.jpg?itok=FqU1YEed"></img>
+        </div>
+      </div>
+    </section>
+    <section id="secure-payment">
+      <div class="container">
+        <div class="col-md-6 col-sm-12">
+          <img style="" ng-src="https://www.box.com/sites/default/files/styles/module_31_mobile_x1/public/2016-05/shield_1.png?itok=kEa2UKS9"></img>
+        </div>
+        <div class="col-md-6 col-sm-12">
+          <h1>Security You Can Trust</h1>
+          <p>Protect files wherever they go with centralized security controls and reporting, customer-managed encryption, rights management and mobile security.
+Easily implement automated policies to support data retention and eDiscovery while staying compliant with HIPAA, FINRA SEC 17a-4, PCI and more.</p>
+        <a>LEARN MORE</a>
+        </div>
+      </div>
+    </section>
+    <section id="how-it-works">
+      <div class="container text-center">
+        <h2 class="margin-top-80">
+          چطور کار می کند ؟ 
+        </h2>
+        <h3 style="font-size: 100%; margin-bottom:50px">
+          به راحتی ...
+        </h3>
+        <div class="row margin-bottom-80">
+          <div class="col-sm-4 col-lg-3 col-lg-offset-0 col-sm-offset-1">
+            <article class="text-block">
+              <header>
+                <div class="hiw-icon icon-post"></div>
+                <hr>
+              </header>
+              <h3 class="">
+              ارسال 
+              </h3>
+              <p class="text-short">
+                Post a job to tell us about your project. We'll quickly match you with the right freelancers.
+              </p>
+            </article>
+          </div>
+          <div class="col-sm-4 col-lg-3 col-lg-offset-0 col-sm-offset-1">
+            <article class="text-block">
+              <header>
+                <div class="hiw-icon icon-find"></div>
+                <hr>
+              </header>
+              <h3 class="">
+              ارسال 
+              </h3>
+              <p class="text-short">
+                Post a job to tell us about your project. We'll quickly match you with the right freelancers.
+              </p>
+            </article>
+          </div>
+          <div class="col-sm-4 col-lg-3 col-lg-offset-0 col-sm-offset-1">
+            <article class="text-block">
+              <header>
+                <div class="hiw-icon icon-communicate"></div>
+                <hr>
+              </header>
+              <h3 class="">
+              تبادل
+              </h3>
+              <p class="text-short">
+                Browse profiles, reviews, and proposals then interview top candidates. Hire a favorite and begin your project.
+              </p>
+            </article>
+          </div>
+          <div class="col-sm-4 col-lg-3 col-lg-offset-0 col-sm-offset-1">
+            <article class="text-block">
+              <header>
+                <div class="hiw-icon icon-secure-payment"></div>
+                <hr>
+              </header>
+              <h3 class="">
+                پرداخت امن 
+              </h3>
+              <p class="text-short">
+                Use the Upwork platform to chat, share files, and collaborate from your desktop or on the go.
+              </p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- <section id="ig">
       <div class="container">
         <ul>

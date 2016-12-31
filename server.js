@@ -97,14 +97,16 @@ userSchema.methods.comparePassword = function(candidatePassword, cb) {
 
 var jobSchema = new Schema({
     id: ObjectId,
+    user: {type: mongoose.Schema.Types.ObjectId, 
+      ref: 'User', default: null}, 
     category: {type: Number, required: true},
     title: {type: String, required: true},
     tags: [{type: String, default: ''}],
     longDesc: {type: String, default: ''},
-    budgetNumber: {type: Number, default: ''},
+    budgetNumber: {type: String, default: ''},
     budgetRate: {type: String, default: ''},
     startedDate: {type: Date, default: ''},
-    deadlineDate: {type: String, default: ''},
+    deadlineDate: {type: Date, default: ''},
     featured:  {type :Boolean, default: ''},
     views: {type: Number, default: ''},
     report: [{
@@ -112,18 +114,19 @@ var jobSchema = new Schema({
              ref: 'User'},
       claim: {type: String, default: ''},
       report_date: {type: Date, default: new Date()},
-      response_to_claim: {type: String, default: ''}
+      response_to_claim: {type: String, default: ''}, 
+      status: {type:Number}
     }],
     reportCounter: {type: Number, default : ''},
-    status: {type: String, default: ''},
+    status: {type: Number, default: ''},
     poster: {type: String, default: ''},
-    lastModifiedInDate: {type: Date, default : ''},
+    lastModifiedDate: {type: Date, default : ''},
     verified: {type: Boolean, default: ''},
     bids: [{type: mongoose.Schema.Types.ObjectId,
       ref: 'Bid', default: null}], 
-    user: {type: mongoose.Schema.Types.ObjectId, 
-      ref: 'User', default: null}, 
-    updatedAt: {type: String, default: new Date()}
+    updatedAt: {type: Date, default: new Date()}, 
+    expert: {type: mongoose.Schema.Types.ObjectId, 
+      ref: 'Bid', default: null}
 });
 
 
@@ -132,9 +135,9 @@ var bidSchema = new mongoose.Schema({
     amount: String,
     days: String,
     post_date: Date,
-    sponsor: Boolean,
+    sponsored: Boolean,
     desc: String, 
-    updatedAt: {type: String, default: new Date()}
+    updatedAt: {type: Date, default: new Date()}
 });
 
 var articleSchema = new mongoose.Schema({
@@ -149,11 +152,20 @@ var articleSchema = new mongoose.Schema({
   updatedAt : {type: Date},
   relateArticles : [{type: mongoose.Schema.Types.ObjectId, ref: 'Article'}]
 });
+
 articleSchema.pre('save', function(next) {
   var date = moment().format();
   console.log(date);
   this.update({},{ $set: { updatedAt: date } });
   next();
+});
+
+articleSchema.plugin(deepPopulate, {
+  populate: {
+    'user': {
+      select: 'firstName lastName articles image'
+    }
+  }
 });
 
 var postSchema = new mongoose.Schema({
@@ -326,7 +338,7 @@ app.get('/api/jobs' ,ensureAuthenticated,  function(req, res, next) {
   } else if (req.query.alphabet) {
     query.where({ name: new RegExp('^' + '[' + req.query.alphabet + ']', 'i') });
   } else {
-    var query = Job.find({});
+    var query = Job.find({}, 'title startedDate bids tags deadlineDate');
   }
   query.exec(function(err, jobs) {
     if (err) return next(err);
@@ -370,14 +382,6 @@ app.get('/api/article', function(req,res,next){
     if (err) return next(err);
     res.send(arts);
   });
-});
-
-articleSchema.plugin(deepPopulate, {
-  populate: {
-    'user': {
-      select: 'firstName lastName articles image'
-    }
-  }
 });
 
 app.get('/api/article/:id', function(req,res,next){
@@ -595,7 +599,6 @@ app.post('/api/v1/bid', ensureAuthenticated, function(req, res, next) {
         bids: cb._id
       }
     },{upsert: false}, function(err, cb){
-      console.log(cb + 'row has effected');
       res.status(200).end();
     });
 
@@ -672,73 +675,73 @@ app.post('/api/v1/summary', ensureAuthenticated, function(req, res, next){
 });
 
 app.post('/api/v1/resume', ensureAuthenticated , function(req, res, next) {
-User.update({_id: req.body.user._id}, {
-  $push: {
-    resumes: {
-      title: req.body.resume.title,
-      category: req.body.resume.category,
-      start: req.body.resume.start, 
-      finish: req.body.resume.finish,
-      desc: req.body.resume.desc
+  User.update({_id: req.body.user._id}, {
+    $push: {
+      resumes: {
+        title: req.body.resume.title,
+        category: req.body.resume.category,
+        start: req.body.resume.start, 
+        finish: req.body.resume.finish,
+        desc: req.body.resume.desc
+      }
     }
-  }
-}, {upsert: true}, function(err){
-      if (err) console.log(err);
-    });
-res.status(200).end();
+  }, {upsert: true}, function(err){
+        if (err) console.log(err);
+      });
+  res.status(200).end();
 });
 
 app.delete('/api/v1/resume/user/:id1/resume/:id2', ensureAuthenticated, function(req, res, next){
-if (req.params.id1 && req.params.id2) {
-  User.update({_id: req.params.id1}, {
-    $pull: {
-      resumes: {
-        _id: req.params.id2
+  if (req.params.id1 && req.params.id2) {
+    User.update({_id: req.params.id1}, {
+      $pull: {
+        resumes: {
+          _id: req.params.id2
+        }
       }
-    }
-  }, {upsert: false}, function(err){
-    if (err) console.log(err);
-  });
-  res.sendStatus(200);
-} else {
-  console.log('Resume delete parameter error !');
-  res.sendStatus(401);
-}
+    }, {upsert: false}, function(err){
+      if (err) console.log(err);
+    });
+    res.sendStatus(200);
+  } else {
+    console.log('Resume delete parameter error !');
+    res.sendStatus(401);
+  }
 });
 
 app.post('/api/v1/education', ensureAuthenticated , function(req, res, next) {
-User.update({_id: req.body.user._id}, {
-  $push: {
-    educations: {
-      name: req.body.education.name,
-      start: req.body.education.start,
-      finish: req.body.education.finish, 
-      field: req.body.education.field,
-      grade: req.body.education.grade
+  User.update({_id: req.body.user._id}, {
+    $push: {
+      educations: {
+        name: req.body.education.name,
+        start: req.body.education.start,
+        finish: req.body.education.finish, 
+        field: req.body.education.field,
+        grade: req.body.education.grade
+      }
     }
-  }
-}, {upsert: true}, function(err){
-      if (err) console.log(err);
-    });
-res.status(200).end();
+  }, {upsert: true}, function(err){
+        if (err) console.log(err);
+      });
+  res.status(200).end();
 });
 
 app.delete('/api/v1/education/user/:id1/edu/:id2', ensureAuthenticated, function(req, res, next){
-if (req.params.id1 && req.params.id2) {
-  User.update({_id: req.params.id1}, {
-    $pull: {
-      educations: {
-        _id: req.params.id2
+  if (req.params.id1 && req.params.id2) {
+    User.update({_id: req.params.id1}, {
+      $pull: {
+        educations: {
+          _id: req.params.id2
+        }
       }
-    }
-  }, {upsert: false}, function(err){
-    if (err) console.log(err);
-  });
-  res.sendStatus(200);
-} else {
-  console.log('Education delete parameter error !');
-  res.sendStatus(401);
-}
+    }, {upsert: false}, function(err){
+      if (err) console.log(err);
+    });
+    res.sendStatus(200);
+  } else {
+    console.log('Education delete parameter error !');
+    res.sendStatus(401);
+  }
 });
 
 

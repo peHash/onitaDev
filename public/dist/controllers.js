@@ -109,9 +109,37 @@
     angular.forEach(job.bids, function(bid) {
         bid.user.profilePic = bid.user.image ? bid.user.image : '/images/buyer.png';
       });
-    console.log(job);
     $scope.job = job;
   });
+   $scope.startWorking = function(){
+
+      var modalInstance = $uibModal.open({
+        animation: $scope.animationsEnabled,
+        templateUrl: 'notifModal.html',
+        resolve: {},
+        controller: function($scope, $uibModalInstance){
+        	$scope.texts = {
+        		header: "همه چی از همین جا شروع میشه",
+        		bodyContent: 'آیا مطمئن هستید ؟',
+        		confirm: 'بله',
+        		ignore: 'دوباره نگاه بیندازید'
+        	};
+        	$scope.ops = {
+        		confirm: function(){
+        			console.log('ok');
+        			$uibModalInstance.close();
+        		}, 
+        		ignore: function(){
+        			$uibModalInstance.close();
+        		}
+        	};
+        }
+      });
+
+      modalInstance.result.then(function (selectedItem) {
+        $scope.selected = selectedItem;
+      });
+   };
  });    
 }();
 
@@ -161,6 +189,24 @@
 		$scope.posts = Posts.query();
     });  
   }();
++ function() {
+  angular.module('MyApp')
+  .controller('MyProjectCtrl', function($scope, User, $routeParams, $window, $uibModal, $http, Show) {
+   $http({
+    url: '/api/v1/profile/' + $routeParams.id,
+    method: 'GET'
+   })
+   .then(function(response){
+    console.log($scope.user = response.data);
+   }, 
+   function(response){
+    alert('something wrong happened :' + response);
+   });
+   $scope.userProjectPage = '/myprojects/' + $routeParams.id;
+   $scope.userProfilePage = '/my/' + $routeParams.id;
+   
+ });  
+}();
 + function() {
 	angular.module('MyApp').controller('partialBlogCtrl', function ($scope, Article, $routeParams, toaster) {
 	  $scope.defaultTime = "2016-07-06T13:09:04.206Z";
@@ -449,7 +495,8 @@
 
     $scope.headingTitle = '۱۲ درس اول شما';
 
-    $scope.jobs = Show.query();
+    console.log($scope.jobs = Show.query());
+
     $scope.filterByGenre = function(genre) {
       $scope.shows = Show.query({ genre: genre });
       $scope.headingTitle = genre;
@@ -849,24 +896,6 @@
   });  
 }();
 
-+ function() {
-  angular.module('MyApp')
-  .controller('MyProjCtrl', function($scope, User, $routeParams, $window, $uibModal, $http, Show) {
-   $http({
-    url: '/api/v1/profile/' + $routeParams.id,
-    method: 'GET'
-   })
-   .then(function(response){
-    $scope.user = response.data;
-   }, 
-   function(response){
-    alert('something wrong happened :' + response);
-   });
-   $scope.userProjectPage = '/myprojects/' + $routeParams.id;
-   $scope.userProfilePage = '/my/' + $routeParams.id;
-   
- });  
-}();
 + function() {
   angular.module('MyApp')
   .controller('navbarCtrl', function($scope, $window, Auth, $routeParams, $route, $location) {

@@ -247,6 +247,7 @@
 		padding-bottom: 20px !important;
 	}
 	.air-card{
+		position: relative;
 		background-color: #FFF;
 		margin: 40px -40px;
 		padding: 40px;
@@ -273,6 +274,15 @@
 	.expert-profile-pic {
 		border-radius: 4px;
 		margin: 0 auto;
+	}
+	#bid-time {
+		position: absolute;
+		top: -21px;
+		right: 0;
+		font-size: 11px;
+	}
+	#user-description {
+		text-align: center;
 	}
 </style>
 
@@ -302,6 +312,11 @@
 
 		<div class="air-card" ng-repeat="bid in job.bids">
 			<!-- {{job.bids}} -->
+			<span id="bid-time">
+				این پیشنهاد "
+				<time am-time-ago="bid.post_date"></time> "
+				ارسال شده
+			</span>
 			<article>
 				<div class="row" style="position: relative;">
 					<div class="col-md-2">
@@ -312,7 +327,7 @@
 										<img class="avatar avatar-lg expert-profile-pic m-0-top m-0-right" ng-src="{{bid.user.profilePic}}"></img>
 									</a>
 								</p>
-								<div id="userDescription" class="">
+								<div id="user-description" class="">
 									<span class="h3 m-0-top-bottom">
 										<a class="profile-name" style="margin-top:0; text-align:center;" data-ng-href="/profile/{{bid.user._id}}"> {{bid.user.firstName}} {{bid.user.lastName}}
 										</a>
@@ -365,7 +380,7 @@
 					</div> -->
 					<div class="" style="position: absolute; left: 10px; top: 25%; width: 170px">
 						<span class="col-md-12">
-							<button class="btn btn-lg m-xs-bottom btn-action">انتخاب پیشنهاد</button>
+							<button class="btn btn-lg m-xs-bottom btn-action" ng-click="startWorking('sm')">انتخاب پیشنهاد</button>
 						</span>
 						<span class="col-md-12">
 							<button class="btn btn-link btn-lg">گفت و گو </button>
@@ -376,3 +391,16 @@
 		</div>
 	</div>
 </div>
+
+<script type="text/ng-template" id="notifModal.html">
+        <div class="modal-header">
+            <h3 class="modal-title" id="">{{texts.header}}</h3>
+        </div>
+        <div class="modal-body" id="">
+            <span ng-bind-html="texts.bodyContent"></span>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-lg btn-action" ng-click="ops.confirm()">{{texts.confirm}}</button>
+            <button class="btn btn-lg btn-link " ng-click="ops.ignore()">{{texts.ignore}}</button>
+        </div>
+    </script>

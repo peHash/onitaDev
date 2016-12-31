@@ -137,8 +137,11 @@ table {
                 <th class="bids-col">
                     پیشنهادات
                 </th>
-                <th class="skills-col">
+                <!-- <th class="skills-col">
                 مهارت ها
+                </th> -->
+                <th class="status-col">
+                وضعیت
                 </th>
                 <th class="started-col">
                     ارسال 
@@ -158,9 +161,14 @@ table {
                 <td class="col bids-col">
                     {{job.bids.length || '0'}}
                 </td>
-                <td class="col skills-col">
+                <!-- <td class="col skills-col">
                    <a ng-repeat="tag in job.tags" class="blueLink" ng-href="/browse/tag/{{tag}}">
                         {{tag}}
+                    </a>
+                </td> -->
+                <td class="col status-col">
+                   <a class="blueLink" ng-class="">
+                        
                     </a>
                 </td>
                 <td class="col started-col">
