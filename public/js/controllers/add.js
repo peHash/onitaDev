@@ -1,6 +1,6 @@
 + function() {
   angular.module('MyApp')
-    .controller('AddCtrl', function($scope, Show) {
+    .controller('AddCtrl', function($scope, Show, Upload, $timeout) {
       //config : 
       $scope.editorOptions = {
         contentsLangDirection: 'rtl'
@@ -62,5 +62,41 @@
           alert('your project posted Successfuly !');
         });
       };
+
+      $scope.$watch('files', function () {
+        $scope.upload($scope.files);
+      });
+      $scope.$watch('file', function () {
+          if ($scope.file != null) {
+              $scope.files = [$scope.file]; 
+          }
+      });
+
+      $scope.upload = function (files) {
+        if (files && files.length) {
+            for (var i = 0; i < files.length; i++) {
+              var file = files[i];
+              if (!file.$error) {
+                Upload.upload({
+                    url: '/api/v1/uploadFiles',
+                    data: {
+                      file: file  
+                    }
+                }).then(function (resp) {
+                    $timeout(function() {
+                        console.log(resp);
+                    });
+                  });
+                // }, null, function (evt) {
+                //     var progressPercentage = parseInt(100.0 *
+                //         evt.loaded / evt.total);
+                //     $scope.log = 'progress: ' + progressPercentage + 
+                //       '% ' + evt.config.data.file.name + '\n' + 
+                //       $scope.log;
+                // });
+              }
+            }
+        }
+    };
     });
 }();

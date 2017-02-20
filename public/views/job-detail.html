@@ -278,13 +278,22 @@
                                 iOS
                             </a>
                         </p> -->
-                        <div class="projectDate pad-0-right col-md-6 col-sm-6 col-xs-6">
-                        <span class="pull-right pad-0-right pad-lg-left">
-                            ثبت شده در 
-                        </span>
-<span class="">
-<time am-time-ago="job.startedDate"></time>
-</span>
+                        <div class="projectDate pad-0-right col-md-4">
+                            <span class="pull-right pad-0-right pad-lg-left">
+                                ثبت شده در 
+                            <time am-time-ago="job.startedDate"></time>
+                            </span>
+                        </div>
+                        <div class="projectStatus col-md-4">
+                            <span class="">
+                                وضعیت : 
+                            {{jobStatus}}
+                            </span>
+                        </div>
+                        <div class="expert col-md-4">
+                            <span class="">
+                                {{job.expert}}
+                            </span>
                         </div>
 <!--                         <div class="ProjectDuration col-md-6 col-sm-6 col-xs-6">
                             <span class="col-md-6">
@@ -412,8 +421,13 @@
                             </span>
                             <div class="postLikeThis col-md-6 col-sm-6 col-xs-6">
                                 <!-- <input class="btn btn-post btn-lg" value="ثبت  پروژه مشابه" type="submit" style="color: #fff;" ng-click="showip()"></imput> -->
-                                <a class="btn btn-lg btn-action" ng-click="open('lg');">
-                                    ارسال پیشنهاد
+                                <a class="btn btn-lg btn-action" ng-disabled="job.status==2" ng-click="open('lg');">
+                                    <span class="" ng-if="job.status==2">
+                                        پروژه در حال انجام 
+                                    </span>
+                                    <span class="" ng-if="job.status==1">
+                                        ارسال پیشنهاد
+                                    </span>
                                 </a>
                                 <div ng-show="selected"> Selection from a modal :
                                     {{selected}}

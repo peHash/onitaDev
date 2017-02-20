@@ -6,7 +6,8 @@
 .controller('JobCtrl', function($scope, $rootScope, $routeParams, Show, $uibModal, $resource, $http) {
       Show.get({ _id: $routeParams.id }, function(info) {
 
-        $scope.job = info; 
+        console.log($scope.job = info);
+        $scope.jobStatus = calcStatus(info.status);
         // $scope.deadline = moment($scope.job.deadlineDate).fromNow();
         if ($scope.job.deadlineDate < Date()) {
         $scope.status = "بسته";
@@ -17,6 +18,44 @@
       }
 
       });
+
+      var calcStatus = function(s){
+        switch (s) {
+          case -1: 
+            return 'job-blocked';
+            break;
+          case 0: 
+            return 'not-verified';
+            break;
+          case 1: 
+            return 'verified';
+            break;
+          case 2:
+            return 'expert-selected';
+            break;
+          case 3: 
+            return 'expert-accepted';
+            break;
+          case 4: 
+            return 'expert-finalized';
+            break;
+          case 5:
+            return 'owner-finalized';
+            break;
+          case 6:
+            return 'success';
+            break;
+          case 7:
+            return 'failed';
+            break;
+          case 8:
+            return 'expert-reviewed';
+            break;
+          case 9: 
+            return 'owner-reviewed';
+            break;
+        }
+      }
 
 
 

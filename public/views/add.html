@@ -334,6 +334,18 @@ select > option:hover {
     float: none !important;
     display:inline !important;
 }
+.drop-box {
+    background: #F8F8F8;
+    border: 5px dashed #DDD;
+    width: 100%;
+    height: 90px;
+    text-align: center;
+    padding-top: 30px;
+    margin: 10px;
+}
+.dragover {
+    border: 5px dashed blue;
+}
 </style>
 
 <div ng-include src="'views/navbar.html'"></div>
@@ -392,6 +404,36 @@ select > option:hover {
                                     <textarea id="project-desc" type="text" cols="80" rows="10" maxlength="5000" name="project_desc" style="height: auto;" class="form-control" ng-model="project.desc" ckeditor="editorOptions" ></textarea>
                                 </li>
 
+                            </ol>
+                        </fieldset>
+                    </li>
+
+                    <li>
+                        <div class="col-md-1 col-sm-1 col-xs-1">
+                            <span class="li-number">
+                            ۳
+                        </span>
+                        </div>
+
+                        <fieldset class="col-md-11 col-sm-11 col-xs-11">
+                            <legend>
+فایل های مورد نیاز خود را آپلود کنید
+                            </legend>
+                            <ol>
+                                <li class="form-step">
+                                    <label for="">
+فایل های شما :
+                                    </label>
+                                    <div ngf-drop ngf-select ng-model="files" class="drop-box" 
+                                         ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true"
+                                         accept="image/*,application/pdf" 
+                                         ngf-pattern="'image/*,application/pdf'">
+                                         به صورت Drag & Drop فایل/فایل های خود را اینجا بگذارید.
+                                    </div>
+                                    <div ngf-no-file-drop>
+                                    لطفا از اینترنت اکسپلورر استفاده نکنید،‌ ممنون !
+                                    </div>
+                                </li>
                             </ol>
                         </fieldset>
                     </li>

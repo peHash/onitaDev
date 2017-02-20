@@ -1,6 +1,6 @@
 + function() {
   angular.module('MyApp')
-    .controller('AddCtrl', function($scope, Show) {
+    .controller('AddCtrl', function($scope, Show, Upload, $timeout) {
       //config : 
       $scope.editorOptions = {
         contentsLangDirection: 'rtl'
@@ -62,6 +62,42 @@
           alert('your project posted Successfuly !');
         });
       };
+
+      $scope.$watch('files', function () {
+        $scope.upload($scope.files);
+      });
+      $scope.$watch('file', function () {
+          if ($scope.file != null) {
+              $scope.files = [$scope.file]; 
+          }
+      });
+
+      $scope.upload = function (files) {
+        if (files && files.length) {
+            for (var i = 0; i < files.length; i++) {
+              var file = files[i];
+              if (!file.$error) {
+                Upload.upload({
+                    url: '/api/v1/uploadFiles',
+                    data: {
+                      file: file  
+                    }
+                }).then(function (resp) {
+                    $timeout(function() {
+                        console.log(resp);
+                    });
+                  });
+                // }, null, function (evt) {
+                //     var progressPercentage = parseInt(100.0 *
+                //         evt.loaded / evt.total);
+                //     $scope.log = 'progress: ' + progressPercentage + 
+                //       '% ' + evt.config.data.file.name + '\n' + 
+                //       $scope.log;
+                // });
+              }
+            }
+        }
+    };
     });
 }();
 // reference : \public\controllers\job.js
@@ -105,19 +141,25 @@
 + function() {
   angular.module('MyApp')
   .controller('BidsCtrl', function($scope, User, $routeParams, $window, $uibModal, $http, Show) {
+   
    Show.get({ _id: $routeParams.id }, function(job) {
     angular.forEach(job.bids, function(bid) {
         bid.user.profilePic = bid.user.image ? bid.user.image : '/images/buyer.png';
       });
-    $scope.job = job;
+    console.log($scope.job = job);
   });
-   $scope.startWorking = function(){
+
+   $scope.startWorking = function(user){
 
       var modalInstance = $uibModal.open({
         animation: $scope.animationsEnabled,
         templateUrl: 'notifModal.html',
-        resolve: {},
-        controller: function($scope, $uibModalInstance){
+        resolve: {
+          id : function() {
+            return user;
+          }
+        },
+        controller: function($scope, $uibModalInstance, id){
         	$scope.texts = {
         		header: "همه چی از همین جا شروع میشه",
         		bodyContent: 'آیا مطمئن هستید ؟',
@@ -126,7 +168,7 @@
         	};
         	$scope.ops = {
         		confirm: function(){
-        			console.log('ok');
+              selectExpert(id);
         			$uibModalInstance.close();
         		}, 
         		ignore: function(){
@@ -136,10 +178,46 @@
         }
       });
 
-      modalInstance.result.then(function (selectedItem) {
-        $scope.selected = selectedItem;
+      modalInstance.result.then(function () {
+        console.log('Expert selection modal closed at' + new Date());
       });
    };
+   $scope.resetExpert = function() {
+
+      $http({
+      url : '/api/v1/expert/'+ $scope.job._id,
+      method : 'DELETE'
+    })
+    .then(function(r){
+      // toaster.pop('success', 'عالی !', 'پیشنهاد شما با موفقیت ارسال گردید !');
+      // $window.location.href = '/job/' + $scope.job._id;
+      $window.location.reload(false);
+    },
+    function(r) {
+      // toaster.error('درست پیش نرفت', 'مشکلی پیش آمده است ، لطفا دوباره تلاش کنید !')
+      // $window.location.href = '/job/' + $scope.job._id;
+    });
+  };
+
+  var selectExpert = function(id) {
+    $http({
+      url : '/api/v1/expert',
+      method : 'POST',
+      data : {
+        'projectid' : $scope.job._id,
+        'userid' : id
+      }
+    })
+    .then(function(response){
+      // toaster.pop('success', 'عالی !', 'پیشنهاد شما با موفقیت ارسال گردید !');
+      $window.location.href = '/job/' + $scope.job._id;
+
+    },
+    function(response) {
+      // toaster.error('درست پیش نرفت', 'مشکلی پیش آمده است ، لطفا دوباره تلاش کنید !')
+      // $window.location.href = '/job/' + $scope.job._id;
+    });
+  };
  });    
 }();
 
@@ -176,6 +254,7 @@
 
 + function(){
 	angular.module('MyApp').controller('headerProfileController', function ($scope,$rootScope) {
+		$rootScope.userInboxPage = '/inbox/' + $rootScope.currentUser._id;
 		$rootScope.userProjectPage = '/myprojects/' + $rootScope.currentUser._id;
 	  	$rootScope.userProfilePage = '/my/' + $rootScope.currentUser._id;
 	});
@@ -401,7 +480,8 @@
 .controller('JobCtrl', function($scope, $rootScope, $routeParams, Show, $uibModal, $resource, $http) {
       Show.get({ _id: $routeParams.id }, function(info) {
 
-        $scope.job = info; 
+        console.log($scope.job = info);
+        $scope.jobStatus = calcStatus(info.status);
         // $scope.deadline = moment($scope.job.deadlineDate).fromNow();
         if ($scope.job.deadlineDate < Date()) {
         $scope.status = "بسته";
@@ -412,6 +492,44 @@
       }
 
       });
+
+      var calcStatus = function(s){
+        switch (s) {
+          case -1: 
+            return 'job-blocked';
+            break;
+          case 0: 
+            return 'not-verified';
+            break;
+          case 1: 
+            return 'verified';
+            break;
+          case 2:
+            return 'expert-selected';
+            break;
+          case 3: 
+            return 'expert-accepted';
+            break;
+          case 4: 
+            return 'expert-finalized';
+            break;
+          case 5:
+            return 'owner-finalized';
+            break;
+          case 6:
+            return 'success';
+            break;
+          case 7:
+            return 'failed';
+            break;
+          case 8:
+            return 'expert-reviewed';
+            break;
+          case 9: 
+            return 'owner-reviewed';
+            break;
+        }
+      }
 
 
 

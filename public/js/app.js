@@ -84,7 +84,7 @@ angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'mgcrea.ngStrap'
             })
             .when('/myprojects/:id', {
                 templateUrl: 'views/myprojects.html', 
-                controller: 'MyProjCtrl'
+                controller: 'MyProjectCtrl'
             })
             .when('/profile/:id', {
                 templateUrl: 'views/profile.html',

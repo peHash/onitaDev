@@ -125,8 +125,8 @@ var jobSchema = new Schema({
     bids: [{type: mongoose.Schema.Types.ObjectId,
       ref: 'Bid', default: null}], 
     updatedAt: {type: Date, default: new Date()}, 
-    expert: {type: mongoose.Schema.Types.ObjectId, 
-      ref: 'Bid', default: null}
+    experts: [{type: mongoose.Schema.Types.ObjectId, 
+      ref: 'User', default: null}]
 });
 
 
@@ -362,7 +362,8 @@ app.get('/api/jobs/:id', function(req, res, next) {
 
   jobSchema.plugin(deepPopulate);
 
-  Job.findById(req.params.id).deepPopulate('bids.user').exec(function (err, job) {
+
+  Job.findById(req.params.id).deepPopulate('bids.user expert').exec(function (err, job) {
     if (err) console.log(err);
     res.send(job);
   });
@@ -538,7 +539,6 @@ app.post('/api/jobs', ensureAuthenticated , function (req, res, next) {
   });
   job.save(function(err) {
     if (err) return next(err);
-    console.log(job);
     User.findById(req.user._id, function (err, doc) {
     if (err) {return handleError(err)} else {
       doc.projects.push(job._id);
@@ -576,17 +576,16 @@ app.post('/api/answer', ensureAuthenticated, function(req, res, next) {
 });
 
 app.post('/api/v1/bid', ensureAuthenticated, function(req, res, next) {
+  var bid = new Bid({
+    user: req.user._id,
+    amount: req.body.amount,
+    days: req.body.days,
+    desc: req.body.desc,
+    post_date: new Date()
+  });
 
- var bid = new Bid({
-  user: req.user._id,
-  amount: req.body.amount,
-  days: req.body.days,
-  desc: req.body.desc,
-  post_date: new Date()
- });
-
- bid.save(function(err, cb) {
-  if (err) return Next(err);
+  bid.save(function(err, cb) {
+    if (err) return Next(err);
     Job.update({_id: req.body.projectid}, {
       $push: {
         bids: cb._id
@@ -602,9 +601,7 @@ app.post('/api/v1/bid', ensureAuthenticated, function(req, res, next) {
       res.status(200).end();
     });
 
- });
-
-
+  });
 });
 
 app.get('/api/v1/user', function(req, res, next){
@@ -790,7 +787,67 @@ app.post('/api/unsubscribe', ensureAuthenticated, function(req, res, next) {
   });
 });
 
+app.post('/api/v1/expert', ensureAuthenticated, function(req,res, next){
+  Job.update({_id: req.body.projectid}, {
+      $push: {
+        experts: req.body.userid
+      }, 
+      $set: {
+      	status: 2
+      }
+    },{ upsert: false}, function(err,cb){
+      if (err) {
+        console.log(err);
+        res.status(500).end('Cant update Jobs Expert' + err);
+      }
+    });
+  
+  res.status(200).end('Jobs Expert updated Successfully.');
+});
 
+app.delete('/api/v1/expert/:id', ensureAuthenticated, function(req,res,next){
+	Job.update({_id: req.params.id}, {
+      $pop: {
+        experts: 1
+      }, 
+      $set: {
+      	status: 1
+      }
+    },{ upsert: true}, function(err,cb){
+      if (err) {
+        console.log(err);
+        res.status(500).end('Cant update Jobs Expert' + err);
+      }
+    });
+  
+  res.status(200).end('Jobs Expert re-updated Successfully.');
+});
+
+app.post('/api/v1/uploadFiles' ,ensureAuthenticated, function(req, res, next) {
+ var form = new formidable.IncomingForm();
+ var publicFold, fileName;
+ form.uploadDir = './public/file-upload';
+ form.keepExtensions = true;
+
+ form.parse(req, function(err, fields, files){
+    publicFold = './public';
+    fileName = '/file-upload/' + Date.now() + files.file.name;
+    fs.rename(files.file.path, publicFold + fileName, function(err) {
+    if (err) res.status(505).end('cant upload files');
+    res.status(200).end(files.file.name);
+    });
+ });
+});
+
+app.get('download', function(req,res){
+  res.download('/img-upload/1478715531441hamkari-mofidseC.png', function(err){
+    if (err) {
+      console.log(err);
+    } else {
+      console.log('succ');
+    }
+  });
+});
 
 app.get('*', function(req, res) {
   res.redirect('/#' + req.originalUrl);

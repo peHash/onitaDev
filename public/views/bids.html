@@ -284,6 +284,12 @@
 	#user-description {
 		text-align: center;
 	}
+	.blur {
+		filter: blur(3px);
+	}
+	.reset-expert {
+		margin-bottom: 70px;
+	}
 </style>
 
 <div ng-include src="'views/navbar.html'"></div>
@@ -309,85 +315,92 @@
 </div>
 <div class="container expert-profile m-lg-top" data-ng-show="job.bids[0]">
 	<div class="col-md-9" ng-mouseover="trigger_in();" ng-mouseleave="trigger_out();">
-
-		<div class="air-card" ng-repeat="bid in job.bids">
-			<!-- {{job.bids}} -->
-			<span id="bid-time">
-				این پیشنهاد "
-				<time am-time-ago="bid.post_date"></time> "
-				ارسال شده
-			</span>
-			<article>
-				<div class="row" style="position: relative;">
-					<div class="col-md-2">
-						<div class="row">
-							<div class="col-md-12">
-								<p class="text-center m-0-bottom">
-									<a data-ng-href="/profile/{{bid.user._id}}">
-										<img class="avatar avatar-lg expert-profile-pic m-0-top m-0-right" ng-src="{{bid.user.profilePic}}"></img>
-									</a>
-								</p>
-								<div id="user-description" class="">
-									<span class="h3 m-0-top-bottom">
-										<a class="profile-name" style="margin-top:0; text-align:center;" data-ng-href="/profile/{{bid.user._id}}"> {{bid.user.firstName}} {{bid.user.lastName}}
+		<div class="reset-expert" ng-if="job.status != 1">
+			<span>
+				پیشنهاد دیگری را می خواهید انتخاب کنید ؟
+			</span> 
+			<button class="btn btn-link btn-lg" style="display: inline-block; float: left; color: tomato" ng-click="resetExpert()">انصراف</button>
+		</div>
+		<div class="projectProposals" ng-class="{blur: job.status != 1}" >
+			<div class="air-card" ng-repeat="bid in job.bids">
+				<!-- {{job.bids}} -->
+				<span id="bid-time">
+					این پیشنهاد "
+					<time am-time-ago="bid.post_date"></time> "
+					ارسال شده
+				</span>
+				<article>
+					<div class="row" style="position: relative;">
+						<div class="col-md-2">
+							<div class="row">
+								<div class="col-md-12">
+									<p class="text-center m-0-bottom">
+										<a data-ng-href="/profile/{{bid.user._id}}">
+											<img class="avatar avatar-lg expert-profile-pic m-0-top m-0-right" ng-src="{{bid.user.profilePic}}"></img>
 										</a>
-									</span>
-									<!-- <h5 class="title m-xs-top m-0-bottom text-muted">
-										Expert Translator
-									</h5> -->
+									</p>
+									<div id="user-description" class="">
+										<span class="h3 m-0-top-bottom">
+											<a class="profile-name" style="margin-top:0; text-align:center;" data-ng-href="/profile/{{bid.user._id}}"> {{bid.user.firstName}} {{bid.user.lastName}}
+											</a>
+										</span>
+										<!-- <h5 class="title m-xs-top m-0-bottom text-muted">
+											Expert Translator
+										</h5> -->
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="col-md-7">
-						<ul class="list-inline separated m-md-top">
-							<li ng-repeat="tag in bid.user.tags">
-								<a class="blueLink m-0" ng-href="/browse/tag/{{tag}}">
-									{{tag}}
-								</a>
-							</li>
-						</ul>
-						<div class="ng-cloak" ng-hide="true">
-							<p class="oDescription m-md-top m-0-bottom bg-info ng-cloak">
-								<i class="ion-ios-bolt" style="color: tomato"></i>
-به نظر میاد این کاربر کمی تنبل ! چون هنوز مهارتی به پروفایل خود اضافه نکرده است !
-							</p>
+						<div class="col-md-7">
+							<ul class="list-inline separated m-md-top">
+								<li ng-repeat="tag in bid.user.tags">
+									<a class="blueLink m-0" ng-href="/browse/tag/{{tag}}">
+										{{tag}}
+									</a>
+								</li>
+							</ul>
+							<div class="ng-cloak" ng-hide="true">
+								<p class="oDescription m-md-top m-0-bottom bg-info ng-cloak">
+									<i class="ion-ios-bolt" style="color: tomato"></i>
+	به نظر میاد این کاربر کمی تنبل ! چون هنوز مهارتی به پروفایل خود اضافه نکرده است !
+								</p>
+							</div>
+							<div id="pros-desc" class="col-md-12 col-sm-12 col-xs-12 m-md-bottom p-0-right" style="min-height: 90px;">
+								<span class="col-md-12 col-sm-12 text-muted p-0-right">
+									توضیحات
+								</span>
+								<span class="col-md-12 col-sm-12 col-xs-12" style="font-size: 11px">
+									<p ng-bind-html="bid.desc"></p>
+								</span>
+							</div>
 						</div>
-						<div id="pros-desc" class="col-md-12 col-sm-12 col-xs-12 m-md-bottom p-0-right" style="min-height: 90px;">
-							<span class="col-md-12 col-sm-12 text-muted p-0-right">
-								توضیحات
+						<!-- <div class="col-md-3 p-0">
+							<div class="" style="">
+								<span class="col-md-6 text-muted p-0-right">
+									مبلغ پیشنهادی
+								</span>
+								<span class="col-md-6 p-0-left" style=''>
+									{{bid.amount}}
+								</span>
+								<span class="col-md-6 text-muted p-0-right">
+								تعداد روز
+								</span>
+								<span class="col-md-6">
+								 {{bid.days}}
+								</span>
+							</div>
+						</div> -->
+						<div class="" style="position: absolute; left: 10px; top: 25%; width: 170px">
+							<span class="col-md-12">
+								<button class="btn btn-lg m-xs-bottom btn-action" ng-click="startWorking(bid.user._id)">انتخاب پیشنهاد</button>
 							</span>
-							<span class="col-md-12 col-sm-12 col-xs-12" style="font-size: 11px">
-								<p ng-bind-html="bid.desc"></p>
+							<span class="col-md-12">
+								<button class="btn btn-link btn-lg">گفت و گو </button>
 							</span>
 						</div>
 					</div>
-					<!-- <div class="col-md-3 p-0">
-						<div class="" style="">
-							<span class="col-md-6 text-muted p-0-right">
-								مبلغ پیشنهادی
-							</span>
-							<span class="col-md-6 p-0-left" style=''>
-								{{bid.amount}}
-							</span>
-							<span class="col-md-6 text-muted p-0-right">
-							تعداد روز
-							</span>
-							<span class="col-md-6">
-							 {{bid.days}}
-							</span>
-						</div>
-					</div> -->
-					<div class="" style="position: absolute; left: 10px; top: 25%; width: 170px">
-						<span class="col-md-12">
-							<button class="btn btn-lg m-xs-bottom btn-action" ng-click="startWorking('sm')">انتخاب پیشنهاد</button>
-						</span>
-						<span class="col-md-12">
-							<button class="btn btn-link btn-lg">گفت و گو </button>
-						</span>
-					</div>
-				</div>
-			</article>
+				</article>
+			</div>
 		</div>
 	</div>
 </div>
