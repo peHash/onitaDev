@@ -1,0 +1,556 @@
+@media only screen and (max-width: 1199px) {
+    /*General css starts*/
+    
+    h1 {
+        margin: 0;
+    }
+    h3 {
+        margin-top: 0;
+        font-size: 20px;
+    }
+    h4 {
+        font-size: 16px;
+        margin: 10px 0;
+    }
+    p {
+        font-size: 14px;
+    }
+    .mt50 {
+        margin-top: 0;
+    }
+    #contactus .mb30 {
+        margin-bottom: 0;
+    }
+    .mb50,
+    #core_features .list_content,
+    .title p {
+        margin-bottom: 30px;
+    }
+    .theme_btn,
+    .app_btn .theme_btn {
+        font-size: 16px;
+    }
+    #core_features,
+    #extra_features,
+    #available_app,
+    #amazing_features,
+    #working,
+    #screen_shots,
+    #counter,
+    #team,
+    #clients,
+    #our_clients,
+    #pricing,
+    #download,
+    #faq,
+    #subscribe,
+    #clients,
+    #main_footer,
+    #contactus {
+        padding: 40px 0;
+    }
+    .title h2 {
+        font-size: 25px;
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+    }
+    /*General css ends*/
+    /*Available apps css starts*/
+    
+    .apps:after {
+        background-image: none;
+        width: auto;
+    }
+    /*Available apps css ends*/
+
+    #counter span{
+        font-size: 14px;
+    }
+    .counter{
+        margin-top: 13px;
+    }
+    /*Extra_features starts*/
+    #team .nav-pills{
+        padding-top: 0;
+        padding-bottom: 30px;
+    }
+    .team_layout2{
+        padding: 0;
+    }
+#extra_features::after{
+    background-image: none;
+}
+/*Extra_features ends*/
+     /*Footer css starts*/
+    .footer_data {
+        position: inherit;
+        border-radius: 0;
+    }
+    /*footer css ends*/
+}
+@media only screen and (max-width: 991px) {
+    .btn-groups {
+        text-align: center;
+    }
+    /*Footer css starts*/
+   
+    .footer_data .col-sm-4 {       
+        margin-bottom: 30px;
+    }
+    .footer_data .col-sm-4:last-child {
+        margin-bottom: 0;
+    }
+   
+    /*Footer css ends*/
+}
+@media only screen and (max-width: 767px) {
+    /*General css starts*/    
+    .valign_wrapper {
+        display: block;
+    }
+    .mb30{
+        margin-bottom: 20px;
+    }
+    /*General css ends*/
+    /*Navigation css starts*/
+    
+    nav {
+        text-align: center;
+        background:#0e7ae8;
+    }
+    .navbar-header {
+        margin-top: 5px;
+    }
+    .navbar-toggle {
+        background: #fff;
+    }
+    .navbar-toggle span {
+        background-color: #0e7ae8;
+    }
+    .navbar-nav {
+        padding: 0;
+    }
+    .navbar-nav,
+    .scroll_menu .navbar-nav {
+        width: 100%;
+        margin: 0;
+    }
+    #myNavbar{
+        padding:0;
+    }
+    .navbar-nav > li > a,.scroll_menu #myNavbar li a{
+        padding: 19px 16px;
+    }
+    .navbar #myNavbar li.active{
+    background: #fff;
+}
+.navbar #myNavbar li.active a:hover,.scroll_menu #myNavbar li.active a:hover{
+    color: #0e7ae8 !important;
+}
+.navbar #myNavbar li.active a,.scroll_menu #myNavbar li.active a {
+    border-bottom: none;
+    color: #0e7ae8;
+    font-weight: 400;
+}
+    
+    /*Navigation css ends*/
+    /*Header css starts*/
+    
+    header {
+        display: flex !important;
+        align-items: center;
+    }
+    #home {
+        padding: 120px 0 40px;
+    }
+    #home h1 {
+        font-size: 30px;
+        font-weight: 400;
+        text-align: center;
+    }
+    /*Header css ends*/
+    /*Core-features css starts*/
+    
+    #core_features img {
+        margin: 0 auto;
+    }
+    #core_features .list_content:last-child {
+        margin-bottom: 0
+    }
+    /*Core-features css ends*/
+    /*Extra-features css starts*/
+    
+    #extra_features .col-sm-4:first-child,
+    #extra_features .col-sm-4:last-child {
+        margin-top: 0;
+    }
+    #extra_features .col-sm-4:last-child{
+        margin-bottom: 360px;
+    }
+    .extra_feature_ph img {
+    bottom: -18em;
+    left: inherit;
+    top:inherit;
+    margin-left: inherit;
+    margin-top: inherit;    
+}
+    /*Extra-features css ends*/
+    /*Apps css starts*/
+    
+    .apps:last-child,
+    #counter .col-sm-3:nth-child(3),
+    #counter .col-sm-3:nth-child(4),
+    .app_btn .theme_btn:last-child {
+        margin-bottom: 0;
+    }
+    .pricing-table,
+    #counter .col-sm-3,
+    .apps,
+    .working_space,
+    #working .row:last-child .working_space:nth-child(1),
+    #working .row:last-child .working_space:nth-child(2),
+    .app_btn .theme_btn {
+        margin-bottom: 30px;
+    }
+
+    .working_space {
+        border-bottom: 1px dotted #0e7ae8;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+    }
+    #working .row:last-child .col-sm-4:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+    }
+    /*Apps css ends*/
+    /*Amazing features css starts*/
+    
+    .amazing_content {
+        position: inherit;
+        top: 0;
+        right: 0;
+        padding: 40px;
+        text-align: center;
+    }
+    .slick-prev {
+        left: -30px;
+        background-size: 20px;
+    }
+    #amazing_cont .slick-prev {
+        display: block !important;
+    }
+    #amazing_img .slick-prev{
+        display: none !important;
+    }
+    #amazing_img img{
+        margin:0 auto;
+    }
+    .slick-next {
+        background-size:20px; 
+        right: -30px;
+    }
+    /*Amazing features css ends*/
+    /*Working css starts*/
+    
+    h2 {
+        text-align: center;
+    }
+    #working .title h2::after,
+    #team .title h2::after {
+        margin: auto;
+    }
+    /*Working css ends*/
+    /*Team css starts*/
+    
+    #team {
+        padding-bottom: 120px;
+    }
+    #team .owl-dots {
+        text-align: center;
+    }
+    /*Team css ends*/
+    /*Client css statrs*/
+    
+    .client_comment::before {
+        left: 40%;
+    }
+    .client_comment::after {
+        left: 45%;
+    }
+    #our_clients .client_data,
+    .client_data2 {
+        text-align: center;
+    }
+    #our_clients .client_data li {
+        padding-left: 0;
+    }
+    .client_data2 li {
+        margin-left: 0;
+    }
+    #our_clients .client_data img,
+    .client_data2 img {
+        position: inherit;
+        margin: 0 auto;
+    }
+    /*Client css ends*/
+    /*Screenshot css starts*/
+    .swiper-button-prev, .swiper-button-next{
+        height: 30px;
+    }
+    /*Screenshot css ends*/
+    /*Subscribe css starts*/
+    
+    .input-sub {
+        text-align: center;
+    }
+    .input-sub input {
+        margin-bottom: 20px;
+    }
+    .subscribe-button {
+        position: inherit;
+    }
+    /*Subscribe css ends*/
+    
+    #faq img {
+        margin: 0 auto;
+    }   
+
+    /*Footer css starts */
+    .footer_data .col-sm-4{
+        width: 100%;
+    }
+     #main_footer .col-sm-4 {
+        width: 100%;
+        margin-bottom: 30px;
+    }
+    .form-control.mob_control {
+        margin-bottom: 25px;
+    }
+
+    /*Footer css ends */
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    /*Navigation starts*/
+    header{
+        height: 724px !important;
+    }
+    .single_snap{
+        top:30px; 
+    }
+    .snap2 {
+    left: 130px; 
+    top: 20px; 
+}
+.snap4 { 
+    right: 130px;
+    top: 20px; 
+}
+    .brand-logo h1 {
+        font-size: 50px;
+    }
+    .navbar-header {
+        margin-top: 10px;
+    }
+    .brand-logo img {
+        width: 140px;
+    }
+    .navbar-nav {
+        padding: 18px 0;
+    }
+    .navbar-nav > li > a {
+        font-weight: 600;
+        opacity: 0.7;
+        padding: 0 7px;
+        font-size: 15px;
+    }
+    .navbar #myNavbar li.active a{
+        font-weight: 800;
+        opacity: 1;
+    }
+    
+    .navbar #myNavbar li.active a, .scroll_menu #myNavbar li.active a,
+    .navbar-nav li.active a,.navbar-nav > li > a::before {
+        border-bottom: none;
+    }
+    .scroll_menu #myNavbar li a {
+        font-size: 15px;
+        padding: 20px 6px;
+        opacity: 0.7;
+        border-bottom: 4px solid transparent;
+    }
+    .scroll_menu #myNavbar li.active a {
+        background: transparent none repeat scroll 0 0;
+        border-bottom: 4px solid #fff;                
+    }
+    .snap3,.snap5{
+        display: none !important;
+    }
+    /*Navigation ends*/
+    /*team css starts*/
+    
+    .team-images {
+        width: 70px !important
+    }
+    #team .owl-dots {
+        margin-bottom: 60px;
+    }
+    #sync1 .owl-stage-outer {
+        top: 120px;
+    }
+    /*team css ends*/
+    /*Client css starts*/
+    
+    .client_data2 li {
+        margin-left: 6em;
+    }
+    .client_comment2::after {
+        left: 81%;
+    }
+    /*Client css ends*/
+
+    /*Footer css starts*/
+    .contact_container{
+        width: 100%;
+    }
+    /*Footer css ends*/
+}
+@media only screen and (min-width: 768px) and (max-width: 1199px) {
+    /*Extra features css starts*/
+    
+    #extra_features .col-sm-4:first-child,
+    #extra_features .col-sm-4:last-child {
+        margin-top: 100px;
+    }
+    .extra_feature_ph img {
+        width: 190px;
+        margin-left: -100px;
+        margin-top: -90px;
+    }
+    /*Extra features css ends*/
+    /*Amazing features starts*/
+    
+    #amazing_features {
+        padding-bottom: 120px;
+    }
+    .amazing_content {
+        padding: 30px 40px;
+        position: inherit;
+        right: 52px;
+    }
+    .slick-prev,
+    .slick-next {
+        width: 9%;
+    }
+    .slick-next {
+        right: -30px;
+    }
+    /*Amazing features ends*/
+    /*Working css starts*/
+    
+    .working_snap img {
+        top: -100px;
+        width: 420px;
+    }
+    /*Working css ends*/
+    /*Client css starts*/
+    
+    .client_data2 li {
+        margin-left: 6em;
+    }
+    /*Client css ends*/
+
+    /*Footer css starts*/
+    .contact_container{
+        width: 100%;
+    }
+    /*Footer css ends*/
+}
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+    .team-images {
+        width: 90px !important
+    }
+}
+
+@media only screen and (min-width: 360px) and (max-width: 520px) {
+    #team {
+        padding-bottom: 80px;
+    }
+    .team-images {
+        width: 70px !important;
+    }
+    .slick-next,.slick-prev{
+        width: 7%;
+    }
+}
+
+@media only screen and (min-width: 361px) and (max-width: 395px){
+.extra_feature_ph img {
+    bottom: -20em;
+    left: 50%;
+    margin-left: -170px;
+}
+}
+@media only screen and (min-width: 396px) and (max-width: 767px){
+    .extra_feature_ph img{
+        bottom: -22em;
+    left: 50%;
+    margin-left: -180px;    
+    }
+}
+@media only screen and (min-width: 608px) and (max-width: 767px) {
+    .app_btn .theme_btn:last-child {
+        margin-bottom: 30px;
+    }
+}
+@media only screen and (min-width: 1200px) and (max-width: 1330px){
+#extra_features:after{
+         background-size: 96% 66%;     
+    }
+}
+@media only screen and (min-width: 1331px) and (max-width: 1500px) {    
+    .navbar-header{
+        margin-top: 10px;
+    }
+    .brand-logo h1 {
+        margin-top: 0;
+        font-size: 50px;
+    }
+    #home {
+        padding: 90px 0;
+    }
+    #home .mb40 {
+        margin-bottom: 20px;
+    }
+    .single_snap {
+        top: 40px;
+    }
+    .snap2{
+        left: 260px;
+    }
+    .snap4{
+        right: 260px;
+    }
+    .single_snap img {
+        width: 250px;
+    }
+    .theme_btn {
+        font-size: 16px;
+    }
+.extra_feature_ph img {
+    width: 290px;
+    position: absolute;
+    left: 50%;
+    margin-left: -155px;
+    top: 50%;
+    margin-top: -100px;
+}
+    #extra_features:after{
+         background-size: 90% 66%;     
+    }
+}
+@media only screen and (min-width: 2100px) {
+    #extra_features:after{
+            background-size:45% 66%;
+    }
+}
