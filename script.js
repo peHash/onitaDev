@@ -1,0 +1,1 @@
+window.pehash = 'pehash';

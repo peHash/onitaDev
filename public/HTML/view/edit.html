@@ -1,0 +1,303 @@
+<style>
+    
+    .projectPost {
+        padding-top: 38px;
+        padding-right: 0;
+        padding-left: 0;
+        max-width: 800px;
+        margin-right: auto;
+        margin-left: auto;
+        display: block;
+    }
+    .projectPost .form-gourp-ol {
+        margin: 0px;
+        padding: 0px;
+        list-style-type: decimal;
+    }
+    .projectPost fieldset {
+        position: relative;
+        margin: 0px 0px 50px;
+    }
+    .projectPost > ol legend {
+        padding-left: 40px;
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+    .projectPost .form-step {
+        position: relative;
+        padding-bottom : 20px;
+        margin-bottom: 0px ;
+        list-style: outside none none;
+    }
+    .li-number{
+        display: block;
+        background: #33B5E6 none repeat scroll 0% 0%;
+        color: #fff;
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        font-weight: bold;
+        border-radius: 50%;
+        line-height: 30px;
+    }
+    ol {
+        padding-right: 0;
+    }
+    ol > li{
+        list-style: outside none none;
+        width: 100%;
+    }
+    ol > li > ol {
+        list-style: outside none none;
+    }
+    select {
+        display: inline-block;
+        width: 100%;
+        border-style: solid;
+        border-width: 1px;
+        color: #616161;
+        border-color : #D1D1D1;
+        background-color: #fff;
+        box-shadow: none;
+        border-radius: 3px;
+        height: 40px;
+        padding: 0px 0px 0px 12px;
+    }
+    label {
+        display: block;
+        font-weight: normal;
+        margin-bottom: 10px;
+        line-height: 22px;
+        overflow-y: hidden;
+        font-size: 75%;
+    }
+    input[type="text"]{
+        display: inline-block;
+        width: 100%;
+        color: #616161 !important;
+        border-color: #D1D1D1;
+        background-color: #fff;
+        border-radius: 3px;
+        height: 40px;
+        padding: 0 12px;
+        box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset;
+
+    }
+    .rtl {
+        direction: rtl;
+    }
+
+    .ribon {
+        position: absolute;
+        top:0;
+        right:0;
+        margin: 0;
+    }
+    .projectFeature {
+        display: block;
+        margin-bottom: 8px;
+        cursor: pointer;
+        border: 2px solid #eee;
+        padding: 24px;
+        position: relative;
+        background: #fff;
+        min-height: 150px;
+    }
+    .projectFeature:hover{
+        transition: border-color 0.5s ease-in-out 0s, box-shadow 0.5s ease-in-out 0s;
+        border-color: #33B5E6 !important;
+        box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px #33B5E6 !important;
+    }
+    .featureCheck {
+        float: right;
+        margin-top: 10%;
+        margin-left: 3%;
+        margin-right: 0;
+        margin-bottom: 0;
+    }
+    .featureTitle {
+        width: 55%;
+        margin-left: 5%;
+        float: right;
+        color: #333;
+        line-height: 1.5;
+    }
+    .featureCopy {
+        width: 65%;
+        margin-top: 12px;
+        margin-left: 5%;
+        float: right;
+        line-height: 1.5;
+        color: #666;
+        font-size: 80%;
+    }
+    .featureAmount {
+        width: 10%;
+        margin-left: 10%;
+        float: left;
+        clear: none;
+        color:#666;
+    }
+    .btn-action, .btn-link {
+        float: none !important;
+        display:inline !important;
+    }
+    .footer {
+        text-align: center;
+        margin-top: 50px;
+    }
+    #article-image {
+        direction: ltr;
+    }
+    .btn-link:focus, .btn-link:hover {
+        text-decoration: none !important;
+    }
+</style>
+
+<div class="container pt-nav">
+    <div class="col-md-12" style="text-align:center;margin-bottom:100px">
+        <div class="projectPost">
+            <form id="projectForm" class="col-md-12">
+                <div class="row">
+                    <select class="form-control" ng-model="part">
+                        <option ng-repeat="op in parts" value="{{op}}">{{op}}</option>
+                    </select>
+                </div>
+                <div ng-switch on="part">
+                    <div class="row" ng-switch-when="header" >
+                        <div class="col-md-12">
+                            <label for="header">Header</label>
+                            <input type="text" class="form-control rtl" name="header" ng-model="lp.header.title"/>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="header">desc</label>
+                            <input type="text" class="form-control rtl" name="header-desc" ng-model="lp.header.desc"></input>
+                        </div>
+                        <div class="col-sm-12">
+                            <label for="header-btn1">btn1</label>
+                            <input type="text" class="form-control rtl" name="header-btn1" ng-model="lp.header.btn1"/>
+                            <label for="header-btn2">btn2</label>
+                            <input type="text" class="form-control rtl" name="header-btn2" ng-model="lp.header.btn2"/>
+                        </div>
+                    </div>
+                    <div class="row" ng-switch-when="features">
+                        <div class="col-md-12">
+                            <label for="features-title">Features Title & Desc.</label>
+                            <input type="text" class="form-control rtl" name="features-title" ng-model="lp.features.title"/>
+                            <input type="text" class="form-control rtl" name="features-title-desc" ng-model="lp.features.desc"/>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="features-doc">Feature 1</label>
+                            <input type="text" class="form-control rtl" name="features-doc" ng-model="lp.features.doc"/>
+                            <input type="text" class="form-control rtl" name="features-doc-desc" ng-model="lp.features.docDesc"/>
+                            <label for="features-desktop">Feature 2</label>
+                            <input type="text" class="form-control rtl" name="features-desktop" ng-model="lp.features.desktop"/>
+                            <input type="text" class="form-control rtl" name="features-desktop-desc" ng-model="lp.features.desktopDesc"/>
+                            <label for="features-psd">Feature 3</label>
+                            <input type="text" class="form-control rtl" name="features-psd" ng-model="lp.features.psd"/>
+                            <input type="text" class="form-control rtl" name="features-psd-desc" ng-model="lp.features.psdDesc"/>
+                        </div>
+                    </div>
+                    <div class="row" ng-switch-when="working">
+                        <div class="col-md-12">
+                            <label for="working-title">Working Title & Desc.</label>
+                            <input type="text" class="form-control rtl" name="working-title">
+                            <input type="text" class="form-control rtl" name="working-title-desc">
+                        </div>
+                        <div class="col-md-12">
+                            <label for="working-wand">Feature 1</label>
+                            <input type="text" class="form-control rtl" name="working-wand"/>
+                            <input type="text" class="form-control rtl" name="working-wand-desc">
+                        </div>
+                        <div class="col-md-12">
+                            <label for="working-paint">Feature 2</label>
+                            <input type="text" class="form-control rtl" name="working-paint"/>
+                            <input type="text" class="form-control rtl" name="working-paint-desc">
+                        </div>
+                        <div class="col-md-12">
+                            <label for="working-envelope">Feature 3</label>
+                            <input type="text" class="form-control rtl" name="working-envelope"/>
+                            <input type="text" class="form-control rtl" name="working-envelope-desc">
+                        </div>
+                        <div class="col-md-12">
+                            <label for="working-ruler">Feature 4</label>
+                            <input type="text" class="form-control rtl" name="working-ruler"/>
+                            <input type="text" class="form-control rtl" name="working-ruler-desc">
+                        </div>
+                        <div class="col-md-12">
+                            <label for="working-twitter">Feature 5</label>
+                            <input type="text" class="form-control rtl" name="working-twitter"/>
+                            <input type="text" class="form-control rtl" name="working-twitter-desc">
+                        </div>
+                        <div class="col-md-12">
+                            <label for="working-email">Feature 6</label>
+                            <input type="text" class="form-control rtl" name="working-email"/>
+                            <input type="text" class="form-control rtl" name="working-email-desc">
+                        </div>
+                    </div>
+                    <div class="row" ng-switch-when="plans">
+                        <div class="col-md-12">
+                            <label for="Plans-title">Plans Title & Desc.</label>
+                            <input type="text" class="form-control rtl" name="Plans-title"/>
+                            <input type="text" class="form-control rtl" name="Plans-title-desc"/>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="Plans-doc">Plan 1</label>
+                            <input type="text" class="form-control rtl" name="Plan1-cost"/>
+                            <input type="text" class="form-control rtl" name="Plan1-subcost"/>
+                            <label for="Plan1-storage">Plan Features</label>
+                            <input type="text" class="form-control rtl" name="Plan1-storage"/>
+                            <input type="text" class="form-control rtl" name="Plan1-bw"/>
+                            <input type="text" class="form-control rtl" name="Plan1-support"/>
+                            <input type="text" class="form-control rtl" name="Plan1-protected"/>
+                            <input type="text" class="form-control rtl" name="Plan1-business"/>
+                            <label for="Plan3-btn">Plan Button</label>
+                            <input type="text" class="form-control rtl" name="Plan1-btn"/>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="Plans-desktop">Plan 2</label>
+                            <input type="text" class="form-control rtl" name="Plan2-cost"/>
+                            <input type="text" class="form-control rtl" name="Plan2-subcost"/>
+                            <label for="Plan2-storage">Plan Features</label>
+                            <input type="text" class="form-control rtl" name="Plan2-storage"/>
+                            <input type="text" class="form-control rtl" name="Plan2-bw"/>
+                            <input type="text" class="form-control rtl" name="Plan2-support"/>
+                            <input type="text" class="form-control rtl" name="Plan2-protected"/>
+                            <input type="text" class="form-control rtl" name="Plan2-business"/>
+                            <label for="Plan2-btn">Plan Button</label>
+                            <input type="text" class="form-control rtl" name="Plan2-btn"/>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="Plans-psd">Plan 3</label>
+                            <input type="text" class="form-control rtl" name="Plan3-cost"/>
+                            <input type="text" class="form-control rtl" name="Plan3-subcost"/>
+                            <label for="Plan3-storage">Plan Features</label>
+                            <input type="text" class="form-control rtl" name="Plan3-storage"/>
+                            <input type="text" class="form-control rtl" name="Plan3-bw"/>
+                            <input type="text" class="form-control rtl" name="Plan3-support"/>
+                            <input type="text" class="form-control rtl" name="Plan3-protected"/>
+                            <input type="text" class="form-control rtl" name="Plan3-business"/>
+                            <label for="Plan3-btn">Plan Button</label>
+                            <input type="text" class="form-control rtl" name="Plan3-btn"/>
+                        </div>
+                    </div>
+                    <div class="row" ng-switch-when="subscription">
+                        <div class="col-md-12">
+                            <label for="subs-title">Subs. Title & Desc.</label>
+                            <input type="text" class="form-control rtl" name="Subs-title"/>
+                            <input type="text" class="form-control rtl" name="Subs-title-desc"/>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="row">
+                <div class="footer col-md-12" style="">
+                    <span style="margin-right:auto;margin-left:auto;display:block">
+                        <button class="btn btn-lg btn-action" ng-click="fire()"> ذخیره </button>
+                        <button class="btn btn-lg btn-link " ng-click="cancel()"> انصراف </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

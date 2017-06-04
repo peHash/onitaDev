@@ -15,7 +15,7 @@ var xml2js = require('xml2js');
 var sugar = require('sugar');
 var nodemailer = require('nodemailer');
 var _ = require('lodash');
-var fs = require('fs-extra');
+var fs = require('fs');
 var formidable = require('formidable');
 var deepPopulate = require('mongoose-deep-populate')(mongoose);
 
@@ -188,7 +188,7 @@ var Article = mongoose.model('Article', articleSchema);
 
 var Post = mongoose.model('Post', postSchema);
 
-mongoose.connect('mongodb://localhost/giga');
+mongoose.connect('mongodb://localhost/onita');
 
 var app = express();
 
@@ -198,7 +198,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public/HTML')));
 app.use(bodyParser({defer: true}));
 
 function ensureAuthenticated(req, res, next) {
@@ -228,6 +228,16 @@ function createJwtToken(user) {
   };
   return jwt.encode(payload, tokenSecret);
 }
+
+app.get('/read',  function(req,res){
+  console.log('got it');
+  var srcPath = path.join(__dirname, 'script.js');
+  fs.readFile(srcPath, 'utf8', function (err, data) {
+          if (err) throw err;
+          res.send(data);
+          }
+      );
+})
 
 app.post('/api/youtubeDownloader', function(req, res, next){
   var id = req.body.id;

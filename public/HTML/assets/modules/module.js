@@ -1,11 +1,56 @@
 
-var app=angular.module('appLab', ['fox.scrollReveal','angular-parallax','slick','ksSwiper','ui.bootstrap','duScroll','angular.backtop']);
+var app=angular.module('appLab', [
+  'ngRoute',
+  'fox.scrollReveal',
+  'angular-parallax',
+  'slick',
+  'ksSwiper',
+  'ui.bootstrap',
+  'duScroll',
+  'angular.backtop']);
+
 
 app.provider('Modernizr', function() {
     this.$get = function () {
         return Modernizr || {};
     };
  });
+
+app.config(config);
+config.$inject = ['$routeProvider', '$locationProvider'];
+function config($routeProvider, $locationProvider, angularLoad) {
+  $locationProvider.html5Mode({
+    enabled : true,
+    requireBase : false
+  });
+  $routeProvider
+  .when('/', {
+    templateUrl: 'view/lp.html',
+    controller: 'MyController', 
+    resolve: {
+      load:    ['ResourceLoaderService', function (resourceLoaderService) {
+                        return resourceLoaderService.load(['assets/css/bootstrap.min.css', 'assets/css/font-awesome.min.css']);
+                    }]
+
+    }
+  })
+  .when('/edit', {
+    templateUrl: 'view/edit.html',
+    controller: 'MyController',
+    resolve : {
+      load : ['ResourceLoaderService', function(resourceLoaderService){
+        return resourceLoaderService.loadCss(['assets/css/bootstrap.min.css']);
+      }],
+      content: function($window) {
+        return window.lpContent = {
+          lpHead: 1,
+          lpBody: 2
+        }
+      }
+    }
+  })
+  .otherwise({ redirectTo: '/' });
+}
 
 /*Directive for  rest window hight */
 app.directive('banner', function ($window) {  
