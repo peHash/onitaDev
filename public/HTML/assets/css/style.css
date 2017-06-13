@@ -931,7 +931,7 @@ header {
     -moz-transform: rotate(45deg);
     transform: rotate(45deg);
     box-shadow: 3px 2px 2px -3px rgba(128, 128, 128, 0.64);
-	
+    
 }
 .client_comment2:after {
     left: 88%;
@@ -994,13 +994,14 @@ header {
 }
 .pricing_cost {
     display: inline-block;
-    font-size: 35px;
+    font-size: 18px;
     border: 2px solid #fff;
     height: 130px;
     width: 130px;
     border-radius: 100%;
     padding: 20px;
     line-height: 60px;
+    direction: rtl;
 }
 .pricing-table_cnt ul li {
     font-weight: 300;
@@ -1010,14 +1011,7 @@ header {
 .pricing-table_cnt ul li:last-child {
     margin-bottom: 30px;
 }
-.pricing-table_cnt .theme_btn {
-    background-color: #282937;
-}
-.pricing-table_cnt .theme_btn:hover {
-    background-color: #fff;
-    color: #282937 !important;
-    border: 1px solid #282947;
-}
+
 .pricing-table {
     box-shadow: 0 3px 3px 2px rgba(0, 0, 0, 0.13);
     padding-bottom: 5px;
