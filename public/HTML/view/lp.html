@@ -1,23 +1,6 @@
 <style>
-#working {display: none;}
-#working [class^="col-"] {direction: rtl;}
 /*#working .working-space > div */
 #header {background-image: none !important;}
-#subscribe {background-image: none !important;}
-#main_footer {background-image: none!important;}
-#main_footer .middle_footer input[placeholder] {display: none;}
-#main_footer .middle_footer {direction: ltr;text-align: left;}
-#main_footer [class^="col-"] {float: right !important;}
-#main_footer .social_icons > a:first-child {margin-right: 0}
-#main_footer > div { direction: rtl; text-align: right; }
-#pricing .pricing-table {background: #E8E6E6;}
-#pricing .pricing-table .general {background-color: #01ccdf;}
-#pricing .pricing-table_cnt .theme_btn:hover {background-color: #fff;}
-#pricing .pricing-table .technical {background-color: #0e7ae8;}
-#pricing .pricing-table_cnt .theme_btn:hover, #pricing .pricing-table_cnt .theme_btn:focus {
-	color: #fff !important;
-	border: 1px solid #0e7ae8;
-}
 #header .bg_layer{
     text-align: center;
     background: linear-gradient(-90deg, #01ccdf, #0e7ae8);
@@ -30,6 +13,28 @@
 
     box-shadow: 0 2px 4px 0 rgba(0,0,0, 0.3);
 }
+#working {display: none;}
+#working [class^="col-"] {direction: rtl;}
+#subscribe {background-image: none !important;}
+#main_footer {background-image: none!important;}
+#main_footer .middle_footer input[placeholder] {display: none;}
+#main_footer .middle_footer {direction: ltr;text-align: left;}
+#main_footer [class^="col-"] {float: right !important;}
+#main_footer .social_icons > a:first-child {margin-right: 0}
+#main_footer > div { direction: rtl; text-align: right; }
+#extra_features .row:nth-child(2) > div {float:right;}
+#pricing .pricing-table {background: #E8E6E6;}
+#pricing .pricing-table .general {background-color: #01ccdf;}
+/*#pricing .pricing-table_cnt .theme_btn:hover {background-color: #fff;}*/
+#pricing .theme_btn:hover, #pricing .theme_btn:focus {color: #fff !important;border: ;}
+#pricing .pricing-table .technical {background-color: #0e7ae8;}
+#pricing .theme_btn:hover, #pricing .theme_btn:focus {
+	color: #fff !important;
+}
+#pricing .general.theme_btn:hover {background-color: #fff !important; color: #01CCDF !important; border: none;}
+#pricing .technical.theme_btn:hover {background-color: #fff !important; color: #0E7AE8 !important; border: none;}
+footer .client_detail h4 {font-size: 14px;}
+footer .client_detail span {font-size: 18px;}
 .rtl {
 	direction: rtl;
 }
@@ -109,13 +114,14 @@
 <!-- Home section ends -->
 
 <!-- Extra_features section starts -->
-<section id="extra_features">
+
+<!-- <section id="extra_features">
 	<div class="container">
 		<div class="row">
 			<div class="title">
-				<h2 class="text-center">{{lp.features.title}} <span class="theme_bolder"></span></h2>
+				<h2 class="text-center">همه چی <span class="theme_bolder"> همین جا</span></h2>
 				<div class="col-sm-6 col-sm-offset-3 text-center">
-					<p>{{lp.features.desc}}</p>
+					<p>یکپارچه ترین خدمات را برای شما فراهم کرده ایم تا بسیار ساده و در کوتاه ترین زمان پروژه تان انجام گردد</p>
 				</div>
 			</div>
 		</div>
@@ -124,29 +130,29 @@
 				<div class="extra_features_icon">
 					<span class="docs"></span>
 				</div>
-				<h4 class="system_font_color text-uppercase">{{lp.features.doc}}</h4>
-				<p>{{lp.features.docDesc}}</p>
+				<h4 class="system_font_color text-uppercase">ثبت سفارش</h4>
+				<p></p>
 			</div>
 			<div class="col-sm-4 text-center">
 				<div class="extra_features_icon">
 					<span class="desktop"></span>
 				</div>
-				<h4 class="system_font_color text-uppercase">{{lp.features.desktop}}</h4>
-				<p>{{lp.features.desktopDesc}}</p>
+				<h4 class="system_font_color text-uppercase">انتخاب مترجم و شروع کار</h4>
+				<p></p>
 			</div>
 			<div class="col-sm-4 text-center">
 				<div class="extra_features_icon">
 					<span class="psd"></span>
 				</div>
-				<h4 class="system_font_color text-uppercase">{{lp.features.psd}}</h4>
-				<p>{{lp.features.psdDesc}}</p>
+				<h4 class="system_font_color text-uppercase">اتمام کار طبق برنامه زمانی</h4>
+				<p></p>
 			</div>
 		</div>
 		<div class="extra_feature_ph">
 			<img class="img-responsive animate_bottom_60" src="assets/images/extra_feature_ph.png" alt="Extra_feature">
 		</div>
 	</div>
-</section>
+</section> -->
 <!-- Extra_features section ends -->
 
 <!-- Pricing section starts -->
@@ -154,9 +160,11 @@
 	<div class="container">
 		<div class="row">
 			<div class="title">
-				<h2 class="text-center">Pricing <span class="theme_bolder">plans</span></h2>
+				<h2 class="text-center">قیمت <span class="theme_bolder">سرویس ها</span></h2>
 				<div class="col-sm-12 col-md-6 col-md-offset-3 text-center">
-					<p>This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit Lorem Ipsum. Proin gravida nibh vel velit </p>
+					<p>
+						با کمترین هزینه ممکن، با متخصص ترین مترجمین ایران کار کنید
+					</p>
 				</div>
 			</div>
 		</div>
@@ -349,7 +357,7 @@
 	<div class="container contact_container">
 		<div class="row">
 			<div class="footer_data">
-				<div class="col-sm-4 col-xs-4">
+				<div class="col-sm-6 col-xs-6">
 					<ul class="client_data">
 						<li>
 							<span class="contact"></span>
@@ -360,7 +368,7 @@
 						</li>
 					</ul>
 				</div>
-				<div class="col-sm-4 col-xs-4">
+				<div class="col-sm-6 col-xs-6">
 					<ul class="client_data">
 						<li>
 							<span class="email"></span>
@@ -368,17 +376,6 @@
 							<div class="client_detail">
 								<h4>تلگرام</h4>
 								<span>@onita_telegram</span>
-							</div>
-						</li>
-					</ul>
-				</div>
-				<div class="col-sm-4 col-xs-4">
-					<ul class="client_data">
-						<li>
-							<span class="location"></span>
-							<div class="client_detail">
-								<h4>آدرسی</h4>
-								<span>شهرک اکباتان - فاز ۳ - بلوک E1</span>
 							</div>
 						</li>
 					</ul>

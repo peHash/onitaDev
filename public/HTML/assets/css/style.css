@@ -167,7 +167,7 @@ h5 {
     color: #fff;
     padding: 10px 15px;
     font-size: 16px;
-    border: 1px solid #fff;
+    /*border: 1px solid #fff;*/
     cursor: pointer;
     position: relative;
     z-index: 1;
@@ -226,6 +226,7 @@ h5 {
     -webkit-transition: 1.2s;
     transition: 1.2s;
 }
+
 /*Button effect css ends*/
 
 .system_font_color {
