@@ -1,0 +1,94 @@
+<style>
+    table th {font-weight: normal}
+    table .ico {text-align: center}
+    table td a {font-size: small;}
+    table tr td {font-size: small}
+</style>
+<section id="contactus">
+    <div class="row">
+        <div class="title">
+            <h2 class="text-center">لیست <span class="theme_bolder">مترجمین</span></h2>
+            <div class="text-center" style="padding: 0 50px;">
+                <p>
+                    <span class="highlight-blue">اونیتا</span> پلتفرمی برای تسهیل ارتباط بین مترجمین حرفه ای و افرادی است که نیاز به ترجمه دارند
+                </p>
+            </div>
+        </div>
+    </div>
+    <div id="expertslist" class="row">
+        <div class="col-sm-offset-1 col-sm-10 table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th class="bookmark-col">
+                            <input type="checkbox">
+                        </th>
+                        <th class="name-col">
+                            Name
+                        </th>
+                        <th class="email-col">
+                            Email
+                        </th>
+                        <th class="resume-col">
+                            Resume
+                        </th>
+                        <th class="telegram-col">
+                            Telegram
+                        </th>
+                        <th class="vcall-col">
+                            Voice Call
+                        </th>
+                        <th class="app-col">
+                            Approve
+                        </th>
+                        <th class="rej-col">
+                            Reject
+                        </th>
+                        <th class="rem-col">
+                            Remove
+                        </th>
+                    </tr>
+                </thead>
+                <tbody> 
+                    <tr ng-repeat="user in users | orderBy: 'user.name'" ng-class="{'success': user.approved, 'warning': user.rejected, 'active': user.removed}">
+                            <td class="">
+                                <a class="bookmark">
+                                    <input type="checkbox" name="">
+                                </a>
+                            </td>   
+                            <td class="">
+                                <a class="seo-url" href="{{user._id}}">
+                                    {{user.name}}
+                                </a>
+                            </td>
+                            <td class="">
+                                {{user.email}}
+                            </td>
+                            <td class="">
+                                {{user.resume}}
+                            </td>
+                            <td class="">
+                                {{user.telegram}}
+                            </td>
+                            <td class="">
+                                {{user.voiceCall}}
+                            </td>
+                            <td class="ico">
+                                <input type="checkbox" ng-model="user.approved" ng-value="user.approved">
+                            </td>
+                            <td class="ico">
+                                <input type="checkbox" ng-model="user.rejected" ng-value="user.rejected">
+                            </td>
+                            <td class="ico"> 
+                                <a href="#" ng-click="">
+                                    <span class="ti-trash" ng-if="user.removed == false"></span>
+                                </a>
+                                <span class="ti-na" ng-if="user.removed"></span>
+                            </td>
+                    </tr>
+                </tbody>
+            </table>        
+        </div>  
+    </div>
+</section>
+

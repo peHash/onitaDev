@@ -1,0 +1,73 @@
+<style>
+#userform p {font-size: 14px;}
+[class^='col-'] {float:right}
+.col-sm-offset-2 {margin-right: 16.66666667%; margin-left: 0;}
+#e_mail , #tel {direction:ltr;}
+.description p {font-size: 14px;}
+.highlight-blue {color:#0e7ae8;}
+.checkbox p {padding-right: 20px; font-size: 14px;}
+.checkbox p > input[type=checkbox] {margin-right: -20px;margin-left: 0;margin-top: 8px;}
+</style>
+<section id="contactus">
+	<div class="row">
+		<div class="title">
+			<h2 class="text-center">فرم <span class="theme_bolder">همکاری</span></h2>
+			<div class="text-center" style="padding: 0 50px;">
+				<p>
+					<span class="highlight-blue">اونیتا</span> پلتفرمی برای تسهیل ارتباط بین مترجمین حرفه ای و افرادی است که نیاز ترجمه دارند
+				</p>
+			</div>
+		</div>
+	</div>
+	<div id="userform" class="row">
+		<div class="col-sm-8 col-sm-offset-2">
+			<form class="form-horizontal" style="direction: rtl;">
+				<div class="form-group">
+					<div class="col-sm-6">
+						<input type="text" class="form-control mob_control" id="email" placeholder="نام" ng-model="user.name">
+					</div>
+					<div class="col-sm-6">
+						<input type="text" class="form-control" id="e_mail" placeholder="ای میل" ng-model="user.email">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-12">
+						<input type="text" class="form-control" id="tel" placeholder="شماره تماس" ng-model="user.tel">
+						<div class="checkbox">
+							<p>
+								<input type="checkbox" class="" ng-model="user.telegram">
+								تلگرام دارید ؟
+							</p>
+							<p>
+								<input type="checkbox" class="checkbox-inline" ng-model="user.callPerm">
+								امکان صحبت با شما هست ؟
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="form-group" ng-show="user.callPerm" style="margin-bottom: 50px;">
+					<div class="col-sm-12">
+						<p>
+							بازه ای که همکاران ما می توانند با شما تماس بگیرند را مشخص کنید
+						</p>
+						<rzslider rz-slider-model="user.minHour" rz-slider-high="user.maxHour" rz-slider-options="slider.options"></rzslider>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-12 description">
+						<textarea class="form-control" rows="4" cols="50" placeholder="توضیحاتی درباره خودتان (سابقه کاری، رزومه ، زیمنه های تخصص ترجمه ، ...)" aria-describedby="helpBlock" ng-model="user.resume"></textarea>
+						<p class="help-block">
+						بعد از ارسال این فرم همکاران ما در کمتر از چند ساعت با شما تماس خواهند گرفت
+						</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12 text-center mb30">
+						<div id="recaptcha" vc-recaptcha key="'6LdD7iUUAAAAAMdzX8UuKlRECBeKtYOoRwAI7d2T'" ng-model="user.recaptcha" size="normal" lang="fa" style="margin-bottom: 30px;"></div>
+						<button class="btn theme_btn" ng-click="submitForm(user)">ارسال کن</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</section>

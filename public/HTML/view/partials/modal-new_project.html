@@ -1,0 +1,97 @@
+<style>
+#newproject {padding: 80px 0}
+ol, ul {list-style: none; margin: 0;padding: 0;}
+.drop-box {
+    background: #F8F8F8;
+    border: 5px dashed #DDD;
+    width: 100%;
+    height: 90px;
+    text-align: center;
+    padding-top: 30px;
+    margin: 10px;
+}
+.dragover {
+    border: 5px dashed blue;
+}
+</style>
+<section id="newproject">
+    <div class="row">
+        <div class="title">
+            <h2 class="text-center">ثبت <span class="theme_bolder">سفارش</span></h2>
+            <div class="text-center" style="padding: 0 50px;">
+                <p>
+                    <span class="highlight-blue">اونیتا</span> پلتفرمی برای تسهیل ارتباط بین مترجمین حرفه ای و افرادی است که نیاز ترجمه دارند
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+            <form class="form-horizontal" style="direction: rtl;" name="projectForm">
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <p>
+        موضوع پروژه خود را مشخص کنید
+                        </p>
+                            <select id="ordercategory" name="" class="form-control" ng-model="project.cat" ng-options="option.cat for option in categories">
+                            </select>
+                    </div>
+                    <div class="col-sm-12">
+                        <p>
+    در مورد پروژه خود بیشتر توضیح دهید
+                        </p>
+                        <ol>
+                            <li class="form-step">
+                                <p>
+نام پروژه :
+                                </p>
+                                <input id="projectname" type="text" name="project_name" class="form-control" ng-model="project.name"></input>
+                            </li>
+                            <!-- <li class="form-step">
+                                <p>
+                                    مهارت های مورد نیاز برای انجام این پروژه :
+                                </p>
+                                 <md-chips collection='itemsCollection' ng-model='returnedValues' md-title='title' md-subtitle='subtitle' md-item='items'/>
+                            </li> -->
+                            <li class="form-step">
+                                <p>
+در مورد پروژه بیشتر توضیح دهید :
+                                </p>
+                                <textarea id="projectdesc" type="text" cols="80" rows="10" maxlength="5000" name="project_desc" style="height: auto;" class="form-control" ng-model="project.desc" ckeditor="editorOptions" ></textarea>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <p>
+    فایل های مورد نیاز خود را آپلود کنید
+                        </p>    
+                        <ol>
+                            <li class="form-step">
+                                <div ngf-drop ngf-select ng-model="files" class="drop-box" 
+                                     ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true"
+                                     accept="image/*,application/pdf" 
+                                     ngf-pattern="'image/*,application/pdf'">
+                                     <p>
+                                     به صورت Drag & Drop فایل/فایل های خود را اینجا قرار دهدی
+                                     </p>
+                                </div>
+                                <div ngf-no-file-drop>
+                                    <p>لطفا از اینترنت اکسپلورر استفاده نکنید،‌ ممنون !</p>
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 text-center mb30">
+                        <div id="recaptcha" vc-recaptcha key="'6LdD7iUUAAAAAMdzX8UuKlRECBeKtYOoRwAI7d2T'" ng-model="project.recaptcha" size="normal" lang="fa" style="margin-bottom: 30px;"></div>
+                        <button class="btn theme_btn" ng-click="orderSubmit(project)">ثبت سفارش</button>
+                        <button class="btn btn-lg btn-link " ng-click="cancel()"> انصراف </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
