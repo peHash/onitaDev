@@ -7,7 +7,11 @@ var app=angular.module('appLab', [
   'ksSwiper',
   'ui.bootstrap',
   'duScroll',
-  'angular.backtop']);
+  'angular.backtop', 
+  'ngFileUpload',
+  'rzModule', 
+  'vcRecaptcha'
+  ]);
 
 
 app.provider('Modernizr', function() {
@@ -16,9 +20,14 @@ app.provider('Modernizr', function() {
     };
  });
 
-app.config(config);
-config.$inject = ['$routeProvider', '$locationProvider'];
+
+angular
+  .module('appLab')
+  .config(config);
+  config.$inject = ['$routeProvider', '$locationProvider'];
+
 function config($routeProvider, $locationProvider, angularLoad) {
+
   $locationProvider.html5Mode({
     enabled : true,
     requireBase : false
@@ -52,27 +61,62 @@ function config($routeProvider, $locationProvider, angularLoad) {
   .otherwise({ redirectTo: '/' });
 }
 
+angular
+  .module('appLab') 
+  .config(interceptorConfig);
+  interceptorConfig.$inject = ['$httpProvider'];
+
+  function interceptorConfig($rootScope, $q, $window, $location) {
+    return {
+
+        request: function(config) {
+          if ($window.localStorage.token) {
+            config.headers.Authorization = 'Bearer ' + $window.localStorage.token;
+          }
+          return config;
+        },
+        responseError: function(response) {
+          if (response.status === 401 || response.status === 403) {
+            $location.path('/login');
+          } else if (response.status === 400) {
+                // User Access token has expired 
+                delete $window.localStorage.token;
+                $rootScope.currentUser = null;
+                $rootScope.signedin = false;
+                $location.path('/login');
+          } else if (response.status === 404) {
+                console.log('fucking ' + response);
+                $location.path('/');
+          }
+          return $q.reject(response);
+        }
+      }
+  }
+
+  
+
 /*Directive for  rest window hight */
 app.directive('banner', function ($window) {  
 
   return {
     link: function () {
 
-     var m = angular.element($window);
-     var windowHeight=m.innerHeight();
+     var windowWidth = window.innerWidth;
 
-    if (m.innerWidth() >= 320 && m.innerWidth() <= 767) {
+     var windowHeight= window.innerHeight;
+
+    if (windowWidth >= 320 && windowWidth <= 767) {
       angular.element('#header').css('min-height', windowHeight);
     } 
-    else if(m.innerWidth() >= 768 && m.innerWidth() <= 992){     
+    else if(windowWidth >= 768 && windowWidth <= 992){     
       angular.element('#header').css('min-height', 0);     
     }
-    else if(m.innerWidth() >= 1080 && m.innerWidth() <= 1500){  
+    else if(windowWidth >= 1080 && windowWidth <= 1500){  
        
      angular.element('#header').css('min-height', windowHeight);
       angular.element('.big_screen').css('align-items','center');
     }
-    else if(m.innerWidth() >= 1501 && m.innerWidth() <= 1950){     
+    else if(windowWidth >= 1501 && windowWidth <= 1950){     
       angular.element('#header').css('min-height', windowHeight);
       angular.element('.big_screen').css('align-items','center');
      
@@ -194,3 +238,4 @@ app.directive('wrapOwlcarousel', function () {
     }  
   };  
 });  
+

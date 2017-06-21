@@ -4077,6 +4077,7 @@ angular.module('ui.bootstrap.modal', ['ui.bootstrap.stackedMap', 'ui.bootstrap.p
         var angularDomEl = angular.element('<div uib-modal-window="modal-window"></div>');
         angularDomEl.attr({
           'class': 'modal',
+          'style': modal.backdropStyle,
           'template-url': modal.windowTemplateUrl,
           'window-top-class': modal.windowTopClass,
           'role': 'dialog',
@@ -4328,6 +4329,7 @@ angular.module('ui.bootstrap.modal', ['ui.bootstrap.stackedMap', 'ui.bootstrap.p
                   backdrop: modalOptions.backdrop,
                   keyboard: modalOptions.keyboard,
                   backdropClass: modalOptions.backdropClass,
+                  backdropStyle: modalOptions.backdropStyle,
                   windowTopClass: modalOptions.windowTopClass,
                   windowClass: modalOptions.windowClass,
                   windowTemplateUrl: modalOptions.windowTemplateUrl,

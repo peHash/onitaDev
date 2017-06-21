@@ -78,7 +78,7 @@
               var file = files[i];
               if (!file.$error) {
                 Upload.upload({
-                    url: '/api/v1/uploadFiles',
+                    url: '/api/uploadDocs',
                     data: {
                       file: file  
                     }

@@ -193,7 +193,10 @@ mongoose.connect('mongodb://localhost/onita');
 var app = express();
 
 app.set('port', process.env.PORT || 1212);
-app.use(logger('dev'));
+// app.use(logger('dev'));
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
+app.set('views', path.join(__dirname, 'public/HTML/view'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
@@ -833,20 +836,22 @@ app.delete('/api/v1/expert/:id', ensureAuthenticated, function(req,res,next){
   res.status(200).end('Jobs Expert re-updated Successfully.');
 });
 
-app.post('/api/v1/uploadFiles' ,ensureAuthenticated, function(req, res, next) {
- var form = new formidable.IncomingForm();
- var publicFold, fileName;
- form.uploadDir = './public/file-upload';
- form.keepExtensions = true;
+app.post('/api/uploadDocs' , function(req, res, next) {
+  var form = new formidable.IncomingForm();
+  var docAddress, fileName;
+  form.uploadDir = './public/users-docs';
+  form.keepExtensions = true;
 
- form.parse(req, function(err, fields, files){
-    publicFold = './public';
-    fileName = '/file-upload/' + Date.now() + files.file.name;
-    fs.rename(files.file.path, publicFold + fileName, function(err) {
-    if (err) res.status(505).end('cant upload files');
-    res.status(200).end(files.file.name);
+  form.parse(req, function(err, fields, files){ 
+    fileName =  Date.now() + files.file.name;
+    docAddress = path.join(form.uploadDir, fileName);
+    fs.rename(files.file.path, docAddress, function(err) {
+      if (err) res.status(505).send('cant upload files');
+      // files.file.name = fileName;
+      // console.log(files.file.name.config);
+      res.status(200).send({fileName: fileName});
     });
- });
+  });
 });
 
 app.get('download', function(req,res){
@@ -860,7 +865,8 @@ app.get('download', function(req,res){
 });
 
 app.get('*', function(req, res) {
-  res.redirect('/#' + req.originalUrl);
+  // res.redirect('/#' + req.originalUrl);
+  res.render('lp.html');
 });
 
 app.use(function(err, req, res, next) {

@@ -108,11 +108,14 @@ angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'mgcrea.ngStrap'
           if (response.status === 401 || response.status === 403) {
             $location.path('/login');
           } else if (response.status === 400) {
-            // User Access token has expired 
-            delete $window.localStorage.token;
-            $rootScope.currentUser = null;
-            $rootScope.signedin = false;
-            $location.path('/login');
+                // User Access token has expired 
+                delete $window.localStorage.token;
+                $rootScope.currentUser = null;
+                $rootScope.signedin = false;
+                $location.path('/login');
+          } else if (response.status === 404) {
+                console.log('fucking ' + response);
+                $location.path('/');
           }
           return $q.reject(response);
         }

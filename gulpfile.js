@@ -6,6 +6,7 @@ var gulp = require('gulp'),
     exec = require('child_process').exec,
     ngAnnotate = require('gulp-ng-annotate'),
     plumber = require('gulp-plumber'),
+    ngTemplateCache = require('gulp-angular-templatecache'),
     plugins = {
             less: require('gulp-less'),
             rename: require('gulp-rename'),
@@ -19,10 +20,12 @@ var gulp = require('gulp'),
             chmod: require('gulp-chmod')
             },
     templateCache = require('gulp-angular-templatecache'),
-    paths = { root: './', app: {}, assets: {}, publish: {} },
+    paths = { root: './', app: {}, appLab: {} , assets: {}, publish: {} },
     sources = { js: {}, css: {}, less: '', fonts: '', img: '' };
 
 paths.app.src = paths.root + 'public/';
+paths.appLab.view = paths.app.src + 'HTML/view';
+paths.appLab.dist = paths.app.src + 'HTML/assets/dist';
 paths.assets.js = paths.app.src + 'js/';
 paths.app.lib = paths.app.src + 'lib/';
 paths.app.dist = paths.app.src + 'dist/';
@@ -90,6 +93,16 @@ gulp.task('launch', function() {
   });
 });
 
+gulp.task('templates', function () {
+  return gulp.src(paths.appLab.view + '/**/*.html')
+    .pipe(ngTemplateCache('templates.js', {
+      root: 'view',
+      module: 'appLab.templates',
+      standalone: true
+    }))
+    .pipe(gulp.dest(paths.appLab.dist))
+})
+
 // gulp.task('launch', function (cb) {
 //     // exec('mongod --dbpath E:/data/db', function (err, stdout, stderr) {
 //     // console.log(stdout);
@@ -147,7 +160,7 @@ gulp.task('launch', function() {
 
 
 
-    gulp.task('default', ['concat-js', 'launch'], function () {
+    gulp.task('default', ['templates', 'concat-js', 'launch'], function () {
     gulp.watch(sources.js.controllers, ['concat-js-controllers']).on('change', reporter('running `concat-js-controllers` task'));
     gulp.watch(sources.js.directives, ['concat-js-directives']).on('change', reporter('running `concat-js-directives` task'));
     gulp.watch(sources.js.filters, ['concat-js-filters']).on('change', reporter('running `concat-js-filters` task'));

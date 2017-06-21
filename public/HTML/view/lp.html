@@ -28,11 +28,14 @@
 /*#pricing .pricing-table_cnt .theme_btn:hover {background-color: #fff;}*/
 #pricing .theme_btn:hover, #pricing .theme_btn:focus {color: #fff !important;border: ;}
 #pricing .pricing-table .technical {background-color: #0e7ae8;}
+#pricing .technical , #pricing .general {border: none !important;}
 #pricing .theme_btn:hover, #pricing .theme_btn:focus {
 	color: #fff !important;
 }
 #pricing .general.theme_btn:hover {background-color: #fff !important; color: #01CCDF !important; border: none;}
 #pricing .technical.theme_btn:hover {background-color: #fff !important; color: #0E7AE8 !important; border: none;}
+#pricing .pricing-table:hover .general .pricing_cost {color: #01CCDF;}
+#pricing .pricing-table:hover .technical .pricing_cost {color: #56ACE9;}
 footer .client_detail h4 {font-size: 14px;}
 footer .client_detail span {font-size: 18px;}
 .rtl {
@@ -73,11 +76,14 @@ footer .client_detail span {font-size: 18px;}
 				<li>
 					<a href="#pricing" data-du-smooth-scroll data-du-scrollspy>پکیج قیمت</a>
 				</li>
-				<li>
+				<!-- <li>
 					<a href="#working" data-du-smooth-scroll data-du-scrollspy>چطور کار میکند</a>
-				</li>
+				</li> -->
 				<li>
 					<a href="#subscribe" data-du-smooth-scroll data-du-scrollspy>ارتباط با ما</a>
+				</li>
+				<li>
+					<a href="#" data-du-smooth-scroll data-du-scrollspy ng-click="openModal('experts')">لیست مترجمین</a>
 				</li>
 			</ul>
 		</div>
@@ -100,9 +106,9 @@ footer .client_detail span {font-size: 18px;}
 								<p> هر ترجمه عمومی ، تحصصی ، شخصی ، سازمانی ، در اونیتا ما برای پروژه شما مترجم فوق العاده حرفه ای داریم</p>
 							</div>
 							<div class="btn-groups col-sm-12 mb40 rtl">
-								<button type="button" class="btn theme_btn mr15">سفارش ترجمه دارید‌ ؟</button>
+								<button type="button" class="btn theme_btn mr15" ng-click="openModal('customer');">سفارش ترجمه دارید‌ ؟</button>
 								<span class="white_bolder" style="margin: 0 25px;">یا</span>
-								<button type="button" class="btn theme_btn">مترجم هستید ؟</button>
+								<button type="button" class="btn theme_btn" ng-click="openModal('freelancer');">مترجم هستید ؟</button>
 							</div>
 						</div>
 					</div>
@@ -426,3 +432,90 @@ footer .client_detail span {font-size: 18px;}
 	</section>
 </footer>
 <!-- Footer section ends -->
+
+
+
+<!-- Modal Templates Start Here -->
+<script type="text/ng-template" id="modal-signup-form.html">
+    <div class="modal-header">
+        <h3 class="modal-title" id="">{{texts.header}}</h3>
+    </div>
+    <div class="modal-body" id="">
+        <span ng-bind-html="texts.bodyContent"></span>
+		<div class="container">
+		  <div class="row">
+		    <div class="giga-logo-container">
+		      <a  href="/"><img id="giga-logo-portion" src="./images/giga-logo.png"/></a>
+		    </div>
+		    <div class="center-form panel" style="direction: ltr;">
+		      <div class="panel-body">
+		        <form method="post" ng-submit="signup()" name="signupForm">
+		          <h2 class="text-center">ثبت نام </h2>
+
+		          <div class="form-group has-feedback" ng-class="{ 'has-error' : signupForm.firstName.$invalid && signupForm.firstName.$dirty }" style="direction:rtl">
+		            <input class="form-control input-lg" type="text" name="firstName" ng-model="firstName" placeholder="
+		نام
+		            " required style="padding-right:42.5px;">
+		            <span class="ion-person form-control-feedback"></span>
+		            <div class="help-block text-danger" ng-if="signupForm.firstName.$dirty" ng-messages="signupForm.firstName.$error">
+		              <div ng-message="required">
+		               لطفا نام خود را مطابق با آنجه در شناسنامه/کارت ملی آمده است وارد کنید !
+		              </div>
+		            </div>
+		          </div>
+		          <div class="form-group has-feedback" ng-class="{ 'has-error' : signupForm.lastName.$invalid && signupForm.lastName.$dirty }" style="direction:rtl">
+		            <input class="form-control input-lg" type="text" name="lastName" ng-model="lastName" placeholder="
+		نام خانوادگی
+		            " required style="padding-right:42.5px;">
+		            <span class="ion-ios-people form-control-feedback"></span>
+		            <div class="help-block text-danger" ng-if="signupForm.lastName.$dirty" ng-messages="signupForm.lastName.$error">
+		              <div ng-message="required">
+		                لطفا نام خانوادگی خود را مطابق با آنجه در شناسنامه/کارت ملی آمده است وارد کنید !
+		              </div>
+		            </div>
+		          </div>
+		          <div class="form-group has-feedback" ng-class="{ 'has-error' : signupForm.cellPhoneNumber.$invalid && signupForm.cellPhoneNumber.$dirty }">
+		            <input class="form-control input-lg" type="text" name="cellPhoneNumber" ng-model="cellPhoneNumber" placeholder="شماره موبایل " required>
+		            <span class="ion-android-call form-control-feedback"></span>
+		            <div class="help-block text-danger" ng-if="signupForm.cellPhoneNumber.$dirty" ng-messages="signupForm.cellPhoneNumber.$error">
+		              <div ng-message="required">شما باید شماره موبایل خود را وارد کنید !</div>
+		            </div>
+		          </div>
+
+		          <div class="form-group has-feedback" ng-class="{ 'has-error' : signupForm.email.$invalid && signupForm.email.$dirty }">
+		            <input unique-email class="form-control input-lg" type="email" id="email" name="email" ng-model="email" placeholder="ایمیل" required autofocus>
+		            <span class="ion-at form-control-feedback"></span>
+		            <div class="help-block text-danger" ng-if="signupForm.email.$dirty" ng-messages="signupForm.email.$error">
+		              <div ng-message="required">وارد کردن ایمیل الزامی است !</div>
+		              <div ng-message="email">ایمیل شما صحیح نیست !</div>
+		              <div ng-message="unique">
+		                <span class="ion-looping"></span> با این ایمیل قبل ثبت نام شده است ! 
+		              </div>
+		            </div>
+		          </div>
+
+		          <div class="form-group has-feedback" ng-class="{ 'has-error' : signupForm.password.$invalid && signupForm.password.$dirty }">
+		            <input password-strength class="form-control input-lg" type="password" name="password" ng-model="password" placeholder="کلمه عبور " required>
+		            <span class="ion-key form-control-feedback"></span>
+		            <div class="help-block text-danger" ng-if="signupForm.password.$dirty" ng-messages="signupForm.password.$error">
+		              <div ng-message="required">وارد کردن کلمه عبور الزامی است .</div>
+		            </div>
+		          </div>
+
+		         <!-- <p class="text-center text-muted"><small>By clicking on Sign up, you agree to <a href="#">terms & conditions</a> and <a href="#">privacy policy</a></small></p>-->
+
+		          <button type="submit" class="btn btn-block btn-post" style="color: #fff;">ثبت نام </button>
+		          <br/>
+
+		          <p class="text-center text-muted">قبلا ثبت نام کرده اید ؟ <a href="/login"> وارد شوید ;) </a></p>
+		        </form>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-lg btn-action" ng-click="ops.confirm()">{{texts.confirm}}</button>
+        <button class="btn btn-lg btn-link " ng-click="ops.ignore()">{{texts.ignore}}</button>
+    </div>
+</script>

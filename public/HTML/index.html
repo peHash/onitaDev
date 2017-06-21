@@ -1,3 +1,10 @@
+<style>
+	/*html {font-size: 60%;}*/
+	#recaptcha > div {width: auto !important}
+	.rzslider .rz-tick-value {font-size: 11px}
+	form input {color: #555 !important}
+
+</style>
 <!DOCTYPE html>
 <html data-ng-app="appLab" lang="en">
 	<head>
@@ -24,7 +31,7 @@
 		<link rel="stylesheet" type="text/css" href="assets/css/themify-icons.css">
 		<link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
 
-
+		<link rel="stylesheet" type="text/css" href="bower_components/angularjs-slider/dist/rzslider.min.css">
 
 		<!-- OWL.css-->
 		<link rel="stylesheet" type="text/css" href="assets/css/owl.carousel.css">
@@ -76,12 +83,23 @@
 	<!--AngularJs-->
 	<script src="assets/angularJS/angular.min.js"></script>
 
+	<!-- Angular Recaptcha -->
+	<script type="text/javascript" src="bower_components/angular-recaptcha/release/angular-recaptcha.min.js"></script>
+
+	<!-- Angularjs Slider -->
+	<script src="bower_components/angularjs-slider/dist/rzslider.min.js"></script>
+
+	<!-- Ng File Upload -->
+	<script src="bower_components/ng-file-upload/ng-file-upload-shim.min.js"></script>
+	<script src="bower_components/ng-file-upload/ng-file-upload.min.js"></script>
+
 	<!-- Angular Route -->
 	<script src="vendor/angular-route.js"></script>
 
 	<!-- Module -->
 	<script src="assets/modules/module.js" ></script>    
-
+	<!-- Templates -->
+	<!-- <script src="assets/dist/templates.js"></script> -->
 	<!-- Controller -->
 	<script src="assets/controllers/controller.js" ></script>   
 
