@@ -10,7 +10,9 @@ var app=angular.module('appLab', [
   'angular.backtop', 
   'ngFileUpload',
   'rzModule', 
-  'vcRecaptcha'
+  'vcRecaptcha',
+  'toaster'
+  // 'ngAnimate'
   ]);
 
 

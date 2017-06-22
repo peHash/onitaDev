@@ -140,6 +140,36 @@ var bidSchema = new mongoose.Schema({
     updatedAt: {type: Date, default: new Date()}
 });
 
+var projectSchema = new mongoose.Schema({
+    id: ObjectId,
+    projectCat: String,
+    projectName: String,
+    projectDesc: String,
+    // username: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+    username: String,
+    fileName: [String],
+    reCaptcha: String, 
+    addedDate: String,
+    lastUpdate: String
+})
+
+var expSchema = new mongoose.Schema({
+    id: ObjectId,
+    expName: String,
+    expEmail: {type: String, required: true },
+    expTel: {type: String, required: true},
+    expResume: {type: String, required: true },
+    expTelegram: {type: String},
+    expVoiceCall: {type: Boolean},
+    expApproved: {type: Boolean},
+    expRejected: {type: Boolean},
+    expRemoved: {type: Boolean},
+    expAdded: {type: Date},
+    expUpdated: {type: Date}
+})
+
+
+
 var articleSchema = new mongoose.Schema({
   user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
   title: {type: String, required: true},
@@ -177,6 +207,10 @@ var postSchema = new mongoose.Schema({
   added_date: {type:String, default: new Date()}, 
   updatedAt: String
 });
+
+var Expert = mongoose.model('Expert', expSchema);
+
+var Project = mongoose.model('Project', projectSchema);
 
 var User = mongoose.model('User', userSchema);
 
@@ -231,6 +265,65 @@ function createJwtToken(user) {
   };
   return jwt.encode(payload, tokenSecret);
 }
+
+app.get('/api/experts', function(req,res,next){
+  var query = Expert.find({}).exec(function(err, expertsList) {  
+    if (err) return next(err);
+    res.send(expertsList);
+  });
+})
+
+app.post('/api/expert', function(req,res,next){
+  var expert = new Expert({
+    expName: req.body.expName,
+    expEmail: req.body.expEmail,
+    expTel: req.body.expTel,
+    expResume: req.body.expResume,
+    expTelegram: req.body.expTelegram,
+    expVoiceCall: req.body.expVoiceCall,
+    expAdded: new Date(), 
+    expApproved: '',
+    expRejected: '',
+    expRemoved: '',
+  });
+  expert.save(function(err) {
+    if (err) return next(err);
+    res.send(200);
+  });
+})
+
+
+
+app.post('/api/orders', function(req,res,next){
+  // Project.findOne({ email: req.body.email.toLowerCase() }, function(err, user) {
+  //   if (!user) return res.status(401).send('User does not exist');
+  //   user.comparePassword(req.body.password, function(err, isMatch) {
+  //     if (err) return res.status(401).send('something went WRONG, try again ;)')
+  //     if (!isMatch) return res.status(401).send('Invalid email and/or password');
+  //     var cpUser = {
+  //       _id: user._id,
+  //       email: user.email,
+  //       password: user.password
+  //     };
+  //     var token = createJwtToken(cpUser);
+  //     res.status(200).send({ token: token });
+  //   });
+  // });
+  var project = new Project({
+    projectCat: req.body.projectCat,
+    projectName: req.body.projectName,
+    projectDesc: req.body.projectDesc,
+    // username: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+    username: req.body.username,
+    fileName: req.body.fileName,
+    addedDate: new Date(),
+    lastUpdate: new Date()
+  });
+  project.save(function(err) {
+    if (err) return next(err);
+    res.send(200);
+  });
+})
 
 app.get('/read',  function(req,res){
   console.log('got it');

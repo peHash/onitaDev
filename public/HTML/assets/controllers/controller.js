@@ -1,4 +1,3 @@
-
 app.controller('MyController', function ($scope,Modernizr,$window, $timeout, $http, $document,$uibModal, Upload) {
 
 $(window).load(function(){
@@ -27,7 +26,19 @@ function openModal (group) {
 
 // Trigger Modal 
 // modalStarter();
-function expertsList($scope) {
+function expertsList($scope, $http) {
+
+  getExpertsList();
+
+  function getExpertsList() {
+    $http.get('/api/experts').then(resolve, reject);
+    function resolve(d){$scope.experts = d.data};
+    function reject(e){console.log(e)};
+  }
+
+
+
+
   $scope.users = [{
     name: 'Jafar',
     email: 'Jafari@gmail.com',
@@ -70,7 +81,16 @@ function expertsList($scope) {
   ];
 }
 
-function newProjectController($scope, Upload, $http){
+function newProjectController($scope, Upload, $http, toaster){
+
+  var succ = {
+    header: 'ثبت شد',
+    body: 'پروژه شما با موفقیت ثبت گردید'
+  },
+  failed = {
+    header: 'متاسفانه پروژه با موفقیت ثبت نشد، لطفا چند دقیقه دیگر دوباره تلاش کنید',
+    body : 'متاسفانه پروژه با موفقیت ثبت نشد، لطفا چند دقیقه دیگر دوباره تلاش کنید'
+  }
 
   $scope.fileNames = [];
   $scope.project = {};
@@ -94,8 +114,8 @@ function newProjectController($scope, Upload, $http){
       }
     }
     $http(config).then(resolve, reject);
-    function resolve(r) {console.log(r)};
-    function reject(e) {console.log(e)};
+    function resolve(r) {toaster.pop('success', succ.header , succ.body)};
+    function reject(e) {toaster.pop('error', failed.header, failed.body)};
   }
 
   $scope.$watch('files', function () {
@@ -138,8 +158,16 @@ function newProjectController($scope, Upload, $http){
   };
 }
 
-function contactUsController($scope) {
+function contactUsController($scope, toaster, $http) {
 
+  var succ = {
+    header: 'ثبت شد',
+    body: 'درخواست شما با موفقیت ثبت گردید'
+  },
+  failed = {
+    header: 'متاسفانه ثبت نشد',
+    body : 'متاسفانه در خواست شما با موفقیت ثبت نشد! لطفا چند دقیقه دیگر دوباره تلاش کنید'
+  }
   $scope.user = {
     callPerm: false,
     minHour: 6,
@@ -160,8 +188,22 @@ function contactUsController($scope) {
             }
   };
 
-  function submitForm(user) {
-      console.log(user);
+  function submitForm(User) {
+      config = {
+      method: 'POST',
+      url: '/api/expert', 
+      data: {
+        expName: User.name,
+        expEmail: User.email,
+        expTel: User.tel,
+        expResume: User.resume,
+        expTelegram: User.telegram,
+        expVoiceCall: User.callPerm
+      }
+    }
+    $http(config).then(resolve, reject);
+    function resolve(r) {toaster.pop('success', succ.header , succ.body)};
+    function reject(e) {toaster.pop('error', failed.header, failed.body)};
   }
 
   function refreshSlider(){
@@ -370,6 +412,12 @@ function fire() {
         }
     }
 }();
+
+app.controller('expertController', function ($scope) {
+  $scope.$watch('expert.expApproved', function(n,o){
+    if (n != o) {console.log($scope.expert);}
+  });
+});
 
 function navbarController($scope, $window) {
   /* Menu hide/show on scroll */

@@ -50,40 +50,41 @@
                     </tr>
                 </thead>
                 <tbody> 
-                    <tr ng-repeat="user in users | orderBy: 'user.name'" ng-class="{'success': user.approved, 'warning': user.rejected, 'active': user.removed}">
+                    <tr ng-repeat="expert in experts | orderBy:expert.expAdded track by expert._id" ng-controller="expertController" ng-class="{'success': expert.expApproved, 'warning': expert.expRejected, 'active': expert.expRemoved}">
                             <td class="">
                                 <a class="bookmark">
-                                    <input type="checkbox" name="">
+                                    <!-- <input type="checkbox" name=""> -->
+                                    No. {{$index + 1}}
                                 </a>
                             </td>   
                             <td class="">
-                                <a class="seo-url" href="{{user._id}}">
-                                    {{user.name}}
+                                <a class="seo-url" href="{{expert._id}}">
+                                    {{expert.expName}}
                                 </a>
                             </td>
                             <td class="">
-                                {{user.email}}
+                                {{expert.expEmail}}
                             </td>
                             <td class="">
-                                {{user.resume}}
+                                {{expert.expResume}}
                             </td>
                             <td class="">
-                                {{user.telegram}}
+                                {{expert.expTelegram}}
                             </td>
                             <td class="">
-                                {{user.voiceCall}}
+                                {{expert.expVoiceCall}}
                             </td>
                             <td class="ico">
-                                <input type="checkbox" ng-model="user.approved" ng-value="user.approved">
+                                <input type="checkbox" ng-model="expert.expApproved" ng-value="expert.approved">
                             </td>
                             <td class="ico">
-                                <input type="checkbox" ng-model="user.rejected" ng-value="user.rejected">
+                                <input type="checkbox" ng-model="expert.expRejected" ng-value="expert.expRejected">
                             </td>
                             <td class="ico"> 
                                 <a href="#" ng-click="">
-                                    <span class="ti-trash" ng-if="user.removed == false"></span>
+                                    <span class="ti-trash" ng-if="expert.expRemoved == false"></span>
                                 </a>
-                                <span class="ti-na" ng-if="user.removed"></span>
+                                <span class="ti-na" ng-if="expert.expRemoved"></span>
                             </td>
                     </tr>
                 </tbody>

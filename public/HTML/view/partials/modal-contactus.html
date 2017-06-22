@@ -8,6 +8,7 @@
 .checkbox p {padding-right: 20px; font-size: 14px;}
 .checkbox p > input[type=checkbox] {margin-right: -20px;margin-left: 0;margin-top: 8px;}
 </style>
+<toaster-container toaster-options="{'position-class': 'toast-top-full-width'}"></toaster-container>
 <section id="contactus">
 	<div class="row">
 		<div class="title">
@@ -65,6 +66,7 @@
 					<div class="col-sm-12 text-center mb30">
 						<div id="recaptcha" vc-recaptcha key="'6LdD7iUUAAAAAMdzX8UuKlRECBeKtYOoRwAI7d2T'" ng-model="user.recaptcha" size="normal" lang="fa" style="margin-bottom: 30px;"></div>
 						<button class="btn theme_btn" ng-click="submitForm(user)">ارسال کن</button>
+						<button class="btn theme_btn" ng-click="toasterOpen()">توستر‌:) </button>
 					</div>
 				</div>
 			</form>
