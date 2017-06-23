@@ -1,0 +1,41 @@
+/*Onita appLab StyleSheets*/
+
+.modal-content section {padding: 80px 0}
+.btn-post{
+    background-color: #33B5E6;
+    border-color: #3291bf;
+    font-size: 14px; 
+    border-width: 2px;
+}
+.btn-post:hover{
+    background-color: #1A9CCD;
+    border-color: #27779d;
+    color: #fff;
+}
+.btn-link {
+  display: block;
+  width: 160px;
+  margin: 0 auto;
+  background-color: transparent;
+  border-color: transparent;
+  color: #00bf8c;
+}
+.btn-link:hover {
+  color: #00bf8c;
+  border-color: transparent;
+
+}
+.has-feedback .form-control {padding:0 42.5px;}
+.nav .open>a, .nav .open>a:focus, .nav .open>a:hover {background-color: transparent;border-color: none;}
+.dropdown-menu {right: 0;left:inherit;}
+.dropdown-menu {text-align: right;}
+.dropdown-menu > li > a {color: #666;font-size: medium;}
+.dropdown-menu > li > a .text-muted {float: left;font-size: smaller;margin-top: 2px;}
+
+
+
+
+
+
+
+
