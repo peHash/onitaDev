@@ -1,4 +1,4 @@
-app.controller('MyController', function ($scope,Modernizr,$window, $timeout, $http, $document,$uibModal, Upload) {
+app.controller('MyController', function ($scope,Modernizr,$window, $timeout, $http, $document,$uibModal, Upload, Auth) {
 
 $(window).load(function(){
      someUIWorking($scope, Modernizr);
@@ -10,6 +10,10 @@ $scope.SyncOwl = SyncOwl;
 
 $scope.openModal = openModal;
 
+$scope.logout = function() {
+  Auth.logout();
+}
+
 function openModal (group) {
   switch (group){
     case 'freelancer':   
@@ -19,14 +23,73 @@ function openModal (group) {
       modalStarter('view/partials/modal-new_project.html', 'static', newProjectController);
       break;
     case 'experts': 
-      modalStarter('view/partials/modal-experts_list.html', 'static', expertsList);
+      modalStarter('view/partials/modal-experts_list.html', 'static', expertsListController);
       break;
+    case 'login':
+      modalStarter('view/partials/modal-login.html', 'static', loginController);
+      break;
+    case 'signup':
+      modalStarter('view/partials/modal-signup.html', 'static', signUpController);
   }
 }
 
-// Trigger Modal 
-// modalStarter();
-function expertsList($scope, $http) {
+// Trigger Modal  modalStarter();
+function modalStarter(template,static,controller, size) {
+    var modalInstance = $uibModal.open({
+      templateUrl: template,
+      // templateUrl : $templateCache.get('signup-modal.html'),
+      size: size ? size : 'lg',
+      backdrop: static ? static : true,
+      backdropStyle: 'background-color: #333;', 
+      controller : controller ? controller : contactUsController
+    });
+  };
+
+// function logout(Auth) {
+//   Auth.logout();
+//   // $route.reload();
+// }
+
+
+function signUpController($scope, Auth, toaster, $uibModalInstance){
+
+  $scope.signup = function() {
+      Auth.signup({
+        name: $scope.name,
+        tel: $scope.tel,
+        email: $scope.email,
+        password: $scope.password
+      })
+      .success(function() {
+            toaster.pop('success','SIGNUP SUCCESS', 'YUPS');
+            $timeout(function() {$uibModalInstance.close();}, 3000);
+          })
+          .error(function(err) {
+            toaster.pop('error','SIGNUP FAILED', err);
+          });
+    };
+}
+
+function loginController($rootScope, $scope, Auth, toaster, $uibModalInstance, $timeout) {
+
+  $scope.login = function() {
+    Auth.login({email: $scope.email, password: $scope.password})
+    .success(function(data) {
+            toaster.pop('success', 'LOGIN SUCCESS', 'YUPS');
+            $window.localStorage.token = data.token;
+            var payload = JSON.parse($window.atob(data.token.split('.')[1]));
+            $rootScope.currentUser = payload.user;
+            $rootScope.userLogged = true;
+            $timeout(function() {$uibModalInstance.close();}, 3000);
+          })
+          .error(function(err) {
+            toaster.pop('error','lOGIN FAILED', err);
+            delete $window.localStorage.token;
+          });
+  }
+}
+
+function expertsListController($scope, $http) {
 
   getExpertsList();
 
@@ -36,49 +99,6 @@ function expertsList($scope, $http) {
     function reject(e){console.log(e)};
   }
 
-
-
-
-  $scope.users = [{
-    name: 'Jafar',
-    email: 'Jafari@gmail.com',
-    resume: 'خیلی بلدم :)',
-    telegram: '@jj',
-    voiceCall: true,
-    approved: true,
-    rejected: false,
-    removed: false
-  }, {
-    name: 'Zeynab',
-    email: 'omolZeynab@ymail.com',
-    resume: 'متون تخصصی',
-    telegram: '@zeynab',
-    voiceCall: false,
-    approved: false,
-    rejected: true,
-    removed: false
-  }, {
-    name: 'Fateme',
-    email: 'fatima@yahoo.com',
-    resume: 'منم خیلی بلدم',
-    telegram: '@ff',
-    voiceCall: false,
-    approved: false,
-    rejected: false,
-    removed: true
-  }, {
-    name: 'Expert',
-    email: 'free@lancer.com',
-    resume: 'فقط متن عمومی',
-    telegram: '@expert',
-    voiceCall: false,
-    approved: false,
-    rejected: false,
-    removed: false
-  }
-
-
-  ];
 }
 
 function newProjectController($scope, Upload, $http, toaster){
@@ -94,13 +114,14 @@ function newProjectController($scope, Upload, $http, toaster){
 
   $scope.fileNames = [];
   $scope.project = {};
-  $scope.categories = [{cat: 1, name: 'A'},{ cat: 2, name: 'B'},{ cat:3, name: 'C'}];
+  $scope.categories = [{cat: 1, value: 'عمومی'},{ cat: 2, value: 'جامعه شناسی'},{ cat:3, value: 'صنایع غذایی'},{ cat:4, value: 'فناوری'},{ cat:5, value: 'ریاضیات'},{ cat:6, value: 'فیزیک'},{ cat:7, value: 'آمار'},{ cat:8, value: 'نساجی'},{ cat:9, value: 'میکروبیولوژی'},{ cat:10, value: 'جغرافیا'},{ cat:11, value: 'ادبیات و زبانشناسی'},{ cat:12, value: 'پزشکی'},{ cat:13, value: 'حقوق'},{ cat:14, value: 'زیرنویس فیلم و سریال'},{ cat:15, value: 'فقه و علوم اسلامی'},{ cat:16, value: 'معماری'},{ cat:17, value: 'نفت ، گاز و پتروشیمی'},{ cat:18, value: 'اسناد تجاری'},{ cat:19, value: 'اقتصاد'},{ cat:20, value: 'بازرگانی'},{ cat:21, value: 'برق و الکترونیک'},{ cat:22, value: 'تاریخ'},{ cat:23, value: 'حسابداری'},{ cat:24, value: 'روانشناسی'}, {cat: 25, value: 'شیمی'} ];
 
   $scope.cancel = function() {
     modalStarter('view/partials/modal-experts_list.html', 'true', expertsList);
   }
 
   $scope.orderSubmit = function(project) {
+
     config = {
       method: 'POST',
       url: '/api/orders', 
@@ -214,17 +235,6 @@ function contactUsController($scope, toaster, $http) {
 
 }
 
-function modalStarter(template,static,controller, size) {
-    var modalInstance = $uibModal.open({
-      templateUrl: template,
-      // templateUrl : $templateCache.get('signup-modal.html'),
-      size: size ? size : 'lg',
-      backdrop: static ? static : true,
-      backdropStyle: 'background-color: #333;', 
-      controller : controller ? controller : contactUsController
-    });
-
-  };
 
 $scope.sentences  = ["your elegant app", "your creative app", "your modern design"];
 
@@ -250,168 +260,8 @@ $scope.images = [
   'assets/images/banner/slide_3.jpg'
 ];
 /* Backstretch slider End*/
-
- 
-
-
-
-$scope.lp = {
-  header: {
-    title: 'اونیتا',
-    desc: 'رم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.',
-    btn1: 'ثبت نام',
-    btn2: 'سفارش ترجمه'
-  },
-  features: {
-    title: 'امکانات بیشتر',
-    desc: 'کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد.  ',
-    doc: 'مستندات',
-    docDesc: 'در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.',
-    desktop: 'طراحی زیبا',
-    desktopDesc: 'در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.',
-    psd: 'خیلی قشنگ',
-    psdDesc: 'در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد. '
-  }
-}
-
-function makeScript(data) {
-  var document = $document[0];
-  var script = document.createElement('script');
-            script.text = data;
-            document.head.prepend(script);
-            return;
-}
-$scope.fire = fire;
-
-function fire() {
-  $http.get('/read')
-            .success(function(data) {
-              makeScript(data);
-            })
-            .error(function(err) {
-              // toaster.pop('error','SIGNUP FAILED', err);
-              console.log('error');
-              return
-            });  
-}
-
   
 }).value('duScrollOffset', 0);
-
-+function () {
-
-    angular
-    .module('appLab')
-    .factory('ResourceLoaderService', ['$q', '$document', '$timeout', resourceLoaderService]);
-
-    function resourceLoaderService($q, $document, $timeout) {
-
-        var document = $document[0],
-            service = {},
-            promises = {};
-
-        service.load = load;
-        service.loadJs = loadJs;
-        service.loadCss = loadCss;
-        service.unloadCss = unloadCss;
-
-        return service;
-
-
-        function loadJs(url) {
-            return loader(createScriptElement)(url);
-        }
-
-        function unloadCss(url) {
-          delete promises[url];
-          var docHead = document.head;
-          if(docHead) {
-            var targetCss = docHead.querySelector('[href="' + url + '"]');
-            if(targetCss) {
-              targetCss.remove();
-              return true;
-            }
-          }
-          return false;
-        }
-
-        function loadCss(url) {
-            var docHead = document.head;
-            if(docHead) {
-              var targetCss = docHead.querySelector('[href="' + url + '"]');
-              if (targetCss) {
-                return true;
-              } else {
-                return loader(createCssLinkElement)(url);
-              }
-            }
-        }
-
-        function load(urls) {
-            return $q.all(urls.map(function (url) {
-                if (isCss(url)) {
-                    return loadCss(url);
-                }
-                if (isJs(url)) {
-                    return loadJs(url);
-                }
-            }));
-        }
-
-        function isCss(url) {
-            return url.indexOf('.css') > -1;
-        }
-
-        function isJs(url) {
-            return url.indexOf('.js') > -1;
-        }
-
-        function loader(createElementFn) {
-            return function (url) {
-                if (typeof promises[url] === 'undefined') {
-                    promises[url] = createPromise(url);
-                }
-
-                return promises[url];
-            };
-
-            function createPromise(url) {
-                var defer = $q.defer(),
-                    element = createElementFn(url);
-
-                element.onload = element.onreadystatechange = function (e) {
-                    $timeout(function () {
-                        defer.resolve(e);
-                    });
-                };
-
-                element.onerror = function (e) {
-                    $timeout(function () {
-                        defer.reject(e);
-                    });
-                };
-
-                return defer.promise;
-            }
-        }
-
-        function createScriptElement(src) {
-            var script = document.createElement('script');
-            script.src = src;
-            document.body.appendChild(script);
-            return script;
-        }
-
-        function createCssLinkElement(href) {
-            var link = document.createElement('link');
-            link.rel = 'stylesheet';
-            link.type = 'text/css';
-            link.href = href;
-            document.head.firstChild.prepend(link);
-            return link;
-        }
-    }
-}();
 
 app.controller('expertController', function ($scope) {
   $scope.$watch('expert.expApproved', function(n,o){
@@ -420,6 +270,7 @@ app.controller('expertController', function ($scope) {
 });
 
 function navbarController($scope, $window) {
+
   /* Menu hide/show on scroll */
 $scope.ost = 0;
         $(window).scroll(function() {

@@ -66,6 +66,30 @@ footer .client_detail span {font-size: 18px;}
 			</a>
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
+			<ul class="nav navbar-nav pull-left rtl" ng-if="!userLogged">
+				<li class="active">
+					<a ng-click="openModal('signup');" data-du-smooth-scroll data-du-scrollspy>ثبت نام</a>
+				</li>
+				<li>
+					<a ng-click="openModal('login');" data-du-smooth-scroll data-du-scrollspy>ورود</a>
+				</li>
+			</ul>
+			<ul class="nav navbar-nav pull-left" ng-if="userLogged">
+				<li uib-dropdown on-toggle="toggled(open)">
+			      <a href id="simple-dropdown" uib-dropdown-toggle>
+			        سلام دوست عزیز
+			      </a>
+			      <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown">
+			        <li>
+						<a ng-click="openModal('experts')">لیست مترجمین</a>
+						<a>داشبورد <span class="text-muted">به زودی</span> </a>
+						<a>سفارشات <span class="text-muted">به زودی</span></a>
+						<a>پرداخت <span class="text-muted">به زودی</span></a>
+						<a href ng-click="logout()">خروج</a>
+			        </li>
+			      </ul>
+			    </li>
+			</ul>
 			<ul class="nav navbar-nav pull-right rtl">
 				<li class="active">
 					<a href="#home" data-du-smooth-scroll data-du-scrollspy>خانه</a>
@@ -81,9 +105,6 @@ footer .client_detail span {font-size: 18px;}
 				</li> -->
 				<li>
 					<a href="#subscribe" data-du-smooth-scroll data-du-scrollspy>ارتباط با ما</a>
-				</li>
-				<li>
-					<a href="#" data-du-smooth-scroll data-du-scrollspy ng-click="openModal('experts')">لیست مترجمین</a>
 				</li>
 			</ul>
 		</div>
@@ -358,6 +379,8 @@ footer .client_detail span {font-size: 18px;}
 </section>
 <!-- Subscribe section ends -->
 
+
+<!-- todo: should be responsive ! -->
 <!-- Footer section starts -->
 <footer>
 	<div class="container contact_container">

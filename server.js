@@ -28,9 +28,8 @@ var youtubeFolder = path.join(__dirname, 'public/youtube/videos');
 
 var userSchema = new Schema({
   // _creator: {type: Number, ref: 'Course'},
-  firstName: { type: String, trim: true, required: true },
-  lastName: {type: String, trim: true, required: true},
-  cellPhoneNumber : {type: Number, unique: true, default: ''},
+  name: { type: String, trim: true, required: true },
+  tel : {type: Number, unique: true, default: ''},
   email: { type: String, unique: true, lowercase: true, trim: true , required: true},
   image: {type: String},
   password: { type: String },
@@ -392,9 +391,8 @@ app.get('/api/posts', function(req,res,next){
 
 app.post('/auth/signup', function(req, res, next) {
   var user = new User({
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    cellPhoneNumber: req.body.cellPhoneNumber,
+    name: req.body.name,
+    tel: req.body.tel,
     email: req.body.email.toLowerCase(),
     password: req.body.password
   });

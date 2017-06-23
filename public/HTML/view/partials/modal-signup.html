@@ -1,73 +1,64 @@
-  <div class="modal-body">
-    <div class="">
-      <div class="row">
-        <div class="center-form panel" style="direction: ltr;">
-          <div class="panel-body">
-            <form method="post" ng-submit="signup()" name="signupForm">
-              <h2 class="text-center">ثبت نام </h2>
-
-              <div class="form-group has-feedback" ng-class="{ 'has-error' : signupForm.firstName.$invalid && signupForm.firstName.$dirty }" style="direction:rtl">
-                <input class="form-control input-lg" type="text" name="firstName" ng-model="firstName" placeholder="
-    نام
-                " required style="padding-right:42.5px;">
-                <span class="ion-person form-control-feedback"></span>
-                <div class="help-block text-danger" ng-if="signupForm.firstName.$dirty" ng-messages="signupForm.firstName.$error">
-                  <div ng-message="required">
-                   لطفا نام خود را مطابق با آنجه در شناسنامه/کارت ملی آمده است وارد کنید !
-                  </div>
-                </div>
-              </div>
-              <div class="form-group has-feedback" ng-class="{ 'has-error' : signupForm.lastName.$invalid && signupForm.lastName.$dirty }" style="direction:rtl">
-                <input class="form-control input-lg" type="text" name="lastName" ng-model="lastName" placeholder="
-    نام خانوادگی
-                " required style="padding-right:42.5px;">
-                <span class="ion-ios-people form-control-feedback"></span>
-                <div class="help-block text-danger" ng-if="signupForm.lastName.$dirty" ng-messages="signupForm.lastName.$error">
-                  <div ng-message="required">
-                    لطفا نام خانوادگی خود را مطابق با آنجه در شناسنامه/کارت ملی آمده است وارد کنید !
-                  </div>
-                </div>
-              </div>
-              <div class="form-group has-feedback" ng-class="{ 'has-error' : signupForm.cellPhoneNumber.$invalid && signupForm.cellPhoneNumber.$dirty }">
-                <input class="form-control input-lg" type="text" name="cellPhoneNumber" ng-model="cellPhoneNumber" placeholder="شماره موبایل " required>
-                <span class="ion-android-call form-control-feedback"></span>
-                <div class="help-block text-danger" ng-if="signupForm.cellPhoneNumber.$dirty" ng-messages="signupForm.cellPhoneNumber.$error">
-                  <div ng-message="required">شما باید شماره موبایل خود را وارد کنید !</div>
-                </div>
-              </div>
-
-              <div class="form-group has-feedback" ng-class="{ 'has-error' : signupForm.email.$invalid && signupForm.email.$dirty }">
-                <input unique-email class="form-control input-lg" type="email" id="email" name="email" ng-model="email" placeholder="ایمیل" required autofocus>
-                <span class="ion-at form-control-feedback"></span>
-                <div class="help-block text-danger" ng-if="signupForm.email.$dirty" ng-messages="signupForm.email.$error">
-                  <div ng-message="required">وارد کردن ایمیل الزامی است !</div>
-                  <div ng-message="email">ایمیل شما صحیح نیست !</div>
-                  <div ng-message="unique">
-                    <span class="ion-looping"></span> با این ایمیل قبل ثبت نام شده است ! 
-                  </div>
-                </div>
-              </div>
-
-              <div class="form-group has-feedback" ng-class="{ 'has-error' : signupForm.password.$invalid && signupForm.password.$dirty }">
-                <input password-strength class="form-control input-lg" type="password" name="password" ng-model="password" placeholder="کلمه عبور " required>
-                <span class="ion-key form-control-feedback"></span>
-                <div class="help-block text-danger" ng-if="signupForm.password.$dirty" ng-messages="signupForm.password.$error">
-                  <div ng-message="required">وارد کردن کلمه عبور الزامی است .</div>
-                </div>
-              </div>
-
-             <!-- <p class="text-center text-muted"><small>By clicking on Sign up, you agree to <a href="#">terms & conditions</a> and <a href="#">privacy policy</a></small></p>-->
-
-              <button type="submit" class="btn btn-block btn-post" style="color: #fff;">ثبت نام </button>
-              <br/>
-
-              <p class="text-center text-muted">قبلا ثبت نام کرده اید ؟ <a href="/login"> وارد شوید ;) </a></p>
-            </form>
+<toaster-container toaster-options="{'position-class': 'toast-top-full-width'}"></toaster-container>
+<section id="signup">
+  <div class="row">
+      <div class="title">
+          <h2 class="text-center">ثبت <span class="theme_bolder"> نام</span></h2>
+          <div class="text-center" style="padding: 0 50px;">
+              <p>
+                  <span class="highlight-blue">اونیتا</span> پلتفرمی برای تسهیل ارتباط بین مترجمین حرفه ای و افرادی است که نیاز ترجمه دارند
+              </p>
+          </div>
+      </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-8 col-sm-offset-2" style="direction: ltr;">
+      <form method="post" ng-submit="signup()" name="signupForm">
+        <div class="form-group has-feedback" ng-class="{ 'has-error' : signupForm.name.$invalid && signupForm.name.$dirty }" style="direction:rtl">
+          <input class="form-control input-lg" type="text" name="name" ng-model="name" placeholder="
+نام
+          " required style="padding-right:42.5px;" autofocus>
+          <span class="ion-person form-control-feedback"></span>
+          <div class="help-block text-danger" ng-if="signupForm.name.$dirty" ng-messages="signupForm.name.$error">
+            <div ng-message="required">
+             لطفا نام خود را مطابق با آنجه در شناسنامه/کارت ملی آمده است وارد کنید !
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+        <div class="form-group has-feedback" ng-class="{ 'has-error' : signupForm.tel.$invalid && signupForm.tel.$dirty }">
+          <input class="form-control input-lg" type="text" name="tel" ng-model="tel" placeholder="شماره موبایل " required>
+          <span class="ion-android-call form-control-feedback"></span>
+          <div class="help-block text-danger" ng-if="signupForm.tel.$dirty" ng-messages="signupForm.tel.$error">
+            <div ng-message="required">شما باید شماره موبایل خود را وارد کنید !</div>
+          </div>
+        </div>
 
-    <!-- Modal Footer Section Start -->
-    <div class="modal-footer"></div>
+        <div class="form-group has-feedback" ng-class="{ 'has-error' : signupForm.email.$invalid && signupForm.email.$dirty }">
+          <input unique-email class="form-control input-lg" type="email" id="email" name="email" ng-model="email" placeholder="ایمیل" required autofocus>
+          <span class="ion-at form-control-feedback"></span>
+          <div class="help-block text-danger" ng-if="signupForm.email.$dirty" ng-messages="signupForm.email.$error">
+            <div ng-message="required">وارد کردن ایمیل الزامی است !</div>
+            <div ng-message="email">ایمیل شما صحیح نیست !</div>
+            <div ng-message="unique">
+              <span class="ion-looping"></span> با این ایمیل قبل ثبت نام شده است ! 
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group has-feedback" ng-class="{ 'has-error' : signupForm.password.$invalid && signupForm.password.$dirty }">
+          <input password-strength class="form-control input-lg" type="password" name="password" ng-model="password" placeholder="کلمه عبور " required>
+          <span class="ion-key form-control-feedback"></span>
+          <div class="help-block text-danger" ng-if="signupForm.password.$dirty" ng-messages="signupForm.password.$error">
+            <div ng-message="required">وارد کردن کلمه عبور الزامی است .</div>
+          </div>
+        </div>
+
+       <!-- <p class="text-center text-muted"><small>By clicking on Sign up, you agree to <a href="#">terms & conditions</a> and <a href="#">privacy policy</a></small></p>-->
+       <div class="form-group">
+        <button type="submit" class="btn btn-block btn-post" style="color: #fff;">ثبت نام</button>
+        <p class="text-center text-muted" style="margin-left: 0;margin-top:20px;">قبلا ثبت نام کرده اید ؟</p>
+        <button type="submit" class="btn btn-block btn-link">وارد شوید </button>
+       </div>
+      </form>
+    </div>
   </div>
+</section>

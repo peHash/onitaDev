@@ -34,7 +34,7 @@ ol, ul {list-style: none; margin: 0;padding: 0;}
                         <p>
         موضوع پروژه خود را مشخص کنید
                         </p>
-                            <select id="ordercategory" name="" class="form-control" ng-model="project.cat" ng-options="option.cat for option in categories">
+                            <select id="ordercategory" name="" class="form-control" ng-model="project.cat" ng-options="option.value for option in categories">
                             </select>
                     </div>
                     <div class="col-sm-12">
@@ -75,7 +75,7 @@ ol, ul {list-style: none; margin: 0;padding: 0;}
                                      accept="image/*,application/pdf" 
                                      ngf-pattern="'image/*,application/pdf'">
                                      <p>
-                                     به صورت Drag & Drop فایل/فایل های خود را اینجا قرار دهدی
+                                     به صورت Drag & Drop فایل/فایل های خود را اینجا قرار دهید (یا کلیک کنید)
                                      </p>
                                 </div>
                                 <div ngf-no-file-drop>

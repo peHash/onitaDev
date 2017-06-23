@@ -1,49 +1,43 @@
 <style>
-p {
-  font-size: 12px;
-}
+.form-group p {direction: rtl}
 </style>
 <toaster-container toaster-options="{'time-out': 2000, 'close-button':true, 'animation-class': 'toast-top-center'}"></toaster-container>
-<div class="modal-body">
+<section id="login">
   <div class="row">
-    <div class="center-form panel" style="direction: ltr;">
-        <div class="panel-body">
-          <h2 class="text-center">ورود</h2>
-          <form method="post" ng-submit="login()" name="loginForm">
-            <div class="form-group has-feedback">
-              <input class="form-control input-lg" type="text" name="email" ng-model="email" placeholder="ایمیل" required autofocus>
-              <span class="ion-at form-control-feedback"></span>
-            </div>
-
-            <div class="form-group has-feedback">
-              <input class="form-control input-lg" type="password" name="password" ng-model="password" placeholder="کلمه عبور" required>
-              <span class="ion-key form-control-feedback"></span>
-            </div>
-
-            <button type="submit" class="btn btn-block btn-post" style="color:#FFF;">وارد شو</button>
-
-            <br/>
-
-            <p class="text-center">
-              <a href="#">پسورد خود را فراموش کرده اید ؟</a>
-            </p>
-
-            <p class="text-center text-muted">
-              <small>  قبلا ثبت نام نکرده اید ؟ اشکال نداره   <a href="/signup">ثبت نام کن !</a></small>
-            </p>
-
-<!-- NOT NOW HONEY !!! -->
-<!-- 
-            <div class="signup-or-separator">
-              <h6 class="text">یا</h6>
-              <hr>
-            </div>
-
-            <button class="btn btn-block btn-facebook" ng-click="facebookLogin()"><span class="ion-social-facebook"></span>با اکانت فیس بوک وارد شوید </button>
-            <button class="btn btn-block btn-google-plus" ng-click="googleLogin()"><span class="ion-social-googleplus"></span>با اکانت گوگل وارد شوید </button> -->
-          </form>
+      <div class="title">
+          <h2 class="text-center"> <span class="theme_bolder"> ورود</span></h2>
+          <div class="text-center" style="padding: 0 50px;">
+              <p>
+                  <span class="highlight-blue">اونیتا</span> پلتفرمی برای تسهیل ارتباط بین مترجمین حرفه ای و افرادی است که نیاز ترجمه دارند
+              </p>
+          </div>
+      </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-8 col-sm-offset-2" style="direction: ltr;">
+      <form method="post" ng-submit="login()" name="loginForm">
+        <div class="form-group has-feedback">
+          <input class="form-control input-lg" type="text" name="email" ng-model="email" placeholder="ایمیل" required autofocus>
+          <span class="ion-at form-control-feedback"></span>
         </div>
-        <div class="panel-footer"></div>
+
+        <div class="form-group has-feedback">
+          <input class="form-control input-lg" type="password" name="password" ng-model="password" placeholder="کلمه عبور" required>
+          <span class="ion-key form-control-feedback"></span>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-block btn-post" style="color:#FFF;">وارد شو</button>
+          <p class="text-center" style="margin-top: 40px;">
+            <a href="#">پسورد خود را فراموش کرده اید ؟</a>
+          </p>
+          <p class="text-center text-muted">
+            <small> یا اگر قبلا ثبت نام نکرده اید، </small>
+          </p>
+          <p class="text-center">
+            <button type="submit" class="btn btn-block btn-link">ثبت نام کنید</button>
+          </p>
+        </div>
+      </form>
     </div>
   </div>
-</div>
+</section>

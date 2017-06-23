@@ -11,7 +11,8 @@ var app=angular.module('appLab', [
   'ngFileUpload',
   'rzModule', 
   'vcRecaptcha',
-  'toaster'
+  'toaster',
+  'ngMessages'
   // 'ngAnimate'
   ]);
 
@@ -29,7 +30,6 @@ angular
   config.$inject = ['$routeProvider', '$locationProvider'];
 
 function config($routeProvider, $locationProvider, angularLoad) {
-
   $locationProvider.html5Mode({
     enabled : true,
     requireBase : false
@@ -70,7 +70,6 @@ angular
 
   function interceptorConfig($rootScope, $q, $window, $location) {
     return {
-
         request: function(config) {
           if ($window.localStorage.token) {
             config.headers.Authorization = 'Bearer ' + $window.localStorage.token;
@@ -84,7 +83,7 @@ angular
                 // User Access token has expired 
                 delete $window.localStorage.token;
                 $rootScope.currentUser = null;
-                $rootScope.signedin = false;
+                $rootScope.userLogged = false;
                 $location.path('/login');
           } else if (response.status === 404) {
                 console.log('fucking ' + response);
