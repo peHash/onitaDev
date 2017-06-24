@@ -267,7 +267,7 @@ function createJwtToken(user) {
 
 
 app.post('/api/cbpayment', function(req,res){
-  res.status(200).send(req.body);
+  res.render('edit.html', {serverData: req.body});
 })
 
 
