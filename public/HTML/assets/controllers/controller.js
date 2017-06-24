@@ -1,4 +1,4 @@
-app.controller('MyController', function ($scope,Modernizr,$window, $timeout, $http, $document,$uibModal, Upload, Auth) {
+app.controller('MyController', function ($scope,Modernizr,$window, $timeout, $http, $document,$uibModal, Upload, Auth, $location) {
 
 $(window).load(function(){
      someUIWorking($scope, Modernizr);
@@ -53,12 +53,13 @@ function modalStarter(template,static,controller, size) {
 //   // $route.reload();
 // }
 
-function paymentController($scope, $http) {
+function paymentController($scope, $http, $window) {
   $scope.pay = function() {
     var config = {
       method: 'POST',
-      url: 'https://pay.ir/payment/send',
+      url: '/api/payment',
       data: {
+        'url': 'https://pay.ir/payment/send',
         'api': 'a539036b4734cddd43aa8dd61e593e7c',
         'amount': parseInt($scope.amount),
         'redirect': 'http://onita.ir/api/cbpayment'
@@ -66,7 +67,7 @@ function paymentController($scope, $http) {
       }
     }
     $http(config).then(resolve, reject);
-    function resolve(r){console.log(r)};
+    function resolve(r){$window.location.href = 'https://pay.ir/payment/gateway/' + r.data['transId']};
     function reject(e){console.log(e)};
   }
 }

@@ -265,9 +265,40 @@ function createJwtToken(user) {
   return jwt.encode(payload, tokenSecret);
 }
 
+
 app.post('/api/cbpayment', function(req,res){
-  res.send(req.body);
+  res.status(200).send(req.body);
 })
+
+
+app.post('/api/payment', function(req,res){
+
+// Set the headers
+var headers = {
+    'User-Agent':       'Super Onita/0.0.1',
+    'Content-Type':     'application/x-www-form-urlencoded'
+}
+// Configure the request
+var options = {
+    url: req.body.url,
+    method: 'POST',
+    headers: headers,
+    form: {
+        'api': req.body.api,
+        'amount': req.body.amount,
+        'redirect': req.body.redirect
+        // 'factorNumber': Math.random()*(Math.pow(10,15)).toString()
+      }
+}
+// Start the request
+request(options, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+        res.status(200).send(body);
+    }
+})
+})
+
+
 
 app.get('/api/experts', function(req,res,next){
   var query = Expert.find({}).exec(function(err, expertsList) {  
@@ -960,8 +991,8 @@ app.get('download', function(req,res){
 });
 
 app.get('*', function(req, res) {
-  // res.redirect('/#' + req.originalUrl);
-  res.render('lp.html');
+  res.redirect('/#' + req.originalUrl);
+  // res.render('lp.html');
 });
 
 app.use(function(err, req, res, next) {
