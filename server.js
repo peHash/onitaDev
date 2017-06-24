@@ -265,6 +265,10 @@ function createJwtToken(user) {
   return jwt.encode(payload, tokenSecret);
 }
 
+app.post('/api/cbpayment', function(req,res){
+  res.send(req.body);
+})
+
 app.get('/api/experts', function(req,res,next){
   var query = Expert.find({}).exec(function(err, expertsList) {  
     if (err) return next(err);

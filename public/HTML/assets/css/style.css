@@ -366,7 +366,7 @@ nav.top-nav-collapse {
     color: #fff !important;
     transition: all ease-in 0.3s;
 }
-.scroll_menu #myNavbar li a {
+.scroll_menu .myNavbar li a {
     font-size: 16px;
     display: block;
     padding: 22px 16px;

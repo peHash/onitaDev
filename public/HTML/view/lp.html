@@ -65,7 +65,7 @@ footer .client_detail span {font-size: 18px;}
 				<!-- <img src="assets/images/logo-onita.png" alt="Theme_name"> -->
 			</a>
 		</div>
-		<div class="collapse navbar-collapse" id="myNavbar">
+		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav pull-left rtl" ng-if="!userLogged">
 				<li class="active">
 					<a ng-click="openModal('signup');" data-du-smooth-scroll data-du-scrollspy>ثبت نام</a>
@@ -90,7 +90,7 @@ footer .client_detail span {font-size: 18px;}
 			      </ul>
 			    </li>
 			</ul>
-			<ul class="nav navbar-nav pull-right rtl">
+			<ul class="nav navbar-nav pull-right rtl myNavbar">
 				<li class="active">
 					<a href="#home" data-du-smooth-scroll data-du-scrollspy>خانه</a>
 				</li>
@@ -106,6 +106,10 @@ footer .client_detail span {font-size: 18px;}
 				<li>
 					<a href="#subscribe" data-du-smooth-scroll data-du-scrollspy>ارتباط با ما</a>
 				</li>
+				<li>
+					<a href ng-click="openModal('payment');" data-du-smooth-scroll data-du-scrollspy>پرداخت</a>
+				</li>
+
 			</ul>
 		</div>
 	</div>

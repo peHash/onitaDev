@@ -30,7 +30,7 @@
 .dropdown-menu {right: 0;left:inherit;}
 .dropdown-menu {text-align: right;}
 .dropdown-menu > li > a {color: #666;font-size: medium;}
-.dropdown-menu > li > a .text-muted {float: left;font-size: smaller;margin-top: 2px;}
+.dropdown-menu > li > a .text-muted {margin-right: 10px;font-size: smaller;margin-top: 2px;}
 
 
 

@@ -23,13 +23,16 @@ function openModal (group) {
       modalStarter('view/partials/modal-new_project.html', 'static', newProjectController);
       break;
     case 'experts': 
-      modalStarter('view/partials/modal-experts_list.html', 'static', expertsListController);
+      modalStarter('view/partials/modal-experts_list.html', 'false', expertsListController);
       break;
     case 'login':
-      modalStarter('view/partials/modal-login.html', 'static', loginController);
+      modalStarter('view/partials/modal-login.html', 'false', loginController);
       break;
     case 'signup':
-      modalStarter('view/partials/modal-signup.html', 'static', signUpController);
+      modalStarter('view/partials/modal-signup.html', 'false', signUpController);
+      break;
+    case 'payment':
+      modalStarter('view/partials/modal-payment.html', 'false', paymentController, 'lg');
   }
 }
 
@@ -50,6 +53,23 @@ function modalStarter(template,static,controller, size) {
 //   // $route.reload();
 // }
 
+function paymentController($scope, $http) {
+  $scope.pay = function() {
+    var config = {
+      method: 'POST',
+      url: 'https://pay.ir/payment/send',
+      data: {
+        'api': 'a539036b4734cddd43aa8dd61e593e7c',
+        'amount': parseInt($scope.amount),
+        'redirect': 'http://onita.ir/api/cbpayment'
+        // 'factorNumber': Math.random()*(Math.pow(10,15)).toString()
+      }
+    }
+    $http(config).then(resolve, reject);
+    function resolve(r){console.log(r)};
+    function reject(e){console.log(e)};
+  }
+}
 
 function signUpController($scope, Auth, toaster, $uibModalInstance){
 
