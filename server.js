@@ -992,7 +992,6 @@ app.get('download', function(req,res){
 
 app.get('*', function(req, res) {
   res.redirect('/#' + req.originalUrl);
-  // res.render('lp.html');
 });
 
 app.use(function(err, req, res, next) {

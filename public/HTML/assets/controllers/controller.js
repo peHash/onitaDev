@@ -14,6 +14,13 @@ $scope.logout = function() {
   Auth.logout();
 }
 
+function bytesToSize(bytes) {
+   var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+   if (bytes == 0) return '0 Byte';
+   var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+   return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
+};
+
 function openModal (group) {
   switch (group){
     case 'freelancer':   
@@ -82,7 +89,7 @@ function signUpController($scope, Auth, toaster, $uibModalInstance){
         password: $scope.password
       })
       .success(function() {
-            toaster.pop('success','SIGNUP SUCCESS', 'YUPS');
+            toaster.pop('success','SIGNUP SUCCESS', 'خوش اومدی بهترین');
             $timeout(function() {$uibModalInstance.close();}, 3000);
           })
           .error(function(err) {
@@ -96,12 +103,12 @@ function loginController($rootScope, $scope, Auth, toaster, $uibModalInstance, $
   $scope.login = function() {
     Auth.login({email: $scope.email, password: $scope.password})
     .success(function(data) {
-            toaster.pop('success', 'LOGIN SUCCESS', 'YUPS');
+            toaster.pop('success', 'LOGIN SUCCESS', 'سلام بهترین');
             $window.localStorage.token = data.token;
             var payload = JSON.parse($window.atob(data.token.split('.')[1]));
             $rootScope.currentUser = payload.user;
             $rootScope.userLogged = true;
-            $timeout(function() {$uibModalInstance.close();}, 3000);
+            $timeout(function() {$uibModalInstance.close();}, 1000);
           })
           .error(function(err) {
             toaster.pop('error','lOGIN FAILED', err);
@@ -122,7 +129,7 @@ function expertsListController($scope, $http) {
 
 }
 
-function newProjectController($scope, Upload, $http, toaster){
+function newProjectController($scope, Upload, $http, toaster, $uibModalInstance){
 
   var succ = {
     header: 'ثبت شد',
@@ -138,7 +145,7 @@ function newProjectController($scope, Upload, $http, toaster){
   $scope.categories = [{cat: 1, value: 'عمومی'},{ cat: 2, value: 'جامعه شناسی'},{ cat:3, value: 'صنایع غذایی'},{ cat:4, value: 'فناوری'},{ cat:5, value: 'ریاضیات'},{ cat:6, value: 'فیزیک'},{ cat:7, value: 'آمار'},{ cat:8, value: 'نساجی'},{ cat:9, value: 'میکروبیولوژی'},{ cat:10, value: 'جغرافیا'},{ cat:11, value: 'ادبیات و زبانشناسی'},{ cat:12, value: 'پزشکی'},{ cat:13, value: 'حقوق'},{ cat:14, value: 'زیرنویس فیلم و سریال'},{ cat:15, value: 'فقه و علوم اسلامی'},{ cat:16, value: 'معماری'},{ cat:17, value: 'نفت ، گاز و پتروشیمی'},{ cat:18, value: 'اسناد تجاری'},{ cat:19, value: 'اقتصاد'},{ cat:20, value: 'بازرگانی'},{ cat:21, value: 'برق و الکترونیک'},{ cat:22, value: 'تاریخ'},{ cat:23, value: 'حسابداری'},{ cat:24, value: 'روانشناسی'}, {cat: 25, value: 'شیمی'} ];
 
   $scope.cancel = function() {
-    modalStarter('view/partials/modal-experts_list.html', 'true', expertsList);
+    $uibModalInstance.close();
   }
 
   $scope.orderSubmit = function(project) {
@@ -156,7 +163,10 @@ function newProjectController($scope, Upload, $http, toaster){
       }
     }
     $http(config).then(resolve, reject);
-    function resolve(r) {toaster.pop('success', succ.header , succ.body)};
+    function resolve(r) {
+      toaster.pop('success', succ.header , succ.body)
+      $timeout(function() {$uibModalInstance.close();}, 3000);
+    };
     function reject(e) {toaster.pop('error', failed.header, failed.body)};
   }
 
@@ -171,6 +181,7 @@ function newProjectController($scope, Upload, $http, toaster){
             for (var i = 0; i < files.length; i++) {
               var file = files[i];
               if (!file.$error) {
+                $scope.uploading = true;
                 Upload.upload({
                     url: '/api/uploadDocs',
                     data: {
@@ -184,23 +195,21 @@ function newProjectController($scope, Upload, $http, toaster){
                         // ', Response: ' + JSON.stringify(resp.data) +
                         // '\n' + $scope.log;
                         // console.log(resp);
-                        $scope.fileNames.push(resp.data.fileName);
+                        $scope.fileNames.push(resp.config.data.file);
                     });
                 }, function(err) {console.log(err)}, function (evt) {
                     var progressPercentage = parseInt(100.0 *
                         evt.loaded / evt.total);
-                    $scope.log = 'progress: ' + progressPercentage + 
-                      '% ' + evt.config.data.file.name + '\n' + 
-                      $scope.log;
-                      console.log($scope.log);
+                    $scope.fileProgress = progressPercentage;
                 });
               }
             }
+            $scope.uploading = false;
         }
   };
 }
 
-function contactUsController($scope, toaster, $http) {
+function contactUsController($scope, toaster, $http, $uibModalInstance) {
 
   var succ = {
     header: 'ثبت شد',
@@ -216,6 +225,7 @@ function contactUsController($scope, toaster, $http) {
     maxHour: 12
   };
   $scope.submitForm = submitForm;
+  $scope.cancel = closeModal;
 
   $scope.$watch('user.callPerm', function(n,o){
     if (n) {
@@ -229,6 +239,10 @@ function contactUsController($scope, toaster, $http) {
               showTicksValues: true
             }
   };
+
+  function closeModal() {
+    $uibModalInstance.close();
+  }
 
   function submitForm(User) {
       config = {
@@ -244,7 +258,10 @@ function contactUsController($scope, toaster, $http) {
       }
     }
     $http(config).then(resolve, reject);
-    function resolve(r) {toaster.pop('success', succ.header , succ.body)};
+    function resolve(r) {
+      toaster.pop('success', succ.header , succ.body)
+      $timeout(function() {$uibModalInstance.close();}, 3000);
+    };
     function reject(e) {toaster.pop('error', failed.header, failed.body)};
   }
 

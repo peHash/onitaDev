@@ -43,3 +43,4 @@ jspm_packages
  ./node_modules/
  ./public/img-upload/
  ./public/videos
+ ./public/users-docs

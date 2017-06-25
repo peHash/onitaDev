@@ -14,7 +14,7 @@ ol, ul {list-style: none; margin: 0;padding: 0;}
     border: 5px dashed blue;
 }
 </style>
-<toaster-container toaster-options="{'position-class': 'toast-top-full-width'}"></toaster-container>
+<toaster-container toaster-options="{'position-class': 'toast-bottom-left'}"></toaster-container>
 <section id="newproject">
     <div class="row">
         <div class="title">
@@ -74,15 +74,31 @@ ol, ul {list-style: none; margin: 0;padding: 0;}
                                      ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true" ngf-max-size="20MB"
                                      accept="image/*,application/pdf" 
                                      ngf-pattern="'image/*,application/pdf'">
-                                     <p>
+                                     <p ng-hide="uploading">
                                      به صورت Drag & Drop فایل/فایل های خود را اینجا قرار دهید (یا کلیک کنید)
                                      </p>
+                                     <p ng-show="uploading">{{fileProgress + '%'}}</p>
                                 </div>
                                 <div ngf-no-file-drop>
                                     <p>لطفا از اینترنت اکسپلورر استفاده نکنید،‌ ممنون !</p>
                                 </div>
-                                <div>
-                                    <img ngf-thumbnail="file">
+                                <div class="onita-collection">
+                                    <div class="collection-elements" ng-repeat="file in fileNames">
+                                        <div class="collection-item text-center">
+                                            <div class="collection-item-preview">
+                                                <img class="collection-item-img" ng-src="/assets/images/plain.png" alt>
+                                                <div class="collection-item-overlay"></div>
+                                                <div class="collection-item-info">
+                                                    <div class="file-info">
+                                                        <span name="file-size">{{file.size}}</span>
+                                                        <span name="file-type">{{file.type}}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="collection-item-progress" ng-style="{'width':fileProgess + '%'}"></div>
+                                            </div>
+                                            <div class="collection-item-name">{{file.name}}</div>
+                                        </div>
+                                    </div>
                                 </div>
                             </li>
                         </ol>

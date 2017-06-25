@@ -60,9 +60,9 @@ footer .client_detail span {font-size: 18px;}
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a href="index.html" class="brand-logo">
+			<a href="/" class="brand-logo">
 				<!-- <h1>AppLab</h1> -->
-				<!-- <img src="assets/images/logo-onita.png" alt="Theme_name"> -->
+				<img src="assets/images/onita-logo.png" alt="onita-logo">
 			</a>
 		</div>
 		<div class="collapse navbar-collapse">
@@ -81,10 +81,10 @@ footer .client_detail span {font-size: 18px;}
 			      </a>
 			      <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown">
 			        <li>
-						<a ng-click="openModal('experts')">لیست مترجمین</a>
 						<a>داشبورد <span class="text-muted">به زودی</span> </a>
-						<a>سفارشات <span class="text-muted">به زودی</span></a>
-						<a>پرداخت <span class="text-muted">به زودی</span></a>
+						<a ng-click="openModal('experts')">لیست مترجمین</a>
+						<!-- <a>سفارشات <span class="text-muted">به زودی</span></a> -->
+						<a href ng-click="openModal('payment');">پرداخت</a>
 						<a href ng-click="logout()">خروج</a>
 			        </li>
 			      </ul>
@@ -106,10 +106,6 @@ footer .client_detail span {font-size: 18px;}
 				<li>
 					<a href="#subscribe" data-du-smooth-scroll data-du-scrollspy>ارتباط با ما</a>
 				</li>
-				<li>
-					<a href ng-click="openModal('payment');" data-du-smooth-scroll data-du-scrollspy>پرداخت</a>
-				</li>
-
 			</ul>
 		</div>
 	</div>
