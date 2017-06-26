@@ -4,6 +4,7 @@ Analytics.registerScriptTags();
 Analytics.registerTrackers();
 Analytics.set('&uid', 1234);
 Analytics.trackPage('/landing/justlanding111');
+Analytics.pageView();
 
 $(window).load(function(){
      someUIWorking($scope, Modernizr);
