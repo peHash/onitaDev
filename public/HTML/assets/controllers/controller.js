@@ -1,4 +1,9 @@
-app.controller('MyController', function ($scope,Modernizr,$window, $timeout, $http, $document,$uibModal, Upload, Auth, $location) {
+app.controller('MyController', function ($scope,Modernizr,$window, $timeout, $http, $document,$uibModal, Upload, Auth, $location,Analytics) {
+
+Analytics.registerScriptTags();
+Analytics.registerTrackers();
+Analytics.set('&uid', 1234);
+Analytics.trackPage('/landing/justlanding111');
 
 $(window).load(function(){
      someUIWorking($scope, Modernizr);
