@@ -12,7 +12,8 @@ var app=angular.module('appLab', [
   'rzModule', 
   'vcRecaptcha',
   'toaster',
-  'ngMessages'
+  'ngMessages',
+  'angular-google-analytics'
   // 'ngAnimate'
   ]);
 
@@ -22,6 +23,20 @@ app.provider('Modernizr', function() {
         return Modernizr || {};
     };
  });
+
+angular
+  .module('appLab')
+  .config(['AnalyticsProvider', function (AnalyticsProvider) {
+   // Add configuration code as desired
+   AnalyticsProvider.setAccount('UA-101661642-1');
+
+   AnalyticsProvider
+    .logAllCalls(true)
+    .startOffline(true)
+    .useECommerce(true, true);
+
+   AnalyticsProvider.trackUrlParams(true);
+}]).run(['Analytics', function(Analytics) { }]);
 
 
 angular
@@ -38,6 +53,7 @@ function config($routeProvider, $locationProvider, angularLoad) {
   .when('/', {
     templateUrl: 'view/lp.html',
     controller: 'MyController', 
+    pageTrack: '/landing',
     resolve: {
       load:    ['ResourceLoaderService', function (resourceLoaderService) {
                         return resourceLoaderService.load(['assets/css/bootstrap.min.css', 'assets/css/font-awesome.min.css']);
@@ -48,6 +64,7 @@ function config($routeProvider, $locationProvider, angularLoad) {
   .when('/edit', {
     templateUrl: 'view/edit.html',
     controller: 'MyController',
+    pageTrack: '/divar',
     resolve : {
       load : ['ResourceLoaderService', function(resourceLoaderService){
         return resourceLoaderService.loadCss(['assets/css/bootstrap.min.css']);
